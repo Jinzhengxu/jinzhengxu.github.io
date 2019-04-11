@@ -6,7 +6,7 @@ categories:
   - Uncategorized
 date: 2018-09-05 12:16:06
 tags:
-categoties:
+categoties: 算法珠玑
 copyright:
 ---
 

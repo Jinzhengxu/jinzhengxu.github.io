@@ -13,7 +13,7 @@ copyright:
 ### Get started
 这次我们使用`Debian 9`发行版，如果你还不知道如何选购服务器并设置，可以参考这篇文章[Ubuntu18.04下通过Vultr服务搭建vps科学上网](http://jinzhnegxu.online/2019/03/14/Ubuntu18-04%E4%B8%8B%E9%80%9A%E8%BF%87Vultr%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BAvps%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/)。
 
-### Debian9 开启 BBR 
+### Debian9 开启 BBR
 BBR 是 Google 开源的一个 TCP 拥塞控制算法项目，可以充分发挥服务器的带宽。在有一定丢包率的网络链路上充分利用带宽。降低网络链路上的 buffer 占用率，从而降低延迟。开与不开 BBR，搭建 SSR 和 V2Ray 等代理工具时，最高可以相差近 10 倍！目前该 BBR 算法已经并提交到了 Linux 内核，从 Linux 4.9 开始已经默认安装编译了该算法.
 
 所以采用 Linux 4.9 内核的Debian9系统不用再安装可以通过几行命令开启BBR加速了，爽到。
@@ -68,7 +68,7 @@ systemctl restart v2ray
 ```
 更换传输协议、端口和 UUID，可以使用[Xftp]打开服务器目录`/etc/v2ray/`中的`config.json`文件。修改保存后，请执行`systemctl restart v2ray`重启 V2Ray 生效。
 运行 `v2ray --config=/etc/v2ray/config.json`也可，或使用 systemd 等工具把 V2Ray 作为服务在后台运行。
-### 安装Vv2ray客户端
+### 安装v2ray客户端
 [第三方客户端合集](http://briteming.hatenablog.com/entry/2017/10/21/124645)
 #### Linux安装方法
 从[github](https://github.com/v2ray/v2ray-core/releases)获得适合自己pc的release。解压后将自己的`config.conf`文件移动到解压得到的文件夹里，并删除文件夹内的`vpoint_vmess_freedom.json`。然后在该文件目录下打开终端执行
@@ -78,6 +78,42 @@ $ sudo ./v2ray
 这样就可以了，然后通过`chorme`插件`SwitchOmega`来设置系统代理就可以了。
 
 BBR比锐速好太多了吧！
+#### v2ray多用户配置
+多用户只需要在服务端的config.json中修改inboundDetour即可，可以使用[https://www.uuidgenerator.net/](https://www.uuidgenerator.net/)来生成UIUD，tcp配置例子如下：
+```config
+{
+  "inbound": {
+    ...
+  },
+  "inboundDetour":[
+    {
+      "port": 你的端口(不同于inbound),
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "你的UUID(不同于inbound)",
+            "level": 1,
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings":{
+        "network": "tcp"
+      }
+    }
+  ],
+  "outbound": {
+    ...
+  },
+  "outboundDetour": [
+    ...
+  ],
+  "routing": {
+    ...
+  }
+}
+```
 
 #### 推荐阅读
 1.[Linux Kernel 4.9 中的 BBR 算法与之前的 TCP 拥塞控制相比有什么优势？](https://www.zhihu.com/question/53559433)

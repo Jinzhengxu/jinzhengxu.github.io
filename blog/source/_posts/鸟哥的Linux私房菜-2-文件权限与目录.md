@@ -1,5 +1,5 @@
 ---
-title: 鸟哥的Linux私房菜(2)-文件权限与目录
+title: Linux(2)-文件权限与目录
 date: 2019-03-21 09:54:06
 tags:
 - Linux

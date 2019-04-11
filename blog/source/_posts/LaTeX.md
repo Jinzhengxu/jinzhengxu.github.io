@@ -1,11 +1,11 @@
----
+:q---
 title: LaTeX使用指南
 date: 2019-02-28 13:53:37
 tags:
 - LaTex
 categoties: 拉普拉斯妖
 copyright:
-notshow: 
+notshow:
 ---
 LaTeX使用实在是太nice了，我真是high到不行，高德纳男神nb！
 
@@ -13,7 +13,7 @@ LaTeX使用实在是太nice了，我真是high到不行，高德纳男神nb！
 
 这里我们先给出LaTex的书写规范，语法格式，最后会给出一份符号表以供参考。还有LaTex的标准写法应该是$\LaTeX{}$,而标准读音应该是 “Lay-tech” 或 “Lah-tech”,即"拉泰赫"。如果因技术限制而做不到，则应该写成“LaTeX”。
 
-### 如何开启$\LaTeX$
+### 如何开启 $\LaTeX$
 MathJax是一款运行在浏览器中的开源的数学符号渲染引擎，使用MathJax可以方便的在浏览器中显示数学公式，不需要使用图片。这篇文章介绍如何使用LaTeX语法编写数学公式。在NexT主题中有MathJax的默认选项将其值改为`true`就可以对md文件中的公式进行渲染了。
 ##### 特殊字符
 下面的这些字符是 $\LaTeX$ 的保留字符，它们或在  $\LaTeX$ 中有特定的用处，类似于标识符。如果你直接在文本中使用它们，会导致  $\LaTeX$ 做一些并非你所构想的事情。
@@ -90,32 +90,32 @@ And just one more line.
 #### 数学符号表
 表 3.1: 数学模式重音符:
 
-| $\hat{a}$| \hat{a} | $\check{a}$| \check{a} | $\tilde{a}$| \tilde{a}| $\acute{a}$ | \acute{a}|
-|:---:|:---:|:---:|:---:|
-|$\grave{a}$|\grave{a}| $\dot{a}$| \dot{a} | $\ddot{a}$| \ddot{a}  |$\breve{a}$|\breve{a}|
- |$\bar{a} $|\bar{a}  |$\vec{a} $ |\vec{a}  |$\widehat{A}$|\widehat{A}| $ \widetilde{A}$|  \widetilde{A}|
+|  $\hat{a}$  |  \hat{a}  | $\check{a}$ | \check{a} | $\tilde{a}$   | \tilde{a}   | $\acute{a}$      | \acute{a}     |
+|:-----------:|:---------:|:-----------:|:---------:| ------------- | ----------- | ---------------- | ------------- |
+| $\grave{a}$ | \grave{a} |  $\dot{a}$  |  \dot{a}  | $\ddot{a}$    | \ddot{a}    | $\breve{a}$      | \breve{a}     |
+| $\bar{a}$  |  \bar{a}  | $\vec{a}$  |  \vec{a}  | $\widehat{A}$ | \widehat{A} | $\widetilde{A}$ | \widetilde{A} |
 表 3.2: 小写希腊字母
 
-|$\alpha$|\alpha | $\theta$| \theta|  $o$|  o | $\upsilon$| \upsilon|
-|:---:|:---:|
- |$\beta$|\beta |  $\vartheta$  |\vartheta  |$\pi$|\pi | $\phi$|\phi|
- |$\gamma $|$\gamma $ |$\iota$|\iota | $\varpi$| \varpi|  $\varphi$|  \varphi|
- |$\delta$|\delta  |$\kappa$|\kappa| $ \rho$ |  \rho |$ \chi$| \chi|
- |$\epsilon$ |\epsilon |$ \lambda$| \lambda | $\varrho$ | \varrho | $\psi$| \psi|
- |$\varepsilon$|\varepsilon |$ \mu $| \mu  |$\sigma$|\sigma |$ \omega$| \omega|
- |$\zeta$ |\zeta  |$\nu$|\nu |$ \varsigma$| \varsigma|
- |$\eta$ |\eta  |$\xi$|\xi|  $\tau$|  \tau|
- 
+|   $\alpha$    |   \alpha    | $\theta$    | \theta    | $o$          | o         | $\upsilon$ | \upsilon |
+|:-------------:|:-----------:| :-----------: | :---------: | :------------: | :---------: | :----------: | :--------: |
+|    $\beta$    |    \beta    | $\vartheta$ | \vartheta | $\pi$        | \pi       | $\phi$     | \phi     |
+|   $\gamma$   |  \gamma  | $\iota$     | \iota     | $\varpi$     | \varpi    | $\varphi$  | \varphi  |
+|   $\delta$    |   \delta    | $\kappa$    | \kappa    | $\rho$      | \rho      | $\chi$    | \chi     |
+|  $\epsilon$   |  \epsilon   | $\lambda$  | \lambda   | $\varrho$    | \varrho   | $\psi$     | \psi     |
+| $\varepsilon$ | \varepsilon | $\mu$     | \mu       | $\sigma$     | \sigma    | $\omega$  | \omega   |
+|    $\zeta$    |    \zeta    | $\nu$       | \nu       | $\varsigma$ | \varsigma |            |          |
+|    $\eta$     |    \eta     | $\xi$       | \xi       | $\tau$       | \tau      |            |          |
+
  表 3.3: 大写希腊字母:
- 
- |$\Gamma$|\Gamma | $\Lambda$| \Lambda  |$\Sigma$|\Sigma| $ \Psi$|  \Psi|
- |:---:|:---:|
- |$\Delta$ |\Delta  |$\Xi$|\Xi  |$\Upsilon$|\Upsilon |$ \Omega$| \Omega|
- |$\Theta$|\Theta | $\Pi$| \Pi  |$\Phi$|\Phi|
- 
+
+| $\Gamma$ | \Gamma | $\Lambda$ | \Lambda | $\Sigma$   | \Sigma   | $\Psi$   | \Psi   |
+| :---:    | :---:  | :---:          | :---:   | :---:      |  :---:        | :---:     | :---:  |
+| $\Delta$ | \Delta | $\Xi$     | \Xi     | $\Upsilon$ | \Upsilon | $\Omega$ | \Omega |
+| $\Theta$ | \Theta | $\Pi$     | \Pi     | $\Phi$     | \Phi     |           |        |
+
 
  <center>**数学符号表**</center>
- 
+
 {% pdf https://drive.google.com/file/d/19qn_TktFfkmDWGz6qq3c1cDhSE5-Meew/preview %}
 #### 基本公式
 LaTeX的数学公式有两种：行内公式和块级公式。行内公式放在文中与其它文字混编，块级公式单独成行。都使用美元符号进行标记显示。
@@ -162,63 +162,65 @@ $\vec{a} \cdot \vec{b}=0$
 
 ##### 特殊字符
 ###### 关系运算符
-|$\pm$|\pm |$\times$|\times |$\div$|\div|
-|:---:|
-|$\mid$|\mid|$\nmid$|\nmid |$\cdot$|\cdot|
-|$\circ$|\circ |$\ast$|\ast |$\bigodot$|\bigodot| 
-|$\bigotimes$|\bigotimes |$\bigoplus$|\bigoplus |$\leq$|\leq| 
-|$\geq$|\geq |$\equiv$|\equiv |$\sum$|\sum |
-|$\prod$|\prod |$\coprod$|\coprod|
+|    $\pm$     | \pm        | $\times$    | \times    | $\div$     | \div     |
+|:------------:| ---------- | ----------- | --------- | ---------- | -------- |
+|    $\mid$    | \mid       | $\nmid$     | \nmid     | $\cdot$    | \cdot    |
+|   $\circ$    | \circ      | $\ast$      | \ast      | $\bigodot$ | \bigodot |
+| $\bigotimes$ | \bigotimes | $\bigoplus$ | \bigoplus | $\leq$     | \leq     |
+|    $\geq$    | \geq       | $\equiv$    | \equiv    | $\sum$     | \sum     |
+|   $\prod$    | \prod      | $\coprod$   | \coprod   |            |          |
 
 ###### 集合运算符
 
-|$\emptyset $|\emptyset |$\in $|\in |$\notin$|\notin|
-|:--:|
-|$\subset$|\subset |$\supset$|\supset |$\subseteq$|\subseteq| 
-|$\supseteq$|\supseteq |$\bigcap$|\bigcap |$\bigcup$|\bigcup| 
-|$\bigvee$|\bigvee |$\bigwedge$|\bigwedge |$\biguplus$|\biguplus| 
-|$\bigsqcup$|\bigsqcup|
+| $\emptyset$ | \emptyset | $\in$      | \in       | $\notin$    | \notin    |
+|:------------:| --------- | ----------- | --------- | ----------- | --------- |
+|  $\subset$   | \subset   | $\supset$   | \supset   | $\subseteq$ | \subseteq |
+| $\supseteq$  | \supseteq | $\bigcap$   | \bigcap   | $\bigcup$   | \bigcup   |
+|  $\bigvee$   | \bigvee   | $\bigwedge$ | \bigwedge | $\biguplus$ | \biguplus |
+| $\bigsqcup$  | \bigsqcup |             |           |             |           |
 
 ###### 对数运算符
-|$\log$|\log |$\lg$|\lg |$\ln$|\ln|
-|:---:|
+| $\log$ | \log | $\lg$ | \lg | $\ln$ | \ln |
+|:------:| ---- | ----- | --- | ----- | --- |
+
 
 ###### 三角运算符
-|$\bot$|\bot |$\angle$|\angle |$\circ$|\circ |
-|:---:|
-|$\sin$|\sin |$\cos$|\cos |$\tan$|\tan |
-|$\cot$|\cot |$\sec$|\sec |$\csc$|\csc|
+| $\bot$ | \bot | $\angle$ | \angle | $\circ$ | \circ |
+|:------:| ---- | -------- | ------ | ------- | ----- |
+| $\sin$ | \sin | $\cos$   | \cos   | $\tan$  | \tan  |
+| $\cot$ | \cot | $\sec$   | \sec   | $\csc$  | \csc  |
 
 ###### 微积分运算符
-|$\prime$|\prime |$\int$|\int |$\iint$|\iint |
-|:---:|
-|$\iiint$|\iiint |$\iiiint$|\iiiint |$\oint$|\oint| 
-|$\lim$|\lim |$\infty$|\infty |$\nabla$|\nabla|
+| $\prime$ | \prime | $\int$    | \int    | $\iint$  | \iint  |
+|:--------:| ------ | --------- | ------- | -------- | ------ |
+| $\iiint$ | \iiint | $\iiiint$ | \iiiint | $\oint$  | \oint  |
+|  $\lim$  | \lim   | $\infty$  | \infty  | $\nabla$ | \nabla |
 
 ###### 逻辑运算符
-|$\because$|\because |$\therefore$|\therefore |$\forall $|\forall |
-|:---:|
-|$exists$|\exists |$\not=$|\not= |$\not>$|\not> |
-|$\not\subset$|\not\subset|
+|  $\because$   | \because    | $\therefore$ | \therefore | $\forall$ | \forall |
+|:-------------:| ----------- | ------------ | ---------- | ---------- | ------- |
+|   $exists$    | \exists     | $\not=$      | \not=      | $\not>$    | \not>   |
+| $\not\subset$ | \not\subset |              |            |            |         |
 
 ###### 戴帽符号
-|$\hat{y} $|\hat{y} |$\check{y}$|\check{y} |$\breve{y}$|\breve{y}|
-|:---:|
+| $\hat{y}$ | \hat{y} | $\check{y}$ | \check{y} | $\breve{y}$ | \breve{y} |
+|:----------:| ------- | ----------- | --------- | ----------- | --------- |
 
 ###### 连线符号
-|$\overline{a+b+c+d}$|\overline{a+b+c+d} |
-|:---:|
-|$\underline{a+b+c+d}$|\underline{a+b+c+d} |
-|$\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}$|\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}|
+|              $\overline{a+b+c+d}$              | \overline{a+b+c+d}                           |
+|:----------------------------------------------:| -------------------------------------------- |
+|             $\underline{a+b+c+d}$              | \underline{a+b+c+d}                          |
+| $\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}$ | \overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0} |
 
 ###### 箭头符号
-|$\uparrow $|\uparrow |$\downarrow$|\downarrow|
-|:---:|
-|$\Uparrow $|\Uparrow |$\Downarrow$|\Downarrow|
-|$\rightarrow$|\rightarrow|$\leftarrow$|\leftarrow |
-|$\Rightarrow $|\Rightarrow |$\Leftarrow$|\Leftarrow |
-|$\longrightarrow $|\longrightarrow |$\longleftarrow$|\longleftarrow|
-|$\Longrightarrow$|\Longrightarrow|$\Longleftarrow$|\Longleftarrow|
+|    $\uparrow$     |    \uparrow     |   $\downarrow$   | \downarrow     |
+|:-----------------:|:---------------:|:----------------:| -------------- |
+|    $\Uparrow$     |    \Uparrow     |   $\Downarrow$   | \Downarrow     |
+|   $\rightarrow$   |   \rightarrow   |   $\leftarrow$   | \leftarrow     |
+|   $\Rightarrow$   |   \Rightarrow   |   $\Leftarrow$   | \Leftarrow     |
+| $\longrightarrow$ | \longrightarrow | $\longleftarrow$ | \longleftarrow |
+| $\Longrightarrow$ | \Longrightarrow | $\Longleftarrow$ | \Longleftarrow |
+
 
 ### 参考资料
 1.[中国$C\TeX$协会关于$\LaTeX2_\epsilon$的文档](http://117.128.6.12/cache/www.mohu.org/info/lshort-cn.pdf?ich_args2=472-05141922037508_ebb4f2e409c6ab413a287e44d4962b2a_10001002_9c89612dd0c5f7d6903a518939a83798_f48d5199abd7921134efa7ce01554962)

@@ -17,7 +17,8 @@ comments: false
 1.[CS:APP](http://jinzhnegxu.online/2019/02/09/深入理解计算机系统/)
 2.[《编译原理》](http://jinzhnegxu.online/2019/03/03/《编译原理》龙书第四版/)
 3.[《现代编译原理—C语言描述》](http://jinzhnegxu.online/2019/03/03/《现代编译原理-C语言描述》虎书/)
-4.[山财机器学习](http://jinzhnegxu.online/2019/03/03/山财机器学习/)
+4.[机器学习笔记](http://jinzhnegxu.online/2019/03/03/山财机器学习/)
+5.[Linux使用笔记](http://jinzhnegxu.online/2019/03/27/Linux使用笔记/)
 
 ##### [忒修斯之船]()
 ###### 古希腊神话中的忒修斯之船，当你到达终点时，或许早已今非昔比。

@@ -1,5 +1,5 @@
 ---
-title: 鸟哥的Linux私房菜(1)--基本概念与帮助
+title: Linux(1)-基本概念与帮助
 date: 2019-03-18 20:36:08
 tags:
 - Linux
