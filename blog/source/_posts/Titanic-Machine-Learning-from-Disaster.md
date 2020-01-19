@@ -86,11 +86,6 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 fig.set(alpha=0.2) #设定图表颜色颜色
 
-plt.subplot2grid((2,3),(0,0)) #分出小图
-data_train.Survived.value_counts().plot(kind='bar') #柱状图
-plt.title(u"Surivied(=1)") #标题
-plt.ylabel(u"number")
-
 plt.subplot2grid((2,3),(0,1))
 data_train.Pclass.value_counts().plot(kind="bar")
 plt.ylabel(u"number") #人数
@@ -103,7 +98,7 @@ plt.grid(b=True, which='major', axis='y')
 plt.title(u"Survived by age(=1)")
 
 plt.subplot2grid((2,3),(1,0),colspan=2)
-data_train.Age[data_train.Pclass == 1].plot(kind='kde')   
+data_train.Age[data_train.Pclass == 1].plot(kind='kde')
 data_train.Age[data_train.Pclass == 2].plot(kind='kde')
 data_train.Age[data_train.Pclass == 3].plot(kind='kde')
 plt.xlabel(u"Age")# plots an axis lable
@@ -115,7 +110,7 @@ plt.legend((u'level1', u'level2',u'level3'),loc='best') # sets our legend for ou
 plt.subplot2grid((2,3),(1,2))
 data_train.Embarked.value_counts().plot(kind='bar')
 plt.title(u"the number of each embarked")
-plt.ylabel(u"number")  
+plt.ylabel(u"number")
 plt.show()
 fig = plt.figure()
 fig.set(alpha=0.2)  # 设定图表颜色alpha参数
@@ -140,8 +135,8 @@ Survived_1 = data_train.Pclass[data_train.Survived == 1].value_counts()
 df=pd.DataFrame({u'Unsurvived':Survived_0,u'Survived':Survived_1})
 df.plot(kind='bar', stacked=True)
 plt.title(u"each Pclass survived")
-plt.xlabel(u"Pcalss") 
-plt.ylabel(u"number") 
+plt.xlabel(u"Pcalss")
+plt.ylabel(u"number")
 plt.show()
 ```
 ![AAHZ3n.png](https://s2.ax1x.com/2019/03/14/AAHZ3n.png)
@@ -157,7 +152,7 @@ Survived_f = data_train.Survived[data_train.Sex == 'female'].value_counts()
 df=pd.DataFrame({u'MAN':Survived_m, u'FEMALE':Survived_f})
 df.plot(kind='bar', stacked=True)
 plt.title(u"the survived by sex")
-plt.xlabel(u"Sex") 
+plt.xlabel(u"Sex")
 plt.ylabel(u"number")
 plt.show()
 ```
@@ -205,8 +200,8 @@ Survived_1 = data_train.Embarked[data_train.Survived == 1].value_counts()
 df=pd.DataFrame({u'Unsurvived':Survived_0,u'Survived':Survived_1})
 df.plot(kind='bar', stacked=True)
 plt.title(u"the Survived by Embarked")
-plt.xlabel(u"Embarked") 
-plt.ylabel(u"number") 
+plt.xlabel(u"Embarked")
+plt.ylabel(u"number")
 
 plt.show()
 ```
@@ -224,7 +219,7 @@ print(df)
 终端会输出
 ```
                 PassengerId
-SibSp Survived             
+SibSp Survived
 0     0                 398
       1                 210
 1     0                  97
@@ -238,7 +233,7 @@ SibSp Survived
 5     0                   5
 8     0                   7
                 PassengerId
-Parch Survived             
+Parch Survived
 0     0                 445
       1                 233
 1     0                  53
@@ -335,7 +330,7 @@ Survived_nocabin = data_train.Survived[pd.isnull(data_train.Cabin)].value_counts
 df=pd.DataFrame({u'YES':Survived_cabin, u'NO':Survived_nocabin}).transpose()
 df.plot(kind='bar', stacked=True)
 plt.title(u"the Survived by IfHaveCabin")
-plt.xlabel(u"CabinYES/NO") 
+plt.xlabel(u"CabinYES/NO")
 plt.ylabel(u"number")
 plt.show()
 ```
@@ -348,10 +343,10 @@ plt.show()
 
 现在我们看一下数据集中到底是那些数据缺失比较严重
 ```python
-import numpy as np 
-import pandas as pd 
-import matplotlib 
-import missingno as msno 
+import numpy as np
+import pandas as pd
+import matplotlib
+import missingno as msno
 import matplotlib.pyplot as plt
 
 train_df = pd.read_csv("/home/jason/Documents/ML/titanic/train.csv")
@@ -372,9 +367,9 @@ msno.bar(train_df)
 
 + 删除记录:如果缺值的样本占总数比例极高，我们可能就直接舍弃了，作为特征加入的话，可能反倒带入noise，影响最后的结果了
 +  替换缺失值:如果缺值的样本适中，而该属性非连续值特征属性(比如说类目属性)，那就把NaN作为一个新类别，加到类别特征中
-+   数据填补:如果缺值的样本适中，而该属性为连续值特征属性，有时候我们会考虑给定一个step(比如这里的age，我们可以考虑每隔2/3岁为一个步长)，然后把它离散化，之后把NaN作为一个type加到属性类目中。 
-+ 数据填补:有些情况下，缺失的值个数并不是特别多，那我们也可以试着根据已有的值，拟合一下数据，补充上。 
- 	
++   数据填补:如果缺值的样本适中，而该属性为连续值特征属性，有时候我们会考虑给定一个step(比如这里的age，我们可以考虑每隔2/3岁为一个步长)，然后把它离散化，之后把NaN作为一个type加到属性类目中。
++ 数据填补:有些情况下，缺失的值个数并不是特别多，那我们也可以试着根据已有的值，拟合一下数据，补充上。
+
 本例中，后两种处理方式应该都是可行的，我们先使用拟合补全吧(虽然说没有特别多的背景可供我们拟合，这不一定是一个多么好的选择)。这里用scikit-learn中的RandomForest来拟合一下缺失的年龄数据(注：RandomForest是一个用在原始数据中做不同采样，建立多颗DecisionTree，再进行average等等来降低过拟合现象，提高结果的机器学习算法，我们之后会介绍到)
 
 ```python
@@ -404,7 +399,7 @@ def set_missing_ages(df):
     predictedAges = rfr.predict(unknown_age[:, 1::])
 
     # 用得到的预测结果填补原缺失数据
-    df.loc[ (df.Age.isnull()), 'Age' ] = predictedAges 
+    df.loc[ (df.Age.isnull()), 'Age' ] = predictedAges
 
     return df, rfr
 

@@ -27,5 +27,5 @@ comments: false
 ###### 算法的魅力
 
 ##### [Calisthenics]()
-
 ###### `每天运动一小时，健康工作五十年，幸福生活一辈子`
+[The Plan & Diet](http://jinzhnegxu.online/2019/04/09/The-Plan-Diet/)

@@ -29,23 +29,23 @@ pwd    显示当前目录
 rmdir  建立一个新目录
 mkdir  删除一个空目录
 ```
-+ cd（change directory，切换目录）
+###### cd（change directory，切换目录）
  + 注意利用相对路径的写法时必须要确认当前的所在工作目录的局对路径，单独使用`cd`相当于`cd ~`，`cd -`会显示前一个工作目录
  + 利用[Tab]键来自动补全路径
-+ pwd（显示目前所在的目录，Print Working directory）
+###### pwd（显示目前所在的目录，Print Working directory）
 ```
 pwd [-P]
 选项与参数：
 -P： 显示出真正的路径，而非使用链接（Link）路径。
 ```
-+ rmdir（remove directory）
+###### rmdir（remove directory）
 ```
 rmdir [-p] 目录名称
 选项与参数
 -p：连同上层的空目录一起递归删除
 ```
 目录中必须是空的，如果有任何的文件和目录，都不能使用`rmdir`。
-+ mkdir（make directory）
+###### mkdir（make directory）
 ```
 mkdir [-mp] 目录名称
 选项与参数：
@@ -71,7 +71,7 @@ $ cp 复制
 $ rm 删除
 $ mv 移动，重命名
 ```
-#### 文件与目录的查看
+#### 文件与目录的查看ls
 ```
 $ ls [-aAdfFhilnrRSt] 文件名或目录名称
 $ ls [--color={never,auto,always}] 文件名或目录名称
@@ -102,7 +102,7 @@ $ ls [--full-time] 文件名或目录名称
   ls默认只显示：非隐藏文件，以文件名排序，文件名代表的颜色
 ```
 #### 复制,删除与移动
-+ cp（复制文件或目录）
+###### cp（复制文件或目录）
 ```c
 $ cp [-adfilprsu] 源文件（source） 目标文件（destination）
 $ cp [-options] sorce1 source2 ... directory
@@ -119,7 +119,7 @@ $ cp [-options] sorce1 source2 ... directory
     --preserve=all：除了-p的权限外还加入SELinux属性，links，xatter等也复制
 ```
 在默认的条件下，cp的源文件与目标文件是不同的，目标文件的拥有者通常是命令操作者本身。
-+ rm（删除文件或目录）
+###### rm（删除文件或目录）
 ```c
 $ rm [-fir] 文件或目录
 选项与参数：
@@ -130,7 +130,7 @@ $ rm -i bashrc* //通配符*可以删除目录下所有开头为bashrc的文件
 $ \rm -r /tmp/etc //rm命令前加上\可以忽略alias指定的选项
 $ rm -- -aaa- //这样可以删除文件中带-的文件，放置系统误判为选择项
 ```
-+ mv （移动文件与目录，或重命名）
+###### mv （移动文件与目录，或重命名）
 ```c
 $ mv [-fiu] source destination
 $ mv [options] source1 source2 ... directory
@@ -160,7 +160,7 @@ $ dirname /etc/sysconfig/network
 
 
 #### 直接查看文件内容
-+ cat（concatenate串联）
+###### cat（concatenate串联）
 ```
 $ cat [-AbEnTv]
 选项与参数：
@@ -171,8 +171,8 @@ $ cat [-AbEnTv]
     -T：将[Tab]键以^I显示出来
     -v：列出一些看不出来的特殊字符
 ```
-+ tac（反向列示）
-+ nl（添加行号）
+###### tac（反向列示）
+###### nl（添加行号）
 ```
 $ nl [-bnw] 文件
 选项与参数：
@@ -187,23 +187,23 @@ $ nl [-bnw] 文件
 ```
 
 #### 可翻页查看
-+ more（一页一页翻动）
+###### more（一页一页翻动）
  + 空格键；向下翻页
  + Enter：代表向下一行
  + /字符串：向下查找字符串这个关键词
  + ：f：立即显示出文件名和人当前行数
  + q：离开
  + b向后翻页，只对文件有用对管道无用
-+ less
+###### less
  + like man：man就是使用less来显示文件内容
 
- 
+
 #### 数据截取
-+ head
+###### head
 ```
 $ head [-n number] 文件
 ```
-+ tail
+###### tail
 ```
 $ tail [-n number] 文件
 选项与参数：
@@ -215,7 +215,7 @@ $ tail [-n number] 文件
 ```
 head -n 20 /etc/man_db.conf | head -n 20 | tail -n 10
 ```
-#### 非纯文本文件
+#### 非纯文本文件od
 ```
 $ od [-t TYPE] 文件
 选项或参数：
@@ -231,7 +231,7 @@ $ echo password | od -t oCc
           p   a   s   s   w   o   r   d  \n
 0000011
 ```
-#### 修改文件时间或创建新文件
+#### 修改文件时间或创建新文件touch
 + 修改时间（modification time，mtime）
 + 状态时间（Status time，ctime）
 + 读取时间（access time，atime）
@@ -248,7 +248,7 @@ $ touch [-acdnt] 文件
 $ touch -d "2 days ago" bashrc
 ```
 ### 文件与目录的默认权限与隐藏权限
-#### 文件默认权限
+#### 文件默认权限umask
 `umask`指定目前用户在建立文件或 目录时的权限默认值。
 ```
 $ umask
@@ -263,7 +263,7 @@ u=rwx,g=rx,o=rx
 `drwxrwxrwx`
 
 #### 文件隐藏属性
-+ chatter（配置文件隐藏属性）
+###### chatter（配置文件隐藏属性）
 ```
 $ chatter [+-=] [ASacdistu] 文件或目录名称
 选项与参数：
@@ -279,7 +279,7 @@ i：文件不能被删除，改名，设置链接，也无法写入或新增数�
 s：删除时被完全删除
 u：删除时数据还在磁盘之中
 ```
-+ lsatter（显示文件隐藏属性）
+###### lsatter（显示文件隐藏属性）
 ```
 $ lsatter [-adR] 文件或目录
 选项与参数：
@@ -288,7 +288,7 @@ $ lsatter [-adR] 文件或目录
 -R：连同子目录的数据也一并列出来
 ```
 #### 文件特殊权限
-+ SUID（Set UID）
+###### SUID（Set UID）
  + SUID执行权限仅对二进制程序（binary program）有效；
  + 执行者对于该程序需要具有x的执行权限；
  + 本权限仅在执行该程序的过程中有效（run-time）；
@@ -307,7 +307,7 @@ $ lsatter [-adR] 文件或目录
               |———|*程序拥有者：root *|
 ```
 SUID仅可用于二进制文件上，不能用在shell脚本上
-+ SGID（Set GID）
+###### SGID（Set GID）
  + 对于文件：
    + SGID对二进制程序有用
    + 程序执行者对于该程序来说，需要具备x的权限
@@ -315,7 +315,7 @@ SUID仅可用于二进制文件上，不能用在shell脚本上
   + 对于目录：
    + 用户若对于此目录具有r与x的权限时，该用户能够进入此目录
    + 用户在此目录下的有效用户组（effective group）将会变成该目录的用户组
-   + 用途：若用户在此目录下具有w的权限（可以新建文件），则用户所建立的新文件，该文件的用户组与此目录的用户组相同  
+   + 用途：若用户在此目录下具有w的权限（可以新建文件），则用户所建立的新文件，该文件的用户组与此目录的用户组相同
 + SBIT
  + 当用户对于此目录具有w，x权限，即具有写入的权限
  + 当用户在该目录下建立文件或目录时，仅有自己与root才有权力删除该文件。
@@ -329,7 +329,7 @@ $ file /usr/bin/passwd
 /usr/bin/passwd: setuid ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=d44c96296f224071ed008e442b9eb3f2462840e4, stripped
 ```
 ### 命令与文件的查找
-#### 脚本文件的查找
+#### 脚本文件的查找which
 ```
 $ which [-a] command
 选项或参数：
@@ -337,7 +337,7 @@ $ which [-a] command
 ```
 which根据PATH的规范的路径去寻找执行文件的文件名。
 #### 文件的查找
-+ whereis（由一些特定的目录中查找文件）
+###### whereis（由一些特定的目录中查找文件）
 ```
 $ whereis [-bmsu] 文件或目录名
 选项与参数：
@@ -347,7 +347,7 @@ $ whereis [-bmsu] 文件或目录名
 -s：只找source源文件
 -u：查找不在上述三个项目中的其他文件
 ```
-+ locate
+###### locate
 根据`/var/lib/mlocate`文件中的数据库记录，找出用户所输入的关键词的文件名。
 ```
 $ locate [-ir] keyword
@@ -358,9 +358,9 @@ $ locate [-ir] keyword
 -S：输出locate使用的数据库文件的信息
 -r：后接正则表达式
 ```
-+ updatedb
+###### updatedb
 根据`/etc/updatedb.conf`的设置去查找系统硬盘内的文件，并更新`/var/lib/mlocate`内的数据库文件，locate的数据库如果不执行，则是一天更新一次。
-+ find
+###### find
 ```
 $ find [PATH] [option] [action]
 选项与参数：
@@ -387,3 +387,24 @@ $ find [PATH] [option] [action]
   -exec command：接额外的命令来处理查找到的结果
   -print：结果打印到屏幕，默认
 ```
+### 重点回顾
++ 一个可以被挂载的数据通常称为『文件系统, filesystem』而不是分区槽 (partition) 喔!
++ 基本上 Linux 的传统文件系统为 Ext2 ,该文件系统内的信息主要有:
+  + superblock:记录此 filesystem 的整体信息,包括 inode/block 的总量、使用量、剩余量, 以及文件系统的格式与相关信息等;
+  + inode:记录文件的属性,一个文件占用一个 inode,同时记录此文件的数据所在的 block 号码;
+  + block:实际记录文件的内容,若文件太大时,会占用多个 block 。
++ Ext2 文件系统的数据存取为索引式文件系统(indexed allocation)
++ 需要碎片整理的原因就是文件写入的 block 太过于离散了,此时文件读取的效能将会变的很差所致。 这个时候可以透过碎片整理将同一个文件所属的 blocks 汇整在一起。
++ Ext2 文件系统主要有:boot sector, superblock, inode bitmap, block bitmap, inode table, data block 等六大部分。
++  data block 是用来放置文件内容数据地方,在 Ext2 文件系统中所支持的 block 大小有 1K, 2K 及 4K 三种而已
++ inode 记录文件的属性/权限等数据,其他重要项目为: 每个 inode 大小均为固定,有 128/256bytes 两种基本容量。每个文件都仅会占用一个 inode 而已; 因此文件系统能够建立的文件数量与 inode 的数量有关;
++ 文件的 block 在记录文件的实际数据,目录的 block 则在记录该目录底下文件名与其 inode 号码的对照表;
++ 日志式文件系统 (journal) 会多出一块记录区,随时记载文件系统的主要活动,可加快系统复原时间;
++ Linux 文件系统为增加效能,会让主存储器作为大量的磁盘高速缓存;
++ 实体链接只是多了一个文件名对该 inode 号码的链接而已;
++ 符号链接就类似 Windows 的快捷方式功能。
++ 磁盘的使用必需要经过:分区、格式化与挂载,分别惯用的指令为:gdisk, mkfs, mount 三个指令
++ 分区时,应使用 parted 检查分区表格式,再判断使用 fdisk/gdisk 来分区,或直接使用 parted 分区
++ 为了考虑效能,XFS 文件系统格式化时,可以考虑加上 agcount/su/sw/extsize 等参数较佳
++ 如果磁盘已无未分区的容量,可以考虑使用大型文件取代磁盘装置的处理方式,透过 dd 与格式化功能。
++ 开机自动挂载可参考/etc/fstab 之设定,设定完毕务必使用 mount -a 测试语法正确否;

@@ -50,7 +50,7 @@ root@Jason:~# lsmod | grep bbr
 ```bash
 root@Jason:~# bash <(curl -L -s https://install.direct/go.sh)
 ```
-显示`V2Ray v4.18.0 is installed.`则表示安装成功。同时记下你的端口号`PORT`和`UIUD`，这些信息会以蓝色高亮显示。
+显示`V2Ray v4.18.0 is installed.`则表示安装成功。同时记下你的端口号`PORT`和`UUID`，这些信息会以蓝色高亮显示。
 然后启动v2ray：
 ```bash
 root@Jason:~# sudo systemctl start v2ray
@@ -79,7 +79,7 @@ $ sudo ./v2ray
 
 BBR比锐速好太多了吧！
 #### v2ray多用户配置
-多用户只需要在服务端的config.json中修改inboundDetour即可，可以使用[https://www.uuidgenerator.net/](https://www.uuidgenerator.net/)来生成UIUD，tcp配置例子如下：
+多用户只需要在服务端的config.json中修改inboundDetour即可，可以使用[https://www.uuidgenerator.net/](https://www.uuidgenerator.net/)来生成UUID，tcp配置例子如下：
 ```config
 {
   "inbound": {
