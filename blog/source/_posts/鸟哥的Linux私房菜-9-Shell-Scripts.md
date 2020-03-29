@@ -1,4 +1,4 @@
-d---
+---
 title: 鸟哥的Linux私房菜-9-Shell Scripts
 date: 2019-05-22 11:20:53
 tags:
