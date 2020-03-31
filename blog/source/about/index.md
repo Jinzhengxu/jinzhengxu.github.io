@@ -6,12 +6,7 @@ comments: false
 ---
 ##### [芝诺龟]()
 
-###### 这里是我对数学的心得和体验，对于数学，就要和乌龟一样耐住性子一点一点理解，打熬内功。
-
 ##### [拉普拉斯妖]()
-
->"Computer programming is an art, because it applies accumulated knowledge to the world, because it requires skill and ingenuity, and especially because it produces objects of beauty."
->Donald Kunth 1974
 
 
 1.[CS:APP](http://jinzhnegxu.online/2019/02/09/深入理解计算机系统/)

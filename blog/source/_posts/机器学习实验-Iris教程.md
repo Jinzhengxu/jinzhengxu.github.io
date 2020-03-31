@@ -5,6 +5,7 @@ tags:
   - ML
   - 机器学习
   - 线性判别
+mathjax: true
 categoties: 忒修斯之船
 copyright:
 ---
@@ -385,12 +386,12 @@ Linear Discriminant Analysis，器最主要的作用我觉得是对数据进行�
 ![EHHzg1.png](https://s2.ax1x.com/2019/05/16/EHHzg1.png)
 
  这里用到的方法是求特征向量,然后将器归总到类内散度矩阵和类间散度矩阵。
- $$
- \begin{align\*}
+$$
+\begin{align}
  & S_w=\Sigma_0+\Sigma_1=\sum_{x \in X_0}(x-\mu_0)(x-\mu_0)^T+\sum_{x \in X_1}(x-\mu_1)(x-\mu_1)^T \\\\
  & S_b=(\mu_0-\mu_1)(\mu_0-\mu_1)^T
- \end{align\*}
- $$
+ \end{align}
+$$
 
  每一个特征向量都对应一个特征值， 如果特征值的大小接近就代表我们投影到的空间维度比较合适。
 #### 基本方法和步骤
@@ -469,6 +470,9 @@ plt.show()
 实际应用中，比起通过投影降维（此处即LDA），另一种比较好的办法是做特征筛选。像鸢尾花这样的低维数据集，看一眼直方图就能得到很多信息了。
 ##### LDA
 + 计算数据的 d 维均值向量
+
+
+
 ```python
 import numpy as np
 import math
@@ -497,6 +501,9 @@ for clo in range(1,4):
     mean_vectors.append(np.mean(X[y==clo-1],axis=0))
     print('Mean Vector FClass %s: %s\n' %(clo-1,mean_vectors[clo-1]))
 ```
+
+
+
 py一下
 ```bash
 Jason@X1:~/flower/Data$ py3 LDA.py
@@ -507,6 +514,9 @@ Mean Vector FClass 1: [5.9486 2.7314 4.2371 1.3086]
 Mean Vector FClass 2: [6.6829 3.0086 5.6314 2.0686]
 
 ```
+
+
+
 + 计算散度矩阵
 $$
 S_w=\Sigma_0+\Sigma_1=\sum_{x \in X_0}(x-\mu_0)(x-\mu_0)^T+\sum_{x \in X_1}(x-\mu_1)(x-\mu_1)^T
@@ -533,6 +543,8 @@ Jason@X1:~/flower/Data$ py3 LDA.py
 $$
 S_b=(\mu_0-\mu_1)(\mu_0-\mu_1)^T
 $$
+
+
 ```python
 overall_mean = np.mean(X, axis=0)
 
@@ -545,6 +557,9 @@ for i,mean_vec in enumerate(mean_vectors):
 
 print('类间散度矩阵:\n', S_B)
 ```
+
+
+
 py一下
 ```bash
 Jason@X1:~/flower/Data$ py3 LDA.py
@@ -554,8 +569,14 @@ Jason@X1:~/flower/Data$ py3 LDA.py
  [124.6189 -36.7686 311.056  135.2389]
  [ 54.7119 -14.6504 135.2389  59.263 ]]
 ```
+
+
+
 + 求解矩阵的广义特征值
-```python
+
+
+
+```bash
 eig_vals, eig_vecs = np.linalg.eig(np.linalg.inv(S_W).dot(S_B))
 
 for i in range(len(eig_vals)):
@@ -563,7 +584,11 @@ for i in range(len(eig_vals)):
     print('\n特征向量 {}: \n{}'.format(i+1, eigvec_sc.real))
     print('特征值 {:}: {:.2e}'.format(i+1, eig_vals[i].real))
 ```
+
+
+
 py一下
+
 ```bash
 Jason@X1:~/flower/Data$ py3 LDA.py
 特征向量 1:
@@ -594,6 +619,9 @@ Jason@X1:~/flower/Data$ py3 LDA.py
  [ 0.2834]]
 特征值 4: 2.78e-15
 ```
+
+
+
 特征向量和特征值代表了一个线性变换的形变程度，特征向量是形变的方向，特征值是形变的大小。
 
 + 选择线性判别器构成新的特征子空间
@@ -1234,11 +1262,11 @@ Jason@X1:~/flower/Dat$ py3 args.py
 ```
 也就得到了三个线性回归方程
 $$
-\begin{align\*}
+\begin{align}
 & P(FClass==0)=\sigma(1.31SL+2.91SW-3.99PL-1.96PW+0.68) \\\\
 & P(FClass==0)=\sigma(0.97SL-0.22SW-0.25PL-1.77PW+1.61) \\\\
 & P(FClass==0)=\sigma(-2.28SL-2.69SW+4.24PL+3.72PW-2.29) \\\\
-\end{align\*}
+\end{align}
 $$
 
 ### 相关论文与参考资料：

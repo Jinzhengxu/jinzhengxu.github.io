@@ -44,7 +44,7 @@ AC代码：
 | ------ | ---- |
 | 216k   | 0MS  |
 
-```c++
+```c
 #include <iostream>
 #include <vector>
 #include <stdio.h>
@@ -70,15 +70,15 @@ int main(){
     for(int i=0;i<Lakenum;i++){
       cin>>lake[i].Frognum;
       lake[i].index=i;
-      //cout<<lake[i].index<<" "<<lake[i].Frognum<<endl;
+      ##cout<<lake[i].index<<" "<<lake[i].Frognum<<endl;
     }
 
     for(int i=0;i<Lakenum;i++){
       sort(lake,lake+Lakenum,acompare);
       int index=lake[0].Frognum;
-      //int jumpout=0;
-      //for(int j=0;j<Lakenum;j++) cout<<lake[j].Frognum;
-      //cout<<endl;
+      ##int jumpout=0;
+      ##for(int j=0;j<Lakenum;j++) cout<<lake[j].Frognum;
+      ##cout<<endl;
       lake[0].Frognum=0;
       for(int j=1;j<=index;j++){
         answer[lake[0].index][lake[j].index]=1;
@@ -107,3 +107,4 @@ int main(){
     return 0;
 }
 ```
+
