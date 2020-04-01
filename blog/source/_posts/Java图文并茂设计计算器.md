@@ -3,10 +3,7 @@ title: Java图文并茂设计计算器
 date: 2018-12-03 19:56:34
 tags:
 - Java
-- 作业
-categories: 忒修斯之船
-comments: true
-copyright: true
+categories: 程序设计
 ---
 
 * 体系框架 
@@ -46,7 +43,7 @@ class AWT_ONVALUECHANGED implements TextListener
      void      textValueChanged(TextEvent t)
 ```
 ### 实现思路
-    
+
 总体思路是获得用户输入的字符串并计算该字符串所表示算数表达式的值。细分功能有：小数点运算，多零输入，（）运算，高级数学运算（平方，开根，求模等）等。
 第一步，将算数表达式分割，给按钮“=”添加监听，当用户发事件“=”时将输入的字符串传递给Postfix类，Postfix的setStr将算数运算式由字符串转换成单个字符组成的链表，再通过调用transferToPostfix方法得到后缀表达式，此时再通过calculate方法计算表达式的值即可。整个运算过程就结束了。
 

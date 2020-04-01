@@ -3,10 +3,9 @@ title: Ubuntu+LaTeX+Vim史上最强Note
 date: 2019-03-29 15:20:24
 tags:
 - Linux
-- linux
 - vim
 - LaTeX
-categoties: 忒修斯之船
+categories: 软件工具
 copyright:
 ---
 自从被种草Markdown以后，真的是大大提升了效率。但是每次碰上$ \LaTeX $还是会gg，但是看了国外的一位老哥上课$\LaTeX$比老师板书都快，真的很羡慕啊，但是也舍弃不了Spacevim的便利，这里就尝试一下，如何使用spacevim达到和[这篇文章](https://castel.dev/post/lecture-notes-1/)国外老哥的一样的效果。

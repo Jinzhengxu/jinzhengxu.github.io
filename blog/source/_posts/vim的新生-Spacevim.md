@@ -3,8 +3,7 @@ title: vim的新生--Spacevim
 date: 2019-02-11 18:29:00
 tags:
 - vim
-categoties:
-- 忒修斯之船
+categories: 软件工具
 copyright: true
 ---
 要说Linux下的文本编辑器大哥，那当然是vim啦。但是除了极少数的大神，使用不带任何plugin的vim对于普通人来说还是稍有些难度。如果使用vim来AA题还好，管理大型项目则是一个不小的挑战，所以就有了今天的主角 *Spacevim* 的出现，Spacevim是一个[开源项目]()，有自己的[中英文官网](https://spacevim.org/https://github.com/SpaceVim/SpaceVim)，和丰富详尽的指南，还可以自己定义快捷键模式。将一个上古编译器拉倒现代IDE的水平，真的要给Spacevim的团队一个赞。

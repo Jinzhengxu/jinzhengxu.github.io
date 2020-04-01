@@ -2,9 +2,8 @@
 title: The 5*5 plan for my summer training
 date: 2019-07-21 10:38:17
 tags:
-  - fitness
   - 5*5
-categoties:
+categories: Workout
 copyright:
 ---
 

@@ -3,10 +3,9 @@ title: 鸟哥的Linux私房菜-9-Shell Scripts
 date: 2019-05-22 11:20:53
 tags:
   - Linux
-  - linux
   - Shell Scripts
   - Shell
-categoties: 拉普拉斯妖
+categories: 程序设计 
 copyright:
 ---
 shell脚本就是将一些命令集合起来一起执行，类似于程序的编写，但是不需要compile
@@ -65,44 +64,50 @@ read -p "Please input your last name: " lastname
 echo -e " \n Your full name is: ${firstname} ${lastname}"
 ```
 + 随日期变化
-```bash
-#!/bin/bash
-#Program:
-#       Insert date into filename
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-export PATH
-echo -e "I will use 'touch' command to create 3 file."
-read -p "Please input your filename:" fileuser
 
-filename=${fileuser:-"filename"}
+  ```bash
+  #!/bin/bash
+  #Program:
+  #       Insert date into filename
+  PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+  export PATH
+  echo -e "I will use 'touch' command to create 3 file."
+  read -p "Please input your filename:" fileuser
+  
+  filename=${fileuser:-"filename"}
+  
+  date1=$(date --date='2 days ago' +%Y%m%d)
+  date2=$(date --date='1 days ago' +%Y%m%d)
+  date3=$(date +%Y%m%d)
+  file1=${filename}${date1}
+  file2=${filename}${date2}
+  file3=${filename}${date3}
+  
+  touch "${file1}"
+  touch "${file3}"
+  touch "${file2}"
+  ```
 
-date1=$(date --date='2 days ago' +%Y%m%d)
-date2=$(date --date='1 days ago' +%Y%m%d)
-date3=$(date +%Y%m%d)
-file1=${filename}${date1}
-file2=${filename}${date2}
-file3=${filename}${date3}
-
-touch "${file1}"
-touch "${file3}"
-touch "${file2}"
-```
+  
 + 数值运算
-使用`$(())`来实现整数数值运算
-```bash
-#!/bin/bash
-#Program:
-#       cross two number
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-export PATH
+  使用`$(())`来实现整数数值运算
 
-echo -e "Input two number,the I multiplying them! \n"
-read -p "first number" first
-read -p "second number" second
-total=$((${first}*${second}))
-echo -e "\n The result of ${first}*${second} ==> ${total}"
-```
-+
+  ```bash
+  #!/bin/bash
+  #Program:
+  #       cross two number
+  PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+  export PATH
+  
+  echo -e "Input two number,the I multiplying them! \n"
+  read -p "first number" first
+  read -p "second number" second
+  total=$((${first}*${second}))
+  echo -e "\n The result of ${first}*${second} ==> ${total}"
+  ```
+
+  
+
 ##### script的执行方式的差异source，sh script，./script
 #### 善用判断式
 ##### 利用test指令的测试功能
@@ -118,4 +123,3 @@ echo -e "\n The result of ${first}*${second} ==> ${total}"
 ##### for...do...done的数值处理
 ##### 搭配随机数与数组的实验
 #### Shell Scripts的追踪与Debug
-### 重点回顾

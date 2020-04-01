@@ -3,7 +3,7 @@ title: poj3487 The Stable Marrige Problem 稳定匹配
 date: 2019-02-25 22:39:15
 tags:
 - 算法
-categoties:
+categories: 程序设计
 copyright:
 ---
 [poj3487](http://poj.org/problem?id=3487)

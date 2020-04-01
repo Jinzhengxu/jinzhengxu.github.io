@@ -5,7 +5,7 @@ tags:
   - Havel–Hakimi算法
   - Poj
   - 图论
-categoties: 算法珠玑
+categories: 程序设计
 copyright:
 ---
 ## Poj 1659 Frogs’ Neighborhood

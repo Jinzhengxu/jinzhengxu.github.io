@@ -3,10 +3,8 @@ title: Java+MySQL构建学生信息管理系统
 date: 2018-12-03 20:33:46
 tags:
 - Java
-- 作业
-categories: 忒修斯之船
-comments: true
-copyright: true
+categories: 程序设计
+cover: true
 ---
 学生信息管理系统，应付一般的课堂大作业应该足够了。
 * 体系框架
@@ -100,7 +98,8 @@ public class Student{
 }
 ```
 JDBCHelper.java
-```Java
+
+```java
 package com.jason.dao;
 import com.mysql.cj.xdevapi.SqlDataResult;
 
@@ -382,7 +381,9 @@ public class JDBCHelper {
     }
 }
 ```
+
 StudentDao.java
+
 ```java
 package com.jason.dao;
 import com.jason.bean.Student;
@@ -1729,6 +1730,7 @@ public class Updatestu extends JFrame implements ActionListener {
 }
 ```
 test.java
+
 ```java
 package com.jason.run;
 
@@ -1742,5 +1744,4 @@ public class test {
     }
 }
 ```
-
 

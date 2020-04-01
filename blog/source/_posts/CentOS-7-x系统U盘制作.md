@@ -5,7 +5,7 @@ tags:
 - Linux
 - CentOS
 - 虚拟机
-categories: 忒修斯之船
+categories: 软件工具
 copyright: true
 ---
 CentOS是红帽(RedHat)旗下RHEL的社区化版本，稳得一批。

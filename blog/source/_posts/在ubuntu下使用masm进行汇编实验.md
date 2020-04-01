@@ -5,7 +5,7 @@ tags:
   - masm
   - ubuntu
   - 汇编语言
-categoties: 忒修斯之船
+categories: 底层 
 copyright:
 ---
 windows下我们常常使用masm作为学习汇编语言的环境，Linux虽然有nasm等强大的开源软件，但是nasm的debug，编译等都与lab中使用masm的方式不同，但是masm对于linux的适配并不是非常完美。很多人选择重新开一个windows xp虚拟机来进行masm的安装，根据`禁止套娃`的原则，这里介绍集中可以在ubuntu下使用masm的方法。

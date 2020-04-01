@@ -3,9 +3,8 @@ title: Linux(8)-正则表达式与文件格式化处理
 date: 2019-05-19 14:44:00
 tags:
   - Linux
-  - linux
   - 正则表达式
-categoties: 拉普拉斯妖
+categoties: 程序设计
 copyright:
 ---
 简单的说,正则表达式就是用在字符串的处理上面的一项『表示式』。正则表达式并不是一个工具程序,而是一个字符串处理的标准依据,如果您想要以正则表达式的方式处理字符串,就得要使用支持正则表达式的工具程序才行, 这类的工具程序很多,例如 vi, sed, awk 等等。
@@ -289,15 +288,21 @@ $ grep -v '^$' /etc/rsyslog.conf | grep -v '^#'
 # 第二个『 -v '^#' 』代表『不要开头是 # 的那行』喔!
 ```
 ###### 任意一个字符 . 与重复字符 *
-  + . (小数点):代表『一定有一个任意字符』的意思;
-  ```bash
-  $ grep -n 'g..d' regular_express.txt
+
+
+
++ . (小数点):代表『一定有一个任意字符』的意思;
+
+```bash
+$ grep -n 'g..d' regular_express.txt
   1:"Open Source" is a good mechanism to develop programs.
   9:Oh! The soup taste good.
   16:The world <Happy> is the same with "glad".
+```
 
-  ```
-  + \* (星星号):代表『重复前一个字符, 0 到无穷多次』的意思,为组合形态
+
+
+  + \* (星号):代表『重复前一个字符, 0 到无穷多次』的意思,为组合形态
   ```bash
   $ grep -n 'ooo*' regular_express.txt
   1:"Open Source" is a good mechanism to develop programs.
@@ -739,7 +744,8 @@ $ ll passwd*
 ```bash
 $ pr /etc/man_db.conf
 ```
-###
+### 重点回顾
+
 + 正规表示法就是处理字符串的方法,他是以行为单位来进行字符串的处理行为;
 + 正规表示法透过一些特殊符号的辅助,可以让使用者轻易的达到『搜寻/删除/取代』某特定字符串的处理程序;
 只要工具程序支持正规表示法,那么该工具程序就可以用来作为正规表示法的字符串处理之用;

@@ -3,12 +3,12 @@ title: vps服务器使用v2ray科学上网
 date: 2019-03-20 16:13:08
 tags:
 - v2ray
-- linux
+- Linux
 - debian
-categoties: 忒修斯之船
+categories: 软件工具
 copyright:
 ---
-啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊，服务器又被识别了怎么办！吐血的我准备尝试一下v2ray来科学上网，因为ss，ssr等工具已经长期不再更新，所以掌握一个社区活跃的工具也是很有必要的啊。
+啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊，服务器又被Great Wall识别了怎么办！吐血的我准备尝试一下v2ray来科学上网，因为ss，ssr等工具已经长期不再更新，所以掌握一个社区活跃的工具也是很有必要的啊。
 
 ### Get started
 这次我们使用`Debian 9`发行版，如果你还不知道如何选购服务器并设置，可以参考这篇文章[Ubuntu18.04下通过Vultr服务搭建vps科学上网](http://jinzhnegxu.online/2019/03/14/Ubuntu18-04%E4%B8%8B%E9%80%9A%E8%BF%87Vultr%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BAvps%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/)。

@@ -7,7 +7,10 @@ tags:
   - corntab
   - telegram-cli
   - docker
-categoties: 忒修斯之船
+categoties: 程序设计
+top: true
+cover: true
+img: https://s2.ax1x.com/2019/10/26/KDJkgP.png
 copyright: true
 ---
 ## 前情提要

@@ -3,9 +3,9 @@ title: 《现代编译原理-C语言描述》虎书
 date: 2019-03-03 21:42:46
 tags:
 - 《现代编译原理-C语言描述》
-categoties: 拉普拉斯妖
+categories: 底层
 copyright:
-notshow: true
+password: fbddfdc4c1000a5dd4dd1952fc9f98044beb5fc73ce22c8fe6041ea691615c1e
 ---
 + [《现代编译原理—C语言描述》学习笔记（1）- 绪论](http://jinzhnegxu.online/2019/02/28/《现代编译原理-C语言描述》（1）/)
 

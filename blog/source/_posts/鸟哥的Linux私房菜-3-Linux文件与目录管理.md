@@ -3,9 +3,8 @@ title: Linux(3)-Linux文件与目录管理
 date: 2019-03-26 16:59:30
 tags:
 - Linux
-- linux
 - 文件和目录
-categoties:
+categories: 软件工具
 copyright:
 ---
 ### 目录与路径

@@ -2,11 +2,9 @@
 title: Hexo+Ubuntu+Gtihub打造你的个人博客
 date: 2018-11-30 12:41:27
 tags: 
-- 博客
+- hexo
 - Markdown
-categories: 忒修斯之船
-comments: true
-copyright: true
+categories: 软件工具
 ---
 
 搭建自己的个人博客是一件很有趣的事，可是网上教程大多是关于Windows系统下通过Hexo搭建博客的教程，对于Linux重度用户来说十分不友好这里趁着熟悉，为大家整理一份相近的教程。主要解决Ubuntu下git免密hexo部署等问题。

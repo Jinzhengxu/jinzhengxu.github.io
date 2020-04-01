@@ -3,9 +3,8 @@ title: Linux(7)-认识与学习BASH
 date: 2019-05-06 12:58:52
 tags:
   - Linux
-  - linux
   - BASH
-categoties: 拉普拉斯妖
+categories: 软件工具
 copyright:
 ---
 #### 认识 BASH 这个 Shell
@@ -97,12 +96,14 @@ builtin :表示该指令为 bash 内建的指令功能;
 当所需要下达的命令特别长,或者是输入了一串错误的指令时,你快速的将这串指令
 整个删除掉,可以使用其他的快速组合键。
 常见的有底下这些:
-| 组合键            | 功能与示范                                                            |
-| ----------------- | --------------------------------------------------------------------- |
+
+| 组合键            | 功能与示范                                                   |
+| ----------------- | ------------------------------------------------------------ |
 | [ctrl]+u/[ctrl]+k | 分别是从光标处向前删除指令串 ([ctrl]+u) 及向后删除指令串 ([ctrl]+k)。 |
 | [ctrl]+a/[ctrl]+e | 分别是让光标移动到整个指令串的最前面 ([ctrl]+a) 或最后面 ([ctrl]+e)。 |
 
 在终端机 (tty) 上面登入后, Linux 就会依据 ``/etc/passwd` 文件的设定给我们一个 shell (预设是 bash),然后我们就可以依据上面的指令下达方式来操作 shell。
+
 #### shell的变量功能
 + 变量的可变性与方便性
 
@@ -141,39 +142,54 @@ Jason　#变量设置完成
 ```
 变量的设定规则：
 + 变量与变量内容以一个等号『=』来连结
+
 + 等号两边不能直接接空格符
+
 + 变量名称只能是英文字母与数字,但是开头字符不能是数字
+
 + 变量内容若有空格符可使用双引号『"』或单引号『'』将变量内容结合起来
   + 双引号内的特殊字符如 $ 等,可以保有原本的特性
   + 单引号内的特殊字符则仅为一般字符 (纯文本)
+  
 + 可用『 \ 』将特殊符号(如 [Enter], $, \, 空格符, '等)变成一般字符
-+ 在一串指令的执行中,还需要藉由其他额外的指令所提供的信息时,可以使用反单引号『`命令`』或 『$(命令)』
-+ 若该变量为扩增变量内容时,则可用 "$变量名称" 或 ${变量} 累加内容
-+ 若该变量需要在其他子程序执行,则需要以 export 来使变量变成环境变量:『export PATH』
-+ 通常大写字符为系统默认变量,自行设定变量可以使用小写字符,方便判断
-+ 取消变量的方法为使用 unset :『unset 变量名称』
-```bash
-$ name=Jason
-$ echo ${name}
-Jason
-$ bash  #进入到子程序
-$ echo ${name}
-        #并没有刚刚设定的内容
-$ exit  #子程序:离开这个子程序
-$ export name
-$ bash
-$ echo ${name}
-Jason
-#在一般的状态下,父程序的自定义变量是无法在子程序内使用的。但是透过export将变量变成环境变量后,就能够在子程序底下应用了
 
-$ cd /lib/modules/`uname -r`/kernel
-# 进入到目前核心的模块目录
-$ ls -ld $(locate crontab)
-# 先以 locate 将文件名数据都列出来,再以 ls 指令来处理的意思
-$ work="/cluster/server/work/taiwan_2015/003/"
-$ cd $work
-# 使用其他目录作为我的模式工作目录时,只要变更 work 这个变数
-```
++ 在一串指令的执行中,还需要藉由其他额外的指令所提供的信息时,可以使用反单引号『`命令`』或 『$(命令)』
+
++ 若该变量为扩增变量内容时,则可用 "$变量名称" 或 ${变量} 累加内容
+
++ 若该变量需要在其他子程序执行,则需要以 export 来使变量变成环境变量:『export PATH』
+
++ 通常大写字符为系统默认变量,自行设定变量可以使用小写字符,方便判断
+
++ 取消变量的方法为使用 unset :『unset 变量名称』
+
+  ```bash
+  $ name=Jason
+  $ echo ${name}
+  Jason
+  $ bash  #进入到子程序
+  $ echo ${name}
+          #并没有刚刚设定的内容
+  $ exit  #子程序:离开这个子程序
+  $ export name
+  $ bash
+  $ echo ${name}
+  Jason
+  #在一般的状态下,父程序的自定义变量是无法在子程序内使用的。但是透过export将变量变成环境变量后,就能够在子程序底下应用了
+  
+  $ cd /lib/modules/`uname -r`/kernel
+  # 进入到目前核心的模块目录
+  $ ls -ld $(locate crontab)
+  # 先以 locate 将文件名数据都列出来,再以 ls 指令来处理的意思
+  $ work="/cluster/server/work/taiwan_2015/003/"
+  $ cd $work
+  # 使用其他目录作为我的模式工作目录时,只要变更 work 这个变数
+  ```
+
+  
+
+
+
 ##### 环境变量的功能
 ###### 用 env 观察环境变量与常见环境变量说明
 ```bash
@@ -317,55 +333,59 @@ LC_ALL= #整体语系的环境
 这里需要注意的是 ***『环境变量』与『bash 的操作环境』*** 意思不太一样,举例来说, PS1 并不是环境变量。
 ##### 变量键盘读取、数组与宣告read，array，declare
 + read
-```bash
-$ read [-pt] variable
-选项与参数:
--p :后面接提示字符
--t :后面接等待的『秒数』
-$ read atest
-This is a test  # 此时光标会等待输入
-$ echo ${atest}
-This is a test # 刚刚输入的数据已经变成一个变量内容
 
-$ read -p "Please keyin your name: " -t 30 named
-Please keyin your name: Jason # 提示字符
-$ echo ${named}
-Jason #输入的数据又变成一个变量的内容了!
-```
+  ```bash
+  $ read [-pt] variable
+  选项与参数:
+  -p :后面接提示字符
+  -t :后面接等待的『秒数』
+  $ read atest
+  This is a test  # 此时光标会等待输入
+  $ echo ${atest}
+  This is a test # 刚刚输入的数据已经变成一个变量内容
+  
+  $ read -p "Please keyin your name: " -t 30 named
+  Please keyin your name: Jason # 提示字符
+  $ echo ${named}
+  Jason #输入的数据又变成一个变量的内容了!
+  ```
 
+  
 + array
-``bash
-$ declare -a var
-$ var[1]="sdf"
-$ var[2]="sdfsd"
-$ echo "${var[1]},${var[2]}"
-sdf,sdfsd
-```
-+ declare/typeset
-declare 或 typeset 是一样的功能,就是在『宣告变量的类型』。
-```bash
-$ declare [-aixr] variable
-选项与参数:
--a :将后面名为 variable 的变量定义成为数组 (array) 类型
--i :将后面名为 variable 的变量定义成为整数数字 (integer) 类型
--x :用法与 export 一样,就是将后面的 variable 变成环境变量;
--r :将变量设定成为 readonly 类型,该变量不可被更改内容,也不能 unset
-$ sum=100+300+50
-$ echo ${sum}
-100+300+50 #没有计算加总，因为这是文字型态的变量属性
-$ declare -i sum=100+300+50
-$ echo ${sum}
-450
-$ declare -x sum
-$ export | grep sum
-declare -ix sum="450" #将 sum 变成环境变量
-$ declare -r sum
-$ sum=tesgting
--bash: sum: readonly variable #sum 变成只读属性,不可更动
-$ declare +x sum # 将 - 变成 + 可以进行『取消』动作
-$ declare -p sum #-p 可以单独列出变量的类型
-declare -ir sum="450" #只剩下 i, r 的类型,不具有 x
-```
+
+  ```bash
+  $ declare -a var
+  $ var[1]="sdf"
+  $ var[2]="sdfsd"
+  $ echo "${var[1]},${var[2]}"
+  sdf,sdfsd
+  + declare/typeset
+  declare 或 typeset 是一样的功能,就是在『宣告变量的类型』。
+  ​```bash
+  $ declare [-aixr] variable
+  选项与参数:
+  -a :将后面名为 variable 的变量定义成为数组 (array) 类型
+  -i :将后面名为 variable 的变量定义成为整数数字 (integer) 类型
+  -x :用法与 export 一样,就是将后面的 variable 变成环境变量;
+  -r :将变量设定成为 readonly 类型,该变量不可被更改内容,也不能 unset
+  $ sum=100+300+50
+  $ echo ${sum}
+  100+300+50 #没有计算加总，因为这是文字型态的变量属性
+  $ declare -i sum=100+300+50
+  $ echo ${sum}
+  450
+  $ declare -x sum
+  $ export | grep sum
+  declare -ix sum="450" #将 sum 变成环境变量
+  $ declare -r sum
+  $ sum=tesgting
+  -bash: sum: readonly variable #sum 变成只读属性,不可更动
+  $ declare +x sum # 将 - 变成 + 可以进行『取消』动作
+  $ declare -p sum #-p 可以单独列出变量的类型
+  declare -ir sum="450" #只剩下 i, r 的类型,不具有 x
+  ```
+
+  
 ##### 与文件系统及程序的限制关系：ulimit
 bash 是可以『限制用户的某些系统资源』的,包括可以开启的文件数量, 可以使用的 CPU 时间,可以使用的内存总量等等。
 
@@ -406,34 +426,36 @@ $ ulimit -f 10240 #限制用户仅能建立 10MBytes 以下的容量的文件
 ```
 ##### 变量内容的删除，取代与替换Optional
 + 变量内容的删除与取代
-```bash
-$ path=${PATH}
-$ echo ${path}
-/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin:/home/dmtsai/bin
-$ echo ${path#/*local/bin:} #删除目录
 
-${variable#/*local/bin:}
-上面的特殊字体部分是关键词!用在这种删除模式所必须存在的
-${variable#/*local/bin:}
-这就是原本的变量名称,以上面范例二来说,这里就填写 path 这个『变量名称』啦!
-${variable#/*local/bin:}
-这是重点!代表『从变量内容的最前面开始向右删除』,且仅删除最短的那个
-${variable#/*local/bin:}
-代表要被删除的部分,由于 # 代表由前面开始删除,所以这里便由开始的 / 写起。
-需要注意的是,我们还可以透过通配符 * 来取代 0 到无穷多个任意字符
-$ echo ${path##/*:}
-/home/dmtsai/bin
-# 变成 ## 之后『删除掉最长的那个数据』
-$ echo ${path%:*bin}
-/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin
-# 这个 % 符号代表由最后面开始向前删除!
-$ echo ${path%%:*bin}
-/usr/local/bin
-# 同样的, %% 代表的则是最长的符合字符串
-$ echo ${path/sbin/SBIN} #将 path 的变量内容内的 sbin 取代成大写 SBIN
-$ echo ${path//sbin/SBIN} #如果是两条斜线,那么就变成所有符合的内容都会被取代喔
-```
+  ```bash
+  $ path=${PATH}
+  $ echo ${path}
+  /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin:/home/dmtsai/bin
+  $ echo ${path#/*local/bin:} #删除目录
+  
+  ${variable#/*local/bin:}
+  上面的特殊字体部分是关键词!用在这种删除模式所必须存在的
+  ${variable#/*local/bin:}
+  这就是原本的变量名称,以上面范例二来说,这里就填写 path 这个『变量名称』啦!
+  ${variable#/*local/bin:}
+  这是重点!代表『从变量内容的最前面开始向右删除』,且仅删除最短的那个
+  ${variable#/*local/bin:}
+  代表要被删除的部分,由于 # 代表由前面开始删除,所以这里便由开始的 / 写起。
+  需要注意的是,我们还可以透过通配符 * 来取代 0 到无穷多个任意字符
+  $ echo ${path##/*:}
+  /home/dmtsai/bin
+  # 变成 ## 之后『删除掉最长的那个数据』
+  $ echo ${path%:*bin}
+  /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin
+  # 这个 % 符号代表由最后面开始向前删除!
+  $ echo ${path%%:*bin}
+  /usr/local/bin
+  # 同样的, %% 代表的则是最长的符合字符串
+  $ echo ${path/sbin/SBIN} #将 path 的变量内容内的 sbin 取代成大写 SBIN
+  $ echo ${path//sbin/SBIN} #如果是两条斜线,那么就变成所有符合的内容都会被取代喔
+  ```
 
+  
 | 变量设定方式 | 说明 |
 | ------------ | ---- |
 | ${变量#关键词} |若变量内容从头开始的数据符合『关键词』,则将符合的最短数据删除|
@@ -844,7 +866,7 @@ $ tee [-a] file
 ###### tr
 
 tr 可以用来删除一段讯息当中的文字,或者是进行文字讯息的替换
-```bash
+​```bash
 $ tr [-ds] SET1 ...
 选项与参数:
 -d :删除讯息当中的 SET1 这个字符串;

@@ -2,9 +2,7 @@
 title: The new calisthenics plan
 date: 2019-02-18 10:01:11
 tags:
-- FITNESS
-- PALN
-categoties:
+categories: Workout
 copyright:
 ---
 |日期|内容|

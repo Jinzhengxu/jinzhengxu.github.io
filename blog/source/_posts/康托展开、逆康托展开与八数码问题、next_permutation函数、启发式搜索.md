@@ -1,12 +1,8 @@
 ---
 title: 康托展开、逆康托展开与八数码问题、next_permutation函数、启发式搜索
-url: 20.html
-id: 20
-categories:
-  - Uncategorized
 date: 2018-09-05 12:16:06
-tags:
-categoties: 算法珠玑
+tags: 算法
+categories: 程序设计
 copyright:
 ---
 

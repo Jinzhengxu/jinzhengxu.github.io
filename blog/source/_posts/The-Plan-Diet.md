@@ -2,10 +2,9 @@
 title: The Plan & Diet
 date: 2019-04-09 19:24:12
 tags:
-  - fitness
-  - calisthenics
+  - Calisthenics
   - Diet
-categoties:
+categories: Workout
 copyright:
 ---
 

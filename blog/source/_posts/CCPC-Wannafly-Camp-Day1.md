@@ -2,7 +2,7 @@
 title: CCPC Wannafly Camp Day1
 date: 2019-01-20 08:24:59
 tags:
-categoties:
+categories: 程序设计
 copyright:
 ---
 div1 7 div2 6

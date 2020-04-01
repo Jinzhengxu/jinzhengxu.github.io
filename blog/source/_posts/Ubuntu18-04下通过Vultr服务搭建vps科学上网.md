@@ -2,11 +2,13 @@
 title: Ubuntu18.04下通过Vultr服务搭建vps科学上网
 date: 2019-03-14 16:43:15
 tags:
-- linux
+- Linux
 - 服务器
 - 科学上网
 - CentOS
-categoties: 忒修斯之船
+img: https://s2.ax1x.com/2019/03/14/AATaxx.png
+categories: 软件工具
+top: true
 copyright:
 ---
 * 购买vps服务器
@@ -18,7 +20,7 @@ copyright:
 Vultr（[www.vultr.com](https://www.vultr.com/?ref=7958083) )是一家云基础架构提供商，面向软件开发人员提供虚拟专用服务器（VPS），具有许多性价比很高的服务器，按时计费。目前（2019年3月14日）最低价格为$5.00/月($0.007/小时)。而且最近退出一个新用户首冲10美元送50美元额度的活动[新用户50美元](https://www.vultr.com/?ref=7958085-4F)，性价比可以说非常之高了，谁叫老用户是狗呢。
 
 首先在vultr中`create account`创建一个账户，通过邮箱验证。点击侧边栏的billing就可以充值了。购买服务器需要最低充值10美金，使用支付宝付款，服务器按小时计费。充值流程：【Billing】-【Alipay】-【Pay with Alipay】-【完成支付】
-![create account](http://www.vuvps.com/wp-content/uploads/2018/06/1.png)
+
 然后选择左侧`Servers`，点击右侧圆圈状的+号进行添加服务器。这里的服务器地址`Server Location`建议选择美国地区的服务器，因为日本和新加坡地区的服务器22端口封的较多，搭建成功率较低，如下图：
 ![AABXWj.png](https://s2.ax1x.com/2019/03/14/AABXWj.png)
 服务器类型`Server Type`选择Centos 6 x64，套餐选择看自己的经济水平吧，像我就是5美元足矣，如下图:
@@ -172,6 +174,7 @@ lsmod |grep 'bbr_powered'
 
 然后就可以通过各个平台的工具连接vps科学上网了（工具在文末给出），打开油管([www.youtube.com](www.youtube.com) )挑个4k视频试试吧。
 ![AATaxx.png](https://s2.ax1x.com/2019/03/14/AATaxx.png)
+
 #### 6.平台工具合集
 MAC版下载地址：[ShadowsocksX-NG-R8.dmg](https://github.com/gaoshilei/ShadowsocksX-NG/releases/download/1.4.3-R8-build3/ShadowsocksX-NG-R8.dmg)
 
@@ -182,3 +185,6 @@ Linux：自己sudo apt-get吧
 windows：https://github.com/shadowsocksrr/shadowsocksr-csharp/releases/download/4.9.0/ShadowsocksR-win-4.9.0.zip
 
 或者在[这里](https://ssr.tools/175)下载
+
+#### 7.[使用v2ray科学上网](http://localhost:4000/2019/03/20/vps-fu-wu-qi-shi-yong-v2ray-ke-xue-shang-wang/)
+

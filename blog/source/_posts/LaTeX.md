@@ -3,7 +3,8 @@ title: LaTeX使用指南
 date: 2019-02-28 13:53:37
 tags:
 - LaTex
-categoties: 拉普拉斯妖
+mathjax: true
+categories: 软件工具
 copyright:
 notshow:
 ---

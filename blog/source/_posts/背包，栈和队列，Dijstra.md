@@ -1,12 +1,10 @@
 ---
 title: 背包，栈和队列，Dijstra
-url: 57.html
-id: 57
 categories:
-  - Uncategorized
+  - 程序设计
 date: 2018-09-26 16:28:35
 tags:
-categoties: 算法珠玑
+  - 算法
 copyright:
 ---
 

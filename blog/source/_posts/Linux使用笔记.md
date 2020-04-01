@@ -3,10 +3,8 @@ title: Linux使用笔记
 date: 2019-03-27 15:07:27
 tags:
 - Linux
-- linux
-categoties:
+categories: 软件工具
 copyright:
-notshow: true
 ---
 1.[基本概念与帮助](http://jinzhnegxu.online/2019/03/18/鸟哥的Linux私房菜-1-基本概念与帮助/)
 

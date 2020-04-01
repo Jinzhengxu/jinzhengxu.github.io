@@ -1,12 +1,16 @@
 ---
-title: 机器学习实验--Iris教程
+title: 机器学习实验--Iris
 date: 2019-05-09 11:24:12
 tags:
-  - ML
   - 机器学习
   - 线性判别
+  - 支持向量机
+  - 主成分分析
+top: true
+cover: true
+img: https://s2.ax1x.com/2019/05/20/EzPu0x.png
 mathjax: true
-categoties: 忒修斯之船
+categories: 机器学习
 copyright:
 ---
 
@@ -874,6 +878,7 @@ plot_step_lda(X_lda,y_pred,"The Prediction Of LDA")
 ![EzPu0x.png](https://s2.ax1x.com/2019/05/20/EzPu0x.png)
 ![EzPgun.png](https://s2.ax1x.com/2019/05/20/EzPgun.png)
 可以看到我们只有一个数据点出现了误差。
+
 #### 猜想验证
 ```python
 import numpy as np

@@ -3,9 +3,8 @@ title: Linux(1)-基本概念与帮助
 date: 2019-03-18 20:36:08
 tags:
 - Linux
-- linux
 - CentOS
-categoties: 拉普拉斯妖
+categories: 软件工具
 copyright: GPL
 ---
 #### Linux命令基本形式

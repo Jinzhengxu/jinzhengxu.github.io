@@ -3,9 +3,8 @@ title: Linux(5)-文件与文件系统的压缩
 date: 2019-04-18 14:43:28
 tags:
   - Linux
-  - linux
   - 文件压缩
-categoties: 拉普拉斯妖
+categories: 软件工具
 copyright:
 ---
 
@@ -508,7 +507,7 @@ alex firewalld man_db.conf rsyslog.d
 $ umount /mnt
 # 测试完毕要记得卸除!
 这样可以使用-graft-point来处理
-```bash
+​```bash
 $ mkisofs -r -V 'linux_file' -o /tmp/system.img \
 >
 -m /root/etc -graft-point /root=/root /home=/home /etc=/etc
@@ -623,25 +622,26 @@ driveropts=burnfree :打开 Buffer Underrun Free 模式的写入功能
 :支持 DVD-RW 的格式
 ```
 + 侦测你的刻录机所在位置:
-```bash
-$ ll /dev/sr0
-brw-rw----+ 1 root cdrom 11, 0 Jun 26 22:14 /dev/sr0 #一般 Linux 光驱文件名!
-$ wodim --devices dev=/dev/sr0
--------------------------------------------------------------------------
-0
-dev='/dev/sr0'
-rwrw-- : 'QEMU' 'QEMU DVD-ROM'
--------------------------------------------------------------------------
-$ wodim --devices dev=/dev/sr0
-wodim: Overview of accessible drives (1 found) :
--------------------------------------------------------------------------
-0
-dev='/dev/sr0'
-rwrw-- : 'ASUS' 'DRW-24D1ST'
--------------------------------------------------------------------------
-# 你可以发现到其实鸟哥做了两个测试!上面的那部主机系统是虚拟机,当然光驱也是仿真的,没法用。
-# 因此在这里与底下的 wodim 用法,鸟哥只能使用另一部 Demo 机器测试给大家看了!
-```
+
+  ```bash
+  $ ll /dev/sr0
+  brw-rw----+ 1 root cdrom 11, 0 Jun 26 22:14 /dev/sr0 #一般 Linux 光驱文件名!
+  $ wodim --devices dev=/dev/sr0
+  -------------------------------------------------------------------------
+  0
+  dev='/dev/sr0'
+  rwrw-- : 'QEMU' 'QEMU DVD-ROM'
+  -------------------------------------------------------------------------
+  $ wodim --devices dev=/dev/sr0
+  wodim: Overview of accessible drives (1 found) :
+  -------------------------------------------------------------------------
+  0
+  dev='/dev/sr0'
+  rwrw-- : 'ASUS' 'DRW-24D1ST'
+  -------------------------------------------------------------------------
+  ```
+
+  
 + 进行cd/dvd的刻录
 ```bash
 # 0. 先抹除光盘的原始内容:(非可重复读写则可略过此步骤)

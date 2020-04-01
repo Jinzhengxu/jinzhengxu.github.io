@@ -4,7 +4,7 @@ date: 2019-03-03 22:58:52
 tags:
 - 机器学习
 - Kaggle
-categoties: 拉普拉斯妖
+categories: 机器学习
 copyright:
 ---
 ### 初识Kaggle
@@ -370,7 +370,7 @@ msno.bar(train_df)
 +   数据填补:如果缺值的样本适中，而该属性为连续值特征属性，有时候我们会考虑给定一个step(比如这里的age，我们可以考虑每隔2/3岁为一个步长)，然后把它离散化，之后把NaN作为一个type加到属性类目中。
 + 数据填补:有些情况下，缺失的值个数并不是特别多，那我们也可以试着根据已有的值，拟合一下数据，补充上。
 
-本例中，后两种处理方式应该都是可行的，我们先使用拟合补全吧(虽然说没有特别多的背景可供我们拟合，这不一定是一个多么好的选择)。这里用scikit-learn中的RandomForest来拟合一下缺失的年龄数据(注：RandomForest是一个用在原始数据中做不同采样，建立多颗DecisionTree，再进行average等等来降低过拟合现象，提高结果的机器学习算法，我们之后会介绍到)
+本例中，后两种处理方式应该都是可行的，我们先使用拟合补全吧(虽然说没有特别多的背景可供我们拟合，这不一定是一个多么好的选择)。这里用scikit-learn中的RandomForest来拟合一下缺失的年龄数据(注：RandomForest是一个用在原始数据中做不同采样，建立多颗DecisionTree，再进行average等等来降低过拟合现象，提高结果的机器学习算法)
 
 ```python
 from sklearn.ensemble import RandomForestRegressor

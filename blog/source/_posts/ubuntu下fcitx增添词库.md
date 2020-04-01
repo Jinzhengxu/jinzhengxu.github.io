@@ -3,7 +3,7 @@ title: ubuntu下fcitx增添词库
 date: 2019-04-17 21:46:51
 tags:
   - Linux
-categoties: 忒修斯之船
+categories: 软件工具
 copyright:
 ---
 

@@ -3,9 +3,8 @@ title: Linux(2)-文件权限与目录
 date: 2019-03-21 09:54:06
 tags:
 - Linux
-- linux
 - 文件权限与目录配置
-categoties: 拉普拉斯妖
+categories: 软件工具
 copyright:
 ---
 Linux 和windows的一个主要区别是Windows的设计是单人假多任务，而Linux则是优秀的多人多任务环境，为了针对每个用户都有自己的文件管理权限，Linux有一套自己的文件管理方式，将文件可读写的身份分为三个类别，分别是 *** 拥有者（owner），所属群组（group），其他人（others）。***

@@ -4,9 +4,7 @@ date: 2019-03-20 16:33:15
 tags:
 - ssh
 - Linux
-- linux
-- 服务器
-categoties: 忒修斯之船
+categories: 软件工具
 copyright:
 ---
 今天在服务器被banl，在用ssh连接新deploy的服务器时,遇到点小问题。终端显示：

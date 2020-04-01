@@ -3,9 +3,8 @@ title: Linux(6)-vim程序编辑器
 date: 2019-04-23 23:26:15
 tags:
   - Linux
-  - linux
   - vim
-categoties: 拉普拉斯妖
+categories: 软件工具
 copyright:
 ---
 ```bash
@@ -222,11 +221,11 @@ Swap file ".config.json.swp" already exists!
 
 ##### 多文件编辑
 
-| 多文件编辑的按键 | 意义                                 |
-| :n | 编辑下一个文件 |
-| :N | 编辑上一个文件 |
-| :files | 列出目前这个 vim 的开启的所有文件 |
-
+| 多文件编辑的按键 | 意义                              |
+| ---------------- | --------------------------------- |
+| :n               | 编辑下一个文件                    |
+| :N               | 编辑上一个文件                    |
+| :files           | 列出目前这个 vim 的开启的所有文件 |
 ##### 多窗口功能
 
 | 多窗口情况下的按键 | 功能 |
@@ -263,7 +262,7 @@ vim 会主动的将你曾经做过的行为登录下来,那个记录动作的文
 | :set bg=dark :set bg=light        | 可用以显示不同的颜色色调,预设是『 light 』。                                                             |
 
 ##### vim常用命令示意图
-![vim常用命令示意图]([![EB5Dbt.md.jpg](https://s2.ax1x.com/2019/05/06/EB5Dbt.md.jpg)](https://imgchr.com/i/EB5Dbt)
+![EB5Dbt.jpg](https://s2.ax1x.com/2019/05/06/EB5Dbt.jpg)
 #### 其他vim使用注意事项
 ##### 中文编码的问题:q
 
