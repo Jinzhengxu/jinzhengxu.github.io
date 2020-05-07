@@ -1,0 +1,1528 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="整数分解, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>整数分解 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">整数分解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/算法/">
+                                <span class="chip bg-color">算法</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/程序设计/" class="post-category">
+                                程序设计
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-09-03
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="1-试除法"><a href="#1-试除法" class="headerlink" title="1.试除法"></a>1.试除法</h3><p>试除法是整数分解算法中最简单和最容易理解的算法。首次出现于意大利数学家斐波那契出版于1202年的著作。 有合数n，n为待分解的正整数，从小于等于<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2a2994734eae382ce30100fb17b9447fd8e99f81" alt="\sqrt{n}">的每个素数去试除待分解的整数。如果找到一个数能够整除除尽，这个数就是待分解整数的因子。如果找到一个数能够整除除尽，这个数就是待分解整数的因子。试除法一定能够找到n的因子，如果没有找到则证明n是素数，如果整数的末尾不是0或5那么可以不用计算5的倍数的素因子，如果n末尾为2，检查偶数因子即可。</p>
+<p>某种意义上说，试除法是个效率非常低的算法，如果从2开始，一直算到<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2a2994734eae382ce30100fb17b9447fd8e99f81" alt="\sqrt{n}">需要 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/70dcd123ffd5e05da1282e8bb6199a69cabb3094" alt="{\displaystyle \pi ({\sqrt {n}})}">)次试除，这里pi(x)是小于x的素数的个数。这是不包括<a href="https://zh.wikipedia.org/wiki/%E7%B4%A0%E6%80%A7%E6%B5%8B%E8%AF%95" title="素性测试" target="_blank" rel="noopener">素性测试</a>的。如果稍做变通——还是不包括素性测试——用小于<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2a2994734eae382ce30100fb17b9447fd8e99f81" alt="\sqrt{n}">的奇数去简单的试除，则需要<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/84e2f902675495ea907811a67242d5de452cc580" alt="{\displaystyle { {\sqrt {n}} \over 2}}">)次。这意味着，如果<em>n</em>有大小接近的素因子（例如<a href="https://zh.wikipedia.org/wiki/%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E5%AD%A6" title="公钥密码学" target="_blank" rel="noopener">公钥密码学</a>中用到的），试除法是不太可能实行的。但是，当<em>n</em>有至少一个小因子，试除法可以很快找到这个小因子。值得注意的是，对于随机的<em>n</em>，2是其因子的<a href="https://zh.wikipedia.org/wiki/%E6%A6%82%E7%8E%87" title="概率" target="_blank" rel="noopener">概率</a>是50％，3是33％，等等，88％的正整数有小于100的因子，91％的有小于1000。 1.1<strong>卢卡斯-莱默检测法</strong> <strong>梅森数</strong>是指形如<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/51e4bd4ef2f9549d026cbf643a91c0d12a8c6794" alt="2^{n}-1">)的数，记为<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8656f32ad5c50e679b491b361a423727491496a0" alt="M_{n}">)；如果一个梅森数是<a href="https://zh.wikipedia.org/wiki/%E7%B4%A0%E6%95%B0" title="素数" target="_blank" rel="noopener">素数</a>那么它称为<strong>梅森素数</strong>（英语：Mersenne prime）。 卢卡斯－莱默检验法原理是这样：令梅森数 <em>M__p</em> = 2_p_− 1作为检验对象（预设<em>p</em>是<a href="https://zh.wikipedia.org/wiki/%E7%B4%A0%E6%95%B0" title="素数" target="_blank" rel="noopener">素数</a>，否则<em>M__p_就是<a href="https://zh.wikipedia.org/wiki/%E5%90%88%E6%95%B0" title="合数" target="_blank" rel="noopener">合数</a>了）。定义序列{_s__i</em> }：所有的<em>i</em> ≥ 0</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9fc749e18edade3aef75492f908b51d8557bd4b5" alt="s_{i}={\begin{cases}\;\;\,4\\s_{ {i-1}}^{2}-2\end{cases}}"></p>
+<p>，如果<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9c43332a399f3f7b9aa3adedf804715b87afedd3" alt="\displaystyle i=0">；</p>
+<p>，如果<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f578faf6a3a1f2c22e7c77e819a5ae06c6a27e18" alt="\displaystyle i&gt;0">。</p>
+<p>这个序列的开始几项是<a href="https://zh.wikipedia.org/wiki/4" title="4" target="_blank" rel="noopener">4</a>, <a href="https://zh.wikipedia.org/wiki/14" title="14" target="_blank" rel="noopener">14</a>, <a href="https://zh.wikipedia.org/wiki/194" title="194" target="_blank" rel="noopener">194</a>, <a href="https://zh.wikipedia.org/w/index.php?title=37634&action=edit&redlink=1" title="37634（页面不存在）" target="_blank" rel="noopener">37634</a>, … （<a href="https://zh.wikipedia.org/wiki/%E6%95%B4%E6%95%B8%E6%95%B8%E5%88%97%E7%B7%9A%E4%B8%8A%E5%A4%A7%E5%85%A8" title="整数数列线上大全" target="_blank" rel="noopener">OEIS</a>中的数列<a href="https://oeis.org/A003010" title="oeis:A003010" target="_blank" rel="noopener">A003010</a>） 那么_M__p_是素数<a href="https://zh.wikipedia.org/wiki/%E5%BD%93%E4%B8%94%E4%BB%85%E5%BD%93" title="当且仅当" target="_blank" rel="noopener">当且仅当</a></p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/927bf8c53e8606aee46b2aa67843462e2dc0dfce" alt="s_{ {p-2}}\equiv 0{\pmod  {M_{p}}};"></p>
+<p>否则, <em>M__p_是<a href="https://zh.wikipedia.org/wiki/%E5%90%88%E6%95%B0" title="合数" target="_blank" rel="noopener">合数</a>。_s__p</em> − 2模_M__p_的余数叫做<em>p</em>的<strong>卢卡斯－莱默余数</strong>。 1.2 <strong>埃拉托斯特尼筛法</strong> <strong>埃拉托斯特尼筛法</strong>（<a href="https://zh.wikipedia.org/wiki/%E5%B8%8C%E8%87%98%E8%AA%9E" title="希腊语" target="_blank" rel="noopener">希腊语</a>：κόσκινον Ἐρατοσθένους，英语：sieve of Eratosthenes ），简称<strong>埃氏筛</strong>，也有人称素数筛。这是一种简单且历史悠久的<a href="https://zh.wikipedia.org/wiki/%E7%AD%9B%E6%B3%95" title="筛法" target="_blank" rel="noopener">筛法</a>，用来找出一定范围内所有的<a href="https://zh.wikipedia.org/wiki/%E8%B3%AA%E6%95%B8" title="素数" target="_blank" rel="noopener">素数</a>。 所使用的原理是从2开始，将每个<a href="https://zh.wikipedia.org/wiki/%E8%B3%AA%E6%95%B8" title="素数" target="_blank" rel="noopener">素数</a>的各个倍数，标记成<a href="https://zh.wikipedia.org/wiki/%E5%90%88%E6%95%B8" title="合数" target="_blank" rel="noopener">合数</a>。一个素数的各个倍数，是一个差为此素数本身的等差数列。此为这个筛法和<a href="https://zh.wikipedia.org/wiki/%E8%A9%A6%E9%99%A4%E6%B3%95" title="试除法" target="_blank" rel="noopener">试除法</a>不同的关键之处，后者是以素数来测试每个待测数能否被整除。 埃拉托斯特尼筛法是列出所有小素数最有效的方法之一，其名字来自于<a href="https://zh.wikipedia.org/wiki/%E5%8F%A4%E5%B8%8C%E8%87%98%E6%95%B8%E5%AD%B8" title="古希腊数学" target="_blank" rel="noopener">古希腊数学家</a><a href="https://zh.wikipedia.org/wiki/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC" title="埃拉托斯特尼" target="_blank" rel="noopener">埃拉托斯特尼</a>，并且被描述在另一位古希腊数学家<a href="https://zh.wikipedia.org/wiki/%E5%B0%BC%E7%A7%91%E9%A9%AC%E5%BA%93%E6%96%AF" title="尼科马库斯" target="_blank" rel="noopener">尼科马库斯</a>所著的《算术入门》中。<a href="https://zh.wikipedia.org/wiki/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95#cite_note-1" target="_blank" rel="noopener">[1]</a> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Sieve_of_Eratosthenes_animation.gif/350px-Sieve_of_Eratosthenes_animation.gif" alt="åæææ¯ç¹å°¼ç­æ³"> 详细列出算法如下：</p>
+<ol>
+<li>列出2以后的所有序列：<ul>
+<li>2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</li>
+</ul>
+</li>
+<li>标出序列中的第一个质数，也就是2，序列变成：<ul>
+<li>2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</li>
+</ul>
+</li>
+<li>将剩下序列中，划摽2的倍数（用红色标出），序列变成：<ul>
+<li>2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</li>
+</ul>
+</li>
+<li>如果现在这个序列中最大数小于最后一个标出的素数的平方，那么剩下的序列中所有的数都是质数，否则回到第二步。</li>
+</ol>
+<hr>
+<ol>
+<li><p>本例中，因为25大于2的平方，我们返回第二步：</p>
+</li>
+<li><p>剩下的序列中第一个质数是3，将主序列中3的倍数划出（红色），主序列变成：</p>
+<ul>
+<li>2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</li>
+</ul>
+</li>
+<li><p>我们得到的质数有：2，3</p>
+</li>
+<li><p>25仍然大于3的平方，所以我们还要返回第二步：</p>
+</li>
+<li><p>现在序列中第一个质数是5，同样将序列中5的倍数划出，主序列成了：</p>
+<ul>
+<li>2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25</li>
+</ul>
+</li>
+<li><p>我们得到的质数有：2, 3, 5 。</p>
+</li>
+<li><p>因为25等于5的平方，结束循环</p>
+</li>
+</ol>
+<p>结论：去掉红色的数字，2到25之间的质数是：2, 3, 5, 7, 11, 13, 17, 19, 23。 1.2.1伪代码</p>
+<p><strong>Input</strong>: an integer <em>n</em> &gt; 1</p>
+<p>Let <em>A</em> be an array of Boolean values, indexed by integers 2 to <em>n</em>,<br>initially all set to <strong>true</strong>.</p>
+<p> <strong>for</strong> <em>i</em> = 2, 3, 4, …, not exceeding <em>√n</em>:<br>  <strong>if</strong> <em>A</em>[<em>i</em>] is <strong>true</strong>:<br>    <strong>for</strong> <em>j</em> = <em>i2</em>, <em>i2+i</em>, <em>i2+2i</em>, <em>i2+3i</em>, …, not exceeding <em>n</em> :<br>      <em>A</em>[<em>j</em>] := <strong>false</strong></p>
+<p><strong>Output</strong>: all <em>i</em> such that <em>A</em>[<em>i</em>] is <strong>true</strong>.</p>
+<p>1.3.1 C++</p>
+<pre class=" language-c++"><code class="language-c++">bool flag[MAXN] = {1};    //将标识初始化为true
+void erat(int maxn)
+{
+    flag[0]=0;            //0不是素数
+    flag[1]=0;            //1不是素数
+    for(int i=2;i<=maxn;++i)
+    {
+        /*当i为素数时，i的所有倍数都不是素数*/
+        if(flag[i])
+        {
+            for(int j=i*i;j<=maxn;j+=i)
+            {
+                flag[j]=0;
+            }
+        }
+    }
+ }</code></pre>
+<pre><code>
+`#include &lt;iostream&gt;`
+
+`#include &lt;cstdio&gt;`
+
+`#include &lt;cmath&gt;`
+
+`#include &lt;cstring&gt;`
+
+`#include &lt;vector&gt;`
+
+`#include &lt;algorithm&gt;`
+
+`using` `namespace` `std;`
+
+`const` `long` `long` `maxn = 10000007 + 10;`
+
+`const` `long` `long` `maxp = 700000;`
+
+`int` `vis[maxn];    ``// i是合数vis为1，i是素数，vis为0`
+
+`long` `long` `prime[maxp];`
+
+`void` `sieve(``long` `long` `n){`
+
+`long` `long` `m = (``long` `long``)``sqrt``(n + 0.5);`
+
+`memset``(vis, 0, ``sizeof``(vis));`
+
+`vis[2] = 0;`
+
+`for` `(``long` `long` `i = 3; i &lt;= m; i += 2) {`
+
+`if``(!vis[i])`
+
+`for` `(``long` `long` `j = i * i; j &lt;= n; j += i)`
+
+`vis[j] = 1;`
+
+`if``(i * i &gt; n)`
+
+`break``;`
+
+`}`
+
+`}`
+
+`long` `long` `gen(``long` `long` `n){`
+
+`sieve(n);`
+
+`long` `long` `c = 1;`
+
+`prime[0] = 2;`
+
+`for` `(``long` `long` `i = 3; i &lt;= n; i += 2)`
+
+`if``(!vis[i])`
+
+`prime[c++] = i;`
+
+`return` `c;`
+
+`}`
+
+`int` `main()`
+
+`{`
+
+`long` `long` `n, c;`
+
+`cout &lt;&lt; ``&quot;刷素数到n：&quot;``;`
+
+`cin &gt;&gt; n;`
+
+`c = gen(n);`
+
+`for` `(``long` `long` `i = 0; i &lt; c; i++)`
+
+`printf``(``&quot;%lld&quot;``, prime[i]);`
+
+`cout &lt;&lt; endl &lt;&lt; c;`
+
+`return` `0;`
+
+`}`</code></pre><p>1.3 米勒-拉宾素性检验 <strong>米勒-拉宾素性检验</strong>是一种<a href="https://zh.wikipedia.org/wiki/%E8%B3%AA%E6%95%B8%E5%88%A4%E5%AE%9A%E6%B3%95%E5%89%87" title="素数判定法则" target="_blank" rel="noopener">素数判定法则</a>，利用<a href="https://zh.wikipedia.org/wiki/%E9%9A%8F%E6%9C%BA%E5%8C%96%E7%AE%97%E6%B3%95" title="随机化算法" target="_blank" rel="noopener">随机化算法</a>判断一个数是<a href="https://zh.wikipedia.org/wiki/%E5%90%88%E6%95%B0" title="合数" target="_blank" rel="noopener">合数</a>还是_可能是_素数。<a href="https://zh.wikipedia.org/wiki/%E5%8D%A1%E5%86%85%E5%9F%BA%E6%A2%85%E9%9A%86%E5%A4%A7%E5%AD%A6" title="卡内基梅隆大学" target="_blank" rel="noopener">卡内基梅隆大学</a>的计算机系教授Gary Lee Miller首先提出了基于<a href="https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B9%89%E9%BB%8E%E6%9B%BC%E7%8C%9C%E6%83%B3" title="广义黎曼猜想" target="_blank" rel="noopener">广义黎曼猜想</a>的<a href="https://zh.wikipedia.org/wiki/%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%AE%97%E6%B3%95" title="确定性算法" target="_blank" rel="noopener">确定性算法</a>，由于广义黎曼猜想并没有被证明，其后由以色列<a href="https://zh.wikipedia.org/wiki/%E8%80%B6%E8%B7%AF%E6%92%92%E5%86%B7%E5%B8%8C%E4%BC%AF%E4%BE%86%E5%A4%A7%E5%AD%B8" title="耶路撒冷希伯来大学" target="_blank" rel="noopener">耶路撒冷希伯来大学</a>的<a href="https://zh.wikipedia.org/wiki/%E8%BF%88%E5%85%8B%E5%B0%94%C2%B7%E6%8B%89%E5%AE%BE" title="迈克尔·拉宾" target="_blank" rel="noopener">Michael O. Rabin</a>教授作出修改，提出了不依赖于该假设的<a href="https://zh.wikipedia.org/wiki/%E9%9A%8F%E6%9C%BA%E5%8C%96%E7%AE%97%E6%B3%95" title="随机化算法" target="_blank" rel="noopener">随机化算法</a>。 1.3.1 概念 首先介绍一个相关的引理。<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/65e7c059e3e4df8c6f5e3befcc9123ecf0699545" alt="{\displaystyle 1^{2}{\bmod {p}}}"> 和 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5a3697b745e05696dc2c0d59f2d8bdba087ac938" alt="{\displaystyle (-1)^{2}{\bmod {p}}}">总是得到 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/92d98b82a3778f043108d4e20960a9193df57cbf" alt="1">)，称这两个数为1的“平凡平方根”。当<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/81eac1e205430d1f40810df36a0edffdc367af36" alt="p">是素数且<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0502012bc3b4e73e6f3c2f4748feaab3fd3c350d" alt="{\displaystyle p&gt;2}">时，不存在<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5655e491d25858db6c2959a9140055d1269ccef7" alt="{\displaystyle 1{\bmod {p}}}"> 的“非平凡平方根”。为了证明该引理，我们假设<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/87f9e315fd7e2ba406057a97300593c4802b53e4" alt="x">是<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5655e491d25858db6c2959a9140055d1269ccef7" alt="{\displaystyle 1{\bmod {p}}}">的平方根，于是有</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f2404e3c31b0cfd08dda220c8baa8219babc5f97" alt="{\displaystyle x^{2}\equiv 1{\pmod {p}}}"></p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/672a2fc37298d72e29c68b7013b486b6246c38db" alt="{\displaystyle (x+1)(x-1)\equiv 0{\pmod {p}}}"></p>
+<p>也就是说，素数 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/81eac1e205430d1f40810df36a0edffdc367af36" alt="p"> 能够整除 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8eac886a1c95ee0e9751dee8a34db16419da65ed" alt="{\displaystyle (x-1)(x+1)}"> ，根据欧几里得引理，<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0f1a88d34243b98b57c4df9db5724f61b59a4b9d" alt="{\displaystyle x-1}"> 或者 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/16df430ed7a23df9b160a5bbd957f306a0c3baa7" alt="x+1">)能够被<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/81eac1e205430d1f40810df36a0edffdc367af36" alt="p"> 整除，即 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c47130edf21adaddfaf7943b7f4726b9f49e0c0c" alt="{\displaystyle x\equiv 1{\pmod {p}}}"> 或 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9442867e294b731375518aa103c235126f5c5c1f" alt="{\displaystyle x\equiv -1{\pmod {p}}}">, 即 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/87f9e315fd7e2ba406057a97300593c4802b53e4" alt="x"> 是<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5655e491d25858db6c2959a9140055d1269ccef7" alt="{\displaystyle 1{\bmod {p}}}"> 的平凡平方根。 现在假设<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">是一个奇素数，且 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/44e71ac55b9fbf1e9f341b946cda63d61d3ef2cd" alt="n&gt;2">)。于是<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/fbd0b0f32b28f51962943ee9ede4fb34198a2521" alt="n-1">是一个偶数，可以被表示为<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5aa9d1939706614a2d66d272883bd4918e5bf302" alt="{\displaystyle 2^{s}*d}"> 的形式，<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/01d131dfd7673938b947072a13a9744fe997e632" alt="s">)和<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e85ff03cbe0c7341af6b982e47e9f90d235c66ab" alt="d">)都是正整数且<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e85ff03cbe0c7341af6b982e47e9f90d235c66ab" alt="d">是奇数。对任意在<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d72620a16da7fb10ee179052ceb101a91ac33098" alt="{\displaystyle (Z/nZ)^{*}}"> 范围内的 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 和<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d7adcc552e16961533f8b5d14d4aa43c696350a8" alt="{\displaystyle 0\leq r\leq s-1}">，必满足以下两种形式的一种：</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2fbd85b469a4bd1028f98a9ba2a0a9e170006f21" alt="{\displaystyle a^{d}\equiv 1{\pmod {n}}}"></p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/eb8b4bcb85512714451e65b5e92f60f84332a500" alt="{\displaystyle a^{2^{r}d}\equiv -1{\pmod {n}}}"></p>
+<p>因为由于 <a href="https://zh.wikipedia.org/wiki/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86" title="费马小定理" target="_blank" rel="noopener">费马小定理</a> ，对于一个素数<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">，有</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3bfc8625369c7558deadd61823842db06983423d" alt="{\displaystyle a^{n-1}\equiv 1{\pmod {n}}}"></p>
+<p>又由于上面的引理，如果我们不断对<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2a6beb3068e2c15fb1b618b9b82f306c65430b33" alt="{\displaystyle a^{n-1}}">取平方根，我们总会得到 1 或 -1。如果我们得到了 -1，意味着②式成立，<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 是一个素数。如果我们从未得到 -1，那么通过这个过程我们已经取遍了所有2的幂次，即①式成立。 米勒-拉宾素性测试就是基于上述原理的逆否，也就是说，如果如果我们能找到这样一个<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a">，使得对任意<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d7adcc552e16961533f8b5d14d4aa43c696350a8" alt="{\displaystyle 0\leq r\leq s-1}">以下两个式子均满足：</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0867bd3e86262241fae38a021ed361001e28f66a" alt="{\displaystyle a^{d}\not \equiv 1{\pmod {n}}}"></p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e20bbbf10f3ef34c4e8d4e398dd978250331af54" alt="{\displaystyle a^{2^{r}d}\not \equiv -1{\pmod {n}}}"></p>
+<p>那么<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 就不是一个素数。这样的 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 称为<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 是合数的一个凭证（witness）。否则 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 可能是是一个证明 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 是素数的“强伪证”（strong liar），即当<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">)确实是一个合数，但是对当前选取的<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 来说上述两个式子均不满足，这时我们认为<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">)是基于<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a">的大概率素数。 每个奇合数 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 都有很多个对应的凭证<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a">，但是要生成这些 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 并不容易。当前解决的办法是使用概率性的测试。我们从集合<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d72620a16da7fb10ee179052ceb101a91ac33098" alt="{\displaystyle (Z/nZ)^{*}}">)中随机选择非零数<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a">，然后检测当前的 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 是否是 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 为合数的一个凭证。如果 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 本身确实是一个合数，那么大部分被选择的 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 都应该是<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 的凭证，也即通过这个测试能检测出<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 是合数的可能性很大。然而，仍有极小概率的情况下我们找到的 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a"> 是一个“强伪证”（反而表明了<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n"> 可能是一个素数）。通过多次独立测试不同的<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a">，我们能减少这种出错的概率。 对于测试一个大数是否是素数，常见的做法随机选取基数<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a">，毕竟我们并不知道凭证和伪证在<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6565c7499e7a49f53c1858eadce017451ff55543" alt="{\displaystyle [1,n-1]}">这个区间如何分布。典型的例子是 Arnault 曾经给出了一个397位的合数<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">)，但是所有小于307的基数<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ffd2487510aa438433a2579450ab2b3d557e5edc" alt="a">)都是<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n">是素数的“强伪证”。不出所料，这个大合数通过了 Maple 程序的<code>isprime()</code> 函数（被判定为素数）。这个函数通过检测 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ff4c8c2bb13ff520e25b9461efe76dd55292336f" alt="{\displaystyle a=2,3,5,7,11}"> 这几种情况来进行素性检验。 1.3.2 伪代码</p>
+<pre><code>
+Input #1: n &gt; 3, an odd integer to be tested for primality;
+Input #2: k, a parameter that determines the accuracy of the test
+Output: composite if n is composite, otherwise probably prime
+
+write n − 1 as 2r·d with d odd by factoring powers of 2 from n − 1
+WitnessLoop: repeat k times:
+    pick a random integer a in the range \[2, n − 2\]
+    x ← ad mod n
+    if x = 1 or x = n − 1 then
+        continue WitnessLoop
+    repeat r − 1 times:
+    x ← x2 mod n
+    if x = 1 then
+        return composite
+    if x = n − 1 then
+        continue WitnessLoop
+    return composite
+return probably prime</code></pre><p>1.3.3 c++</p>
+<pre><code>
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+typedef long long llong;
+//求取(x * y) % n
+llong mod(llong x, llong y,llong n)
+{
+    llong res = 0;
+    llong temp = x % n;
+    while(y)
+   {
+        if(y &amp; 0x1)
+            if((res += temp) &gt; n)
+                res -= n;
+        if((temp &lt;&lt;= 1) \&gt;  n)
+            temp -= n;
+        y &gt;&gt;= 1;
+    }
+    return res;
+}
+//求取(x ^ y) % n
+llong get_mod(llong x, llong y, llong n)
+{
+    llong res = 1;
+    llong temp = x;
+    while(y)
+    {
+        if(y &amp; 0x1)
+            res = mod(res, temp, n);
+        temp = mod(temp, temp, n);
+        y &gt;&gt;= 1;
+    }
+    return res;
+}
+//编写bool函数，判定是否为素数
+bool is_prime(llong n, int t)
+{
+    if(n &lt; 2)
+        return false;
+    if(n == 2)
+        return true;
+    if(!(n &amp; 0x1))
+        return false;
+    llong k = 0, m, a, i;
+    for(m = n -1; !(m &amp; 0x1); m &gt;&gt;= 1, ++k);
+    while(t--)
+    {
+        a = get_mod(rand() % (n - 2) \+ 2, m, n);
+        if(a != 1)
+        {
+            for(i = 0; i &lt; k &amp;&amp; a != n-1; ++i)
+            {
+                cout &lt;&lt; a &lt;&lt; endl;
+                a = mod(a, a, n);
+            }
+            //根据二次探测定理，只要不满足(a == 1) || (a == n - 1)，就会一直遍历下去，直到最后返回false
+            if(i &gt;= k
+                return false;
+        }
+    }
+    return true;
+}
+//主函数
+int main()
+{
+    int times;
+    llong num;
+    cin &gt;\&gt; times;
+    while(times--)
+    {
+        cin &gt;\&gt; num;
+        if(is_prime(num, 1))
+            cout &lt;&lt; &quot;Yes&quot; &lt;&lt; endl;
+        else
+            cout &lt;&lt; &quot;No&quot; &lt;&lt; endl;
+    }
+    return 0;
+}</code></pre><h3 id="2-轮式因子分解法"><a href="#2-轮式因子分解法" class="headerlink" title="2.轮式因子分解法"></a>2.轮式因子分解法</h3><pre><code>
+### 3.Pollard&#39;s rho algorithm
+
+`/* C++ program to find a prime factor of composite using`
+
+`Pollard&#39;s Rho algorithm */`
+
+`#include&lt;bits/stdc++.h&gt;`
+
+`using` `namespace` `std;`
+
+`/* Function to calculate (base^exponent)%modulus */`
+
+`long` `long` `int` `modular_pow(``long` `long` `int` `base,` `int` `exponent,`
+
+`long` `long` `int` `modulus)`
+
+`{`
+
+`/* initialize result */`
+
+`long` `long` `int` `result = 1;`
+
+`while` `(exponent &gt; 0)`
+
+`{`
+
+`/* if y is odd, multiply base with result */`
+
+`if` `(exponent &amp; 1)`
+
+`result = (result * base) % modulus;`
+
+`/* exponent = exponent/2 */`
+
+`exponent = exponent &gt;&gt; 1;`
+
+`/* base = base * base */`
+
+`base = (base * base) % modulus;`
+
+`}`
+
+`return` `result;`
+
+`}`
+
+`/* method to return prime divisor for n */`
+
+`long` `long` `int` `PollardRho(``long` `long` `int` `n)`
+
+`{`
+
+`/* initialize random seed */`
+
+`srand` `(``time``(NULL));`
+
+`/* no prime divisor for 1 */`
+
+`if` `(n==1)` `return` `n;`
+
+`/* even number means one of the divisors is 2 */`
+
+`if` `(n % 2 == 0)` `return` `2;`
+
+`/* we will pick from the range [2, N) */`
+
+`long` `long` `int` `x = (``rand``()%(n-2))+2;`
+
+`long` `long` `int` `y = x;`
+
+`/* the constant in f(x).`
+
+`* Algorithm can be re-run with a different c`
+
+`* if it throws failure for a composite. */`
+
+`long` `long` `int` `c = (``rand``()%(n-1))+1;`
+
+`/* Initialize candidate divisor (or result) */`
+
+`long` `long` `int` `d = 1; `
+
+`/* until the prime factor isn&#39;t obtained.`
+
+`If n is prime, return n */`
+
+`while` `(d==1)`
+
+`{`
+
+`/* Tortoise Move: x(i+1) = f(x(i)) */`
+
+`x = (modular_pow(x, 2, n) + c + n)%n;`
+
+`/* Hare Move: y(i+1) = f(f(y(i))) */`
+
+`y = (modular_pow(y, 2, n) + c + n)%n;`
+
+`y = (modular_pow(y, 2, n) + c + n)%n;`
+
+`/* check gcd of |x-y| and n */`
+
+`d = __gcd(``abs``(x-y), n);`
+
+`/* retry if the algorithm fails to find prime factor`
+
+`* with chosen x and c */`
+
+`if` `(d==n)` `return` `PollardRho(n);`
+
+`}`
+
+`return` `d;`
+
+`}`
+
+`/* driver function */`
+
+`int` `main()`
+
+`{`
+
+`long` `long` `int` `n = 10967535067;`
+
+`printf``(``&quot;One of the divisors for %lld is %lld.&quot;``,`
+
+`n, PollardRho(n));`
+
+`return` `0;`
+
+`}`</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2018/09/03/zheng-shu-fen-jie/">http://jinzhengxu.github.io/2018/09/03/zheng-shu-fen-jie/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/算法/">
+                                    <span class="chip bg-color">算法</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/09/04/kang-tuo-zhan-kai-ni-kang-tuo-zhan-kai-yu-ba-shu-ma-wen-ti-next-permutation-han-shu-qi-fa-shi-sou-suo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="康托展开、逆康托展开与八数码问题、next_permutation函数、启发式搜索">
+                        
+                        <span class="card-title">康托展开、逆康托展开与八数码问题、next_permutation函数、启发式搜索</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            1.康托展开康托展开其实就是一个简单的公式：  其中,为整数,并且 应用这个原理我们可以把一个很大的数转化为一个较小的数来储存，因为康托展开是一个全排列的双射（one-to-one correspondence）所以可以进行康拓展开的逆运算
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-09-05
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/算法/">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/09/02/zhan-zhuan-xiang-chu-fa-yu-xian-xing-diu-fan-tu-fang-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="辗转相除法与线性丢番图方程">
+                        
+                        <span class="card-title">辗转相除法与线性丢番图方程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            0.原理：两个整数的最大公约数等于两个整数中较小的数和两数之差的最大公约数，反复应用此原理直至其中一数为零，另一个不为零的数即为最大公约数。 1.为求简明，以下只说明如何求两个非负整数a和b的最大公约数（负数的情况是简单的）。在第一步计算时
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-09-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/算法/">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

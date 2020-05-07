@@ -1,0 +1,1222 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="并查集, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>并查集 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">并查集</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/算法/">
+                                <span class="chip bg-color">算法</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/程序设计/" class="post-category">
+                                程序设计
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-09-18
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="1-dynamic-connectivity"><a href="#1-dynamic-connectivity" class="headerlink" title="1.dynamic connectivity"></a>1.dynamic connectivity</h4><p><img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-17-22-12-02.png" alt="Screenshot from 2018-09-17 22-12-02"> 首先我们考虑如图所示的问题，在图中我们可以看到执行所有的操作后得到最终结果，由于执行过程中我们可以动态加入连通分量，所以称之为动态连通。 上图中的结果可以容易得到，但当图中节点数量增大时，我们需要程序辅助判断。我们现在给出几个比较明显的假设，首先，每个节点p都链接到p本身；其次，如果p连接到q，则q也连接到p；最后，如果p连接到q，q连接到r，则p也连接到r。 将互相连接的节点视为一个集合，如果两个节点同时存在于同一个集合之中则可以确定两点之间连通，即初始化的空图为n个single set，每次执行一次union操作相当于将集合合并，这样对于节点之间是否连接我们可以给出一个判断。 下面给出UF的API：</p>
+<p>public class UF<br>________________________________________________________<br>UF(int N)             初始化并查集数据结构中的n个对象<br>void union（int p，int q） 在p和q之间连接<br>boolean connected（int p，int q） 判断pq是否连通<br>int find（int p）        在0到n-1中寻找与p相等的值<br>int count（）            计数</p>
+<p>下面给出调用UF的一个列子：</p>
+<pre><code>import main.java.edu.princeton.cs.algs4.*;
+public class Main{
+    public static void main(String\[\] args)
+    {
+        int N = StdIn.readInt();
+        UF uf = new UF(N);
+        while (!StdIn.isEmpty())
+        {
+            int p = StdIn.readInt();
+            int q = StdIn.readInt();
+            if (!uf.connected(p, q))
+            {
+                uf.union(p, q);
+                StdOut.println(p + &quot; &quot; + q);
+            }
+        }
+    }
+}</code></pre><h4 id="2-quick-find"><a href="#2-quick-find" class="headerlink" title="2.quick-find"></a>2.quick-find</h4><p>下面考虑如何实现并查集的数据结构，将各个点视为一个数组，将数组中所存值视为该组节点的共同标志。每次union的操作都会将两个待合并子集的标志合并，即数组中保存的值修改为同一值。 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-20-16-53.png" alt="Screenshot from 2018-09-18 20-16-53"> <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-20-19-27.png" alt="Screenshot from 2018-09-18 20-19-27.png"> 下面给出Quick-Find的Java代码实现：</p>
+<p>import main.java.edu.princeton.cs.algs4.*;</p>
+<p>public class QuickFindUF {<br>    private int[] id;<br>    public QuickFindUF(int N){<br>        id = new int [N];<br>        for(int i=0;i&lt;N;i++)<br>            id[i]=i;<br>    }</p>
+<pre><code>public boolean connected(int p,int q){
+    return id\[p\]==id\[q\];
+}
+
+public void union(int p,int q){
+    int pid = id\[p\];
+    int qid = id\[q\];
+    for(int i=0;i&lt;id.length;i++)
+        if(id\[i\] == pid)
+            id\[i\] = qid;
+}</code></pre><p>}</p>
+<p>但是我们可以发现Quick—Find算法对于数据较大的情况表现不好，初始化需要n步操作，union操作需要n步操作，寻找需要一次操作。这将会需要n^2操作去执行n个对象的合并操作。</p>
+<h4 id="3-quick-union"><a href="#3-quick-union" class="headerlink" title="3.quick-union"></a>3.quick-union</h4><p>Linus 说过“坏的程序员担心他们的代码，而好的程序员则担心他们的数据结构及它们之间的关系。下面我们考虑一种更为合理的数据结构来表示节点之间的关系。 首先将节点之间的连接化为一颗树，这样节点之间就具有了一种全新的数据结构，将每个节点的父节点位置储存在数组中，这样id【i】 的值即为其父节点，而节点i的根节点的值是id[id[id[…id[i]…]]]. 这时判断节点是否连通的条件是它们是否拥有同一个父节点。而union操作则是将该树的根节点成为另一颗树的子节点。 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-20-47-39.png" alt="Screenshot from 2018-09-18 20-47-39.png">下面给出Quick-Union的java实现：</p>
+<pre><code>import main.java.edu.princeton.cs.algs4.*;
+
+public class QuickUnionUf {
+    private int\[\] id;
+
+    public QuickUnionUf(int N){
+        id =new int \[N\];
+        for(int i=0;i&lt;N;i++)
+            id\[i\]=i;
+    }
+
+    private int root(int i){
+        while(id\[i\]!= i) i = id\[i\];
+        return i;
+    }
+
+    public boolean connected(int p,int q){
+        return root(p)==root(q);
+    }
+
+    public void union(int p,int q){
+        int i= root(p);
+        int j= root(q);
+        id\[i\] = j;
+    }
+}</code></pre><p>这样依然存在问题，在Quick-Find算法中树太过平面，union操作太昂贵，而在Quick——Union算法中树变得过于高，union操作的最坏情况是n，而find操作太过昂贵。</p>
+<h4 id="4-解决办法"><a href="#4-解决办法" class="headerlink" title="4.解决办法"></a>4.解决办法</h4><h5 id="4-1带权"><a href="#4-1带权" class="headerlink" title="4.1带权"></a>4.1带权</h5><p>带权的方法仍然采用quick-Union算法的思想不过在带权（weighting）中我们总是将较小的树放在较高的树下面，即总是将较小树的根节点修改为较高树的子节点。 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-07-54.png" alt="Screenshot from 2018-09-18 21-07-54.png"> 我们再来比较一下两种方法产生的树<img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-09-38.png" alt="Screenshot from 2018-09-18 21-09-38.png"> 明显带权算法产生的树更加扁平。 下面给出带权算法的java实现：</p>
+<pre><code>import main.java.edu.princeton.cs.algs4.*;
+
+public class QuickUnionUf {
+    private int\[\] id;
+    private int\[\] sz;
+
+    public QuickUnionUf(int N){
+        id =new int \[N\];
+        for(int i=0;i&lt;N;i++) {
+            id\[i\] = i;
+            sz\[i\] = i;
+        }
+    }
+
+    private int root(int i){
+        while(id\[i\]!= i) i = id\[i\];
+        return i;
+    }
+
+    public boolean connected(int p,int q){
+        return root(p)==root(q);
+    }
+
+    public void union(int p,int q){
+        int i= root(p);
+        int j= root(q);
+        if(i==j) return;
+        if(sz\[i\]&lt;sz\[j\]){ id\[i\]=j; sz\[j\]+=sz\[i\];}
+        else {id\[j\] = i; sz\[i\]+=sz\[j\];}
+    }
+}</code></pre><p>分析带权算法我们发现find操作需要的时间与p和q的深度成正比，union操作则需要常数时间， 还可以发现每个节点的深度一定小于lgN。<img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-24-41.png" alt="Screenshot from 2018-09-18 21-24-41.png"> 那么为什么任意节点x的深度最多是N以2为底的对数呢？ 理解这个问题的关键在于观察节点的深度到底是在何时增加的 何时它在树中变得更深？ 当x所在的树，即图中的T1，与另一棵树，即图中的T2，合并的时候x的深度加1 好，之前我们说过只有在T2的大小 T2的大小大于等于T1的大小时才会发生这种情况 所以当x深度增加时 树的大小至少翻倍。这很关键，因为这意味着 包含x的树的大小最多可以翻N次倍因为如果从1开始 翻倍lg N次，就会得到N，而最后树中总共只有N个节点 这就是任意节点x的深度最多是N以2为底的对数的粗略证明 这对于这个算法的性能有着巨大的影响 现在，除了初始化总是需要正比于N的时间，合并和 “是否连接”或查询操作需要的时间都是正比于N以2为底的对数 这个算法能成比例适应大规模问题。当N从1百万变为10亿 花费的时间从20变为30，这就比较能接受了。 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-32-17.png" alt="Screenshot from 2018-09-18 21-32-17.png"></p>
+<h5 id="4-2路径压缩"><a href="#4-2路径压缩" class="headerlink" title="4.2路径压缩"></a>4.2路径压缩</h5><p>我们想办法进一步提高程序的性能。 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-35-35.png" alt="Screenshot from 2018-09-18 21-35-35.png"> 经过路径压缩之后树变得扁平 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-37-11.png" alt="Screenshot from 2018-09-18 21-37-11.png"> 实现路径压缩只需在root方法中添加一行代码即可：</p>
+<pre><code>private int root(int i){
+    while(id\[i\]!= i){
+      _ **id\[i\]=id\[id\[i\]\];**_
+        i = id\[i\];
+    }
+    return i;
+}</code></pre><p>这样我们便实现了路径压缩。合并起来即为WQUPC算法。 Hopcroft Ulman和Tarjan证明了如果 有N个对象，M个合并与查找操作的任意序列，需要访问数组 最多c(N + M lg* N)次。lg* N是个挺有意思的函数 它是使N变为1需要取对数的次数 它叫做<a href="https://zh.wikipedia.org/wiki/%E8%BF%AD%E4%BB%A3%E5%B0%8D%E6%95%B8" target="_blank" rel="noopener">迭代对数函数</a>。在真实世界中 可以认为是一个小于5的数，因为lg<em>（2^65536）=5 所以，这说明带路径压缩的带权快速合并算法 在真实世界中的时间复杂度是线性的，而实际上可以改进到 一个更有意思的函数，Ackermann函数，这个函数增长速度 比 lg</em> 还慢。另外一点要说明的是看起来这个算法的时间复杂度已经非常接近与N成正比的线性了 它与N乘一个关于N的增长非常缓慢的函数成正比。<img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-55-46.png" alt="Screenshot from 2018-09-18 21-55-46.png"></p>
+<h4 id="5-并查集的应用"><a href="#5-并查集的应用" class="headerlink" title="5.并查集的应用"></a>5.并查集的应用</h4><p>・Percolation. ・Games (Go, Hex). ✓ Dynamic connectivity. ・Least common ancestor. ・Equivalence of finite state automata. ・Hoshen-Kopelman algorithm in physics. ・Hinley-Milner polymorphic type inference. ・Kruskal’s minimum spanning tree algorithm. ・Compiling equivalence statements in Fortran. ・Morphological attribute openings and closings. ・Matlab’s bwlabel() function in image processing. 下面考虑一个问题：渗透（Percolation） 给出问题的描述：1.有一个n×n的方格；2.每个方格开放的概率是p（闭合的概率是1-p）；3.一个系统称为可渗透的是顶层和底层被开放空格所连接。 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-21-59-45.png" alt="Screenshot from 2018-09-18 21-59-45.png"> <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-22-11-18.png" alt="Screenshot from 2018-09-18 22-11-18.png"> ・p &gt; p<em>: 系统极有可能是是渗透的 ・p &lt; p</em>: 系统几乎不可能是渗透的； <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-22-12-30.png?w=688" alt="Screenshot from 2018-09-18 22-12-30.png">如何判断方格之间是否连通呢？我们将每个方格考虑成一个节点<img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-22-19-071.png" alt="Screenshot from 2018-09-18 22-19-07.png"> 节点之间的连通性可以用连接先表示，而系统是否连通可以加入两个虚拟点，如果这两点连通即可推出系统渗透。我们要运行的就是所谓的蒙特卡罗仿真 首先将整个网格初始化为闭合的，全是黑色的，然后随机加上开放的位 每次加上一个开放位后，检查 是否使系统变得渗滤的。持续这个过程直到 系统变得是渗滤的。我们可以证明系统变得渗滤时开放位的比例 是要求的阈值的估计。我们要做的是 将这个实验运行上百万次，这我们可以在计算机上完成 只要我们能够高效地计算当前系统是否渗滤 这就是蒙特卡罗仿真，这个计算问题 为这个尚无人知道如何求解的科学或者数学问题给出的解决办法。 <img src="https://jason87459473.files.wordpress.com/2018/09/screenshot-from-2018-09-18-22-21-591.png" alt="Screenshot from 2018-09-18 22-21-59.png"> [gallery ids=”49,50” type=”rectangular”]</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2018/09/18/bing-cha-ji/">http://jinzhengxu.github.io/2018/09/18/bing-cha-ji/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/算法/">
+                                    <span class="chip bg-color">算法</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/09/24/suan-fa-fen-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="算法分析">
+                        
+                        <span class="card-title">算法分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-09-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/09/11/ji-suan-ji-he-chu-bu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="计算几何初步">
+                        
+                        <span class="card-title">计算几何初步</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            1.精度计算几何与解析几何、向量代数等都有一定的关系，用一定的数据结构与算法来处理几何问题。但是计算几何跟数学的解析几何解决问题的首选方法还是有比较大的区别。计算几何，首先要注意“计算”二字，一定要注意精度问题。在很多题目中，精度设置是直接
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-09-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

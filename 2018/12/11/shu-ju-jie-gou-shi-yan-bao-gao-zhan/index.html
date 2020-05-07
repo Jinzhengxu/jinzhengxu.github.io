@@ -1,0 +1,1393 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="数据结构实验报告——栈, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数据结构实验报告——栈 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数据结构实验报告——栈</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/数据结构/">
+                                <span class="chip bg-color">数据结构</span>
+                            </a>
+                        
+                            <a href="/tags/作业/">
+                                <span class="chip bg-color">作业</span>
+                            </a>
+                        
+                            <a href="/tags/实验报告/">
+                                <span class="chip bg-color">实验报告</span>
+                            </a>
+                        
+                            <a href="/tags/栈/">
+                                <span class="chip bg-color">栈</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/程序设计/" class="post-category">
+                                程序设计
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-12-11
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <ul>
+<li>实验目的与要求</li>
+<li>实验步骤与内容</li>
+<li>问题与说明</li>
+<li>备注</li>
+<li>程序清单</li>
+</ul>
+<h3 id="实验目的与要求"><a href="#实验目的与要求" class="headerlink" title="实验目的与要求"></a>实验目的与要求</h3><p>1.了解栈的逻辑结构</p>
+<p>2.熟悉各种方法构建栈</p>
+<p>3.实现栈的基本操作</p>
+<p>4.实现栈的应用</p>
+<h3 id="实验步骤与内容"><a href="#实验步骤与内容" class="headerlink" title="实验步骤与内容"></a>实验步骤与内容</h3><p>栈(stack)由两个端点栈顶(top)和栈底(bottom)构成，遵循“先进后出”(FILO)或“后进先出”(LIFO)的规则，即只允许在一端插入或删除元素。</p>
+<h5 id="栈的ADT："><a href="#栈的ADT：" class="headerlink" title="栈的ADT："></a>栈的ADT：</h5><pre class=" language-c"><code class="language-c">ADT stack<span class="token punctuation">{</span>
+    数据对象<span class="token punctuation">:</span>D<span class="token operator">=</span><span class="token punctuation">{</span>ai<span class="token operator">|</span>ai∈ElemSet<span class="token punctuation">,</span>i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>n <span class="token punctuation">,</span> n≥<span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    数据关系<span class="token punctuation">:</span>R<span class="token operator">=</span><span class="token punctuation">{</span><span class="token operator">&lt;</span>ai<span class="token number">-1</span><span class="token punctuation">,</span>ai<span class="token operator">></span><span class="token operator">|</span>ai<span class="token number">-1</span><span class="token punctuation">,</span>a∈D<span class="token punctuation">,</span>i<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>n<span class="token punctuation">}</span><span class="token punctuation">;</span>
+    基本操作<span class="token punctuation">:</span>初始化，进栈，出栈，取栈顶元素，判断栈空、栈满等
+<span class="token punctuation">}</span>ADT stack</code></pre>
+<h5 id="栈的顺序存储结构"><a href="#栈的顺序存储结构" class="headerlink" title="栈的顺序存储结构"></a>栈的顺序存储结构</h5><p>简称顺序栈，使用一维数组来储存，根据使用环境的不同又分为:</p>
+<ul>
+<li>静态顺序栈</li>
+<li>动态顺序栈</li>
+</ul>
+<h5 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h5><h6 id="数制转化"><a href="#数制转化" class="headerlink" title="数制转化"></a>数制转化</h6><p>在2,,8,10进制间转化，遵循<code>n = (n div d) * d + n mod d</code>,出数的顺序是由低位到高位，所以用栈来储存数据，计算完成后弹数即为正序。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">conversion</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">,</span><span class="token keyword">int</span> d<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    sqstack S<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">,</span><span class="token operator">*</span>e<span class="token punctuation">;</span>
+    S<span class="token operator">=</span><span class="token function">Init_stack</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>n<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        k<span class="token operator">=</span>n<span class="token operator">%</span>d<span class="token punctuation">;</span>
+        <span class="token function">push</span><span class="token punctuation">(</span>S<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        n<span class="token operator">=</span>n<span class="token operator">/</span>d<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>top<span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">pop</span><span class="token punctuation">(</span>S<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">*</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="括号匹配问题"><a href="#括号匹配问题" class="headerlink" title="括号匹配问题"></a>括号匹配问题</h6><p>读左括号入栈，当读到右括号时弹出元素与左括号匹配。</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> TRUE 1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> FALSE -1</span>
+sqstack S<span class="token punctuation">;</span>
+S<span class="token operator">=</span><span class="token function">Init_stack</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">Match_Brackets</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    chat ch<span class="token punctuation">,</span>x<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%c"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">asc</span><span class="token punctuation">(</span>cj<span class="token punctuation">)</span><span class="token operator">!=</span><span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>ch<span class="token operator">==</span><span class="token string">'('</span><span class="token operator">||</span>ch<span class="token operator">==</span><span class="token string">'['</span><span class="token punctuation">)</span> <span class="token function">push</span><span class="token punctuation">(</span>S<span class="token punctuation">,</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>ch<span class="token operator">==</span><span class="token string">']'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            x<span class="token operator">=</span><span class="token function">pop</span><span class="token punctuation">(</span>S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token string">'['</span><span class="token punctuation">)</span> <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>ch<span class="token operator">==</span><span class="token string">')'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            x<span class="token operator">=</span><span class="token function">pop</span><span class="token punctuation">(</span>S<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">!=</span><span class="token string">'('</span><span class="token punctuation">)</span> <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>S<span class="token punctuation">.</span>top<span class="token punctuation">)</span> <span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="递归调用"><a href="#递归调用" class="headerlink" title="递归调用"></a>递归调用</h6><p>递归调用，一般遵循这样的规则:</p>
+<pre><code>F(n) = | 1 , n=0;
+       | n*F(n-1) , n&gt;0</code></pre><p>递归栈:<br>(1)栈为空则执行正常返回<br>(2)栈顶弹出一个工作记录<br>(3)赋值<br>(4)返回地址</p>
+<h6 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h6><p>表达式由操作数，操作符和分界符构成。算术表达式分为三种分别是前缀表达式(infix)，中缀表达式(prefix)，后缀表达式(postfix)。所有表达式都遵循以下三个规则：</p>
+<blockquote>
+<p>1.优先级高的先计算；<br>2.优先级相同的从左向右计算；<br>3.括号从最内层开始计算。</p>
+</blockquote>
+<p>对于中缀表达式我们需要两个栈来求值，而后缀表达式只需要一个栈就可求值。所以计算表达式的值采用后缀表达式比较简单，易于理解。</p>
+<blockquote>
+<p>算法1：后缀表达式求值</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>a)如果是运算数直接入栈</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>b)如果是运算符，先计算结果在将结果压栈</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>算法2：利用转将中缀表达式转后缀表达式</p>
+</blockquote>
+<blockquote>
+<p>人工方法</p>
+<blockquote>
+<p>(1)首先补全所有括号<code>(A+B)*D-E/(F+A*D)+C</code>=&gt;<code>((((A+B)*D)-(E/(F+(A*D))))+C)</code></p>
+<p>(2)运算符全部提出到对应的括号外面</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>机器方法</p>
+<blockquote>
+<p>首先表示出各个运算符的优先级</p>
+</blockquote>
+<p>| 操作符ch | # | ( | ^ | * / % | + - | )|<br>| :——: | :——: | :——: |<br>| isp栈内优先级 | 0 | 1 | 7 | 5 | 3 | 8 |<br>| icp栈外优先级 | 0 | 8 | 6 | 4 | 2 | 1 |</p>
+<blockquote>
+<p>操作符优先级相等的情况只出现在括号匹配或栈底的“#”与输入最后的“#”号匹配时。</p>
+<p>操作符初始化，“#”进栈，读入中缀表达式首字符ch直到ch=“#”:</p>
+<p>a)若ch是操作数，直接输出，读入下一个字符ch;</p>
+<p>b)若ch是操作数，判断ch的优先级和位于栈顶的操作符op优先级，若(ch)&gt;(op)，令ch进栈，读入下一个字符(观察后面后是否有更高级的运算符);若(ch)&lt;(op)，退栈并输出(执行前保存栈内优先级最高的op);若(ch)==(op)，退栈但不输出（消括号）。</p>
+</blockquote>
+</blockquote>
+<h3 id="问题与说明"><a href="#问题与说明" class="headerlink" title="问题与说明"></a>问题与说明</h3><p>C语言实现<br>CLion 集成开发环境</p>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><h3 id="程序清单"><a href="#程序清单" class="headerlink" title="程序清单"></a>程序清单</h3><h5 id="动态顺序栈"><a href="#动态顺序栈" class="headerlink" title="动态顺序栈"></a>动态顺序栈</h5><p>bottom表示栈底指针，固定不变；top表示栈顶指针。<code>top==bottom</code>表示栈空；<code>top-bottom=stacksize-1</code>表示栈满。<br>结点进栈时首先将数据元素保存到栈顶(top所指的当前位置)top+1，使top指向栈顶的下一个储存位置。结点出栈时，先top-1取栈顶元素。</p>
+<h6 id="动态栈基本操作的实现"><a href="#动态栈基本操作的实现" class="headerlink" title="动态栈基本操作的实现"></a>动态栈基本操作的实现</h6><h6 id="栈的类型定义"><a href="#栈的类型定义" class="headerlink" title="栈的类型定义"></a>栈的类型定义</h6><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> STACKSIZE 100</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> STACKINCRMENT 10</span>
+<span class="token macro property">#typedeff int ElemType</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> sqstack<span class="token punctuation">{</span>
+    ElemType <span class="token operator">*</span>bottom<span class="token punctuation">;</span>
+    ElemType <span class="token operator">*</span>top<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> stacksize<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>sqstack<span class="token punctuation">;</span></code></pre>
+<h6 id="栈的初始化"><a href="#栈的初始化" class="headerlink" title="栈的初始化"></a>栈的初始化</h6><pre class=" language-c"><code class="language-c">status <span class="token function">Init_stack</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    sqstack S<span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span>bottom<span class="token operator">=</span><span class="token punctuation">(</span>ElemType <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>STACKSIZE<span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ElemType<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">.</span>bottom<span class="token punctuation">)</span> <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+    S<span class="token punctuation">.</span>top<span class="token operator">=</span>S<span class="token punctuation">.</span>bottom<span class="token punctuation">;</span>
+    S<span class="token punctuation">.</span>stacksize<span class="token operator">=</span>STACKSIZE<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="压栈"><a href="#压栈" class="headerlink" title="压栈"></a>压栈</h6><pre class=" language-c"><code class="language-c">Status <span class="token function">push</span><span class="token punctuation">(</span>sqstack s<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>top<span class="token operator">-</span>S<span class="token punctuation">.</span>bottom<span class="token operator">==</span>s<span class="token punctuation">.</span>stacksize<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        S<span class="token punctuation">.</span>bottom<span class="token operator">=</span><span class="token punctuation">(</span>ElemType <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">realloc</span><span class="token punctuation">(</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>stacksize<span class="token operator">+</span>STACKINCRMENT<span class="token punctuation">)</span><span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ElemType<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>S<span class="token punctuation">.</span>bottom<span class="token punctuation">)</span> <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+        S<span class="token punctuation">.</span>top<span class="token operator">=</span>S<span class="token punctuation">.</span>bottom<span class="token operator">+</span>S<span class="token punctuation">.</span>stacksize<span class="token punctuation">;</span>
+        S<span class="token punctuation">.</span>stacksize <span class="token operator">+</span><span class="token operator">=</span> STACKINCRMENT<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">*</span>S<span class="token punctuation">.</span>top<span class="token operator">=</span>e<span class="token punctuation">;</span>
+    S<span class="token punctuation">.</span>top<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="出栈"><a href="#出栈" class="headerlink" title="出栈"></a>出栈</h6><pre class=" language-c"><code class="language-c">Status <span class="token function">pop</span><span class="token punctuation">(</span>sqstack S<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>bottom<span class="token operator">==</span>S<span class="token punctuation">.</span>top<span class="token punctuation">)</span> <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+    S<span class="token punctuation">.</span>top<span class="token operator">--</span><span class="token punctuation">;</span>
+    e<span class="token operator">=</span><span class="token operator">*</span>S<span class="token punctuation">.</span>top<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="静态顺序栈"><a href="#静态顺序栈" class="headerlink" title="静态顺序栈"></a>静态顺序栈</h5><p>一维数组储存，栈底固定不变，而栈顶则随着进栈出栈而变化。top=0表示栈空，top=stacksize-1为栈满。结点进栈，首先执行top+1，是top指向新的栈顶位置，然后将数据元素保存到栈顶。结点出栈，首先取元素，然后执行top-1。为了避免浪费，可以在初始化时将top和bottom都设为-1。</p>
+<h6 id="基本操作的实现"><a href="#基本操作的实现" class="headerlink" title="基本操作的实现"></a>基本操作的实现</h6><h6 id="栈的类型定义-1"><a href="#栈的类型定义-1" class="headerlink" title="栈的类型定义"></a>栈的类型定义</h6><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> MAX_STACK_SIZE 100</span>
+<span class="token macro property">#typedef int ElemType;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> sqstack<span class="token punctuation">{</span>
+    ElemType stack_array<span class="token punctuation">[</span>MAX_STAKC_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> top<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>sqstack<span class="token punctuation">;</span></code></pre>
+<h6 id="栈的初始化-1"><a href="#栈的初始化-1" class="headerlink" title="栈的初始化"></a>栈的初始化</h6><pre class=" language-c"><code class="language-c">Status <span class="token function">Init_stakc</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    sqstack S<span class="token punctuation">;</span>
+    S<span class="token punctuation">.</span>top<span class="token operator">=</span>S<span class="token punctuation">.</span>bottom<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> S<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="入栈"><a href="#入栈" class="headerlink" title="入栈"></a>入栈</h6><pre class=" language-c"><code class="language-c">Status <span class="token function">push</span><span class="token punctuation">(</span>sqstack S<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>top<span class="token operator">>=</span>MAX_STACK_SIZE<span class="token punctuation">)</span> <span class="token keyword">return</span> ERROR
+    S<span class="token punctuation">.</span>top<span class="token operator">++</span><span class="token punctuation">;</span>
+    S<span class="token punctuation">.</span>stack_array<span class="token punctuation">[</span>top<span class="token punctuation">]</span><span class="token operator">=</span>e<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="出栈-1"><a href="#出栈-1" class="headerlink" title="出栈"></a>出栈</h6><pre class=" language-c"><code class="language-c">Status <span class="token function">pop</span><span class="token punctuation">(</span>sqstack S<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>S<span class="token punctuation">.</span>top<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> retunr ERROR<span class="token punctuation">;</span>
+    S<span class="token punctuation">.</span>top<span class="token number">-1</span><span class="token punctuation">;</span>
+    e<span class="token operator">=</span>S<span class="token punctuation">.</span>srray_array<span class="token punctuation">[</span>S<span class="token punctuation">.</span>top<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="栈的链式储存表示"><a href="#栈的链式储存表示" class="headerlink" title="栈的链式储存表示"></a>栈的链式储存表示</h5><p>运算受限，其插入和删除只能在表头位置进行，栈顶指针top就是链表的头指针。</p>
+<h6 id="链表的节点类型"><a href="#链表的节点类型" class="headerlink" title="链表的节点类型"></a>链表的节点类型</h6><pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> Stack_Node<span class="token punctuation">{</span>
+    ElemType data<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> Stacj_Node <span class="token operator">*</span>next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>Stack_Node<span class="token punctuation">;</span></code></pre>
+<h6 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h6><p>初始只有一个头节点head，head-&gt;next为NULL，栈空的条件为head-&gt;next==NULL;由于只有内存溢出时才会出现栈满的情况，通常不考虑这种情况。元素e进栈操作是将包含该元素的一个节点插入作为第一个数据节点，头插入栈删除第一个节点。</p>
+<h6 id="链栈的初始化"><a href="#链栈的初始化" class="headerlink" title="链栈的初始化"></a>链栈的初始化</h6><pre class=" language-c"><code class="language-c">Stack_Node <span class="token function">Init_stack</span><span class="token punctuation">(</span>vodi<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Stack_Node <span class="token operator">*</span>top<span class="token punctuation">;</span>
+    top<span class="token operator">=</span><span class="token punctuation">(</span>Stack_Node <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Stack_Node<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>top<span class="token punctuation">)</span> <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+    top<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> top<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="链栈的压栈"><a href="#链栈的压栈" class="headerlink" title="链栈的压栈"></a>链栈的压栈</h6><pre class=" language-c"><code class="language-c">Status <span class="token function">push</span><span class="token punctuation">(</span>Stack_Node <span class="token operator">*</span>top<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Stack_Node <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    p<span class="token operator">=</span><span class="token punctuation">(</span>Stack_Node <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Stack_Node<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token punctuation">)</span> <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+    p<span class="token operator">-></span>data<span class="token operator">=</span>e<span class="token punctuation">;</span>
+    p<span class="token operator">-></span>next<span class="token operator">=</span>top<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    top<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="链栈的出栈"><a href="#链栈的出栈" class="headerlink" title="链栈的出栈"></a>链栈的出栈</h6><pre class=" language-c"><code class="language-c">Status <span class="token function">pop</span><span class="token punctuation">(</span>Stack_Node <span class="token operator">*</span>top<span class="token punctuation">,</span>ElemType <span class="token operator">*</span>e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    Stack_Node <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    ElemType e<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>top<span class="token operator">-></span>next<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>top<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    e<span class="token operator">=</span>p<span class="token operator">-></span>data<span class="token punctuation">;</span>
+    top<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2018/12/11/shu-ju-jie-gou-shi-yan-bao-gao-zhan/">http://jinzhengxu.github.io/2018/12/11/shu-ju-jie-gou-shi-yan-bao-gao-zhan/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/数据结构/">
+                                    <span class="chip bg-color">数据结构</span>
+                                </a>
+                            
+                                <a href="/tags/作业/">
+                                    <span class="chip bg-color">作业</span>
+                                </a>
+                            
+                                <a href="/tags/实验报告/">
+                                    <span class="chip bg-color">实验报告</span>
+                                </a>
+                            
+                                <a href="/tags/栈/">
+                                    <span class="chip bg-color">栈</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2018/12/11/shu-ju-jie-gou-shi-yan-bao-gao-dui-lie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="数据结构实验报告——队列">
+                        
+                        <span class="card-title">数据结构实验报告——队列</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+实验目的与要求
+实验步骤与内容
+问题与说明
+备注
+程序清单
+
+实验目的与要求1.理解队列的表示方式
+2.实现队列的各项功能
+3.使用顺序和链式实现队列
+4.双向队列
+实验步骤与内容队列（Queue）是遵循“FIFO”即“先进先出”规则，队
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-12-11
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/数据结构/">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
+                    <a href="/tags/作业/">
+                        <span class="chip bg-color">作业</span>
+                    </a>
+                    
+                    <a href="/tags/实验报告/">
+                        <span class="chip bg-color">实验报告</span>
+                    </a>
+                    
+                    <a href="/tags/队列/">
+                        <span class="chip bg-color">队列</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/12/11/shu-ju-jie-gou-shi-yan-bao-gao-lian-biao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="数据结构实验报告——链表">
+                        
+                        <span class="card-title">数据结构实验报告——链表</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+实验目的与要求
+实验步骤与内容
+问题与说明
+备注
+程序清单
+
+实验目的与要求1.掌握链表的各种实现形式（静态和动态）。
+2.理解单链表，循环链表，双向链表的形式。
+3.理解头插入法和尾插入法的异同。
+4.会使用链表删除的几种变形。
+5.会
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/数据结构/">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
+                    <a href="/tags/作业/">
+                        <span class="chip bg-color">作业</span>
+                    </a>
+                    
+                    <a href="/tags/实验报告/">
+                        <span class="chip bg-color">实验报告</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

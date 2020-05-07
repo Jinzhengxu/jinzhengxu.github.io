@@ -1,0 +1,1705 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="《现代编译原理-C语言描述》（4）- 抽象语法, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>《现代编译原理-C语言描述》（4）- 抽象语法 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">《现代编译原理-C语言描述》（4）- 抽象语法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/编译原理/">
+                                <span class="chip bg-color">编译原理</span>
+                            </a>
+                        
+                            <a href="/tags/虎书/">
+                                <span class="chip bg-color">虎书</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-09
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="第四章-抽象语法"><a href="#第四章-抽象语法" class="headerlink" title="第四章 抽象语法"></a>第四章 抽象语法</h3><blockquote>
+<p>抽象的(ab-stract):从所有具体实例中提取出来的。<br>—-韦氏词典</p>
+</blockquote>
+<h4 id="语义动作"><a href="#语义动作" class="headerlink" title="语义动作"></a>语义动作</h4><p>语法分析器中的语义动作（semantic action），可以作用于正在分析的短语。</p>
+<ul>
+<li>对于递归下降分析器来说，语义动作是分散在实现语法分析的控制流中</li>
+<li>对于遵循Yacc说明的语法分析器，语义动作是附带在文法产生式之后的c程序代码</li>
+</ul>
+<h5 id="递归下降"><a href="#递归下降" class="headerlink" title="递归下降"></a>递归下降</h5><p>对于递归下降语法分析器，语义动作是语法分析函数的返回值，或是语法分析函数的副作用，抑或是兼而有之。</p>
+<p>每个非终结符和终结符（type）都关联一种语义值，语义值代表了由这个符号导出的短语。</p>
+<p>对于消除左递归的情况，我们通过将左操作数作为参数传递给下一个语法分析函数的方法来解决。</p>
+<p>也就是说我们为了消除左递归，必须要引入新的符号，但是新引入的符号的产生式不一定符合运算符的操作规范，于是我们必须要将上一层分析中的左操作数传递到下一层并返回。</p>
+<h5 id="Yacc生成的分析器"><a href="#Yacc生成的分析器" class="headerlink" title="Yacc生成的分析器"></a>Yacc生成的分析器</h5><p>对于遵循Yacc说明的语法分析器,语法动作是附加在产生式之后的一段c代码。当Yacc利用，某一条规则进行归约时，就会执行其后的语义动作。例如文法3-13Yacc语法分析器：</p>
+<pre class=" language-c"><code class="language-c"><span class="token operator">%</span><span class="token punctuation">{</span> declarations of yylex and yyerror <span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">%</span><span class="token keyword">union</span> <span class="token punctuation">{</span><span class="token keyword">int</span> num<span class="token punctuation">;</span> string id<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>num<span class="token operator">></span> INT
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>id<span class="token operator">></span> ID
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>num<span class="token operator">></span> exp
+<span class="token operator">%</span>start exp
+<span class="token operator">%</span>left PLUS MINUS
+<span class="token operator">%</span>left TIMES
+<span class="token operator">%</span>left UMINUS
+<span class="token operator">%</span><span class="token operator">%</span>
+exp <span class="token punctuation">:</span> INT             <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> exp PLUS exp    <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span> <span class="token operator">+</span> $<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> exp MINUS exp   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span> <span class="token operator">-</span> $<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> exp TIMES exp   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span> <span class="token operator">*</span> $<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> MINUS exp   <span class="token operator">%</span>prec UMINUS <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token operator">-</span> $<span class="token number">2</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre>
+<p>Yacc中语义动作的使用是用<code>$i</code>来引用第i个右部符号的语义值，它为左部非终结符产生的值可以赋给<code>$$</code>。<code>%union</code>说明了各种可能携带的语义值类型，每个非终结符通过<code>&lt;variant&gt;</code>，注释指明该非终结符应该使用哪一个<code>%union</code>声明中的形式。</p>
+<p>遵循Yacc说明的语法分析器会维护一个 <strong><em>状态栈</em></strong> 和一个 <strong><em>语义值栈</em></strong> 来实现对语义值的操作，在原来简单分析栈的基础上增添了一个与分析栈符号一一对应的语义值栈。在语法分析器执行一个归约动作时，它会从一个简单栈中弹出k个字符，并将归约得到的非终结符压栈，对于语义值栈的操作也是如此，从语义值栈弹出k个语义值，并将执行语义动作c代码返回的语义值重新压栈。</p>
+<p>如下图：</p>
+<p>终结符携带的语义值是无意义的占位符。</p>
+<h5 id="语义动作的解释器"><a href="#语义动作的解释器" class="headerlink" title="语义动作的解释器"></a>语义动作的解释器</h5><p>上面的程序设计语言的例子中，并没有语义动作能够影响全局的副作用，所以右部符号的求值顺序并不能影响最终的结果。</p>
+<p>但是我们可以知道，LR分析是自底向上，从左至右的遍历语法分析树，即后序遍历的方式来执行归约和语义动作。利用这一特性，我们可以编写出带有全局副作用的语义动作，并且可以明确了解副作用的发生顺序。</p>
+<p>下面的例子是绪论中直线式程序设计的解释器。通过使用一个符号表的全局变量：</p>
+<pre class=" language-c"><code class="language-c"><span class="token operator">%</span><span class="token punctuation">{</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> table <span class="token operator">*</span>Table_<span class="token punctuation">;</span>
+Table_ <span class="token punctuation">{</span>string id<span class="token punctuation">;</span> <span class="token keyword">int</span> value<span class="token punctuation">;</span> Table_ tail<span class="token punctuation">}</span><span class="token punctuation">;</span>
+Table_ <span class="token function">Table</span><span class="token punctuation">(</span>string id<span class="token punctuation">,</span><span class="token keyword">int</span> value<span class="token punctuation">,</span> <span class="token keyword">struct</span> table <span class="token operator">*</span>tail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Table_ table<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span>Table_ table<span class="token punctuation">,</span> string id<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">assert</span><span class="token punctuation">(</span>table<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>id<span class="token operator">==</span>table<span class="token punctuation">.</span>id<span class="token punctuation">)</span> <span class="token keyword">return</span> table<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">return</span> <span class="token function">lookup</span><span class="token punctuation">(</span>table<span class="token punctuation">.</span>tail<span class="token punctuation">,</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span>Table_ <span class="token operator">*</span>tabptr<span class="token punctuation">,</span>string id<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token operator">*</span>tabptr <span class="token operator">=</span> <span class="token function">Table</span><span class="token punctuation">(</span>id <span class="token punctuation">,</span>value<span class="token punctuation">,</span> <span class="token operator">*</span>tabptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token operator">%</span><span class="token keyword">union</span> <span class="token punctuation">{</span><span class="token keyword">int</span> num<span class="token punctuation">;</span>string id<span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>num<span class="token operator">></span> INT<span class="token punctuation">;</span>
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>id<span class="token operator">></span> Id
+<span class="token operator">%</span>token ASSIGN PRINT LPAREN RPAREN
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>num<span class="token operator">></span> exp
+<span class="token operator">%</span>right SEMICOLON
+<span class="token operator">%</span>left PLUS MINUS
+<span class="token operator">%</span>left TIMES DIV
+<span class="token operator">%</span>start prog
+<span class="token operator">%</span><span class="token operator">%</span>
+prog<span class="token punctuation">:</span> stm
+
+stm<span class="token punctuation">:</span> stm SEMICOLON stm
+stm<span class="token punctuation">:</span> ID ASSIGN exp            <span class="token punctuation">{</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>table<span class="token punctuation">,</span>ID<span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+stm<span class="token punctuation">:</span> PRINT LPAREN exps RPAREN <span class="token punctuation">{</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+exps<span class="token punctuation">:</span> exp                     <span class="token punctuation">{</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exps<span class="token punctuation">:</span> exps COMMA exp          <span class="token punctuation">{</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> $<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+exp<span class="token punctuation">:</span> INT                      <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp<span class="token punctuation">:</span> ID                       <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">lookup</span><span class="token punctuation">(</span>table<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp<span class="token punctuation">:</span> exp PLUS exp             <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">1</span><span class="token operator">+</span>$<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp<span class="token punctuation">:</span> exp MINUS exp            <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">1</span><span class="token operator">-</span>$<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp<span class="token punctuation">:</span> exp TIMES exp            <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">1</span><span class="token operator">*</span>$<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp<span class="token punctuation">:</span> exp DIV exp              <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">1</span><span class="token operator">/</span>$<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp<span class="token punctuation">:</span> stm COMMA exp            <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">3</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp<span class="token punctuation">:</span> LPAREN exp RPAREN        <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">2</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre>
+<h4 id="抽象语法分析树"><a href="#抽象语法分析树" class="headerlink" title="抽象语法分析树"></a>抽象语法分析树</h4><p>使用上述的方法实现一个编译器的语法分析器完全可行，但是为了方便维护，建议将语法分析和语义动作（类型检查和翻译成机器代码）分开处理。所以我们使用语法分析器生成语法分析树，编译器在较后的阶段对其进行遍历。这样的一颗语法分析树称为具体分析树（concrete parse tree），表示源语言的具体语法（concrete syntax）。</p>
+<p>语法树的结构对文法的依赖程度很高，在消除二义性等过程中引入的新产生式，都因该限制在语法分析阶段。</p>
+<p><strong><em>抽象语法abstract syntax</em></strong> 建立了一个接口，这样语义分析阶段就不受文法二义性的困扰，因为我们提经有了一个语法树</p>
+<p>直线式程序设计语言的抽象语法构造器</p>
+<pre class=" language-c"><code class="language-c"><span class="token operator">%</span><span class="token punctuation">{</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"absyn.h"</span></span>
+<span class="token operator">%</span><span class="token punctuation">}</span>
+
+<span class="token operator">%</span><span class="token keyword">union</span> <span class="token punctuation">{</span><span class="token keyword">int</span> num<span class="token punctuation">;</span> string id<span class="token punctuation">;</span> A_stm stm<span class="token punctuation">;</span> A_exp exp<span class="token punctuation">;</span>A_expList expList<span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>num<span class="token operator">></span> INT
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>id<span class="token operator">></span> ID
+<span class="token operator">%</span>token ASSIGN PRINT LPAREN RPAREN
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>stm<span class="token operator">></span> stm prog
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>exp<span class="token operator">></span> exp
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>expList<span class="token operator">></span> exps
+<span class="token operator">%</span>left SEMICOLON
+<span class="token operator">%</span>left PLUS MINUS
+<span class="token operator">%</span>left TIMES DIV
+<span class="token operator">%</span>start prog
+<span class="token operator">%</span><span class="token operator">%</span>
+prog<span class="token punctuation">:</span> stm <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+stm <span class="token punctuation">:</span> stm SEMICOLON stm <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_CompoundStm</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+stm <span class="token punctuation">:</span> ID ASSIGN exp <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_AssignStm</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+stm <span class="token punctuation">:</span> PRINT LPAREN exps RPAREN  <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_PrintStm</span><span class="token punctuation">(</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+exps<span class="token punctuation">:</span> exp <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_ExpList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exps<span class="token punctuation">:</span> exp COMMA exps <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_ExpList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+exp <span class="token punctuation">:</span> INT <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_NumExp</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp <span class="token punctuation">:</span> ID <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_IdExp</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp <span class="token punctuation">:</span> exp PLUS exp <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_OpExp</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>A_plus<span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp <span class="token punctuation">:</span> exp MINUS exp <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_OpExp</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>A_minus<span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp <span class="token punctuation">:</span> exp TIMES exp <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_OpExp</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>A_times<span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp <span class="token punctuation">:</span> exp DIV exp <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_OpExp</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>A_div<span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp <span class="token punctuation">:</span> stm COMMA exp <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_EsepExp</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+exp <span class="token punctuation">:</span> LPAREN exp RPAREN <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">2</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre>
+<h5 id="位置"><a href="#位置" class="headerlink" title="位置"></a>位置</h5><p>在一个只有一次pass的编译器中，词法分析，语法分析和语义分析，都是同时进行的。词法分析器会保存有一个表示当前位置的全局变量。</p>
+<p>但是在使用抽象语法树的编译器中，在语义分析开始的时候，词法分析就已经到达文件尾，所以应当记住抽象语法树的每个节点在源文件中的位置，以防这个节点发生语义错误。</p>
+<p>所以抽象语法结构上都带有pos域，pos域指明了导出抽象语法树的字符在源程序中对应的位置。Bison语法分析器可以做到这一点</p>
+<h5 id="Tiger的抽象语法"><a href="#Tiger的抽象语法" class="headerlink" title="Tiger的抽象语法"></a>Tiger的抽象语法</h5><p>Tiger的抽象语法:</p>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*
+ * absyn.h - Abstract Syntax Header (Chapter 4)
+ *
+ * All types and functions declared in this header file begin with "A_"
+ * Linked list types end with "..list"
+ */</span>
+
+<span class="token comment" spellcheck="true">/* Type Definitions */</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> A_pos<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_var_ <span class="token operator">*</span>A_var<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_exp_ <span class="token operator">*</span>A_exp<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_dec_ <span class="token operator">*</span>A_dec<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_ty_ <span class="token operator">*</span>A_ty<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_decList_ <span class="token operator">*</span>A_decList<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_expList_ <span class="token operator">*</span>A_expList<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_field_ <span class="token operator">*</span>A_field<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_fieldList_ <span class="token operator">*</span>A_fieldList<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_fundec_ <span class="token operator">*</span>A_fundec<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_fundecList_ <span class="token operator">*</span>A_fundecList<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_namety_ <span class="token operator">*</span>A_namety<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_nametyList_ <span class="token operator">*</span>A_nametyList<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_efield_ <span class="token operator">*</span>A_efield<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> A_efieldList_ <span class="token operator">*</span>A_efieldList<span class="token punctuation">;</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">enum</span> <span class="token punctuation">{</span>A_plusOp<span class="token punctuation">,</span> A_minusOp<span class="token punctuation">,</span> A_timesOp<span class="token punctuation">,</span> A_divideOp<span class="token punctuation">,</span>
+         A_eqOp<span class="token punctuation">,</span> A_neqOp<span class="token punctuation">,</span> A_ltOp<span class="token punctuation">,</span> A_leOp<span class="token punctuation">,</span> A_gtOp<span class="token punctuation">,</span> A_geOp<span class="token punctuation">}</span> A_oper<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> A_var_
+       <span class="token punctuation">{</span><span class="token keyword">enum</span> <span class="token punctuation">{</span>A_simpleVar<span class="token punctuation">,</span> A_fieldVar<span class="token punctuation">,</span> A_subscriptVar<span class="token punctuation">}</span> kind<span class="token punctuation">;</span>
+        A_pos pos<span class="token punctuation">;</span>
+    <span class="token keyword">union</span> <span class="token punctuation">{</span>S_symbol simple<span class="token punctuation">;</span>
+           <span class="token keyword">struct</span> <span class="token punctuation">{</span>A_var var<span class="token punctuation">;</span>
+               S_symbol sym<span class="token punctuation">;</span><span class="token punctuation">}</span> field<span class="token punctuation">;</span>
+           <span class="token keyword">struct</span> <span class="token punctuation">{</span>A_var var<span class="token punctuation">;</span>
+               A_exp exp<span class="token punctuation">;</span><span class="token punctuation">}</span> subscript<span class="token punctuation">;</span>
+         <span class="token punctuation">}</span> u<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> A_exp_
+      <span class="token punctuation">{</span><span class="token keyword">enum</span> <span class="token punctuation">{</span>A_varExp<span class="token punctuation">,</span> A_nilExp<span class="token punctuation">,</span> A_intExp<span class="token punctuation">,</span> A_stringExp<span class="token punctuation">,</span> A_callExp<span class="token punctuation">,</span>
+           A_opExp<span class="token punctuation">,</span> A_recordExp<span class="token punctuation">,</span> A_seqExp<span class="token punctuation">,</span> A_assignExp<span class="token punctuation">,</span> A_ifExp<span class="token punctuation">,</span>
+           A_whileExp<span class="token punctuation">,</span> A_forExp<span class="token punctuation">,</span> A_breakExp<span class="token punctuation">,</span> A_letExp<span class="token punctuation">,</span> A_arrayExp<span class="token punctuation">}</span> kind<span class="token punctuation">;</span>
+       A_pos pos<span class="token punctuation">;</span>
+       <span class="token keyword">union</span> <span class="token punctuation">{</span>A_var var<span class="token punctuation">;</span>
+          <span class="token comment" spellcheck="true">/* nil; - needs only the pos */</span>
+          <span class="token keyword">int</span> intt<span class="token punctuation">;</span>
+          string stringg<span class="token punctuation">;</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>S_symbol func<span class="token punctuation">;</span> A_expList args<span class="token punctuation">;</span><span class="token punctuation">}</span> call<span class="token punctuation">;</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>A_oper oper<span class="token punctuation">;</span> A_exp left<span class="token punctuation">;</span> A_exp right<span class="token punctuation">;</span><span class="token punctuation">}</span> op<span class="token punctuation">;</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>S_symbol typ<span class="token punctuation">;</span> A_efieldList fields<span class="token punctuation">;</span><span class="token punctuation">}</span> record<span class="token punctuation">;</span>
+          A_expList seq<span class="token punctuation">;</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>A_var var<span class="token punctuation">;</span> A_exp exp<span class="token punctuation">;</span><span class="token punctuation">}</span> assign<span class="token punctuation">;</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>A_exp test<span class="token punctuation">,</span> then<span class="token punctuation">,</span> elsee<span class="token punctuation">;</span><span class="token punctuation">}</span> iff<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* elsee is optional */</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>A_exp test<span class="token punctuation">,</span> body<span class="token punctuation">;</span><span class="token punctuation">}</span> whilee<span class="token punctuation">;</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>S_symbol var<span class="token punctuation">;</span> A_exp lo<span class="token punctuation">,</span>hi<span class="token punctuation">,</span>body<span class="token punctuation">;</span> bool escape<span class="token punctuation">;</span><span class="token punctuation">}</span> forr<span class="token punctuation">;</span>
+          <span class="token comment" spellcheck="true">/* breakk; - need only the pos */</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>A_decList decs<span class="token punctuation">;</span> A_exp body<span class="token punctuation">;</span><span class="token punctuation">}</span> let<span class="token punctuation">;</span>
+          <span class="token keyword">struct</span> <span class="token punctuation">{</span>S_symbol typ<span class="token punctuation">;</span> A_exp size<span class="token punctuation">,</span> init<span class="token punctuation">;</span><span class="token punctuation">}</span> array<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> u<span class="token punctuation">;</span>
+     <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> A_dec_
+    <span class="token punctuation">{</span><span class="token keyword">enum</span> <span class="token punctuation">{</span>A_functionDec<span class="token punctuation">,</span> A_varDec<span class="token punctuation">,</span> A_typeDec<span class="token punctuation">}</span> kind<span class="token punctuation">;</span>
+     A_pos pos<span class="token punctuation">;</span>
+     <span class="token keyword">union</span> <span class="token punctuation">{</span>A_fundecList function<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/* escape may change after the initial declaration */</span>
+        <span class="token keyword">struct</span> <span class="token punctuation">{</span>S_symbol var<span class="token punctuation">;</span> S_symbol typ<span class="token punctuation">;</span> A_exp init<span class="token punctuation">;</span> bool escape<span class="token punctuation">;</span><span class="token punctuation">}</span> var<span class="token punctuation">;</span>
+        A_nametyList type<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> u<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> A_ty_ <span class="token punctuation">{</span><span class="token keyword">enum</span> <span class="token punctuation">{</span>A_nameTy<span class="token punctuation">,</span> A_recordTy<span class="token punctuation">,</span> A_arrayTy<span class="token punctuation">}</span> kind<span class="token punctuation">;</span>
+          A_pos pos<span class="token punctuation">;</span>
+          <span class="token keyword">union</span> <span class="token punctuation">{</span>S_symbol name<span class="token punctuation">;</span>
+             A_fieldList record<span class="token punctuation">;</span>
+             S_symbol array<span class="token punctuation">;</span>
+           <span class="token punctuation">}</span> u<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/* Linked lists and nodes of lists */</span>
+
+<span class="token keyword">struct</span> A_field_ <span class="token punctuation">{</span>S_symbol name<span class="token punctuation">,</span> typ<span class="token punctuation">;</span> A_pos pos<span class="token punctuation">;</span> bool escape<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_fieldList_ <span class="token punctuation">{</span>A_field head<span class="token punctuation">;</span> A_fieldList tail<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_expList_ <span class="token punctuation">{</span>A_exp head<span class="token punctuation">;</span> A_expList tail<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_fundec_ <span class="token punctuation">{</span>A_pos pos<span class="token punctuation">;</span>
+                 S_symbol name<span class="token punctuation">;</span> A_fieldList params<span class="token punctuation">;</span>
+         S_symbol result<span class="token punctuation">;</span> A_exp body<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> A_fundecList_ <span class="token punctuation">{</span>A_fundec head<span class="token punctuation">;</span> A_fundecList tail<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_decList_ <span class="token punctuation">{</span>A_dec head<span class="token punctuation">;</span> A_decList tail<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_namety_ <span class="token punctuation">{</span>S_symbol name<span class="token punctuation">;</span> A_ty ty<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_nametyList_ <span class="token punctuation">{</span>A_namety head<span class="token punctuation">;</span> A_nametyList tail<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_efield_ <span class="token punctuation">{</span>S_symbol name<span class="token punctuation">;</span> A_exp exp<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> A_efieldList_ <span class="token punctuation">{</span>A_efield head<span class="token punctuation">;</span> A_efieldList tail<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+
+<span class="token comment" spellcheck="true">/* Function Prototypes */</span>
+A_var <span class="token function">A_SimpleVar</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol sym<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_var <span class="token function">A_FieldVar</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_var var<span class="token punctuation">,</span> S_symbol sym<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_var <span class="token function">A_SubscriptVar</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_var var<span class="token punctuation">,</span> A_exp exp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_VarExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_var var<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_NilExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_IntExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_StringExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> string s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_CallExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol func<span class="token punctuation">,</span> A_expList args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_OpExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_oper oper<span class="token punctuation">,</span> A_exp left<span class="token punctuation">,</span> A_exp right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_RecordExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol typ<span class="token punctuation">,</span> A_efieldList fields<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_SeqExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_expList seq<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_AssignExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_var var<span class="token punctuation">,</span> A_exp exp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_IfExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_exp test<span class="token punctuation">,</span> A_exp then<span class="token punctuation">,</span> A_exp elsee<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_WhileExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_exp test<span class="token punctuation">,</span> A_exp body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_ForExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol var<span class="token punctuation">,</span> A_exp lo<span class="token punctuation">,</span> A_exp hi<span class="token punctuation">,</span> A_exp body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_BreakExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_LetExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_decList decs<span class="token punctuation">,</span> A_exp body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_exp <span class="token function">A_ArrayExp</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol typ<span class="token punctuation">,</span> A_exp size<span class="token punctuation">,</span> A_exp init<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_dec <span class="token function">A_FunctionDec</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_fundecList function<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_dec <span class="token function">A_VarDec</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol var<span class="token punctuation">,</span> S_symbol typ<span class="token punctuation">,</span> A_exp init<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_dec <span class="token function">A_TypeDec</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_nametyList type<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_ty <span class="token function">A_NameTy</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_ty <span class="token function">A_RecordTy</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> A_fieldList record<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_ty <span class="token function">A_ArrayTy</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol array<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_field <span class="token function">A_Field</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol name<span class="token punctuation">,</span> S_symbol typ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_fieldList <span class="token function">A_FieldList</span><span class="token punctuation">(</span>A_field head<span class="token punctuation">,</span> A_fieldList tail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_expList <span class="token function">A_ExpList</span><span class="token punctuation">(</span>A_exp head<span class="token punctuation">,</span> A_expList tail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_fundec <span class="token function">A_Fundec</span><span class="token punctuation">(</span>A_pos pos<span class="token punctuation">,</span> S_symbol name<span class="token punctuation">,</span> A_fieldList params<span class="token punctuation">,</span> S_symbol result<span class="token punctuation">,</span>
+          A_exp body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_fundecList <span class="token function">A_FundecList</span><span class="token punctuation">(</span>A_fundec head<span class="token punctuation">,</span> A_fundecList tail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_decList <span class="token function">A_DecList</span><span class="token punctuation">(</span>A_dec head<span class="token punctuation">,</span> A_decList tail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_namety <span class="token function">A_Namety</span><span class="token punctuation">(</span>S_symbol name<span class="token punctuation">,</span> A_ty ty<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_nametyList <span class="token function">A_NametyList</span><span class="token punctuation">(</span>A_namety head<span class="token punctuation">,</span> A_nametyList tail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_efield <span class="token function">A_Efield</span><span class="token punctuation">(</span>S_symbol name<span class="token punctuation">,</span> A_exp exp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+A_efieldList <span class="token function">A_EfieldList</span><span class="token punctuation">(</span>A_efield head<span class="token punctuation">,</span> A_efieldList tail<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>这里需要注意的几点是：</p>
+<ul>
+<li>夹杂在其中的关于位置的表示是用源代码的字符计数来表示的。</li>
+<li>Tiger语言将相邻的函数生命看成是（可能会）相互递归的。</li>
+<li>没有关于表达式&amp;和|的抽象语法，用if else来表示</li>
+<li>词法分析器返回的ID单词携带string类型的值，而抽象语法要求标识符具有symbol值。<h4 id="程序设计：抽象语法"><a href="#程序设计：抽象语法" class="headerlink" title="程序设计：抽象语法"></a>程序设计：抽象语法</h4>这次的程序设计，是在上一章作业的基础上添加语义动作。</li>
+</ul>
+<p>文件：</p>
+<pre class=" language-c"><code class="language-c">absyn<span class="token punctuation">.</span>c <span class="token comment" spellcheck="true">//Tiger的抽象语法声明</span>
+lex<span class="token punctuation">.</span>yy<span class="token punctuation">.</span>c <span class="token comment" spellcheck="true">//替代的词法分析器，可以使用自己的</span>
+parse<span class="token punctuation">.</span>c <span class="token comment" spellcheck="true">//驱动程序，分析Tiger程序</span>
+prabsyn<span class="token punctuation">.</span>c <span class="token comment" spellcheck="true">//抽象语法树输出程序</span>
+symbol<span class="token punctuation">.</span>c <span class="token comment" spellcheck="true">//字符串转化尾字符</span>
+table<span class="token punctuation">.</span>c <span class="token comment" spellcheck="true">//函数声明表支持</span>
+tiger<span class="token punctuation">.</span>grm <span class="token comment" spellcheck="true">//需要编写的grm文件</span>
+absyn<span class="token punctuation">.</span>h
+makefile
+parse<span class="token punctuation">.</span>h
+prabsyn<span class="token punctuation">.</span>h
+symbol<span class="token punctuation">.</span>h
+table<span class="token punctuation">.</span>h</code></pre>
+<p>通过前面我们知道添加语义动作有两种方式。一种是直接添加语义动作，另一种是通过抽象语法的方式来添加，这里vim一下<code>tiger.grm</code>文件我们可以发现作者的意思应该是通过抽象语法来完成这次的设计。这里就在第三章设计的基础上来完成语法抽象。</p>
+<p>首先将第四章内缺省的一些文件补全,并将第三章内的<code>tiger.grm</code>复制来</p>
+<pre class=" language-bash"><code class="language-bash">~/chap3$ <span class="token function">cp</span> -f parsetest.c util.h util.c tiger.grm ~/chap4</code></pre>
+<p>然后为其增加语义动作</p>
+<pre class=" language-c"><code class="language-c"><span class="token operator">%</span><span class="token punctuation">{</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"util.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"errormsg.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"symbol.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"absyn.h"</span></span>
+
+<span class="token keyword">int</span> <span class="token function">yylex</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* function prototype */</span>
+
+A_exp absyn_root<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">yyerror</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>s<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+ <span class="token function">EM_error</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span> <span class="token string">"%s"</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token operator">%</span><span class="token punctuation">}</span>
+
+
+<span class="token operator">%</span><span class="token keyword">union</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> pos<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ival<span class="token punctuation">;</span>
+    string sval<span class="token punctuation">;</span>
+        A_exp exp<span class="token punctuation">;</span>
+        A_expList explist<span class="token punctuation">;</span>
+        A_var var<span class="token punctuation">;</span>
+        A_decList declist<span class="token punctuation">;</span>
+        A_dec  dec<span class="token punctuation">;</span>
+        A_efieldList efieldlist<span class="token punctuation">;</span>
+        A_efield  efield<span class="token punctuation">;</span>
+        A_namety namety<span class="token punctuation">;</span>
+        A_nametyList nametylist<span class="token punctuation">;</span>
+        A_fieldList fieldlist<span class="token punctuation">;</span>
+        A_field field<span class="token punctuation">;</span>
+        A_fundecList fundeclist<span class="token punctuation">;</span>
+        A_fundec fundec<span class="token punctuation">;</span>
+        A_ty ty<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>sval<span class="token operator">></span> ID STRING
+<span class="token operator">%</span>token <span class="token operator">&lt;</span>ival<span class="token operator">></span> INT
+
+<span class="token operator">%</span>token
+  COMMA COLON SEMICOLON LPAREN RPAREN LBRACK RBRACK
+  LBRACE RBRACE DOT
+  PLUS MINUS TIMES DIVIDE EQ NEQ LT LE GT GE
+  AND OR ASSIGN
+  ARRAY IF THEN ELSE WHILE FOR TO DO LET IN END OF
+  BREAK NIL
+  FUNCTION VAR TYPE
+
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>exp<span class="token operator">></span> exp_em exp expseq
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>explist<span class="token operator">></span> actuals  nonemptyactuals sequencing  sequencing_exps
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>var<span class="token operator">></span>  lvalue one oneormore
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>declist<span class="token operator">></span> decs decs_nonempty
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>dec<span class="token operator">></span>  decs_nonempty_s vardec
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>efieldlist<span class="token operator">></span> rec rec_nonempty
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>efield<span class="token operator">></span> rec_one
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>nametylist<span class="token operator">></span> tydec
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>namety<span class="token operator">></span>  tydec_one
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>fieldlist<span class="token operator">></span> tyfields tyfields_nonempty
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>ty<span class="token operator">></span> ty
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>fundeclist<span class="token operator">></span> fundec
+<span class="token operator">%</span>type <span class="token operator">&lt;</span>fundec<span class="token operator">></span> fundec_one
+
+<span class="token operator">%</span>left SEMICOLON
+<span class="token operator">%</span>nonassoc DO
+<span class="token operator">%</span>nonassoc LOWER
+<span class="token operator">%</span>nonassoc TYPE
+<span class="token operator">%</span>nonassoc FUNCTION
+<span class="token operator">%</span>nonassoc OF
+<span class="token operator">%</span>nonassoc LOW
+<span class="token operator">%</span>nonassoc  ELSE
+<span class="token operator">%</span>right ASSIGN
+<span class="token operator">%</span>left OR
+<span class="token operator">%</span>left AND
+<span class="token operator">%</span>nonassoc EQ NEQ LT LE GT GE
+<span class="token operator">%</span>left PLUS MINUS
+<span class="token operator">%</span>left TIMES DIVIDE
+<span class="token operator">%</span>nonassoc UMINUS
+<span class="token operator">%</span>left DOT LBRACK
+
+
+<span class="token operator">%</span>start program
+
+<span class="token operator">%</span><span class="token operator">%</span>
+
+program
+    <span class="token punctuation">:</span>    exp_em  <span class="token punctuation">{</span>absyn_root <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+exp_em
+    <span class="token punctuation">:</span> exp  <span class="token punctuation">{</span>$$<span class="token operator">=</span>$<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+exp
+    <span class="token punctuation">:</span> INT      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_IntExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> STRING   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_StringExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> lvalue   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_VarExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> NIL      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_NilExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> LPAREN sequencing RPAREN  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_SeqExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> exp PLUS exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_plusOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp MINUS exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_minusOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp TIMES exp   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_timesOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp DIVIDE exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_divideOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp EQ exp      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_eqOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp NEQ exp     <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_neqOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp LT exp      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_ltOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp LE exp      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_leOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp GT exp      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_gtOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp GE exp      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_geOp<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp AND exp     <span class="token punctuation">{</span>$$ <span class="token operator">=</span><span class="token function">A_IfExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">,</span><span class="token function">A_IntExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>exp OR exp      <span class="token punctuation">{</span>$$ <span class="token operator">=</span><span class="token function">A_IfExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token function">A_IntExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>MINUS exp <span class="token operator">%</span>prec UMINUS <span class="token punctuation">{</span>$$<span class="token operator">=</span><span class="token function">A_OpExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>A_minusOp<span class="token punctuation">,</span><span class="token function">A_IntExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>LPAREN exp_em RPAREN    <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">2</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>ID LPAREN actuals RPAREN  <span class="token punctuation">{</span>$$ <span class="token operator">=</span><span class="token function">A_CallExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>lvalue ASSIGN exp         <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_AssignExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>IF exp THEN exp  <span class="token operator">%</span>prec LOW  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_IfExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>IF exp THEN exp ELSE exp   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_IfExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">,</span>$<span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>WHILE exp DO exp            <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_WhileExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>FOR ID ASSIGN exp TO exp DO exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ForExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">,</span>$<span class="token number">6</span><span class="token punctuation">,</span>$<span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>BREAK                            <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_BreakExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>LET decs IN expseq END           <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_LetExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>ID LBRACE rec  RBRACE            <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_RecordExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>ID LBRACK exp RBRACK OF exp      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ArrayExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">,</span>$<span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+lvalue
+    <span class="token punctuation">:</span> ID    <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_SimpleVar</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> oneormore  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+oneormore
+    <span class="token punctuation">:</span> one       <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>oneormore DOT ID   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_FieldVar</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>oneormore LBRACK exp RBRACK   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_SubscriptVar</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+one <span class="token punctuation">:</span> ID DOT ID  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_FieldVar</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">A_SimpleVar</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> ID LBRACK exp RBRACK  <span class="token operator">%</span>prec LOWER  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_SubscriptVar</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">A_SimpleVar</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+
+rec <span class="token punctuation">:</span>  rec_nonempty  <span class="token punctuation">{</span>$$ <span class="token operator">=</span>$<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+rec_nonempty
+    <span class="token punctuation">:</span> rec_one <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_EfieldList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> rec_one COMMA rec_nonempty  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_EfieldList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+rec_one
+    <span class="token punctuation">:</span>  ID EQ exp   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_Efield</span><span class="token punctuation">(</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+sequencing
+    <span class="token punctuation">:</span> exp SEMICOLON sequencing_exps  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ExpList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+sequencing_exps
+    <span class="token punctuation">:</span>  exp          <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ExpList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> exp SEMICOLON sequencing_exps  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ExpList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+
+actuals
+    <span class="token punctuation">:</span> nonemptyactuals   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+nonemptyactuals
+    <span class="token punctuation">:</span> exp     <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ExpList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> exp COMMA nonemptyactuals <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ExpList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+expseq
+    <span class="token punctuation">:</span> sequencing_exps  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_SeqExp</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+
+decs
+    <span class="token punctuation">:</span>  decs_nonempty  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+decs_nonempty
+    <span class="token punctuation">:</span> decs_nonempty_s  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_DecList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> decs_nonempty_s decs_nonempty   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_DecList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+decs_nonempty_s
+    <span class="token punctuation">:</span> tydec  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_TypeDec</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>vardec  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>fundec  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_FunctionDec</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+tydec
+    <span class="token punctuation">:</span> tydec_one  <span class="token operator">%</span>prec LOWER  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_NametyList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> tydec_one tydec      <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_NametyList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+tydec_one
+    <span class="token punctuation">:</span> TYPE ID EQ ty    <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_Namety</span><span class="token punctuation">(</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+ty  <span class="token punctuation">:</span>   ID    <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_NameTy</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> LBRACE tyfields RBRACE  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_RecordTy</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> ARRAY OF ID <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_ArrayTy</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+tyfields
+    <span class="token punctuation">:</span> tyfields_nonempty  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> $<span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>   <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+tyfields_nonempty
+    <span class="token punctuation">:</span> ID COLON ID  <span class="token punctuation">{</span>$$ <span class="token operator">=</span><span class="token function">A_FieldList</span><span class="token punctuation">(</span><span class="token function">A_Field</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> ID COLON ID COMMA tyfields_nonempty  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_FieldList</span><span class="token punctuation">(</span><span class="token function">A_Field</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+vardec
+    <span class="token punctuation">:</span> VAR ID ASSIGN exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_VarDec</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> VAR ID COLON ID ASSIGN exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_VarDec</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+fundec
+    <span class="token punctuation">:</span>   fundec_one  <span class="token operator">%</span>prec LOWER <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_FundecList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span>   fundec_one fundec    <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_FundecList</span><span class="token punctuation">(</span>$<span class="token number">1</span><span class="token punctuation">,</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span>
+
+fundec_one
+    <span class="token punctuation">:</span> FUNCTION ID LPAREN tyfields RPAREN EQ exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_Fundec</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token operator">|</span> FUNCTION ID LPAREN tyfields RPAREN COLON ID EQ exp  <span class="token punctuation">{</span>$$ <span class="token operator">=</span> <span class="token function">A_Fundec</span><span class="token punctuation">(</span>EM_tokPos<span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">4</span><span class="token punctuation">,</span><span class="token function">S_Symbol</span><span class="token punctuation">(</span>$<span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">,</span>$<span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">;</span></code></pre>
+<h4 id="几种yacc错误情况的分析"><a href="#几种yacc错误情况的分析" class="headerlink" title="几种yacc错误情况的分析"></a>几种yacc错误情况的分析</h4><ul>
+<li><p>no delacre type</p>
+<p>首先检查是否在yacc文件的第二部分中声明了该类型，如果没有声明，补充；<br>而是检查yacc文件第三部分的$后的数字是否对应了正确的字段</p>
+</li>
+</ul>
+<blockquote>
+<p>Perhaps you are thinking that only symbols with values are counted. That’s not the case; $n refers to the value of the symbol n in the right-hand side, and is therefore an errorbif that symbol doesn’t have a value.</p>
+</blockquote>
+<blockquote>
+<p>Note that yacc/bison can’t really tell whether or not a particular terminal has a value or not; all it knows is whether you have told it what the type of that value is.</p>
+</blockquote>
+<ul>
+<li>error: ‘YYSTYPE {aka union YYSTYPE}’ has no member named ‘explist’; did you mean ‘expList’</li>
+</ul>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><p>1.<a href="https://www.ibm.com/developerworks/cn/linux/l-flexbison.html" target="_blank" rel="noopener">使用 Flex 和 Bison 更好地进行错误处理</a></p>
+<p>2.<a href="https://segmentfault.com/a/1190000000396608" target="_blank" rel="noopener">如何使用Lex/YACC</a></p>
+<h4 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h4>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2019/04/08/xian-dai-bian-yi-yuan-li-c-yu-yan-miao-shu-4/">http://jinzhengxu.github.io/2019/04/08/xian-dai-bian-yi-yuan-li-c-yu-yan-miao-shu-4/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/编译原理/">
+                                    <span class="chip bg-color">编译原理</span>
+                                </a>
+                            
+                                <a href="/tags/虎书/">
+                                    <span class="chip bg-color">虎书</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/09/the-plan-diet/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="The Plan &amp; Diet">
+                        
+                        <span class="card-title">The Plan &amp; Diet</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            数据：
+
+
+
+体重
+身高
+体脂
+建议碳水
+
+
+
+67kg
+175cm
+
+276g-335g-379g
+
+
+训练表：
+
+
+
+日期
+训练内容
+饮食
+
+
+
+Day1
+顺风旗 60 + 举腿 120
+Normal
+
+
+Day2
+倒立20+倒立撑12
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-04-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Workout/" class="post-category">
+                                    Workout
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Calisthenics/">
+                        <span class="chip bg-color">Calisthenics</span>
+                    </a>
+                    
+                    <a href="/tags/Diet/">
+                        <span class="chip bg-color">Diet</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/03/niao-ge-de-linux-si-fang-cai-4-linux-ci-pan-yu-wen-jian-xi-tong-guan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Linux(4)-Linux磁盘与文件系统管理">
+                        
+                        <span class="card-title">Linux(4)-Linux磁盘与文件系统管理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            认识Linux文件系统Linux 文件系统最“正统”的是 ext2 ,文件系统的建立和磁盘的物理结构是紧密相关的，现在我们有TB级的磁盘阵列，也有读写速度极快的ssd，如何根据自己的要求和期望的性能，文件系统的选择至关重要。
+磁盘组成与分区
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/底层/" class="post-category">
+                                    底层
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/文件系统/">
+                        <span class="chip bg-color">文件系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

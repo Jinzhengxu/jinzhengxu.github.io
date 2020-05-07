@@ -1,0 +1,1677 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="数据结构实验报告——图, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数据结构实验报告——图 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数据结构实验报告——图</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/数据结构/">
+                                <span class="chip bg-color">数据结构</span>
+                            </a>
+                        
+                            <a href="/tags/作业/">
+                                <span class="chip bg-color">作业</span>
+                            </a>
+                        
+                            <a href="/tags/实验报告/">
+                                <span class="chip bg-color">实验报告</span>
+                            </a>
+                        
+                            <a href="/tags/图/">
+                                <span class="chip bg-color">图</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/程序设计/" class="post-category">
+                                程序设计
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-12-11
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <ul>
+<li>实验目的与要求</li>
+<li>实验步骤与内容</li>
+<li>问题与说明</li>
+<li>备注</li>
+<li>程序清单</li>
+</ul>
+<h3 id="实验目的与要求"><a href="#实验目的与要求" class="headerlink" title="实验目的与要求"></a>实验目的与要求</h3><p>1.了解图的基本性质，实现图的构造流程</p>
+<p>2.图的基本操作</p>
+<p>3.BFS和DFS的思想和实现</p>
+<p>4.图在实际中的应用</p>
+<h3 id="实验步骤与内容"><a href="#实验步骤与内容" class="headerlink" title="实验步骤与内容"></a>实验步骤与内容</h3><p>图</p>
+<p>一个图定义为一个偶对（V，E），记G=(V,E)</p>
+<p>V是顶点（Vertex）的非空有限集，记为V（G）</p>
+<p>E是无序集V和V的一个子集，记为E（G），其元素是图的弧（ARC）</p>
+<p>将顶点集合为空的图称为空图</p>
+<p>弧（Arc）表示为两个顶点v和w之间存在个关系用顶点偶对&lt; V，W&gt;表示。</p>
+<h5 id="1-有向图（Digraph）"><a href="#1-有向图（Digraph）" class="headerlink" title="1.有向图（Digraph）"></a>1.有向图（Digraph）</h5><p>E（G）中顶点偶对&lt; v,w&gt;的v和w有序有向；有向图中 &lt;  v ，w &gt;∈ E（G）；v弧尾始点，w弧头终点。</p>
+<h5 id="2-无向图（Undigraph）"><a href="#2-无向图（Undigraph）" class="headerlink" title="2.无向图（Undigraph）"></a>2.无向图（Undigraph）</h5><p>（v，w）表示边</p>
+<h5 id="3-完全无向图"><a href="#3-完全无向图" class="headerlink" title="3.完全无向图"></a>3.完全无向图</h5><p>顶点n个e条边，有n（n-1）/2 条边的称为完全无向图</p>
+<p>对于无向图G=（V，E），若任意两个不同的节点之间都有一条无向边则称为完全无向图。</p>
+<h5 id="4-完全有向图"><a href="#4-完全有向图" class="headerlink" title="4.完全有向图"></a>4.完全有向图</h5><p>n个点n（n-1）条边<br>，若对于有向图G=（V，E），任意两个不同的节点间有一弧</p>
+<h5 id="5-稀疏图和稠密图"><a href="#5-稀疏图和稠密图" class="headerlink" title="5.稀疏图和稠密图"></a>5.稀疏图和稠密图</h5><p>边或弧的数量e小于nlogn的称为稀疏图</p>
+<h5 id="6-权值（Weight）"><a href="#6-权值（Weight）" class="headerlink" title="6.权值（Weight）"></a>6.权值（Weight）</h5><p>权可以表示从一个顶点到另一个顶点的距离或耗费</p>
+<h5 id="7-子图和生成子图"><a href="#7-子图和生成子图" class="headerlink" title="7.子图和生成子图"></a>7.子图和生成子图</h5><p>设有图G=（V，E） </p>
+<p>子图：图的任意一部分（包括本身）都是图G的一个子图​</p>
+<p>定义：若V(H)⊆V(G)，E(H)⊆E(G)，且H中边的重数不超过G中对应边的条数，则称H为G的子图，记为H⊆G。​</p>
+<p>当H⊆G，但H≠G时，H是G的真子图，记为H⊂G。</p>
+<p>生成子图：若图G的一个子图包含G的所有顶点，称该子图为G的生成子图</p>
+<h5 id="8-顶点的邻接（Adjacent）"><a href="#8-顶点的邻接（Adjacent）" class="headerlink" title="8.顶点的邻接（Adjacent）"></a>8.顶点的邻接（Adjacent）</h5><p>对于无向图G=（V，E），若边（V，W）∈E，则称顶点V和W，互为邻接点，即V和W相邻接，边（V，W）依附（incident）与顶点v和w。</p>
+<h5 id="9-顶点的度，入度，出度"><a href="#9-顶点的度，入度，出度" class="headerlink" title="9.顶点的度，入度，出度"></a>9.顶点的度，入度，出度</h5><p>对于有向图G=（V，E），任意vi∈V，图G中依附于vi的边的数目称为顶点vi的度，记为TD（vi）。</p>
+<p>无向图中，所有顶点的度的和第图中边数的两倍，即<code>ΣTD（vi）=2e</code>。</p>
+<p>有向图中G=（V，E），若vi∈V，以Vi为起点的有向边称出度Outdegree记为OD（vi）。入度Indegree记为ID（vi），顶点vi的出度与入度之和称为vi的度，记为TD（vi），即TD（vi）=OD（vi）+ID（vi）。</p>
+<h5 id="10-路径（Path），路径长度，回路"><a href="#10-路径（Path），路径长度，回路" class="headerlink" title="10.路径（Path），路径长度，回路"></a>10.路径（Path），路径长度，回路</h5><p>对于无向图G=（V，E）若从顶点Vi经边若干条能到Vj称Vi和Vi是连通的又称有路径连接；<br>对于有向图G=（V，E），从顶点Vi到Vj有有向路径，指从Vi经过若干条边能到Vj。</p>
+<p>路径之间所有的顶点序列，路径上的边或弧的数目称为路径长度；简单路径：在一条路径中若没有重复相同的节点该路径称为简单路径。</p>
+<p>回路：第一个顶点和最后一个顶点相同的路径称为回路。</p>
+<p>简单回路：子啊一个回路中若除第一个和最后一个节点外，其余顶点不重复出现称为简单路径。</p>
+<h5 id="11-连通图，图的连通分量"><a href="#11-连通图，图的连通分量" class="headerlink" title="11.连通图，图的连通分量"></a>11.连通图，图的连通分量</h5><p>若任意Vi，Vj∈V，Vi和Vj都是连通的的称图是连通图，否则是非连通图，。若G是非连通图，则极大的连通子图称为G的连通分量，“极大”的含义是指对子图而言再增加G中的其他节点，子图就不再连通。任何连通图的连通分量只有一个，即其本身，而非连通图有多个连通分量。<br>对于有向图G=（V，E）若Vi∈V，Vj∈V，都以Vi为起点Vj为终点，及Vj为起点，Vi为终点，称图G是强连通图，否则称为非强连通图：</p>
+<p>（1）若G是非强连通图，则有极大子图强连通分量</p>
+<p>（2）强连通图只有一个强连通分量，非强连通图有多个连通分量</p>
+<h5 id="12-生成树和生成森林"><a href="#12-生成树和生成森林" class="headerlink" title="12.生成树和生成森林"></a>12.生成树和生成森林</h5><p>一个连通图（无向图）的生成树是一个极小连通子图，它含有全部n个点和n-1条边足以构成一棵树。</p>
+<h5 id="13-网"><a href="#13-网" class="headerlink" title="13.网"></a>13.网</h5><p>每个边或弧都附加一个权值的图，称为带权图；带权的连通图，包括强连通的有向图称为网。</p>
+<h4 id="图的抽象数据类型定义"><a href="#图的抽象数据类型定义" class="headerlink" title="图的抽象数据类型定义"></a>图的抽象数据类型定义</h4><pre class=" language-c"><code class="language-c">ADT<span class="token punctuation">{</span>
+    数据对象V：具有相同特性的数据元素的集合，称为顶点集
+    数据对象R：R<span class="token operator">=</span><span class="token punctuation">{</span>VR<span class="token punctuation">}</span>
+        VR<span class="token operator">=</span><span class="token punctuation">{</span><span class="token operator">&lt;</span>v<span class="token punctuation">,</span>w<span class="token operator">></span><span class="token operator">|</span><span class="token operator">&lt;</span>v<span class="token punctuation">,</span>w<span class="token operator">></span><span class="token operator">|</span>v<span class="token punctuation">,</span>w∈V∩<span class="token function">p</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">}</span>
+        <span class="token operator">&lt;</span>v<span class="token punctuation">,</span>w<span class="token operator">></span>表示从v到w的hu
+        <span class="token function">p</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span>定义了弧的信息
+<span class="token punctuation">}</span></code></pre>
+<h4 id="图的储存结构和基本操作"><a href="#图的储存结构和基本操作" class="headerlink" title="图的储存结构和基本操作"></a>图的储存结构和基本操作</h4><h5 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h5><p>用一位数组vexs[n]存储顶点</p>
+<p>用二维数组A[n][n]存储顶点之间的关系，该二位数组称邻接矩阵。在邻接矩阵里，以顶点在vexs数组中下标表示点，邻接矩阵中A[i][j]存放关系</p>
+<h6 id="无向图的数组表示"><a href="#无向图的数组表示" class="headerlink" title="无向图的数组表示"></a>无向图的数组表示</h6><p>（1）无权图的邻接矩阵</p>
+<p>是个n阶对称方阵，<code>A[i][j]=1，若（vi，vj）∈E，A[i][j]=1，若（vi，vj）∉E</code></p>
+<p>（2）带权图的邻接矩阵</p>
+<p>无向带权图G=（V，E）的邻接矩阵，是 一个方阵对角线元素为无穷大，如果有权值则为W，如果没有弧则为正无穷。</p>
+<p>（3）无向图邻接矩阵的特征</p>
+<p>是方阵，Vi的度数为邻接矩阵第i行非0元素个数，边数是上或下三角矩阵</p>
+<h6 id="有向图的数组"><a href="#有向图的数组" class="headerlink" title="有向图的数组"></a>有向图的数组</h6><p>（1）无权图的邻接矩阵</p>
+<p>1表示连接0表示没有连接</p>
+<p>（2）带权图的邻接矩阵</p>
+<p>简单自己想象一下</p>
+<p>（3）有向图邻接矩阵的特征<br>非0元个数是弧数，第i行非0元非个数是出度OD（vi）；第i列非0元个数是入度ID（vi）。</p>
+<h6 id="图的邻接矩阵的操作"><a href="#图的邻接矩阵的操作" class="headerlink" title="图的邻接矩阵的操作"></a>图的邻接矩阵的操作</h6><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> INIFINITY MAX_VAL</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> MAX_VEX 30</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> AdjType<span class="token punctuation">{</span>
+    ArcvalType ArcVal<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//权值</span>
+    ArcInfoType ArcInfo<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>AdjType<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> ArcType<span class="token punctuation">{</span>
+    VexType vex1<span class="token punctuation">,</span>vex2<span class="token punctuation">;</span>
+    ArcvalType ArcVal<span class="token punctuation">;</span>
+    ArcInforType ArcInfor<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>ArcType<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    GraphKind Kind<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> vexnum<span class="token punctuation">,</span>arcnum<span class="token punctuation">;</span>
+    VexType vexs<span class="token punctuation">[</span>MAX_VEX<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    AdjType adj<span class="token punctuation">[</span>MAX_VEX<span class="token punctuation">]</span><span class="token punctuation">[</span>MAX_VEX<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>MGraph<span class="token punctuation">;</span></code></pre>
+<p>或</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> ArcVal<span class="token punctuation">{</span>
+    IType adj<span class="token punctuation">;</span>
+    InforType <span class="token operator">*</span>Infor<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>ArcCell<span class="token punctuation">,</span>AddMatrix<span class="token punctuation">[</span>MAX_VERTEX_NUM<span class="token punctuation">]</span><span class="token punctuation">[</span>MAX_VERTEX_NUM<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    VertexType vexs<span class="token punctuation">[</span>MAX_VERTEX_NUM<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    AdjMatrix arcs<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> vexnum<span class="token punctuation">,</span>arcnum<span class="token punctuation">;</span>
+    Graphkind kind<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>MGraph<span class="token punctuation">;</span></code></pre>
+<p>图的各种操作：<br>（1）图的创建</p>
+<pre class=" language-c"><code class="language-c">AdjGraph <span class="token operator">*</span><span class="token function">Create_Graph</span><span class="token punctuation">(</span>MGraph <span class="token operator">*</span>G<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>G<span class="token operator">-></span>kind<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    G<span class="token operator">-></span>vexnum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> G<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>(2)图的顶点定位</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">Locatevex</span><span class="token punctuation">(</span>MGraph <span class="token operator">*</span>G<span class="token punctuation">,</span>VexType <span class="token operator">*</span>vp<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>k<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>k<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>vexs<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">*</span>vp<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> k<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>(3)加点</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">AddVertex</span><span class="token punctuation">(</span>Mgraph <span class="token operator">*</span>G<span class="token punctuation">,</span>VexType <span class="token operator">*</span>vp<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>vexnum <span class="token operator">>=</span> MAX_VEX<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">LocateVex</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>vp<span class="token punctuation">)</span><span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    k<span class="token operator">=</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>
+    G<span class="token operator">-></span>vexs<span class="token punctuation">[</span>G<span class="token operator">-></span>vexnum<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token operator">*</span>vp<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>kinf<span class="token operator">==</span>DG<span class="token operator">||</span>G<span class="token operator">-></span>kind<span class="token operator">==</span>WDG<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+            G<span class="token operator">-></span>adj<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>Arcval<span class="token operator">=</span>G<span class="token operator">-></span>adj<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Arcval<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            G<span class="token operator">-></span>adj<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>Arcval<span class="token operator">=</span>INFINTY<span class="token punctuation">;</span>
+            G<span class="token operator">-></span>adj<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>Arcval<span class="token operator">=</span>INFINTY<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> k<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>(4)向图中加弧</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">AddArc</span><span class="token punctuation">(</span>Mgraph <span class="token operator">*</span>G<span class="token punctuation">,</span>ArcType <span class="token operator">*</span>arc<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    k<span class="token operator">=</span><span class="token function">Locate</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span><span class="token operator">&amp;</span>arc<span class="token operator">-></span>vex1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    j<span class="token operator">=</span><span class="token function">Locate</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span><span class="token operator">&amp;</span>arc<span class="token operator">-></span>vex2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">||</span> j<span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>kind<span class="token operator">==</span>DG<span class="token operator">||</span>G<span class="token operator">-></span>kind<span class="token operator">==</span>WDG<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        G<span class="token operator">-></span>adj<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>ArcVal<span class="token operator">=</span>arc<span class="token operator">-></span>Val<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adj<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Infor<span class="token operator">=</span>arc<span class="token operator">-></span>Infor<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+        G<span class="token operator">-></span>adj<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>ArcVal<span class="token operator">=</span>arc<span class="token operator">-></span>Val<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adj<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>ArcVal<span class="token operator">=</span>arc<span class="token operator">-></span>Val<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adj<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>Infor<span class="token operator">=</span>arc<span class="token operator">-></span>Infor<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adj<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>Infor<span class="token operator">=</span>arc<span class="token operator">-></span>Infor<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="邻接链表法"><a href="#邻接链表法" class="headerlink" title="邻接链表法"></a>邻接链表法</h5><p>对图的每一个顶点简历一个单链表存储该顶点所有的邻接顶点及其信息，每个单链表都有一个表头结点。</p>
+<p>第i个单链表表示依附于Vi的边（对有向图来说是以顶点Vi为头或尾的弧）。</p>
+<h6 id="节点结构与邻接链表示例"><a href="#节点结构与邻接链表示例" class="headerlink" title="节点结构与邻接链表示例"></a>节点结构与邻接链表示例</h6><p>链表中的节点称为表节点，由三个域组成：</p>
+<p>邻接点域（adjvex）指示与顶点Vi邻接的顶点在图中的位置（编号）</p>
+<p>链域（nextarc）指向下一个与顶点Vi邻接的表节点</p>
+<p>数据域（data）储存与表节点相关的各种信息如权值等</p>
+<h6 id="链表法的特点"><a href="#链表法的特点" class="headerlink" title="链表法的特点"></a>链表法的特点</h6><p>表头向量中每个分量就是一个单链表的表头节点，分量个数就是图中的顶点个数。</p>
+<p>在边或弧稀疏的情况下用链表表示比使用矩阵节省空间</p>
+<p>在无向图，顶点Vi的度是第i个链表的节点数</p>
+<p>有向图可以建立正邻接表和逆邻接表，正邻接表是以Vi出度建立的邻接表，逆邻接表是一Vi入度建立的邻接表</p>
+<p>有向图中第i个链表中的节点数是顶点Vi的出（入）度；求整个出度或入度需要遍历整个邻接表。</p>
+<h6 id="节点及其定义"><a href="#节点及其定义" class="headerlink" title="节点及其定义"></a>节点及其定义</h6><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> MAXVEX 40;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> InforType <span class="token punctuation">;</span>
+typeef <span class="token keyword">enum</span><span class="token punctuation">[</span>DG<span class="token punctuation">,</span>AG<span class="token punctuation">,</span>WDG<span class="token punctuation">,</span>WAG<span class="token punctuation">]</span>GraphKind<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> LinkNode<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> adjvex<span class="token punctuation">;</span>
+    InfoType info<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> LinkNode <span class="token operator">*</span>nextarc<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>LinkNode<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> VexType<span class="token punctuation">{</span>
+    VexType data<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> indegree<span class="token punctuation">;</span>
+    LinkNode <span class="token operator">*</span>firstarc<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>VexNode<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> ArcType<span class="token punctuation">{</span>
+    VexType vex1<span class="token punctuation">,</span>vex2<span class="token punctuation">;</span>
+    InforType info<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>ArcType<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    GraphKind kind<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> vexnum<span class="token punctuation">;</span>
+    VexNode AdjList<span class="token punctuation">[</span>MAX_VES<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>ALGraph<span class="token punctuation">;</span></code></pre>
+<h6 id="图的创建"><a href="#图的创建" class="headerlink" title="图的创建"></a>图的创建</h6><pre class=" language-c"><code class="language-c">ALGraph <span class="token operator">*</span><span class="token function">Create_Graph</span><span class="token punctuation">(</span>ALGraph <span class="token operator">*</span>G<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>G<span class="token operator">-></span>Kind<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> G<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="图的顶点定位"><a href="#图的顶点定位" class="headerlink" title="图的顶点定位"></a>图的顶点定位</h6><p>实际上是确定一个顶点在AdjList数组中的某个元素的data域内容</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> Locate（ALGraph <span class="token operator">*</span>G<span class="token punctuation">,</span>VexType <span class="token operator">*</span>vp<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>k<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>k<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token operator">==</span><span class="token operator">*</span>vp<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> k<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="图的加顶点"><a href="#图的加顶点" class="headerlink" title="图的加顶点"></a>图的加顶点</h6><p>在AdjList数组末尾增加一个节点</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> AddVertex（ALGraph <span class="token operator">*</span>G<span class="token punctuation">,</span>VexType <span class="token operator">*</span>vp<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>vexnum <span class="token operator">>=</span> MAX_VEX<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">LocateVex</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>vp<span class="token punctuation">)</span><span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">]</span><span class="token punctuation">.</span>data <span class="token operator">=</span><span class="token operator">*</span>vp<span class="token punctuation">;</span>
+    G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">]</span><span class="token punctuation">.</span>degree<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    k<span class="token operator">=</span><span class="token operator">++</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> k<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h6 id="4-向图中加弧"><a href="#4-向图中加弧" class="headerlink" title="(4)向图中加弧"></a>(4)向图中加弧</h6><p>无向图改一个表，有向图改两个表</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">AddArc</span><span class="token punctuation">(</span>AlGraph <span class="token operator">*</span>G<span class="token punctuation">,</span>ARcType <span class="token operator">*</span>arc<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+    LinkNode <span class="token operator">*</span>p<span class="token punctuation">,</span><span class="token operator">*</span>q<span class="token punctuation">;</span>
+    k<span class="token operator">=</span><span class="token function">LocateVex</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span><span class="token operator">&amp;</span>arc<span class="token operator">-></span>vex1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    j<span class="token operator">=</span><span class="token function">LocateVex</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span><span class="token operator">&amp;</span>arc<span class="token operator">-></span>vex2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>k<span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">||</span>j<span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    p<span class="token operator">=</span><span class="token punctuation">(</span>LinkNode <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>LonkNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p<span class="token operator">-></span>adjvex<span class="token operator">=</span>arc<span class="token operator">-></span>vex1<span class="token punctuation">;</span>
+    p<span class="token operator">-></span>info<span class="token operator">=</span>arc<span class="token operator">-></span>infor<span class="token punctuation">;</span>
+    p<span class="token operator">-></span>nextarc<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    q<span class="token operator">=</span><span class="token punctuation">(</span>LinkNode <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>LinkNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token operator">-></span>adjvex<span class="token operator">=</span>arc<span class="token operator">-></span>vex2<span class="token punctuation">;</span>
+    q<span class="token operator">-></span>info<span class="token operator">=</span>arc<span class="token operator">-></span>infor<span class="token punctuation">;</span>
+    q<span class="token operator">-></span>nextarc<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>kind<span class="token operator">==</span>AG<span class="token operator">||</span>g<span class="token operator">-></span>Kind<span class="token operator">==</span>WAG<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        q<span class="token operator">-></span>nextarc<span class="token operator">=</span>G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token operator">=</span>q<span class="token punctuation">;</span>
+        p<span class="token operator">-></span>nextarc<span class="token operator">=</span>G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token operator">=</span>p<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        q<span class="token operator">-></span>nextarc <span class="token operator">=</span> G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token operator">=</span>q<span class="token punctuation">;</span>
+        p<span class="token operator">-></span>nextarc<span class="token operator">=</span>G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token operator">=</span>p<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//无向图</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        q<span class="token operator">-></span>nextarc <span class="token operator">=</span> G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+        G<span class="token operator">-></span>adjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token operator">=</span>q<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//p->nextarc = G->adjList[j].firstarc;</span>
+        <span class="token comment" spellcheck="true">//g->adjList[j].firstarc=p;</span>
+        <span class="token comment" spellcheck="true">//有向图</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="十字链表（Orthogonal-List）"><a href="#十字链表（Orthogonal-List）" class="headerlink" title="十字链表（Orthogonal List）"></a>十字链表（Orthogonal List）</h5><p>是有向图的另一种链式储存，是将正邻接表和逆邻接表结合起来</p>
+<p>每条弧的弧头节点和弧尾节点都存放在链表中，并将弧节点分别组织到以弧尾节点为头（顶点）和一弧头节点为头的链表中。</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> INIFITY MAX_VAL;</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> MAX_VEX 30;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> ArcNode<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> tailvex <span class="token punctuation">,</span>headvex<span class="token punctuation">;</span>
+    InfoType info<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> ArcNode<span class="token punctuation">,</span><span class="token operator">*</span>hlink<span class="token punctuation">,</span><span class="token operator">*</span>tlink<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>ArcNode<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> VexNode<span class="token punctuation">{</span>
+    VexType data<span class="token punctuation">;</span>
+    ArcNode <span class="token operator">*</span>firstin<span class="token punctuation">,</span><span class="token operator">*</span>firstout<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>VexNode<span class="token punctuation">;</span>
+tyedef <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> vexnum<span class="token punctuation">;</span>
+    VexNode tlink<span class="token punctuation">[</span>MAX_VEX<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>OLGraph<span class="token punctuation">;</span></code></pre>
+<p>从firstout出发，沿着tlink构成正邻接表；从firstin出发，沿着hlink构成逆邻接表。</p>
+<h5 id="邻接多重表（Adjacency-Multlist）"><a href="#邻接多重表（Adjacency-Multlist）" class="headerlink" title="邻接多重表（Adjacency Multlist）"></a>邻接多重表（Adjacency Multlist）</h5><p>是无向图的另一种链式存储结构</p>
+<p>邻接多重表和邻接表的区别：后者的同一条表要用两个表节点，而邻接多重表只要一个点</p>
+<h4 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h4><p>遍历的要求：每个顶点仅一次，复杂性可能多次访问，解决办法，打标记。</p>
+<h4 id="深度优先搜索（DFS）"><a href="#深度优先搜索（DFS）" class="headerlink" title="深度优先搜索（DFS）"></a>深度优先搜索（DFS）</h4><p>使用正邻接表</p>
+<h5 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h5><p>设初始状态，所有节点都未被访问则：</p>
+<p>（1）从图中某个节点Vi出发，访问Vi然后找到Vi的一个邻接顶点Vi</p>
+<p>（2）从Vi出发深度优先访问Vi相邻接且未被访问过的所有节点</p>
+<p>（3）转到（1），直到与Vi相邻接的所有的节点都被遍历</p>
+<p>（4）继续选取图中的未被访问的节点，Vj作为起始顶点转（1），直到图中所有节点都被遍历</p>
+<h5 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h5><p>由算法思想知，这是一个递归过程，因此先设计一个从某个顶点为V0开始深度优先搜索的函数，便于调用</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> emun<span class="token punctuation">{</span>FALSE<span class="token punctuation">,</span>TRUE<span class="token punctuation">}</span> BOOLEAN<span class="token punctuation">;</span>
+BOOLEAN Visited<span class="token punctuation">[</span>MAX_VEX<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">DFS</span><span class="token punctuation">(</span>ALGraph <span class="token operator">*</span>G<span class="token punctuation">,</span><span class="token keyword">int</span> v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    LinkNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    Visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>TRUE<span class="token punctuation">;</span>
+    <span class="token function">visit</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    p<span class="token operator">-></span>G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>p<span class="token operator">-></span>adjvex<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token function">DFS</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>p<span class="token operator">-></span>adjvex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>nextarc<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">DFS_traverse_Graph</span><span class="token punctuation">(</span>ALGraph <span class="token operator">*</span>G<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> v<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>v<span class="token operator">++</span><span class="token punctuation">)</span>
+        visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>FALSE<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//p=G->AdjList[v].first;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>v<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token function">DFS</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>V<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+boolean visited<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">Status</span> <span class="token punctuation">(</span><span class="token operator">*</span>VisitFunc<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">DFSTraverse</span><span class="token punctuation">(</span>Graph G<span class="token punctuation">,</span><span class="token function">Status</span> <span class="token punctuation">(</span><span class="token operator">*</span>visit<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    VisitFunc <span class="token operator">=</span> Visit<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span><span class="token operator">++</span>v<span class="token punctuation">)</span>
+        visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>FALSE<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span><span class="token operator">++</span>v<span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token function">DFS</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>W<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">DFS</span><span class="token punctuation">(</span>Graph G<span class="token punctuation">,</span><span class="token keyword">int</span> v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>TRUE<span class="token punctuation">,</span><span class="token function">VisitFunc</span><span class="token punctuation">(</span>V<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>w<span class="token operator">=</span><span class="token function">FirstAdjVex</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>w<span class="token operator">>=</span><span class="token number">0</span><span class="token punctuation">;</span>w<span class="token operator">=</span><span class="token function">NextAdjVex</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>w<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token function">DFS</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h5><p>顶点至多有一次DFS，有e条边，n个顶点的图DFS时间复杂度为O（n+e），实质是对每个顶点查找邻接顶点的过程。</p>
+<h4 id="广度优先搜索算法（BFS）"><a href="#广度优先搜索算法（BFS）" class="headerlink" title="广度优先搜索算法（BFS）"></a>广度优先搜索算法（BFS）</h4><p>层次遍历过程</p>
+<h5 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h5><p>设初始节点所有都未被访问</p>
+<p>（1）从Vi出发访问Vi；</p>
+<p>（2）访问Vi所有节点；</p>
+<p>（3）以Vi1，Vi2。。。的次序转（1）；</p>
+<p>（4）继续选择未访问节点作为起点，转（1），直到图中所有节点都被访问。</p>
+<h5 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h5><p>加标记数组，要加一个队列保存相邻接的节点</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> emun <span class="token punctuation">{</span>FALSE<span class="token punctuation">,</span>TRUE<span class="token punctuation">}</span> BOOLEAN<span class="token punctuation">;</span>
+BOOLEAN Vistied<span class="token punctuation">[</span>MAX_VEX<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> Queue<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> elem<span class="token punctuation">[</span>MAX_VEX<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> front<span class="token punctuation">,</span>rear<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>Queue<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">BFS_traverse_Graph</span><span class="token punctuation">(</span>ALGraph <span class="token operator">*</span>G<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> k<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">;</span>
+    LinkNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    Queue <span class="token operator">*</span>Q<span class="token punctuation">;</span>
+    Q<span class="token operator">=</span><span class="token punctuation">(</span>Queue <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token function">siezof</span><span class="token punctuation">(</span>Queue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Q<span class="token operator">-></span>front<span class="token operator">=</span>Q<span class="token operator">-></span>rear<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>k<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>k<span class="token operator">++</span><span class="token punctuation">)</span>
+        visited<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token operator">=</span>FALSE<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>k<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>k<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        v<span class="token operator">=</span>G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            Q<span class="token operator">-></span>elem<span class="token punctuation">[</span><span class="token operator">++</span>Q<span class="token operator">-></span>rear<span class="token punctuation">]</span><span class="token operator">=</span>v<span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>Q<span class="token operator">-></span>front<span class="token operator">!=</span>Q<span class="token operator">-></span>rear<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                w<span class="token operator">=</span>Q<span class="token operator">-></span>elem<span class="token punctuation">[</span><span class="token operator">++</span>Q<span class="token operator">-></span>front<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                visited<span class="token punctuation">[</span>w<span class="token punctuation">]</span><span class="token operator">=</span>TRUE<span class="token punctuation">;</span>
+                <span class="token function">visited</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                p<span class="token operator">=</span>G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>w<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+                <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>p<span class="token operator">-></span>adjvex<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                        visited<span class="token punctuation">[</span>w<span class="token punctuation">]</span><span class="token operator">=</span>TRUE<span class="token punctuation">;</span>
+                        <span class="token function">visit</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        Q<span class="token operator">-></span>elem<span class="token punctuation">[</span><span class="token operator">++</span>Q<span class="token operator">-></span>rear<span class="token punctuation">]</span><span class="token operator">=</span>p<span class="token operator">-></span>adjvex<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    p<span class="token operator">=</span>p<span class="token operator">-></span>nextarc<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">BFS_Traverse</span><span class="token punctuation">(</span>Graph G<span class="token punctuation">,</span><span class="token function">Status</span> <span class="token punctuation">(</span><span class="token operator">*</span>visit<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    visited<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span><span class="token operator">++</span>v<span class="token punctuation">)</span>
+        visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>FALSE<span class="token punctuation">;</span>
+    <span class="token function">InitQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span><span class="token operator">++</span>v<span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>TRUE<span class="token punctuation">;</span>
+            <span class="token function">visit</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">QueueEmpty</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">DeQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">for</span><span class="token punctuation">(</span>w<span class="token operator">=</span><span class="token function">FirstAdjvex</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>w<span class="token operator">>=</span><span class="token number">0</span><span class="token punctuation">;</span>w<span class="token operator">=</span><span class="token function">NextAdNext</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>w<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                        visited<span class="token punctuation">[</span>w<span class="token punctuation">]</span><span class="token operator">=</span>TRUE<span class="token punctuation">;</span>
+                        <span class="token function">visit</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<p>次序不同，时间O（n+e）DFS 回溯的方法；BFS分层顺序不是递归算法</p>
+<h4 id="图的遍历算法的应用"><a href="#图的遍历算法的应用" class="headerlink" title="图的遍历算法的应用"></a>图的遍历算法的应用</h4><h5 id="无向图的连通分量"><a href="#无向图的连通分量" class="headerlink" title="无向图的连通分量"></a>无向图的连通分量</h5><p>生成树</p>
+<p>对于无向图，对其遍历时</p>
+<p>若连通图仅需从任一顶点出发就访问图中的所有顶点</p>
+<p>若非连通图：从图中多个顶点出发，每次从一个新点出发访问所有的节点集序列恰好是各个连通分量的顶点集。</p>
+<h5 id="图的生成树和生成森林算法"><a href="#图的生成树和生成森林算法" class="headerlink" title="图的生成树和生成森林算法"></a>图的生成树和生成森林算法</h5><p>储存结构，孩子-兄弟表示法 递归算法</p>
+<p>对DFS（BFS）稍作修改</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> CSNode<span class="token punctuation">{</span>
+    ELemType data<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> CSNode <span class="token operator">*</span>firstchild<span class="token punctuation">,</span><span class="token operator">*</span>nextsibing<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>CSNode <span class="token punctuation">;</span>
+
+CSNode <span class="token operator">*</span><span class="token function">DFStree</span><span class="token punctuation">(</span>ALGraph <span class="token operator">*</span>G<span class="token punctuation">,</span><span class="token keyword">int</span> v<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    CSNode <span class="token operator">*</span>T<span class="token punctuation">,</span><span class="token operator">*</span>ptr<span class="token punctuation">,</span><span class="token operator">*</span>q<span class="token punctuation">;</span>
+    LinkNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> w<span class="token punctuation">;</span>
+    visited<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>TRUE<span class="token punctuation">;</span>
+    T<span class="token operator">=</span><span class="token punctuation">(</span>CSNode <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>CSNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    T<span class="token operator">-></span>data<span class="token operator">=</span>G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+    T<span class="token operator">-></span>firstchild<span class="token operator">=</span>T<span class="token operator">-></span>nextsibling<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    q<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    p<span class="token operator">=</span>G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+    q<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">:</span>
+    p<span class="token operator">=</span>G<span class="token operator">-></span>AdjList<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>firstarc<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">!=</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        w<span class="token operator">=</span>p<span class="token operator">-></span>adjvex<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">[</span>w<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            ptr<span class="token operator">=</span><span class="token function">DFStree</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>q<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">)</span> T<span class="token operator">-></span>firstchild<span class="token operator">=</span>ptr<span class="token punctuation">;</span>
+            <span class="token keyword">else</span> q<span class="token operator">-></span>nextsibling<span class="token operator">=</span>ptr<span class="token punctuation">;</span>
+            q<span class="token operator">=</span>ptr<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>nextarc<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> T<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>判断连通性</p>
+<pre class=" language-c"><code class="language-c">bool <span class="token function">Connect</span><span class="token punctuation">(</span>ALGraph <span class="token operator">*</span>G<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    bool flag<span class="token operator">=</span> true<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>G<span class="token operator">-></span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        visited<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">DFS</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>G<span class="token operator">-></span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>visited<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            flag<span class="token operator">=</span>false<span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> flag<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="最小生成树（Minimum-Spanning-Tree）MST"><a href="#最小生成树（Minimum-Spanning-Tree）MST" class="headerlink" title="最小生成树（Minimum Spanning Tree）MST"></a>最小生成树（Minimum Spanning Tree）MST</h5><p>权值最小但是不构成回路，n-1条边</p>
+<h6 id="普利姆算法（Prim）"><a href="#普利姆算法（Prim）" class="headerlink" title="普利姆算法（Prim）"></a>普利姆算法（Prim）</h6><p>算法实现</p>
+<p>邻接矩阵（二维数组）两个顶点间不存在权，标记为最大值。</p>
+<p>设置一个一维数组closedge保存V-V中各顶点到V中顶点是有权后最小的边</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> adjvex<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> lowcost<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>closedge<span class="token punctuation">[</span>MAX_EDGE<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+<p><code>closedge[j].adjvex=k</code>表明边（Vi，Vk）是V-V中顶点j到V中权值最小的边</p>
+<p>算法步骤<br>（1）从closedge中选择一条权值最小的边（Vk，Vj）</p>
+<p>设closedge[k].lowcost为0，Vk加入V中；</p>
+<p>根据Vk更新的closedge每个元素：任意Vi∈V-V，若cost（i，k）≤ closedge[i].lowcost</p>
+<p>加入Vk后，（Vi，Vk）或Vi到U中权值最小的边<br><code>closedge[i].lowcost=cost(i,k);closedge[i].adjvex=k;</code></p>
+<p>（2）重复（1）n-1次就得到了MST</p>
+<p>在prime中，图采用邻接矩阵存储，所构成最小生成树用一维数组n-1</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> MSTEdge<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> vex1<span class="token punctuation">,</span>vex2<span class="token punctuation">;</span>
+    WeightType weight<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>MSTEdge<span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> INIFITY MAX_VAL;</span>
+MSTEdge <span class="token operator">*</span><span class="token function">Prim_MST</span><span class="token punctuation">(</span>AdjGraph <span class="token operator">*</span>G<span class="token punctuation">,</span><span class="token keyword">int</span> u<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    MSTEdge TE<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> j<span class="token punctuation">,</span>k<span class="token punctuation">,</span>v<span class="token punctuation">,</span>min<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        closedge<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>adjvex<span class="token operator">=</span>u<span class="token punctuation">;</span>
+        closedge<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token operator">=</span>G<span class="token operator">-></span>adj<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    closedge<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    TE<span class="token operator">=</span><span class="token punctuation">(</span>MSTEdge <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>MSTEdge<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token number">-1</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         min<span class="token operator">=</span>INFINITY<span class="token punctuation">;</span>
+         <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>v<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>closedge<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token operator">!=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span> closedge<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token operator">&lt;</span>min<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                min<span class="token operator">=</span>closedge<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token punctuation">;</span>
+                k<span class="token operator">=</span>v<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            TE<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>vex1<span class="token operator">=</span>closedge<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>adjvex<span class="token punctuation">;</span>
+            TE<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>vex2<span class="token operator">=</span>k<span class="token punctuation">;</span>
+            TE<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token operator">=</span>closedge<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token punctuation">;</span>
+            closedge<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>v<span class="token operator">++</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>G<span class="token operator">-></span>adj<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">&lt;</span> closedge<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    closedge<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>lowcost<span class="token operator">=</span>G<span class="token operator">-></span>adj<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    closedge<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span>adjvex<span class="token operator">=</span>k'
+                <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> TE<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>时间复杂度为O（n^2)与边的数目无关，求closedge权值最小的边为n-1修改closedge</p>
+<h5 id="克鲁斯卡尔算法（Kruskal）"><a href="#克鲁斯卡尔算法（Kruskal）" class="headerlink" title="克鲁斯卡尔算法（Kruskal）"></a>克鲁斯卡尔算法（Kruskal）</h5><p>Kruskal算法实现的关键是判断能否构成边，定义数组vset[n]存放T中每个顶点所在的连通分量的编号</p>
+<p>初值：Vset[i]=i;表示每个点都是一个独立的连通分量</p>
+<p>当往T中加入边（vi，vj）时先检查vset[i]vest[j]的值，若vset[i]=vset[j],表明vi和vj在同一个连通分量里，会产生回路</p>
+<p>加入新点，将两个分量合并将一个连通分量的编号换成另一个的</p>
+<pre class=" language-c"><code class="language-c">MSTEdge <span class="token operator">*</span><span class="token function">Kurskal_MST</span><span class="token punctuation">(</span>ELGraph <span class="token operator">*</span>G<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    MSTEdge TE<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> j<span class="token punctuation">,</span>k<span class="token punctuation">,</span>v<span class="token punctuation">,</span>s1<span class="token punctuation">,</span>s2<span class="token punctuation">,</span>vset<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    WeightType w<span class="token punctuation">;</span>
+    Vset<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span>G<span class="token operator">-></span>vexnum<span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span>G0<span class="token operator">></span>vexnum<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        vset<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>j<span class="token punctuation">;</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>G<span class="token operator">-></span>edgeList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>k<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token number">-1</span><span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>G<span class="token operator">-></span>edgenum<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        s1<span class="token operator">=</span>Vset<span class="token punctuation">[</span>G<span class="token operator">-></span>edgelist<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>vex1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s2<span class="token operator">=</span>Vset<span class="token punctuation">[</span>G<span class="token operator">-></span>edgelist<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>vex2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>s1<span class="token operator">!=</span>s2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            TE<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>vex1<span class="token operator">=</span>G<span class="token operator">-></span>edgelist<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>vex1<span class="token punctuation">;</span>
+            TE<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>vex2<span class="token operator">=</span>G<span class="token operator">-></span>edgelist<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>vex2<span class="token punctuation">;</span>
+            TE<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token operator">=</span>G<span class="token operator">-></span>edgelist<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+            k<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span>v<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>v<span class="token operator">&lt;</span>G<span class="token operator">-></span>vexnum<span class="token punctuation">;</span>v<span class="token operator">++</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>vset<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">==</span>s2<span class="token punctuation">)</span> 
+                    vset<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token operator">=</span>s1<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        j<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>vset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> TE<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>算法时间复杂度O（eloge+n^2)</p>
+<h3 id="问题与说明"><a href="#问题与说明" class="headerlink" title="问题与说明"></a>问题与说明</h3><h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>CLion开发环境，C语言实现</p>
+<h3 id="程序清单"><a href="#程序清单" class="headerlink" title="程序清单"></a>程序清单</h3>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2018/12/11/shu-ju-jie-gou-shi-yan-bao-gao-tu/">http://jinzhengxu.github.io/2018/12/11/shu-ju-jie-gou-shi-yan-bao-gao-tu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/数据结构/">
+                                    <span class="chip bg-color">数据结构</span>
+                                </a>
+                            
+                                <a href="/tags/作业/">
+                                    <span class="chip bg-color">作业</span>
+                                </a>
+                            
+                                <a href="/tags/实验报告/">
+                                    <span class="chip bg-color">实验报告</span>
+                                </a>
+                            
+                                <a href="/tags/图/">
+                                    <span class="chip bg-color">图</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/01/19/ccpc-wannafly-camp-day1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="CCPC Wannafly Camp Day1">
+                        
+                        <span class="card-title">CCPC Wannafly Camp Day1</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            div1 7 div2 6
+Problem A 机器人题目描述wls管理的仓库分为ABAB两个区，这两个区坐落在两条平行的直线上，每个区有nn个站点，标号分别为1…n1…n，agvagv从站点aa到同仓库的站点bb需要花费abs(a-b)a
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-01-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/12/11/shu-ju-jie-gou-shi-yan-bao-gao-shu-he-er-cha-shu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="数据结构实验报告——二叉树">
+                        
+                        <span class="card-title">数据结构实验报告——二叉树</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+实验目的与要求
+实验步骤与内容
+问题与说明
+备注
+程序清单
+
+实验目的与要求1.了解树的概念
+2.会使用树的基本操作
+3.理解先序，中序，后序遍历的不同
+4.理解树的递归和非递归，以及层次遍历方法
+实验步骤与内容树的概念树是n个节点组成的
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/程序设计/" class="post-category">
+                                    程序设计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/数据结构/">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
+                    <a href="/tags/作业/">
+                        <span class="chip bg-color">作业</span>
+                    </a>
+                    
+                    <a href="/tags/实验报告/">
+                        <span class="chip bg-color">实验报告</span>
+                    </a>
+                    
+                    <a href="/tags/二叉树/">
+                        <span class="chip bg-color">二叉树</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
