@@ -1,4 +1,4 @@
-var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
 hexo.on('new', function(data){
-  spawn('atom', [data.path], { stdio: 'inherit' } );
+    exec('open -a "Typora.app" ' + data.path);
 });
