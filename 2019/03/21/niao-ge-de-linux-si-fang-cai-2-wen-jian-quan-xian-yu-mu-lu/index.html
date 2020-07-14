@@ -1,0 +1,1795 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux(2)-文件权限与目录, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux(2)-文件权限与目录 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Jinzhengxu" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Jinzhengxu" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux(2)-文件权限与目录</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/文件权限与目录配置/">
+                                <span class="chip bg-color">文件权限与目录配置</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/软件工具/" class="post-category">
+                                软件工具
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-21
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>Linux 和windows的一个主要区别是Windows的设计是单人假多任务，而Linux则是优秀的多人多任务环境，为了针对每个用户都有自己的文件管理权限，Linux有一套自己的文件管理方式，将文件可读写的身份分为三个类别，分别是 <strong>* 拥有者（owner），所属群组（group），其他人（others）。*</strong></p>
+<h4 id="用户与用户组"><a href="#用户与用户组" class="headerlink" title="用户与用户组"></a>用户与用户组</h4><p>开始接触Linux的时候,由于是自己一个用户来操作个人电脑,只对用户的概念有所了解，用户分为<code>root</code>用户和普通用户。而用户组的概念则是针对多人多任务的情况提出的，让我们思考这样一个情况，假设两组有竞争关系的小组同时使用一台电脑来完成任务，他们最后需要提交的文件是一样的，那肯定在任务进行期间双方只能改动和查看自己的文件，而不能查看对方组内的文件。<strong>* So，用户组最有用的功能之一，就是当你的团队进行协同工作的时候 。*</strong></p>
+<p>在假设一种情况，如果你是刚刚的小组中的一员，在进行工作的闲暇之余，你访问了PornHub并且下载了影片，作为一个正常人，你肯定不会想让自己小组的成语直到你干了什么，这时，你可以将文件的权限设置为作为文件拥有者才拥有查看的权利，其他人都没有。那么即时其他人直到这里有一个十分有趣的文件，也无法直到文件的具体内容。</p>
+<p>还有一个<strong>* others*</strong> 的概念，在设定好用户组以后，除本组成员外的<strong>* 其他人*</strong> ，你也可以针对他们设置文件的权限。</p>
+<p>、linux中默认将所有系统上账户的信息都记录在<code>/etc/paswd</code>这个文件内,用户的密码则储存<code>/etc/shadow</code>文件中,而用户组名则储存在<code>/etc/group</code>中。</p>
+<h4 id="Linux文件权限概念"><a href="#Linux文件权限概念" class="headerlink" title="Linux文件权限概念"></a>Linux文件权限概念</h4><h5 id="Linux文件权限设置"><a href="#Linux文件权限设置" class="headerlink" title="Linux文件权限设置"></a>Linux文件权限设置</h5><p>由于<code>chgrp</code>，<code>chown</code>，<code>chmod</code>命令都需要root身份来执行，所以我们切换到root账户：</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">su</span></code></pre>
+<p>在根目录<code>/root</code>下执行（注意Linux中有很多root，刚刚我们登录的是root账户，这里是根目录，他们都是不同的概念）</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span>root@Jason ~<span class="token punctuation">]</span>$ <span class="token function">ls</span> -al <span class="token comment" spellcheck="true">#ls是list的意思，重点显示文件的文件名与相关属性，</span>
+                       <span class="token comment" spellcheck="true">#选项[-al]表示列出所有的文件详细的权限与属性。</span>
+total 220
+dr-xr-x---    4     root     root       4096      3月  18 11:51   <span class="token keyword">.</span>
+dr-xr-xr-x   24     root     root       4096      3月  20 01:57   <span class="token punctuation">..</span>
+drwxrwxrwx    3     root     root       4096      3月  14 11:50   91yunserverspeeder
+-rw-r--r--    1     root     root      63298      3月  14 11:50   91yunserverspeeder.tar.gz
+-rw-------    1     root     root       2134      3月  18 12:33   .bash_history
+-rw-r--r--    1     root     root         18      5月  20 2009   .bash_logout
+-rw-r--r--    1     root     root        176      5月  20 2009   .bash_profile
+-rw-r--r--    1     root     root        176      9月  23 2004   .bashrc
+-rw-r--r--    1     root     root        100      9月  23 2004   .cshrc
+-rw-------    1     root     root         40      3月  18 11:52   .lesshst
+drwxr-----    3     root     root       4096      10月 16 22:49   .pki
+-rwxr-xr-x    1     root     root       6156      3月  14 11:40   serverspeeder.sh
+-rw-r--r--    1     root     root      47804      3月  14 11:18   shadowsocks-all.log
+-rwxr-xr-x    1     root     root      46219      3月  14 11:13   shadowsocks-all.sh
+-rw-r--r--    1     root     root        554      3月  14 11:18   shadowsocks_r_qr.png
+-rw-r--r--    1     root     root        129      12月  3 2004    .tcshrc
+<span class="token punctuation">[</span>    1    <span class="token punctuation">]</span> <span class="token punctuation">[</span> 2  <span class="token punctuation">]</span> <span class="token punctuation">[</span>  3   <span class="token punctuation">]</span> <span class="token punctuation">[</span>   4   <span class="token punctuation">]</span> <span class="token punctuation">[</span>   5    <span class="token punctuation">]</span> <span class="token punctuation">[</span>       6      <span class="token punctuation">]</span> <span class="token punctuation">[</span>           7                <span class="token punctuation">]</span>
+<span class="token punctuation">[</span>   权限  <span class="token punctuation">]</span> <span class="token punctuation">[</span>链接<span class="token punctuation">]</span> <span class="token punctuation">[</span>拥有者<span class="token punctuation">]</span> <span class="token punctuation">[</span>用户组 <span class="token punctuation">]</span> <span class="token punctuation">[</span>文件容量<span class="token punctuation">]</span> <span class="token punctuation">[</span>   修改日期   <span class="token punctuation">]</span> <span class="token punctuation">[</span>         文件名             <span class="token punctuation">]</span></code></pre>
+<p>（注：为了显示方便，加入了许多空格）</p>
+<h6 id="1-代表文件的类型与权限"><a href="#1-代表文件的类型与权限" class="headerlink" title="[1]代表文件的类型与权限"></a>[1]代表文件的类型与权限</h6><p>这一栏有十个字符：</p>
+<ul>
+<li>第一个字符代表这个文件是<strong><em>目录、文件或链接文件等</em></strong><ul>
+<li>当为[d]则是目录，例如上表文件名为[91yunserverspeeder]的一行</li>
+<li>当为[-]则是文件，例如上表名为[shadowsocks-all.log]的一行</li>
+<li>当为[l]则表示为链接文件（link file）</li>
+<li>若是[b]则表示为设备文件里面可供储存的周边设备（可按块随机读写的设备）</li>
+<li>若是[c]则表示为设备文件里面的串行端口设备，例如键盘，鼠标（一次性读取设备）；</li>
+</ul>
+</li>
+<li>接下来的字符中，以三个为一组，且均为[rwx]的三个参数的组合，其中[r]代表read，[w]代表write，[x]代表execute，如果该用户拥有该权限，则显示对应的字符，如果没有权限，则显示[-]。<ul>
+<li>第一组为文件拥有者可具备执行的权限</li>
+<li>第二组为加入次用户组之账号的权限</li>
+<li>第三组为非本人且没有本用户组的其他账号的权限</li>
+</ul>
+</li>
+</ul>
+<h6 id="2-表示有多少文件名链接到这个节点（inode）"><a href="#2-表示有多少文件名链接到这个节点（inode）" class="headerlink" title="[2]表示有多少文件名链接到这个节点（inode）"></a>[2]表示有多少文件名链接到这个节点（inode）</h6><p>Linux中每个文件都会将它的权限及属性记录到文件系统的inode中，目录树中是使用文件名来记录的，因此每个文件名会关联到一个inode号码，这个数字就是显示有多少个文件关联到同一个inode号码。</p>
+<h6 id="3-表示这个文件的拥有者账户"><a href="#3-表示这个文件的拥有者账户" class="headerlink" title="[3]表示这个文件的拥有者账户"></a>[3]表示这个文件的拥有者账户</h6><h6 id="4-表示这个文件的所属用户组"><a href="#4-表示这个文件的所属用户组" class="headerlink" title="[4]表示这个文件的所属用户组"></a>[4]表示这个文件的所属用户组</h6><h6 id="5-表示这个文件的容量，默认为Bytes"><a href="#5-表示这个文件的容量，默认为Bytes" class="headerlink" title="[5]表示这个文件的容量，默认为Bytes"></a>[5]表示这个文件的容量，默认为Bytes</h6><h6 id="6-表示这个文件的创建日期或最后修改日期"><a href="#6-表示这个文件的创建日期或最后修改日期" class="headerlink" title="[6]表示这个文件的创建日期或最后修改日期"></a>[6]表示这个文件的创建日期或最后修改日期</h6><h6 id="7-表示这个文件的文件名"><a href="#7-表示这个文件的文件名" class="headerlink" title="[7]表示这个文件的文件名"></a>[7]表示这个文件的文件名</h6><p><strong>* Linux下文件权限的设置非常重要！！！ *</strong></p>
+<p><strong><em>在修改你的Linux文件与目录的属性之前，一定要先搞清楚，什么数据是可变的，什么是不可变的。</em></strong></p>
+<h5 id="修改文件属性与权限"><a href="#修改文件属性与权限" class="headerlink" title="修改文件属性与权限"></a>修改文件属性与权限</h5><pre class=" language-bash"><code class="language-bash">$ <span class="token function">chgrp</span>  //修改文件所属用户组
+$ <span class="token function">chown</span>  //修改文件拥有者
+$ <span class="token function">chmod</span>  //修改文件的权限，SUID，SGID，SBIT等的特性</code></pre>
+<h6 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">chgrp</span> <span class="token punctuation">[</span>-R<span class="token punctuation">]</span> dirname/filename<span class="token punctuation">..</span>.
+选项与参数：
+-R ： 进行递归（recursive）修改，亦即联通子目录下所有文件，目录都更新为这个用户组之意。
+</code></pre>
+<h6 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">chown</span> <span class="token punctuation">[</span>-R<span class="token punctuation">]</span> 账号名称 文件或目录
+$ <span class="token function">chown</span> <span class="token punctuation">[</span>-R<span class="token punctuation">]</span> 账号名称:用户组名称 文件或目录
+选项与参数：
+-R ： 进行递归（recursive）修改，亦即联通子目录下所有文件，目录都更新为这个用户组之意。</code></pre>
+<p>命令中的<code>:</code>也可以使用<code>.</code>来代替，但是Linux中隐藏文件和用户名及文件名都常常含有<code>.</code>，所以我们尽量使用<code>:</code>来防止系统误判。</p>
+<h6 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">chmod</span> <span class="token punctuation">[</span>-R<span class="token punctuation">]</span> xyz 文件或目录
+选项与参数：
+-R ： 进行递归（recursive）修改，亦即联通子目录下所有文件，目录都更新为这个用户组之意。</code></pre>
+<ul>
+<li>数字类型修改文件权限。<br>Linux文件的基本权限有九个，分别是拥有者（owner），所属群组（group），其他人（others）三种身份分别拥有读（read），写（write），执行（execute）权限，我们可以使用数字代替各个权限：<pre><code>r：4
+w：2
+x：1</code></pre>每种身份的权限可以表示为一个数字，这样三组权限有三个数字就可以完全表示了，如：<pre><code>rwx 4+2+1=7
+r-x 4+1=5</code></pre>这里鸟哥没有提到，但是我认为也可以理解为也可以理解为二进制形式：<pre><code>rwx 111 = 7
+r-x 101 = 5</code></pre>所以我们设置权限时，就可以直接通过这样的方式进行修改<pre class=" language-bash"><code class="language-bash">root@Jason:~<span class="token comment" spellcheck="true"># chmod -R xyz 文件或目录</span></code></pre>
+</li>
+<li>符号类型修改权限。我们借用u，g，o来代表三种身份，rwx代表权限</li>
+</ul>
+<p>|chmod|u(user) g(group) o(others) a(all)|+ (加入) - (移除) =(设置)|r(读) w(写) x(执行)|文件和目录|<br>| :|</p>
+<h5 id="目录与文件的权限意义"><a href="#目录与文件的权限意义" class="headerlink" title="目录与文件的权限意义"></a>目录与文件的权限意义</h5><ul>
+<li>文件</li>
+</ul>
+<p>[r]这个权限比较通俗，就是读取文件的内容。</p>
+<p>[w]权限可以拥有修改，编辑，写入，新增的权限，但是无权<strong><em>删除</em></strong>该文件。</p>
+<p>Windows下文件是否具有执行能力是看文件的扩展名来决定，<strong><em>而在Linux下一个文件是否能够执行即借由[x]这个权限来决定，跟文件名没有绝对的关系。</em></strong></p>
+<ul>
+<li>目录</li>
+</ul>
+<p>[r]权限可以赋予你读取一个目录的权限，可以通过<code>ls</code>命令将该目录下的文件列表显示。</p>
+<p>[w]的权限对于目录来说十分大，<strong><em>拥有改变目录结构列表的权限</em></strong>：即<br>+</p>
+<ul>
+<li>建立新文件与新目录</li>
+<li>删除已经存在的文件和目录</li>
+<li>将文件和目录更名</li>
+<li>移动该目录内的文件，目录位置</li>
+</ul>
+<p>[x]代表用户是否有权利进入该目录成为工作目录，能不能进入一个目录只与[x权限有关，<strong><em>如果你在某目录下不具有x的权限，你就无法切换到该目录下，即使你具有rhuow的权限，也无法执行该目录下的任何命令。</em></strong> （所以我们在搭建博客时至少应该开放r和x权限，而w权限不能随意开放）</p>
+<p>下面的表格中总结了几种情况来说明完成某种操作所具有的最小权限</p>
+<pre><code>/dir1/file1
+/dir2</code></pre><table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">/dir1</th>
+<th align="center">/dir1/file1</th>
+<th align="center">/dir2</th>
+<th align="center">重点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读取file1内容</td>
+<td align="center">x</td>
+<td align="center">r</td>
+<td align="center">-</td>
+<td align="center">能够进入/dir1且能读取file1</td>
+</tr>
+<tr>
+<td align="center">修改file1内容</td>
+<td align="center">x</td>
+<td align="center">rw</td>
+<td align="center">-</td>
+<td align="center">能够进入/dir1且能修改file1</td>
+</tr>
+<tr>
+<td align="center">执行file1内容</td>
+<td align="center">x</td>
+<td align="center">rx</td>
+<td align="center">-</td>
+<td align="center">能够进入/dir1且能执行file1</td>
+</tr>
+<tr>
+<td align="center">删除file1文件</td>
+<td align="center">w</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">能够进入/dir目录且能修改目录即可</td>
+</tr>
+<tr>
+<td align="center">将file1复制到/dir2</td>
+<td align="center">x</td>
+<td align="center">r</td>
+<td align="center">w</td>
+<td align="center">能够读file1且能修改/dir2</td>
+</tr>
+</tbody></table>
+<p>这里我们假设已经直到了目录里的file1文件，虽然不能通过ls命令了解文件夹内的文件，但是如果事先就知道文件的存在，仍然可以继续操作。</p>
+<h5 id="Linux文件种类与扩展名"><a href="#Linux文件种类与扩展名" class="headerlink" title="Linux文件种类与扩展名"></a>Linux文件种类与扩展名</h5><p><strong><em>任何设备在Linux下都是文件</em></strong></p>
+<p>不仅是设备，数据沟通的接口也有专门的文件</p>
+<h6 id="文件种类"><a href="#文件种类" class="headerlink" title="文件种类"></a>文件种类</h6><ul>
+<li>常规文件（regular file）[-]<ul>
+<li>纯文本文件（ASCII）cat</li>
+<li>二进制文件（binary）</li>
+<li>数据文件（data）last</li>
+</ul>
+</li>
+<li>目录[d]</li>
+<li>链接文件[l]（类似于快捷方式）</li>
+<li>设备与设备文件（通常储存在<code>/dev</code>下）<ul>
+<li>区块(block)设备文件[b]</li>
+<li>字符(character)设备文件[c]</li>
+</ul>
+</li>
+<li>数据接口(sockets)文件[s]</li>
+<li>数据传送(FIFO,pipe)文件[p]</li>
+</ul>
+<h6 id="Linux文件扩展名"><a href="#Linux文件扩展名" class="headerlink" title="Linux文件扩展名"></a>Linux文件扩展名</h6><p><strong><em>Linux文件能否执行只与[x]属性有关，和文件扩展名毫无关系。</em></strong><br>但是<em>具有可执行的权限</em>和<em>具有可执行的程序</em>是两码事，例如我们用<code>chmod</code>给文件<code>test.txt</code>加上[x]权限，但是文件显然还是不可执行的。因为文件的内容里并没有可执行的部分。</p>
+<p>虽然如此但是我们任然希望凭借文件扩展名来了解文件的种类：</p>
+<ul>
+<li>*.sh:脚本或批处理文件（scripts）用<code>shell</code>写成</li>
+<li>*.Z,*.tar.gz,*.tar,*.zip:经过打包的压缩文件</li>
+<li>*.html:网页文件</li>
+</ul>
+<p>可以这样说，Linux下的文件扩展名的意义只是让你或者编辑器知道文件的类型，即时去掉文件扩展名，文件依然可以正常执行。</p>
+<p>Linux文件名长度通常 限制在256个字符之内，且由于Linux命令行操作的特性，最好不要带有特殊字符。</p>
+<h4 id="Linux目录配置"><a href="#Linux目录配置" class="headerlink" title="Linux目录配置"></a>Linux目录配置</h4><h5 id="Linux目录配置的依据——FHS"><a href="#Linux目录配置的依据——FHS" class="headerlink" title="Linux目录配置的依据——FHS"></a>Linux目录配置的依据——FHS</h5><p>FHS（Filesystem Hierarchy Standard）统一了Linux的各发行版之间的的目录配置方法，和HTML的标准一样，这是一个不断进化的标准。</p>
+<p>FHS将文件<strong><em>系统使用的频繁与否</em></strong>及<strong><em>是否允许用户随意修改</em></strong>将目录定义为四中交互作用的形态。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">可分享()</th>
+<th align="center">不可分享()</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">不变(static)</td>
+<td align="center">/usr(软件存放处)</td>
+<td align="center">/etc(配置文件)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">/opt(第三方辅助软件)</td>
+<td align="center">/boot(启动与相关内核)</td>
+</tr>
+<tr>
+<td align="center">可变动(variable)</td>
+<td align="center">/var/mail(用户邮箱)</td>
+<td align="center">/var/run(程序相关)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">/var/spool/news(新闻组)</td>
+<td align="center">/var/lock(程序相关)</td>
+</tr>
+<tr>
+<td align="center">（表中目录仅为参考，不代表全部）</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<ul>
+<li>可分享：可以分享给其他系统挂载的目录</li>
+<li>不可分享：设备文件或与程序有关的socket文件等，仅与自身机器有关</li>
+<li>不变：有些数据是不会经常变动的，例如函数库，文件说明，系统管理员的主机配置文件</li>
+<li>可变动：经常修改的数据，如日志文件等</li>
+</ul>
+<p>FHS针对目录树架构定义出三层目录下面应该放置什么数据</p>
+<ul>
+<li>/ （root，根目录）：与启动系统有关；</li>
+<li>/usr（unix software resource）：与软件安装/执行有关；</li>
+<li>/var （variable）：与系统运行过程有关；</li>
+</ul>
+<h5 id="根目录（-）的意义与内容"><a href="#根目录（-）的意义与内容" class="headerlink" title="根目录（/）的意义与内容"></a>根目录（/）的意义与内容</h5><p>所有的目录都是由根目录衍生而来，根目录同时还与系统的启动，还原，恢复等操作有关。FHS要求，根目录不要放在非常大的分区内，分区越大，存放的数据越多越容易出现问题。</p>
+<p>FHS建议：<strong><em>根目录(/)所在分区越小越好，且应用程序所安装的软件最好不要与根目录放在同一个分区内，保持根目录越小越好，这样不但性能较佳，也不容易出现问题</em></strong></p>
+<p>FHS建议根目录下应该有如下的子目录，即使不存在物理目录，也最好要有连接目录：</p>
+<h6 id="第一部分：FHS要求必须要存在的目录"><a href="#第一部分：FHS要求必须要存在的目录" class="headerlink" title="第一部分：FHS要求必须要存在的目录"></a>第一部分：FHS要求必须要存在的目录</h6><table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">应放置的文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/bin</td>
+<td align="center">放置的是<strong><em>在单人维护模式下还能够被使用的命令</em></strong>，在/bin下的命令可以被root和一般账户所使用，主要有cat，chmod，chown，date，mv，mkdir，cp，bash等常用命令</td>
+</tr>
+<tr>
+<td align="center">/boot</td>
+<td align="center">放置系统启动所用到的文件，包括Linux内核文件和启动配置文件，Linux内核常用文件名为vmlinuz</td>
+</tr>
+<tr>
+<td align="center">/dev</td>
+<td align="center"><em>任何*接口与设备文件都存放于这个目录当中。读写这个目录下的文件就相当于在读写某个设备，如/dev/null，/dev/zero,/dev/tty,/dev/loop\</em>,/dev/*sd</td>
+</tr>
+<tr>
+<td align="center">/etc</td>
+<td align="center">主要的配置文件都存放在这里，账号密码文件，这个目录下的玩家只有root有权利修改，FHS建议<strong><em>不要在/etc下放置可执行文件（binary）</em></strong>，另外FHS还规范几个重要的目录：（1）/etc/opt（必要）：第三方辅助软件的配置文件（2）/etc/sgml（建议）：SGML格式有关的配置文件 （3）/etc/xml（建议）：与xml格式的配置文件</td>
+</tr>
+<tr>
+<td align="center">/lib</td>
+<td align="center">放置的是启动时会用到的函数库，以及在/bin和/sbin下命令会调用的函数库，FHS要求必须存在/lib/modules：主要放置可抽换式的内核相关模块（驱动程序）</td>
+</tr>
+<tr>
+<td align="center">/media</td>
+<td align="center">放置的是<strong><em>可删除的设备</em></strong>，例如软盘，光盘</td>
+</tr>
+<tr>
+<td align="center">/mnt</td>
+<td align="center">暂时挂载设备时可以使用这个目录</td>
+</tr>
+<tr>
+<td align="center">/opt</td>
+<td align="center">给第三方辅助软件放置的目录</td>
+</tr>
+<tr>
+<td align="center">/run</td>
+<td align="center">系统启动后产生的各项信息，可以使用内存来模拟，所以性能会好很多</td>
+</tr>
+<tr>
+<td align="center">/sbin</td>
+<td align="center">放在/sbin下面的为启动过程中所需要的，包括了启动，修复，还原系统所需的命令</td>
+</tr>
+<tr>
+<td align="center">/srv</td>
+<td align="center">service的缩写，是网络服务启动之后，所需要的数据目录</td>
+</tr>
+<tr>
+<td align="center">/tmp</td>
+<td align="center">在启动时，此目录下的内容都清空，正在执行的程序放置文件的地方</td>
+</tr>
+<tr>
+<td align="center">/usr</td>
+<td align="center">第二层FHS设置</td>
+</tr>
+<tr>
+<td align="center">/var</td>
+<td align="center">第二层FHS设置，主要放置编变动性的数据</td>
+</tr>
+</tbody></table>
+<h6 id="第二部分：FHS建议可以存在的目录"><a href="#第二部分：FHS建议可以存在的目录" class="headerlink" title="第二部分：FHS建议可以存在的目录"></a>第二部分：FHS建议可以存在的目录</h6><table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">应放置的文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/home</td>
+<td align="center">系统默认的用户家目录,新增账号时默认的家目录都会规范到这里来</td>
+</tr>
+<tr>
+<td align="center">/lib&lt;qual</td>
+<td align="center">用来存放与/lib不同格式的二进制函数库</td>
+</tr>
+<tr>
+<td align="center">/root</td>
+<td align="center">系统管理员的家目录</td>
+</tr>
+</tbody></table>
+<p>以上就是FJS对根目录的所有定义标准了,Linux下还有许多很重要的目录:</p>
+<table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">应放置的文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/lost+found</td>
+<td align="center">ext2,3,4文件系统格式下产生的目录,当系统发生错误时,将遗失的片段放入</td>
+</tr>
+<tr>
+<td align="center">/proc</td>
+<td align="center">虚拟文件系统(virtual filesystem),数据都在内存当中,如系统内核,进程信息,设备状态,网络状态等本身不占有任何硬盘空间</td>
+</tr>
+<tr>
+<td align="center">/sys</td>
+<td align="center">也是一个虚拟文件系统,记录内核与系统文件相关的内容</td>
+</tr>
+</tbody></table>
+<h5 id="usr的意义与内容"><a href="#usr的意义与内容" class="headerlink" title="/usr的意义与内容"></a>/usr的意义与内容</h5><p>tips:<a href="http://jandan.net/2018/11/08/bug-feature.html" target="_blank" rel="noopener">你知道/usr目录起初是怎么来的吗？:-)</a><br>/usr的数据属于不可变动与可分享,UNIX操作系统资源,一般来说/usr的子目录建议有这些:</p>
+<h6 id="FHS要求必须存在的部分"><a href="#FHS要求必须存在的部分" class="headerlink" title="FHS要求必须存在的部分"></a>FHS要求必须存在的部分</h6><table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">应放置的文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/usr/bin/</td>
+<td align="center">所有一般用户能够使用的命令都放置于此,和/bin是一抹一样的,FHS要求此目录下不应该有子目录</td>
+</tr>
+<tr>
+<td align="center">/usr/lib/</td>
+<td align="center">基本与/lib功能一样</td>
+</tr>
+<tr>
+<td align="center">/usr/local/</td>
+<td align="center">系统管理员安装自己下载(非发行版默认提供)软件的目录</td>
+</tr>
+<tr>
+<td align="center">/usr/sbin/</td>
+<td align="center">非系统正常运行所需要的命令,如服务命令,基本与/sbin功能相同</td>
+</tr>
+<tr>
+<td align="center">/usr/share/</td>
+<td align="center">放置只读的数据文件,放置的文件几乎都是不分硬件架构都可以读取的文件</td>
+</tr>
+</tbody></table>
+<h6 id="FHS建议存在的目录"><a href="#FHS建议存在的目录" class="headerlink" title="FHS建议存在的目录"></a>FHS建议存在的目录</h6><table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">应放置的文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/usr/games/</td>
+<td align="center">与游戏相关的文件</td>
+</tr>
+<tr>
+<td align="center">/usr/local/</td>
+<td align="center">c/c++语言的头文件(header_与包含文件(include)的放置处</td>
+</tr>
+<tr>
+<td align="center">/usr/libexec/</td>
+<td align="center">某些不被一般用户常用的执行文件或脚本</td>
+</tr>
+<tr>
+<td align="center">/usr/lib &lt;qual/</td>
+<td align="center">与/lib &lt;qual功能相同</td>
+</tr>
+<tr>
+<td align="center">/usr/src/</td>
+<td align="center">一般源代码应该放置于此,内核源代码放置在/usr/src/Linux下</td>
+</tr>
+</tbody></table>
+<h5 id="var的意义与内容"><a href="#var的意义与内容" class="headerlink" title="/var的意义与内容"></a>/var的意义与内容</h5><p>不同于/usr在一开始就占用了大量硬盘空间,/var目录是系统运行后渐渐增长的。/var针对经常变动的文件，包括缓存（cache），日志文件（log file），以及软件运行的过程中产生的文件。</p>
+<p>####### FHS要求必须存在的目录</p>
+<table>
+<thead>
+<tr>
+<th align="center">目录</th>
+<th align="center">应放置的文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/var/cache/</td>
+<td align="center">应用程序本身运行会产生的一些缓存</td>
+</tr>
+<tr>
+<td align="center">/var/lib/</td>
+<td align="center">程序本身运行的过程中需要用到的数据文件</td>
+</tr>
+<tr>
+<td align="center">/var/lock/</td>
+<td align="center">某些设备同一时间段只能被一个人使用，所以在设备正使用时，需要对设备上锁</td>
+</tr>
+<tr>
+<td align="center">/var/log/</td>
+<td align="center">非常重要是日志文件的放置处</td>
+</tr>
+<tr>
+<td align="center">/var/mail/</td>
+<td align="center">放置个人邮件，与</td>
+</tr>
+<tr>
+<td align="center">/var/run/</td>
+<td align="center">某些程序启动后，会将他们的PID放置于此</td>
+</tr>
+<tr>
+<td align="center">/var/spool/</td>
+<td align="center">放置队列数据，队列就是排队等待其他程序使用的数据</td>
+</tr>
+</tbody></table>
+<p>再次注意，FHS的标准是不断变化的，现在的文件目录也并不会一成不变。</p>
+<h5 id="目录树（directory-tree）"><a href="#目录树（directory-tree）" class="headerlink" title="目录树（directory tree）"></a>目录树（directory tree）</h5><p>回忆一下，我们说过，Linux下所有文件和目录都是由根目录衍生而来，类似于树的数据结构，根目录就是根节点，我们称这种目录配置方式为目录树（directory tree）。</p>
+<p>目录树的特性有：</p>
+<ul>
+<li>目录树的启始点为根目录（/,root）；</li>
+<li>每一个目录不仅能使用本地分区的文件系统，也可以使用网络上的文件系统，例如通过Network File System（NFS）服务器挂载特定的目录</li>
+<li>每一个文件在目录树中的文件名（完整路径）都是unique的</li>
+</ul>
+<h5 id="绝对路径与相对路径"><a href="#绝对路径与相对路径" class="headerlink" title="绝对路径与相对路径"></a>绝对路径与相对路径</h5><p>绝对路径(absoulte)：从根目录开始写起的路径</p>
+<p>相对路径(relative)：相对与当期路径的文件名写法</p>
+<ul>
+<li>. :代表当前的目录，也可以使用 ./ 来表示</li>
+<li>.. :代表上一层目录，也可以 ../ 来代表</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">uname</span> -r    //查看内核版本
+$ <span class="token function">uname</span> -m // 查看OS架构
+$ lsb_release -r //lsb标准</code></pre>
+<h3 id="重点回顾"><a href="#重点回顾" class="headerlink" title="重点回顾"></a>重点回顾</h3><ul>
+<li>绝对路径:『一定由根目录 / 写起』;相对路径:『不由 / 写起,而是由相对当前目录写起』</li>
+<li>特殊目录有:., .., -, ~, ~account 需要注意;</li>
+<li>与目录相关的指令有:cd, mkdir, rmdir, pwd 等重要指令;</li>
+<li>rmdir 仅能删除空目录,要删除非空目录需使用『 rm -r 』指令;</li>
+<li>用户能使用的指令是依据 PATH 变量所规定的目录去搜寻的;</li>
+<li>ls 可以检视文件的属性,尤其 -d, -a, -l 等选项特别重要!</li>
+<li>文件的复制、删除、移动可以分别使用:cp, rm , mv 等指令来操作;</li>
+<li>检查文件的内容(读文件)可使用的指令包括有:cat, tac, nl, more, less, head, tail, od 等</li>
+<li>cat -n 与 nl 均可显示行号,但默认的情况下,空白行会不会编号并不相同;</li>
+<li>touch 的目的在修改文件的时间参数,但亦可用来建立空文件;</li>
+<li>一个文件记录的时间参数有三种,分别是 access time(atime), status time (ctime), modification time(mtime),ls默认显示的是 mtime。</li>
+<li>除了传统的 rwx 权限之外,在 Ext2/Ext3/Ext4/xfs 文件系统中,还可以使用 chattr 与 lsattr 设定及观察隐藏属性。 常见的包括只能新增数据</li>
+<li>新建文件/目录时,新文件的预设权限使用 umask 来规范。默认目录完全权限为 drwxrwxrwx, 文件则为-rw-rw-rw-。</li>
+<li>文件具有 SUID 的特殊权限时,代表当用户执行此一 binary 程序时,在执行过程中用户会暂时具有程序拥有者的权限</li>
+<li>目录具有 SGID 的特殊权限时,代表用户在这个目录底下新建的文件之群组都会与该目录的组名相同。</li>
+<li>目录具有 SBIT 的特殊权限时,代表在该目录下用户建立的文件只有自己与 root 能够删除!</li>
+<li>观察文件的类型可以使用 file 指令来观察;</li>
+<li>搜寻指令的完整文件名可用 which 或 type ,这两个指令都是透过 PATH 变量来搜寻文件名;</li>
+<li>搜寻文件的完整档名可以使用 whereis 找特定目录或 locate 到数据库去搜寻,而不实际搜寻文件系统;</li>
+<li>利用 find 可以加入许多选项来直接查询文件系统,以获得自己想要知道的档名。</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2019/03/21/niao-ge-de-linux-si-fang-cai-2-wen-jian-quan-xian-yu-mu-lu/">http://jinzhengxu.github.io/2019/03/21/niao-ge-de-linux-si-fang-cai-2-wen-jian-quan-xian-yu-mu-lu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/文件权限与目录配置/">
+                                    <span class="chip bg-color">文件权限与目录配置</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '7C9WIr1xTDwYs88TkPA1W0ua-gzGzoHsz',
+        appKey: 'AzaMuy0kYyiPgMrnYKQALlNS',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/03/26/niao-ge-de-linux-si-fang-cai-3-linux-wen-jian-yu-mu-lu-guan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Linux(3)-Linux文件与目录管理">
+                        
+                        <span class="card-title">Linux(3)-Linux文件与目录管理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            目录与路径相对路径与绝对路径
+相对路径:：安装软件时,每个人有不同的文件安装位置,这时使用相对路径来安排各个软件目录下的文件位置就十分方便。
+绝对路径：绝对路径是绝对正确的路径（如果你自己没犯傻的话），在使用shell脚本的来管理系统的情况
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-03-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/软件工具/" class="post-category">
+                                    软件工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/文件和目录/">
+                        <span class="chip bg-color">文件和目录</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/20/ssh-lian-jie-bao-cuo-warning-remote-host-identification-has-changed/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="ssh连接报错WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!">
+                        
+                        <span class="card-title">ssh连接报错WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            今天在服务器被banl，在用ssh连接新deploy的服务器时,遇到点小问题。终端显示：
+jason@jason-ThinkPad-X1-Carbon-6th:~$ ssh root@149.28.88.126
+@@@@@@@@@@@@@@
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/软件工具/" class="post-category">
+                                    软件工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/ssh/">
+                        <span class="chip bg-color">ssh</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Jinzhengxu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:jzxttzdq@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" class="tooltipped" target="_blank" data-tooltip="我的ICPCID: https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" data-position="top" data-delay="50">
+        <i class="fas fa-lightbulb"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,2239 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux(4)-Linux磁盘与文件系统管理, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux(4)-Linux磁盘与文件系统管理 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Jinzhengxu" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Jinzhengxu" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux(4)-Linux磁盘与文件系统管理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/文件系统/">
+                                <span class="chip bg-color">文件系统</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/底层/" class="post-category">
+                                底层
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-04
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="认识Linux文件系统"><a href="#认识Linux文件系统" class="headerlink" title="认识Linux文件系统"></a>认识Linux文件系统</h3><p>Linux 文件系统最“正统”的是 <strong><em>ext2</em></strong> ,文件系统的建立和磁盘的物理结构是紧密相关的，现在我们有TB级的磁盘阵列，也有读写速度极快的ssd，如何根据自己的要求和期望的性能，文件系统的选择至关重要。</p>
+<h4 id="磁盘组成与分区的复习"><a href="#磁盘组成与分区的复习" class="headerlink" title="磁盘组成与分区的复习"></a>磁盘组成与分区的复习</h4><p> 虽然ssd的出现在一般的计算机上已经普及，但是对于文件的安全性来说，相比于ssd几年的寿命和有限的读写次数，传统机械硬盘是我们保存数据的一个不可替代的选择，所以我们先从机械硬盘的结构说起：</p>
+<ul>
+<li><p>碟片（记录数据）</p>
+</li>
+<li><p>机械手臂，磁头（擦写碟片上的数据）</p>
+</li>
+<li><p>主轴马达：转动磁盘使磁头可以读写碟片上的数据</p>
+<p>也就是说，<strong>数据的储存和擦写主要集中在碟片上</strong> ，而碟片的物理组成为：</p>
+</li>
+<li><p>扇区（Sector）为最小的物理储存单位，根据磁盘设计的不同有 <strong>512B</strong> 和 <strong>4KB</strong>两种</p>
+</li>
+<li><p>将扇区组成一个圆，即为 *<em>柱面（Cylinder） *</em></p>
+</li>
+<li><p>每个扇区都有自己的编号</p>
+</li>
+<li><p>磁盘分区表主要有 <strong>MBR</strong>和 <strong>GPT</strong>两种</p>
+<ul>
+<li>MBR分区表中第一扇区中储存 <strong>主引导记录（Master boot record，MBR）446B</strong> 及 <strong>分区表（partition table）64B</strong>，</li>
+<li>GPT分区表除了分区数量扩充较多，支持的磁盘容量有超过2TB</li>
+</ul>
+<p>物理磁盘的文件名已经模拟成<code>/dev/sd[a-p]</code>的格式，第一块磁盘分区的文件名为<code>/dev/sda[1-128]</code>,虚拟机的磁盘通常是<code>/dev/vd[a-p]</code>,如果使用软件磁盘阵列使用的文件名是<code>/dev/md[a-p]</code>。</p>
+</li>
+</ul>
+<h4 id="文件系统特性"><a href="#文件系统特性" class="headerlink" title="文件系统特性"></a>文件系统特性</h4><p> 操作系统拥有不同的的文件属性/权限，为了存放数据，就要对磁盘进行格式化，成为操作系统所能利用的文件系统。</p>
+<p> LVM与软件磁盘阵列（software raid）技术可以使一个分区拥有不同的文件系统，也可以将多个分区合成一个文件系统。所以我们称呼 <strong>一个可以被挂载的数据为一个文件系统而不是一个分区</strong>。</p>
+<p> 之前对于文件权限的学习中，我们了解到Linux文件系统中的文件有权限和属性的记录， <strong>文件系统会将文件的权限与属性放在inode中，而实际数据在放在数据区块中</strong>，此外还会有一个超级区块来存放文件系统的整体信息，也就是inode与数据区块的总量使用量和剩余量。</p>
+<pre class=" language-c"><code class="language-c"> 每个文件文件占有一个inode<span class="token operator">--</span><span class="token operator">-></span><span class="token operator">|</span>
+                           <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>inode内有文件实际数据所在的区块号码
+ 每个inode和数据区块都有编号<span class="token operator">-></span><span class="token operator">|</span></code></pre>
+<p> 也就是我们只要找到inode就能知道文件的存放位置，这样大大提高了读写效率。这种方式称为 <strong>索引式文件系统</strong>，这样我们可以一口气读出文件所有区块的位置编号，而FAT文件系统需要先读取一个区块才能知道下一个区块的位置编号。考虑这种情况<code>1-&gt;7-&gt;4-&gt;20-&gt;13</code>,索引式文件系统可以在一圈内读出所有数据，而FAT则需要几圈。这也就是<strong>碎片整理</strong>的由来，弱国文件写入的区块太过于离散，文件的读取性能就会很差。</p>
+<h4 id="Linux的ext2文件系统（inode）"><a href="#Linux的ext2文件系统（inode）" class="headerlink" title="Linux的ext2文件系统（inode）"></a>Linux的ext2文件系统（inode）</h4><p> 文件系统一开就将inode和数据区块规划好了，除非重新格式化，或使用<code>resize2fs</code>命令修改。否则inode和数据区块就是固定的。</p>
+<p> ext2文件系统的格式化时是分为多个区块群组（block group）</p>
+<pre class=" language-c"><code class="language-c"> <span class="token operator">|</span>Boot Sector<span class="token operator">|</span>Block Group1<span class="token operator">|</span>Block Group2<span class="token operator">|</span>Block Group3<span class="token operator">|</span>Block Group4<span class="token operator">|</span>
+                <span class="token operator">|</span>    <span class="token operator">|</span>
+ <span class="token operator">|</span><span class="token operator">&lt;</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token operator">|</span>    <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-></span><span class="token operator">|</span>
+ <span class="token operator">|</span>Superblock<span class="token operator">|</span>文件系统描述<span class="token operator">|</span>区块对应表<span class="token operator">|</span>inode对应表<span class="token operator">|</span>inode Table<span class="token operator">|</span>Date Block<span class="token operator">|</span></code></pre>
+<p>文件系统最前方拥有一个启动扇区Boot Sector来存放不同文件系统的引导程序，这样就能实现多重引导，而不用覆盖每个MBR表。</p>
+<p>每个区块群组有6个部分：</p>
+<ul>
+<li><p>Superblock</p>
+<ul>
+<li>数据区块与inode的总量;</li>
+<li>未使用与已使用的inode与数据区块 数量;</li>
+<li>数据区块与inode的大小（block为1,2,4k，inode为128B或256B）;</li>
+<li>文件系统的挂载时间，最近一次写入数据的时间，最近一次检验（fsck）的时间</li>
+<li>一个有效位值，已被挂载为0,否则为1;</li>
+</ul>
+<p>一般 <strong>除了第一个区块群组含有超级区块，剩下的不会有，有也是为了备份</strong>。</p>
+</li>
+<li><p>文件系统描述Filesystem Description</p>
+</li>
+</ul>
+<p>描述区块群组开始与结束的区块，以及每个区块的6个部分分别介于哪个区块之间，可以使用命令<code>dumpe2fs</code>来查看</p>
+<ul>
+<li>区块对应表（block bitmap）</li>
+</ul>
+<p>记录区块是否使用</p>
+<ul>
+<li>inode对应表（inode bitmap）</li>
+</ul>
+<p>记录inode是否使用</p>
+<ul>
+<li><p>inode Table</p>
+<ul>
+<li>文件的读写属性rwx</li>
+<li>文件的拥有者与用户组</li>
+<li>文件的大小</li>
+<li>文件的建立或状态改变的时间ctime</li>
+<li>文件的最后一次读取的时间atime</li>
+<li>文件的最后一次修改时间mtime</li>
+<li>文件特性的标识，SUID，SGID，SBIT等</li>
+<li>文件真正内容的指向pointer</li>
+<li>inode的大小为128B，ext4和xfs可以设为256B</li>
+<li>每个文件只会占用一个inode</li>
+<li>所以文件系统能够建立的文件数量和inode的数量有关</li>
+<li>系统读取文件时会先经过inode</li>
+</ul>
+<p>inode记录区块号码的区域定义为12个直接，一个间接，一个双间接和一个三间接<br>，假设一个区块为1K，。每个记录使用4B，也就是一个区块可以有256条记录</p>
+<pre class=" language-c"><code class="language-c"><span class="token operator">|</span>文件权限<span class="token operator">/</span>属性记录区域<span class="token operator">|</span>
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       直接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>block号码（<span class="token number">1</span>条记录）
+<span class="token operator">|</span>       间接       <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>256block区块<span class="token operator">--</span><span class="token operator">-></span><span class="token number">256</span>×1K<span class="token operator">=</span>256K
+<span class="token operator">|</span>       双间接     <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>256block区块<span class="token operator">--</span><span class="token operator">-></span><span class="token number">256</span>×<span class="token number">256</span>个区块<span class="token operator">--</span><span class="token operator">-></span><span class="token number">256</span><span class="token operator">^</span>2K
+<span class="token operator">|</span>       三间接     <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">-></span>256block区块<span class="token operator">--</span><span class="token operator">-></span><span class="token number">256</span>×<span class="token number">256</span>个区块<span class="token operator">--</span><span class="token operator">-></span><span class="token number">256</span>×<span class="token number">256</span>×<span class="token number">256</span>个区块<span class="token operator">--</span><span class="token operator">-></span><span class="token number">256</span><span class="token operator">^</span>3K<span class="token operator">=</span>16GB</code></pre>
+</li>
+<li><p>Data Block</p>
+<ul>
+<li><p>原则上，区块划分完成以后就不能再次修改</p>
+</li>
+<li><p>每个区块内只能放置一个文件</p>
+</li>
+<li><p>如果文件大于区块的大小，则会占用多个区块</p>
+</li>
+<li><p>文件小于区块大小，则区块剩下的容量就会浪费</p>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Block大小</th>
+<th>1KB</th>
+<th>2KB</th>
+<th>4KB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最大单一文件限制</td>
+<td>16GB</td>
+<td>256GB</td>
+<td>2TB</td>
+</tr>
+<tr>
+<td>最大文件系统的容量</td>
+<td>2TB</td>
+<td>8TB</td>
+<td>16TB</td>
+</tr>
+</tbody></table>
+<h5 id="dumpe2fs命令"><a href="#dumpe2fs命令" class="headerlink" title="dumpe2fs命令"></a>dumpe2fs命令</h5><pre class=" language-bash"><code class="language-bash">$ dumpe2fs <span class="token punctuation">[</span>-bh<span class="token punctuation">]</span> 设备文件名
+选项与参数：
+-b：列出保留为坏道的部分
+-h：仅列出superblock的内容
+$ blkid <span class="token comment" spellcheck="true">#显示出目前系统被格式化的设备</span>
+/dev/loop0: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/loop1: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/loop2: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/loop3: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/loop4: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/loop5: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/loop6: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/loop7: TYPE<span class="token operator">=</span><span class="token string">"squashfs"</span>
+/dev/nvme0n1p1: LABEL<span class="token operator">=</span><span class="token string">"SYSTEM"</span> UUID<span class="token operator">=</span><span class="token string">"C6A3-B7DE"</span> TYPE<span class="token operator">=</span><span class="token string">"vfat"</span> PARTLABEL<span class="token operator">=</span><span class="token string">"EFI system partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"3e25bbec-3e10-4901-8c33-ceeadbc12d69"</span>
+/dev/nvme0n1p3: LABEL<span class="token operator">=</span><span class="token string">"Windows"</span> UUID<span class="token operator">=</span><span class="token string">"B438A7FA38A7BA2E"</span> TYPE<span class="token operator">=</span><span class="token string">"ntfs"</span> PARTLABEL<span class="token operator">=</span><span class="token string">"Basic data partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"f6d4beeb-a0dc-48ed-827b-b63cf7cd1084"</span>
+/dev/nvme0n1p4: LABEL<span class="token operator">=</span><span class="token string">"WinRE_DRV"</span> UUID<span class="token operator">=</span><span class="token string">"E60CA85F0CA82C8D"</span> TYPE<span class="token operator">=</span><span class="token string">"ntfs"</span> PARTLABEL<span class="token operator">=</span><span class="token string">"Basic data partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"58abc9c9-e11e-4dd8-9a3f-2dab172fa72c"</span>
+/dev/nvme0n1p5: UUID<span class="token operator">=</span><span class="token string">"2f6b6a4f-29e2-4a7e-a790-523499851033"</span> TYPE<span class="token operator">=</span><span class="token string">"ext4"</span> PARTUUID<span class="token operator">=</span><span class="token string">"150f0697-4ae7-4957-830f-a91e40d03577"</span> <span class="token comment" spellcheck="true">#ext4文件系统</span>
+$ dumpe2fs -h /dev/nvme0n1p5
+dumpe2fs 1.44.1 <span class="token punctuation">(</span>24-Mar-2018<span class="token punctuation">)</span>
+Filesystem volume name:   <span class="token operator">&lt;</span>none<span class="token operator">></span>
+Last mounted on:          /
+Filesystem UUID:          2f6b6a4f-29e2-4a7e-a790-523499851033
+Filesystem magic number:  0xEF53
+Filesystem revision <span class="token comment" spellcheck="true">#:    1 (dynamic)</span>
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum
+Filesystem flags:         signed_directory_hash
+Default <span class="token function">mount</span> options:    user_xattr acl
+Filesystem state:         clean
+Errors behavior:          Continue
+Filesystem OS type:       Linux
+Inode count:              6225920
+Block count:              24903680
+Reserved block count:     1245184
+Free blocks:              5501844
+Free inodes:              5360200
+First block:              0
+Block size:               4096
+Fragment size:            4096
+Group descriptor size:    64
+Reserved GDT blocks:      1024
+Blocks per group:         32768
+Fragments per group:      32768
+Inodes per group:         8192
+Inode blocks per group:   512
+Flex block group size:    16
+Filesystem created:       Sat Aug 25 09:19:21 2018
+Last <span class="token function">mount</span> time:          Thu Apr 11 08:37:34 2019
+Last <span class="token function">write</span> time:          Thu Apr 11 08:37:34 2019
+Mount count:              676
+Maximum <span class="token function">mount</span> count:      -1
+Last checked:             Sat Aug 25 09:19:21 2018
+Check interval:           0 <span class="token punctuation">(</span><span class="token operator">&lt;</span>none<span class="token operator">></span><span class="token punctuation">)</span>
+Lifetime writes:          2040 GB
+Reserved blocks uid:      0 <span class="token punctuation">(</span>user root<span class="token punctuation">)</span>
+Reserved blocks gid:      0 <span class="token punctuation">(</span>group root<span class="token punctuation">)</span>
+First inode:              11
+Inode size:              256
+Required extra isize:     32
+Desired extra isize:      32
+Journal inode:            8
+First orphan inode:       3408086
+Default directory hash:   half_md4
+Directory Hash Seed:      b1992519-4a57-44b1-a21c-5a97eaff4950
+Journal backup:           inode blocks
+Checksum type:            crc32c
+Checksum:                 0xc872187f
+Journal features:         journal_incompat_revoke journal_64bit journal_checksum_v3
+Journal size:             512M
+Journal length:           131072
+Journal sequence:         0x001fb5bd
+Journal start:            1
+Journal checksum type:    crc32c
+Journal checksum:         0x3e35097a</code></pre>
+<h4 id="与目录树的关系"><a href="#与目录树的关系" class="headerlink" title="与目录树的关系"></a>与目录树的关系</h4><ul>
+<li>目录</li>
+</ul>
+<p>当我们在Linux下建立一个目录时， <strong>文件系统会分配一个inode与至少一个区块给该目录</strong>， inode记录目录的权限和属性，而区块记录目录下的文件名和文件名占用的inode号码。这也体现了 <strong>Linux下一切都是文件</strong>的本质，回忆，、之前的bolg中我们讨论过如果只拥有目录的r权限就可以用ls列出所有的文件内容，其实目录就是一个文件只要有r权限就可以阅读，w权限只能修改或删除该目录下的文件，而x执行权限才能执行并通过目录树访问该目录下的其他文件。</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">ls</span> -li <span class="token comment" spellcheck="true">#-i选项可以观察inode号码</span>
+total 12
+5379387 drwxr-xr-x 3 root root 4096 8月  26  2018 Android
+5244055 drwxr-xr-x 3 root root 4096 8月  26  2018 AndroidStudioProjects
+5259883 drwxr-xr-x 3 root root 4096 11月 10 10:09 PycharmProjects
+$ ll -d / /boot /usr/sbin /proc /sys
+drwxr-xr-x  27 root root  4096 4月   7 11:41 // <span class="token comment" spellcheck="true">#一个4k区块</span>
+drwxr-xr-x   4 root root  4096 4月   7 11:41 /boot/
+dr-xr-xr-x 326 root root     0 4月  11 08:37 /proc/ <span class="token comment" spellcheck="true">#内存数据，不占磁盘容量</span>
+dr-xr-xr-x  13 root root     0 4月  11 08:37 /sys/
+drwxr-xr-x   2 root root 12288 3月  22 09:16 /usr/sbin/ <span class="token comment" spellcheck="true">#3个4K区块</span></code></pre>
+<ul>
+<li>文件</li>
+</ul>
+<p>文件系统会分配一个inode与正好的区块给新建文件。</p>
+<ul>
+<li>目录树读取</li>
+</ul>
+<pre class=" language-c"><code class="language-c">inode<span class="token operator">--</span><span class="token operator">></span>目录文件区块<span class="token operator">--</span><span class="token operator">></span>inode号码<span class="token operator">--</span><span class="token operator">></span>目录文件区块<span class="token operator">--</span><span class="token operator">-></span>……<span class="token operator">--</span><span class="token operator">-></span>inode号码<span class="token operator">--</span><span class="token operator">-></span>文件区块</code></pre>
+<ul>
+<li>文件系统大小与磁盘读取性能</li>
+</ul>
+<p>文件写入通常是离散的，如果离散的程度较大，即使我们使用索引式文件系统，也还是会造成文件读取效率下降的问题。</p>
+<h4 id="ext2-ext3-ext4文件的存取与日志式文件系统的功能"><a href="#ext2-ext3-ext4文件的存取与日志式文件系统的功能" class="headerlink" title="ext2/ext3/ext4文件的存取与日志式文件系统的功能"></a>ext2/ext3/ext4文件的存取与日志式文件系统的功能</h4><p>在我们想要新增一个文件时，，文件系统的操作是：</p>
+<ul>
+<li>1.确定用户是否对目录有w或x的权限</li>
+<li>2.根据inode对照表找出没有使用的inode号码，并写入权限/文件</li>
+<li>3.根据区块对照表找到没有使用的区块号码，将数据写入区块中，并更新inode的区块指向数据</li>
+<li>4.将刚刚写入的inode区块与区块数据同步更新inode对照表和区块对照表，并更新超级区块的内容</li>
+</ul>
+<p>数据的不一致状态（Inconsistent）状态，如果在某些计算条件下，比如机房突然断电，系统内核发生错误的情况，文件系统只写入了inode对照表与数据区块，最后一个同步更新元数据的步骤还未完成。面对这种情况，早期ext2我们要对整个文件系统进行检查使用<code>e2fsck</code>命令，这样消耗大量的时间也就催生了后来的日志式文件系统（Journaling filesystem）。</p>
+<p>日志式文件系统记录一个文件时，：</p>
+<ul>
+<li>首先在日志记录区块中记录某个文件准备要写入的信息</li>
+<li>世界写入更新metadata的数据</li>
+<li>完成更新后，在日志记录区块中完成该文件的记录</li>
+</ul>
+<p>在日志式文件系统中，我们只要检查日志文件区块就可以知道那个文件发生了问题</p>
+<h4 id="Linux文件系统的运行"><a href="#Linux文件系统的运行" class="headerlink" title="Linux文件系统的运行"></a>Linux文件系统的运行</h4><p>Linux 通过异步处理(asynchronously)的方式来解决磁盘读写的效率问题。当系统加载一个文件到内存后，如果文件爱你未被修改 则状态为 <strong><em>Clean</em></strong> ，如果被修改过了，则状态为<strong><em>Dirty</em></strong>，此时操作都在内存中执行，并没有写入到磁盘中。</p>
+<ul>
+<li>系统会将常用文件放入磁盘中，来加速文件的读写操作</li>
+<li>sync命令可以将内存中dirty文件写入磁盘</li>
+<li>正常关机是会调用sync</li>
+<li>不正常关机可能会造成文件系统的损坏<h4 id="挂载点的意义（mount-point）"><a href="#挂载点的意义（mount-point）" class="headerlink" title="挂载点的意义（mount point）"></a>挂载点的意义（mount point）</h4></li>
+</ul>
+<p><strong><em>挂载点一定是目录，该目录为进入该文件系统的入口</em></strong>，所谓挂载就是文件系统与目录树的结合。文件系统必须挂载之后才能使用。</p>
+<p><strong><em>同一个文件系统的某个inode只会对应到一个文件</em></strong></p>
+<h4 id="其他Linux支持的文件系统与VFS"><a href="#其他Linux支持的文件系统与VFS" class="headerlink" title="其他Linux支持的文件系统与VFS"></a>其他Linux支持的文件系统与VFS</h4><p>每种文件系统都有自己不同的特性，比如xfs支持大容量大文件，Reiserfs支持更小型文件，一般Linux支持的系统有：</p>
+<ul>
+<li>传统文件系统： ext2，minix，FAT，iso9660（光盘）等</li>
+<li>日志式文件系统：ext3,ext4,ReiserFS。Windows’NTFS，IBM’sJFS,SGI’sXFS,ZFS</li>
+<li>网络文件系统：NFS，SMBFS</li>
+</ul>
+<p>Linux VFS(Virtual Filesystem Switch),这个内核功能管理整个Linux 的文件系统。我们不需要自己来指定文件系统的类型，VFS会自动提我们识别。</p>
+<h4 id="XFS文件系统简介"><a href="#XFS文件系统简介" class="headerlink" title="XFS文件系统简介"></a>XFS文件系统简介</h4><p>ext文件系统的一个软肋是格式化的速度超慢。由于虚拟化技术的应用，性能上xfs会更站优势。</p>
+<pre class=" language-c"><code class="language-c"><span class="token operator">|</span>数据区data section<span class="token operator">|</span>文件系统活动登录区log section<span class="token operator">|</span>实时运行区realtime section<span class="token operator">|</span>
+<span class="token operator">|</span>i<span class="token operator">|</span>b<span class="token operator">|</span>iT<span class="token operator">|</span>bT<span class="token operator">|</span>SB<span class="token operator">|</span>dec <span class="token operator">|</span>记录文件变化可以指定为外部磁盘 <span class="token operator">|</span>     extent    stripe   <span class="token operator">|</span></code></pre>
+<p>可以通过命令<code>xfs_info</code>来观察。</p>
+<h3 id="文件系统的简单操作"><a href="#文件系统的简单操作" class="headerlink" title="文件系统的简单操作"></a>文件系统的简单操作</h3><h4 id="磁盘与目录的容量"><a href="#磁盘与目录的容量" class="headerlink" title="磁盘与目录的容量"></a>磁盘与目录的容量</h4><h6 id="df：列出文件系统的整体磁盘使用量"><a href="#df：列出文件系统的整体磁盘使用量" class="headerlink" title="df：列出文件系统的整体磁盘使用量"></a>df：列出文件系统的整体磁盘使用量</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">df</span> <span class="token punctuation">[</span>-ahikHTm<span class="token punctuation">]</span> <span class="token punctuation">[</span>目录或文件名<span class="token punctuation">]</span>
+选项与参数：
+ -a :列出所有的文件系统，包括系统特有的/proc等文件系统
+ -k :以KBytes的容量显示各文件系统
+ -m :以MBytes的容量显示各文件系统
+*-h :以人们较易接受的GBytes等格式自行显示
+ -H :以M<span class="token operator">=</span>1000k替换M<span class="token operator">=</span>1024k的进位
+ -T :连同该硬盘分区的文件系统格式也一起列出
+*-i :不用磁盘容量，而以inode的数量来显示
+$ <span class="token function">df</span>
+Filesystem     1K-blocks     Used Available Use% Mounted on
+udev             8053080        0   8053080   0% /dev
+tmpfs            1616676     2164   1614512   1% /run
+/dev/nvme0n1p5  97527092 74703772  17826200  81% /
+tmpfs            8083376     1908   8081468   1% /dev/shm
+tmpfs               5120        4      5116   1% /run/lock
+tmpfs            8083376        0   8083376   0% /sys/fs/cgroup
+
+*Filessystem <span class="token keyword">:</span> 代表该文件系统是在哪个磁盘分区，所以列出设备名称
+*1K-blocks   <span class="token keyword">:</span> 说明下面的数字单位是1kb，可利用 -h或 -m来改变容量
+*Used        <span class="token keyword">:</span> 使用掉的磁盘空间
+*Available   <span class="token keyword">:</span> 剩余磁盘空间大小
+*Use%        <span class="token keyword">:</span> 磁盘使用率
+*Mounted on  <span class="token keyword">:</span> 挂载点</code></pre>
+<p>其中的<code>/dev/shm/</code>目录是利用内存虚拟出来的磁盘空间。</p>
+<h6 id="du：查看文件系统的磁盘使用量（查看目录所占磁盘空间）"><a href="#du：查看文件系统的磁盘使用量（查看目录所占磁盘空间）" class="headerlink" title="du：查看文件系统的磁盘使用量（查看目录所占磁盘空间）"></a>du：查看文件系统的磁盘使用量（查看目录所占磁盘空间）</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">du</span> <span class="token punctuation">[</span>-ahskm<span class="token punctuation">]</span> 文件或目录名称
+选项与参数：
+ -a <span class="token keyword">:</span> 列出所有的文件与目录容量，因为默认仅统计目录下面的文件量
+ -h <span class="token keyword">:</span> 以易读方式显示
+*-s <span class="token keyword">:</span> 仅列出总量，而不是每个别的目录的占用量
+ -S <span class="token keyword">:</span> 不包括子目录下的总计
+ -k <span class="token keyword">:</span> 以KBytes
+ -m <span class="token keyword">:</span> 以MBytes</code></pre>
+<h4 id="硬链接与符号链接：ln"><a href="#硬链接与符号链接：ln" class="headerlink" title="硬链接与符号链接：ln"></a>硬链接与符号链接：ln</h4><p>Linux下链接文件为两种：</p>
+<ul>
+<li>符号链接 类似快捷方式</li>
+<li>硬链接 文件系统通过inode来新建的文件名</li>
+</ul>
+<h5 id="硬链接-Hard-Link-（实际链接）"><a href="#硬链接-Hard-Link-（实际链接）" class="headerlink" title="硬链接 Hard Link （实际链接）"></a>硬链接 Hard Link （实际链接）</h5><p>每个文件占用一个inode，读取文件必须经过目录的文件名指向到正确的inode号码。<strong><em>硬链接只是在某个目录下新增一条文件名链接到某inode号码的关联记录而已。</em></strong><br><img src="https://s2.ax1x.com/2019/04/16/AxKOvn.png" alt="AxKOvn.png"></p>
+<p>这样建立硬链接的一好处是安全，如图，当我们删除掉block1的对应目录时，真正的inode与文件内容实际上仍然存在，这样不会删除真正的文件。但是硬链接也是有限制的：</p>
+<ul>
+<li>不能跨文件系统（这个显而易见）</li>
+<li>不能链接目录 如果要建立一个目录的硬链接，不仅仅是要为目录名建立硬链接，还要为目录下的每一个文件都建立硬链接，这样会造成非常大的环境复杂度，所以目前还不支持目录建立硬链接。</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">ln</span> <span class="token operator">&lt;</span>源文件<span class="token operator">></span> <span class="token operator">&lt;</span>目标文件目录<span class="token operator">></span></code></pre>
+<h5 id="符号链接-Symbolic-Link-（快捷方式）"><a href="#符号链接-Symbolic-Link-（快捷方式）" class="headerlink" title="符号链接 Symbolic Link （快捷方式）"></a>符号链接 Symbolic Link （快捷方式）</h5><p>符号链接就是建立一个独立的文件，这个文件会让数据的读取指向它链接的文件的文件名。</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">ln</span> -s <span class="token operator">&lt;</span>源文件<span class="token operator">></span> <span class="token operator">&lt;</span>目标文件目录<span class="token operator">></span></code></pre>
+<p><a href="https://imgchr.com/i/AxQKe0" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/04/16/AxQKe0.png" alt="AxQKe0.png"></a></p>
+<h3 id="磁盘的分区，格式化，检验与挂载"><a href="#磁盘的分区，格式化，检验与挂载" class="headerlink" title="磁盘的分区，格式化，检验与挂载"></a>磁盘的分区，格式化，检验与挂载</h3><p>新增磁盘的操作：</p>
+<ul>
+<li>对磁盘进行划分</li>
+<li>对磁盘进行格式化，建立西欧他那个可用的文件系统</li>
+<li>建立挂载点，将文件系统挂载上来</li>
+</ul>
+<h4 id="观察磁盘分区状态"><a href="#观察磁盘分区状态" class="headerlink" title="观察磁盘分区状态"></a>观察磁盘分区状态</h4><h6 id="lsblk（list-block-device）"><a href="#lsblk（list-block-device）" class="headerlink" title="lsblk（list block device）"></a>lsblk（list block device）</h6><pre class=" language-bash"><code class="language-bash">$ lsblk <span class="token punctuation">[</span>-dfimpt<span class="token punctuation">]</span> <span class="token punctuation">[</span>device<span class="token punctuation">]</span>
+选项与参数：
+ -d <span class="token keyword">:</span> 仅列出磁盘本身，不列出磁盘的分区数据
+×-f <span class="token keyword">:</span> 列出磁盘内的文件系统名称
+ -i <span class="token keyword">:</span> 使用ASCII字符输出
+ -m <span class="token keyword">:</span> 输出设备的权限信息
+ -p <span class="token keyword">:</span> 列出完整文件名
+ -t <span class="token keyword">:</span> 列出磁盘设备的详细文件数据，包括磁盘阵列信息等
+NAME <span class="token keyword">:</span> 设备文件名
+MAJ:MIN <span class="token keyword">:</span> 内核识别的设备就是通过这两个代码来区分，主要与次要设备代码
+RM <span class="token keyword">:</span> 是否为可卸载设备
+SIZE <span class="token keyword">:</span> 容量
+RO <span class="token keyword">:</span> 是否为只读设备
+TYPE <span class="token keyword">:</span> 是磁盘，分区，还是制度存储器rom
+MOUNTPOINT <span class="token keyword">:</span> 挂载点</code></pre>
+<h6 id="blkid-列出设备的UUID等参数"><a href="#blkid-列出设备的UUID等参数" class="headerlink" title="blkid 列出设备的UUID等参数"></a>blkid 列出设备的UUID等参数</h6><p>UUID：universally unique identifier 全局唯一标识符</p>
+<h6 id="parted-列出磁盘的分区表类型和分区信息"><a href="#parted-列出磁盘的分区表类型和分区信息" class="headerlink" title="parted 列出磁盘的分区表类型和分区信息"></a>parted 列出磁盘的分区表类型和分区信息</h6><pre class=" language-bash"><code class="language-bash">$ parted 设备名 print
+$ parted /dev/nvme0n1 print
+Model: INTEL SSDPEKKF256G8L <span class="token punctuation">(</span>nvme<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 制造厂商 模块名称</span>
+Disk /dev/nvme0n1: 256GB            <span class="token comment" spellcheck="true"># 磁盘容量</span>
+Sector size <span class="token punctuation">(</span>logical/physical<span class="token punctuation">)</span>: 512B/512B <span class="token comment" spellcheck="true"># 磁盘的每个逻辑/物理扇区容量</span>
+Partition Table: gpt                <span class="token comment" spellcheck="true"># 分区表格式</span>
+Disk Flags:
+
+Number  Start   End    Size    File system  Name                          Flags
+ 1      1049kB  274MB  273MB   fat32        EFI system partition          boot, hidden, esp
+ 2      274MB   290MB  16.8MB               Microsoft reserved partition  msftres
+ 3      290MB   153GB  153GB   ntfs         Basic data partition          msftdata
+ 5      153GB   255GB  102GB   ext4
+ 4      255GB   256GB  1049MB  ntfs         Basic data partition          hidden, diag</code></pre>
+<h4 id="磁盘分区：gdisk-fdisk"><a href="#磁盘分区：gdisk-fdisk" class="headerlink" title="磁盘分区：gdisk/fdisk"></a>磁盘分区：gdisk/fdisk</h4><p><strong><em>MBR分区表使用fdisk分区，GPT使用gdisk分区</em></strong></p>
+<h6 id="gdisk"><a href="#gdisk" class="headerlink" title="gdisk"></a>gdisk</h6><pre class=" language-bash"><code class="language-bash">$ gdisk /dev/nvme0n1
+GPT <span class="token function">fdisk</span> <span class="token punctuation">(</span>gdisk<span class="token punctuation">)</span> version 1.0.3
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR<span class="token punctuation">;</span> using GPT.
+
+Command <span class="token punctuation">(</span>? <span class="token keyword">for</span> help<span class="token punctuation">)</span>: ?
+b    back up GPT data to a <span class="token function">file</span>
+c    change a partition<span class="token string">'s name
+d    delete a partition  #删除一个分区
+i    show detailed information on a partition
+l    list known partition types
+n    add a new partition   #新建一个分区
+o    create a new empty GUID partition table (GPT)
+p    print the partition table  #打印分区表
+q    quit without saving changes #不保存分区直接离开gdisk
+r    recovery and transformation options (experts only)
+s    sort partitions
+t    change a partition'</span>s <span class="token function">type</span> code
+<span class="token function">v</span>    verify disk
+w    <span class="token function">write</span> table to disk and <span class="token keyword">exit</span>  <span class="token comment" spellcheck="true">#保存分区后离开gdisk'</span>
+x    extra functionality <span class="token punctuation">(</span>experts only<span class="token punctuation">)</span>
+?    print this menu</code></pre>
+<p>磁盘分区是针对整个磁盘而不是只是一个分区所以不要在设备文件后附带数字。</p>
+<h6 id="gdisk新增分区"><a href="#gdisk新增分区" class="headerlink" title="gdisk新增分区"></a>gdisk新增分区</h6><pre class=" language-bash"><code class="language-bash">$ gdisk /dev/nvme0n1
+GPT <span class="token function">fdisk</span> <span class="token punctuation">(</span>gdisk<span class="token punctuation">)</span> version 1.0.3
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR<span class="token punctuation">;</span> using GPT.
+
+Command <span class="token punctuation">(</span>? <span class="token keyword">for</span> help<span class="token punctuation">)</span>: p
+Disk /dev/nvme0n1: 500118192 sectors, 238.5 GiB
+Model: INTEL SSDPEKKF256G8L
+Sector size <span class="token punctuation">(</span>logical/physical<span class="token punctuation">)</span>: 512/512 bytes
+Disk identifier <span class="token punctuation">(</span>GUID<span class="token punctuation">)</span>: 7D95F9F1-8D34-4BA7-B555-9C68C5D996D6
+Partition table holds up to 128 entries
+Main partition table begins at sector 2 and ends at sector 33
+First usable sector is 34, last usable sector is 500118158
+Partitions will be aligned on 2048-sector boundaries
+Total <span class="token function">free</span> space is 4717 sectors <span class="token punctuation">(</span>2.3 MiB<span class="token punctuation">)</span>
+
+Number  Start <span class="token punctuation">(</span>sector<span class="token punctuation">)</span>    End <span class="token punctuation">(</span>sector<span class="token punctuation">)</span>  Size       Code  Name
+   1            2048          534527   260.0 MiB   EF00  EFI system partition
+   2          534528          567295   16.0 MiB    0C01  Microsoft reserved <span class="token punctuation">..</span>.
+   3          567296       277868543   132.2 GiB   0700  Basic data partition
+   4       277868544       298838015   10.0 GiB    0700  Basic data partition
+   5       298840064       498069503   95.0 GiB    8300
+   6       498069504       500117503   1000.0 MiB  2700  Basic data partition
+
+Command <span class="token punctuation">(</span>? <span class="token keyword">for</span> help<span class="token punctuation">)</span>: n
+Partition number <span class="token punctuation">(</span>7-128, default 7<span class="token punctuation">)</span>: 7
+First sector <span class="token punctuation">(</span>34-500118158, default <span class="token operator">=</span> 298838016<span class="token punctuation">)</span> or <span class="token punctuation">{</span>+-<span class="token punctuation">}</span>size<span class="token punctuation">{</span>KMGTP<span class="token punctuation">}</span>: 298838016
+Last sector <span class="token punctuation">(</span>298838016-298840063, default <span class="token operator">=</span> 298840063<span class="token punctuation">)</span> or <span class="token punctuation">{</span>+-<span class="token punctuation">}</span>size<span class="token punctuation">{</span>KMGTP<span class="token punctuation">}</span>: +1G
+Last sector <span class="token punctuation">(</span>298838016-298840063, default <span class="token operator">=</span> 298840063<span class="token punctuation">)</span> or <span class="token punctuation">{</span>+-<span class="token punctuation">}</span>size<span class="token punctuation">{</span>KMGTP<span class="token punctuation">}</span>: 298838017
+Current <span class="token function">type</span> is <span class="token string">'Linux filesystem'</span>
+Hex code or GUID <span class="token punctuation">(</span>L to show codes, Enter <span class="token operator">=</span> 8300<span class="token punctuation">)</span>:
+Changed <span class="token function">type</span> of partition to <span class="token string">'Linux filesystem'</span>
+
+Command <span class="token punctuation">(</span>? <span class="token keyword">for</span> help<span class="token punctuation">)</span>: p
+Disk /dev/nvme0n1: 500118192 sectors, 238.5 GiB
+Model: INTEL SSDPEKKF256G8L
+Sector size <span class="token punctuation">(</span>logical/physical<span class="token punctuation">)</span>: 512/512 bytes
+Disk identifier <span class="token punctuation">(</span>GUID<span class="token punctuation">)</span>: 7D95F9F1-8D34-4BA7-B555-9C68C5D996D6
+Partition table holds up to 128 entries
+Main partition table begins at sector 2 and ends at sector 33
+First usable sector is 34, last usable sector is 500118158
+Partitions will be aligned on 2048-sector boundaries
+Total <span class="token function">free</span> space is 4715 sectors <span class="token punctuation">(</span>2.3 MiB<span class="token punctuation">)</span>
+
+Number  Start <span class="token punctuation">(</span>sector<span class="token punctuation">)</span>    End <span class="token punctuation">(</span>sector<span class="token punctuation">)</span>  Size       Code  Name
+   1            2048          534527   260.0 MiB   EF00  EFI system partition
+   2          534528          567295   16.0 MiB    0C01  Microsoft reserved <span class="token punctuation">..</span>.
+   3          567296       277868543   132.2 GiB   0700  Basic data partition
+   4       277868544       298838015   10.0 GiB    0700  Basic data partition
+   5       298840064       498069503   95.0 GiB    8300
+   6       498069504       500117503   1000.0 MiB  2700  Basic data partition
+   7       298838016       298838017   1024 bytes  8300  Linux filesystem</code></pre>
+<h6 id="partprobe更新Linux内核的分区表信息"><a href="#partprobe更新Linux内核的分区表信息" class="headerlink" title="partprobe更新Linux内核的分区表信息"></a>partprobe更新Linux内核的分区表信息</h6><pre class=" language-bash"><code class="language-bash">$ partprobe <span class="token punctuation">[</span>-s<span class="token punctuation">]</span>
+$ lsblk /dev/nvme0n1 <span class="token comment" spellcheck="true"># 实际的磁盘分区状态</span>
+$ <span class="token function">cat</span> /proc/partitions <span class="token comment" spellcheck="true">#内核的分区记录</span></code></pre>
+<h4 id="磁盘格式化，创建文件系统"><a href="#磁盘格式化，创建文件系统" class="headerlink" title="磁盘格式化，创建文件系统"></a>磁盘格式化，创建文件系统</h4><p>分区完毕以后就要进行磁盘的格式化，这样才能得到可以使用文件系统。就是使用make filesystem，mkfs指令。</p>
+<p>首先键入<code>mkfs</code>，点击两下[Tab]，就出现了mkfs大家族。</p>
+<pre class=" language-bash"><code class="language-bash">mkfs         mkfs.ext2    mkfs.fat     mkfs.ntfs
+mkfs.bfs     mkfs.ext3    mkfs.minix   mkfs.vfat
+mkfs.cramfs  mkfs.ext4    mkfs.msdos
+$ mkfs.ext4 <span class="token punctuation">[</span>-b size<span class="token punctuation">]</span> <span class="token punctuation">[</span>-L label<span class="token punctuation">]</span> 设备名称
+$ mkfs.ext4 /dev/nvme0n1p4 <span class="token comment" spellcheck="true">#格式化为ext4文件系统</span>
+mke2fs 1.44.1 <span class="token punctuation">(</span>24-Mar-2018<span class="token punctuation">)</span>
+/dev/nvme0n1p4 contains a ntfs <span class="token function">file</span> system labelled <span class="token string">'New Volume'</span>
+Proceed anyway? <span class="token punctuation">(</span>y,N<span class="token punctuation">)</span> y
+Discarding device blocks: <span class="token keyword">done</span>
+Creating filesystem with 2621184 4k blocks and 655360 inodes
+Filesystem UUID: 38cdd582-dff7-4be3-8e55-0cb51fea7c4a
+Superblock backups stored on blocks:
+    32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+
+Allocating group tables: <span class="token keyword">done</span>
+Writing inode tables: <span class="token keyword">done</span>
+Creating journal <span class="token punctuation">(</span>16384 blocks<span class="token punctuation">)</span>: <span class="token keyword">done</span>
+Writing superblocks and filesystem accounting information: <span class="token keyword">done</span></code></pre>
+<h4 id="文件系统检验"><a href="#文件系统检验" class="headerlink" title="文件系统检验"></a>文件系统检验</h4><h6 id="xfs-repair处理XFS文件系统"><a href="#xfs-repair处理XFS文件系统" class="headerlink" title="xfs_repair处理XFS文件系统"></a>xfs_repair处理XFS文件系统</h6><pre class=" language-bash"><code class="language-bash">$ xfs_repair <span class="token punctuation">[</span>-fnd<span class="token punctuation">]</span> 设备名称
+选项与参数：
+-f ： 后面的设备其实是个文件而不是实体设备
+-n ： 单纯检查而不修改文件系统的任何数据
+-d ： 单人维护模式下，针对根目录的修复，很危险</code></pre>
+<p>需要注意的是文件系统修复时不能被挂载。</p>
+<ul>
+<li>fsck.ext4处理ext4文件系统</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">$ fsck.ext4 <span class="token punctuation">[</span>-pf<span class="token punctuation">]</span> <span class="token punctuation">[</span>-b 超级区块<span class="token punctuation">]</span> 设备名称
+选项与参数：
+-p ： 当文件系统修复时如果有需要回复y的动作，直接回复y
+-f ： 强制检查，一般来说fsck弱国没有发现unclean的标识不会检查
+-D ： 针对文件系统下的目录进行最优化配置
+-b ： 后接超级区块的位置
+$ dumpe2fs -h /dev/nvme0n1p4 <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'Blocks per group'</span>
+dumpe2fs 1.44.1 <span class="token punctuation">(</span>24-Mar-2018<span class="token punctuation">)</span>
+Blocks per group:         32768
+$  fsck.ext4 -b 32768 /dev/nvme0n1p4
+e2fsck 1.44.1 <span class="token punctuation">(</span>24-Mar-2018<span class="token punctuation">)</span>
+/dev/nvme0n1p4 was not cleanly unmounted, check forced.
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+Block bitmap differences:  +<span class="token punctuation">(</span>32768--33794<span class="token punctuation">)</span> +<span class="token punctuation">(</span>98304--99330<span class="token punctuation">)</span> +<span class="token punctuation">(</span>163840--164866<span class="token punctuation">)</span> +<span class="token punctuation">(</span>229376--230402<span class="token punctuation">)</span> +<span class="token punctuation">(</span>294912--295938<span class="token punctuation">)</span> +<span class="token punctuation">(</span>819200--820226<span class="token punctuation">)</span> +<span class="token punctuation">(</span>884736--885762<span class="token punctuation">)</span> +<span class="token punctuation">(</span>1605632--1606658<span class="token punctuation">)</span>
+Fix<span class="token operator">&lt;</span>y<span class="token operator">></span>? <span class="token function">yes</span>
+Inode bitmap differences: Group 1 inode bitmap does not match checksum.
+FIXED.
+
+/dev/nvme0n1p4: ***** FILE SYSTEM WAS MODIFIED *****
+/dev/nvme0n1p4: 11/655360 files <span class="token punctuation">(</span>0.0% non-contiguous<span class="token punctuation">)</span>, 66753/2621184 blocks
+$ fsck.ext4 /dev/nvme0n1p4
+e2fsck 1.44.1 <span class="token punctuation">(</span>24-Mar-2018<span class="token punctuation">)</span>
+/dev/nvme0n1p4: clean, 11/655360 files, 66753/2621184 blocks
+$  fsck.ext4 -f /dev/nvme0n1p4
+e2fsck 1.44.1 <span class="token punctuation">(</span>24-Mar-2018<span class="token punctuation">)</span>
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+/dev/nvme0n1p4: 11/655360 files <span class="token punctuation">(</span>0.0% non-contiguous<span class="token punctuation">)</span>, 66753/2621184 blocks</code></pre>
+<h4 id="文件系统挂载与卸载mount"><a href="#文件系统挂载与卸载mount" class="headerlink" title="文件系统挂载与卸载mount"></a>文件系统挂载与卸载mount</h4><ul>
+<li>单一文件系统不应该被重复挂载在不同的挂载点中</li>
+<li>单一目录不应该重复挂载多个文件系统</li>
+<li>作为挂载点的目录。理论上都应该是空目录</li>
+</ul>
+<p>假设挂载点目录并不为空那么挂载了文件系统之后，<strong><em>目录下的问家你会暂时消失</em></strong></p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">mount</span> -a
+$ <span class="token function">mount</span> <span class="token punctuation">[</span>-l<span class="token punctuation">]</span>
+$ <span class="token function">mount</span> <span class="token punctuation">[</span>-t 文件系统<span class="token punctuation">]</span> LABEL<span class="token operator">=</span><span class="token string">''</span> 挂载点
+$ <span class="token function">mount</span> <span class="token punctuation">[</span>-t 文件系统<span class="token punctuation">]</span> UUID<span class="token operator">=</span><span class="token string">''</span> 挂载点
+$ <span class="token function">mount</span> <span class="token punctuation">[</span>-t 文件系统<span class="token punctuation">]</span> 设备文件名 挂载点
+选项与参数：
+-a ：依照配置文件/etc/fstab的数据将所有未挂载的磁盘都挂在上来
+-l ：显示label信息
+-t ：加制定的文件系统种类
+-n ：不将数据写入/etc/mtab中
+-o ：加参数</code></pre>
+<p>Linux通过：</p>
+<ul>
+<li><code>/etc/filesystem</code>：系统制定的测试挂载文件系统的优先级</li>
+<li><code>/proc/filesystem</code>：Linux系统已经加载的文件系统类型<br>```bash<br>$ unmount [-fn] 设备文件名或挂载点<br>选项与参数：</li>
+</ul>
+<p>-f : 强制卸载，可用在类似网络文件系统NFS无法读取到的前提下<br>-l : 立刻卸载文件系统<br>-n : 不更新/etc/mtab</p>
+<pre><code>#### 磁盘文件系统参数自定义
+###### mknod
+
+Linux下一切都是文件，那么文件如何代表设备，***是通过major和minor这两个数值来替代***。
+```bash
+$ mknod 设备文件名 [bcp] [Major] [Minor]
+选项与参数：
+设备种类：
+b ： 设置设备名称为一个外接储存设备文件
+c ： 设置设备名称为一个外接输入设备文件
+f ： 设置设备名称为一个FIFO文件</code></pre><h6 id="xfs-admin修改UUID与Label-name"><a href="#xfs-admin修改UUID与Label-name" class="headerlink" title="xfs_admin修改UUID与Label name"></a>xfs_admin修改UUID与Label name</h6><pre class=" language-bash"><code class="language-bash">$ xfs_admin <span class="token punctuation">[</span>-lu<span class="token punctuation">]</span> <span class="token punctuation">[</span>-L label<span class="token punctuation">]</span> <span class="token punctuation">[</span>-U UUID<span class="token punctuation">]</span> 设备文件名
+选项与参数：
+-l <span class="token keyword">:</span> 列出设备的label name
+-u <span class="token keyword">:</span> 列出设备的UUID
+-L <span class="token keyword">:</span> 设置设备的label name
+-U <span class="token keyword">:</span> 设置设备的UUID
+$ uuidgen <span class="token comment" spellcheck="true">#产生一个UUID</span></code></pre>
+<h6 id="tune2fs修改ext4的label-name-与UUID"><a href="#tune2fs修改ext4的label-name-与UUID" class="headerlink" title="tune2fs修改ext4的label name 与UUID"></a>tune2fs修改ext4的label name 与UUID</h6><pre class=" language-bash"><code class="language-bash">$ tune2fs <span class="token punctuation">[</span>-l<span class="token punctuation">]</span> <span class="token punctuation">[</span>-L label<span class="token punctuation">]</span> <span class="token punctuation">[</span>-U UUID<span class="token punctuation">]</span> 设备文件名
+选项与参数：
+-l <span class="token keyword">:</span> 类似于dump2fs的功能，将superblock内的数据读出
+-L <span class="token keyword">:</span> 设置设备的label name
+-U <span class="token keyword">:</span> 设置设备的UUID</code></pre>
+<h3 id="设置启动挂载"><a href="#设置启动挂载" class="headerlink" title="设置启动挂载"></a>设置启动挂载</h3><p>一个很自然的诉求，就是我们希望系统在开机时自己主动挂载磁盘，否则每次都要mount操作一通实在是有些麻烦。</p>
+<h4 id="启动挂载-etc-fstab及-etc-mtab"><a href="#启动挂载-etc-fstab及-etc-mtab" class="headerlink" title="启动挂载/etc/fstab及/etc/mtab"></a>启动挂载/etc/fstab及/etc/mtab</h4><p>系统挂载的限制：</p>
+<ul>
+<li><strong><em>根目录是必须挂载的而且要先于其他任何挂载点</em></strong></li>
+<li><strong><em>其他挂载点必须为已经建立的目录，遵循FHS</em></strong></li>
+<li><strong><em>所有挂载点在同一时间之内，只能挂载一次</em></strong></li>
+<li><strong><em>所有硬盘分区在统一时间之内，只能挂载一下</em></strong></li>
+<li><strong><em>如果卸载，必须先将工作目录移动到挂载点之外</em></strong></li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">cat</span> /etc/fstab
+<span class="token comment" spellcheck="true"># /etc/fstab: static file system information.</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># Use 'blkid' to print the universally unique identifier for a</span>
+<span class="token comment" spellcheck="true"># device; this may be used with UUID= as a more robust way to name devices</span>
+<span class="token comment" spellcheck="true"># that works even if disks are added and removed. See fstab(5).</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># &lt;file system> &lt;mount point>   &lt;type>  &lt;options>       &lt;dump>  &lt;pass></span>
+<span class="token comment" spellcheck="true"># / was on /dev/nvme0n1p5 during installation</span>
+UUID<span class="token operator">=</span>2f6b6a4f-29e2-4a7e-a790-523499851033 /               ext4    errors<span class="token operator">=</span>remount-ro 0       1
+<span class="token comment" spellcheck="true"># /boot/efi was on /dev/nvme0n1p1 during installation</span>
+UUID<span class="token operator">=</span>C6A3-B7DE  /boot/efi       vfat    umask<span class="token operator">=</span>0077      0       1
+/swapfile                                 none            swap    sw              0       0</code></pre>
+<p><code>/etc/fstab</code>存储的就像我们利用mount命令挂载时所有参数和选项都写入的一个文件。还多余一个dump备份命令，和启动时是否使用fsck系统欧冠你检验有关。</p>
+<p>这六个字段的内容 <strong><em>十分重要！</em></strong></p>
+<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>file system<span class="token operator">></span> <span class="token operator">&lt;</span>mount point<span class="token operator">></span>   <span class="token operator">&lt;</span>type<span class="token operator">></span>      <span class="token operator">&lt;</span>options<span class="token operator">></span>       <span class="token operator">&lt;</span>dump<span class="token operator">></span>  <span class="token operator">&lt;</span>pass<span class="token operator">></span>
+<span class="token operator">&lt;</span> 设备/UUID等<span class="token operator">></span> <span class="token operator">&lt;</span>  挂 载 点  <span class="token operator">></span>   <span class="token operator">&lt;</span>文件系统<span class="token operator">></span>  <span class="token operator">&lt;</span>文件系统参数<span class="token operator">></span>      <span class="token operator">&lt;</span>dump<span class="token operator">></span>  <span class="token operator">&lt;</span>pass<span class="token operator">></span></code></pre>
+<ul>
+<li>第一栏：磁盘设备文件名/UUID/LABEL name</li>
+</ul>
+<p>这里的三个参数，填写任意一个都可以，建议使用blkid命令查询uuid来填写。</p>
+<ul>
+<li>第二栏：挂载点（mount name）</li>
+</ul>
+<p><strong><em>一定是目录</em></strong></p>
+<ul>
+<li>第三栏：磁盘分区的文件系统</li>
+</ul>
+<p>磁盘分区的文件系统，手动挂载时，系统可以自动检测，但是刚开机时系统并不能分析磁盘的文件系统格式，所以必须要手动写入。</p>
+<ul>
+<li>第四栏：文件系统参数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>内容意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>async/sync  异步/同步</td>
+<td>设置磁盘是否以是否以异步方式运行，默认为async（性能较佳）</td>
+</tr>
+<tr>
+<td>auto/noauto  自动/非自动</td>
+<td>当执行mount -a时，此文件系统是否会被主动的检测挂载，默认为auto</td>
+</tr>
+<tr>
+<td>rw/ro 可擦写/只读</td>
+<td>设置ro后，不论是否设置w权限，都无法写入数据</td>
+</tr>
+<tr>
+<td>exec/noexec 可执行/不可执行</td>
+<td>限制文件系统是否可以[执行]的操作，不要随便使用</td>
+</tr>
+<tr>
+<td>user/nouser 允许/不允许用户挂载</td>
+<td>是否希望一般身份的用户是用moount命令挂载，</td>
+</tr>
+<tr>
+<td>suid/nosuid 具有/不具有suid权限</td>
+<td>是否允许SUID的存在</td>
+</tr>
+<tr>
+<td>defaults</td>
+<td>是否使用默认参数配置</td>
+</tr>
+</tbody></table>
+<ul>
+<li>第五栏：能否被dump备份命令作用</li>
+<li>第六栏：是否检查过</li>
+</ul>
+<p>所以设置自动挂载只要将磁盘的信息写入<code>/etc/fstab</code>文件即可</p>
+<pre class=" language-bash"><code class="language-bash">$ blkid
+/dev/nvme0n1: PTUUID<span class="token operator">=</span><span class="token string">"7d95f9f1-8d34-4ba7-b555-9c68c5d996d6"</span> PTTYPE<span class="token operator">=</span><span class="token string">"gpt"</span>
+/dev/nvme0n1p1: LABEL<span class="token operator">=</span><span class="token string">"SYSTEM"</span> UUID<span class="token operator">=</span><span class="token string">"C6A3-B7DE"</span> TYPE<span class="token operator">=</span><span class="token string">"vfat"</span> PARTLABEL<span class="token operator">=</span><span class="token string">"EFI system partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"3e25bbec-3e10-4901-8c33-ceeadbc12d69"</span>
+/dev/nvme0n1p2: PARTLABEL<span class="token operator">=</span><span class="token string">"Microsoft reserved partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"6396a370-a595-4cd8-80a4-3931e3d3df28"</span>
+/dev/nvme0n1p3: LABEL<span class="token operator">=</span><span class="token string">"Windows"</span> UUID<span class="token operator">=</span><span class="token string">"B438A7FA38A7BA2E"</span> TYPE<span class="token operator">=</span><span class="token string">"ntfs"</span> PARTLABEL<span class="token operator">=</span><span class="token string">"Basic data partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"f6d4beeb-a0dc-48ed-827b-b63cf7cd1084"</span>
+/dev/nvme0n1p4: UUID<span class="token operator">=</span><span class="token string">"38cdd582-dff7-4be3-8e55-0cb51fea7c4a"</span> TYPE<span class="token operator">=</span><span class="token string">"ext4"</span> PARTLABEL<span class="token operator">=</span><span class="token string">"Basic data partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"57487810-e2b8-47ff-a2f3-531981effd18"</span>
+/dev/nvme0n1p5: UUID<span class="token operator">=</span><span class="token string">"2f6b6a4f-29e2-4a7e-a790-523499851033"</span> TYPE<span class="token operator">=</span><span class="token string">"ext4"</span> PARTUUID<span class="token operator">=</span><span class="token string">"150f0697-4ae7-4957-830f-a91e40d03577"</span>
+/dev/nvme0n1p6: LABEL<span class="token operator">=</span><span class="token string">"WinRE_DRV"</span> UUID<span class="token operator">=</span><span class="token string">"E60CA85F0CA82C8D"</span> TYPE<span class="token operator">=</span><span class="token string">"ntfs"</span> PARTLABEL<span class="token operator">=</span><span class="token string">"Basic data partition"</span> PARTUUID<span class="token operator">=</span><span class="token string">"58abc9c9-e11e-4dd8-9a3f-2dab172fa72c"</span>
+$ <span class="token function">nano</span> /etc/fstab <span class="token comment" spellcheck="true">#可以自己修改一下文件排版</span>
+UUID<span class="token operator">=</span><span class="token string">"38cdd582-dff7-4be3-8e55-0cb51fea7c4a"</span> /home/jason/Device ext4 defaults 0 1
+$ <span class="token function">df</span> <span class="token comment" spellcheck="true">#观察一下磁盘是否已经挂载</span>
+Filesystem     1K-blocks     Used Available Use% Mounted on
+udev             8053080        0   8053080   0% /dev
+tmpfs            1616676     2196   1614480   1% /run
+/dev/nvme0n1p5  97527092 75489768  17040204  82% /
+tmpfs            8083376     2156   8081220   1% /dev/shm
+tmpfs               5120        4      5116   1% /run/lock
+tmpfs            8083376        0   8083376   0% /sys/fs/cgroup
+tmpfs            1616672       12   1616660   1% /run/user/121
+tmpfs            1616672       36   1616636   1% /run/user/1000
+/dev/sda1       15666400 11506912   4159488  74% /media/jason/E86B-1D06
+tmpfs            1616672        0   1616672   0% /run/user/0
+<span class="token comment" spellcheck="true"># 并没有被挂载</span>
+$ <span class="token function">umount</span> 磁盘 <span class="token comment" spellcheck="true">#如果被挂载，先卸载</span>
+$ <span class="token function">mount</span> -a <span class="token comment" spellcheck="true">#测试我们文件力度语法是否有错误，因为如果写错了，Linux可能无法启动</span>
+$ <span class="token function">df</span> /home/jason/Device <span class="token comment" spellcheck="true">#挂载成功</span>
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/nvme0n1p4  10254612    36888   9677104   1% /home/jason/Device</code></pre>
+<p><code>/etc/fstab</code>是启动事配置文件，实际文件系统的挂载是记录到<code>/etc/mtab</code>和<code>/proc/mounts</code>中的，如果你的配置文件有问题，无法顺利启动进入担任模式中，<code>/etc/fstab</code>文件是只读模式时：</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">mount</span> -n -o remount,rw /</code></pre>
+<p>即可。</p>
+<p>重启df查看，发现设备已经自动挂载</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">reboot</span>
+$ <span class="token function">df</span>
+Filesystem     1K-blocks     Used Available Use% Mounted on
+udev             8053080        0   8053080   0% /dev
+tmpfs            1616676     2164   1614512   1% /run
+/dev/nvme0n1p5  97527092 75506300  17023672  82% /
+tmpfs            8083376      648   8082728   1% /dev/shm
+tmpfs               5120        4      5116   1% /run/lock
+tmpfs            8083376        0   8083376   0% /sys/fs/cgroup
+/dev/loop0         15104    15104         0 100% /snap/gnome-characters/206
+/dev/nvme0n1p4  10254612    36888   9677104   1% /home/jason/Device
+tmpfs            1616672       12   1616660   1% /run/user/121
+tmpfs            1616672       32   1616640   1% /run/user/1000
+/dev/sda1       15666400 11506912   4159488  74% /media/jason/E86B-1D06
+tmpfs            1616672        0   1616672   0% /run/user/0</code></pre>
+<h4 id="特殊设备loop挂载"><a href="#特殊设备loop挂载" class="headerlink" title="特殊设备loop挂载"></a>特殊设备loop挂载</h4><p>如果有光盘镜像文件，过着使用文件作为磁盘的方式时，就要用特别的方法挂在起来，不需要刻录。</p>
+<ul>
+<li>挂载CD/DVD镜像文件</li>
+</ul>
+<p>挂载镜像文件</p>
+<pre class=" language-bash"><code class="language-bash">$ ll -h CentOS-7-x86_64-DVD-1810.iso
+-rw-rw-r-- 1 jason jason 4.3G 12月  5 23:22 CentOS-7-x86_64-DVD-1810.iso
+$ <span class="token function">mkdir</span> ./centos_dvd
+$ <span class="token function">mount</span> -o loop ./CentOS-7-x86_64-DVD-1810.iso ./centos_dvd
+mount: /home/jason/Downloads/google/centos_dvd: WARNING: device write-protected, mounted read-only.
+$ <span class="token function">df</span> ./centos_dvd
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/loop29      4480476 4480476         0 100% /home/jason/Downloads/google/centos_dvd
+$ ll ./centos_dvd
+total 693
+drwxrwxr-x 8 root  root    2048 11月 26 07:53 ./
+drwxrwxr-x 9 jason jason   4096 4月  18 09:57 <span class="token punctuation">..</span>/
+-rw-rw-r-- 1 root  root      14 11月 26 00:01 CentOS_BuildTag
+-rw-r--r-- 1 root  root      29 11月 26 00:16 .discinfo
+drwxr-xr-x 3 root  root    2048 11月 26 00:20 EFI/
+-rw-rw-r-- 1 root  root     227 8月  30  2017 EULA
+-rw-rw-r-- 1 root  root   18009 12月 10  2015 GPL
+drwxr-xr-x 3 root  root    2048 11月 26 00:21 images/
+drwxr-xr-x 2 root  root    2048 11月 26 00:20 isolinux/
+drwxr-xr-x 2 root  root    2048 11月 26 00:20 LiveOS/
+drwxrwxr-x 2 root  root  663552 11月 26 07:52 Packages/
+drwxrwxr-x 2 root  root    4096 11月 26 07:53 repodata/
+-rw-rw-r-- 1 root  root    1690 12月 10  2015 RPM-GPG-KEY-CentOS-7
+-rw-rw-r-- 1 root  root    1690 12月 10  2015 RPM-GPG-KEY-CentOS-Testing-7
+-r--r--r-- 1 root  root    2883 11月 26 07:54 TRANS.TBL
+-rw-r--r-- 1 root  root     354 11月 26 00:21 .treeinfo
+$ unmount ./centos_dvd <span class="token comment" spellcheck="true">#测试完成记得卸载</span></code></pre>
+<p>MD5验证码可以确保设备内部文件的验证。</p>
+<ul>
+<li>建立大文件以制作loop设备文件</li>
+</ul>
+<p>比如分配系统的时候，犯懒只设置了一个根目录，这样就无法机型额外的分区了，我们可以话分出一个打文件，然后将这个文件loop挂载，这样感觉上就多了一个分区。</p>
+<p>Linux下我们可以通过dd命令来建立一个空文件</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">dd</span> if<span class="token operator">=</span>/dev/zero of<span class="token operator">=</span>/srv/loopdev bs<span class="token operator">=</span>1M count<span class="token operator">=</span>512
+512+0 records <span class="token keyword">in</span>
+512+0 records out
+536870912 bytes <span class="token punctuation">(</span>537 MB, 512 MiB<span class="token punctuation">)</span> copied, 0.479746 s, 1.1 GB/s
+<span class="token comment" spellcheck="true"># 命令解释</span>
+<span class="token comment" spellcheck="true"># if input file 输入文件，/dev/zero是一直输出0的设备文件</span>
+<span class="token comment" spellcheck="true"># of output file 输出文件</span>
+<span class="token comment" spellcheck="true"># bs 每个block的大小</span>
+<span class="token comment" spellcheck="true"># count 总共几个bs</span>
+$ ll -h /srv/loopdev
+-rw-r--r-- 1 root root 512M 4月  18 10:28 /srv/loopdev
+$ mkfs.ext4  /srv/loopdev <span class="token comment" spellcheck="true">#对文件进行格式化</span>
+mke2fs 1.44.1 <span class="token punctuation">(</span>24-Mar-2018<span class="token punctuation">)</span>
+Discarding device blocks: <span class="token keyword">done</span>
+Creating filesystem with 131072 4k blocks and 32768 inodes
+Filesystem UUID: 908d7f09-4ab2-4704-a509-d4721e3e4dcc
+Superblock backups stored on blocks:
+    32768, 98304
+
+Allocating group tables: <span class="token keyword">done</span>
+Writing inode tables: <span class="token keyword">done</span>
+Creating journal <span class="token punctuation">(</span>4096 blocks<span class="token punctuation">)</span>: <span class="token keyword">done</span>
+Writing superblocks and filesystem accounting information: <span class="token keyword">done</span>
+$ blkid /srv/loopdev
+/srv/loopdev: UUID<span class="token operator">=</span><span class="token string">"908d7f09-4ab2-4704-a509-d4721e3e4dcc"</span> TYPE<span class="token operator">=</span><span class="token string">"ext4"</span>
+<span class="token comment" spellcheck="true"># 挂载</span>
+$ <span class="token function">mount</span> -o loop UUID<span class="token operator">=</span><span class="token string">"908d7f09-4ab2-4704-a509-d4721e3e4dcc"</span> /mnt
+$ <span class="token function">df</span> /mnt
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/loop29       499656   780    462180   1% /mnt</code></pre>
+<p>通过这个方法可以在不改变原来的环境的情况下，进行分区操作，其实Linux下的虚拟机软件也是基于这个原理来进行的。</p>
+<p>下面将这个文件永久的挂载起来</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">nano</span> /etc/fstab
+/srv/loopdev /media/jason/file ext4 defaults 0 1
+$ <span class="token function">umount</span> /mnt
+$ <span class="token function">mkdir</span> /media/jason/file
+$ <span class="token function">mount</span> -a
+$ <span class="token function">df</span> /media/jason/file
+Filesystem     1K-blocks  Used Available Use% Mounted on
+/dev/loop29       499656   780    462180   1% /media/jason/file</code></pre>
+<h3 id="内存交换分区swap之创建"><a href="#内存交换分区swap之创建" class="headerlink" title="内存交换分区swap之创建"></a>内存交换分区swap之创建</h3><p><code>/swap</code>是在物理内存不够时，用来临时存放内粗你数据的地方，现在个人pc的内存基本上都是足够的，但是到了服务器的场景下就不一定了，所以还是预留好<code>/swap</code>分区以备不时之需。</p>
+<ul>
+<li>设置一个内存交换分区</li>
+<li>建立一个虚拟内存文件<h4 id="使用物理分区创建内存交换分区"><a href="#使用物理分区创建内存交换分区" class="headerlink" title="使用物理分区创建内存交换分区"></a>使用物理分区创建内存交换分区</h4></li>
+<li>1.分区：使用gdisk在磁盘中划分一个分区作为内存交换分区</li>
+<li>2.格式化：利用建立内存交换分区的格式的mkswap格式化为内存交换分区格式</li>
+<li>3.使用：swapon</li>
+<li>4.观察：free和swapon -s观察内存使用量</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">$ gdisk /dev/nvme0n1
+GPT <span class="token function">fdisk</span> <span class="token punctuation">(</span>gdisk<span class="token punctuation">)</span> version 1.0.3
+
+Partition table scan:
+  MBR: not present
+  BSD: not present
+  APM: not present
+  GPT: not present
+
+Creating new GPT entries.
+
+Command <span class="token punctuation">(</span>? <span class="token keyword">for</span> help<span class="token punctuation">)</span>: n
+Partition number <span class="token punctuation">(</span>1-128, default 1<span class="token punctuation">)</span>:
+First sector <span class="token punctuation">(</span>34-20969438, default <span class="token operator">=</span> 2048<span class="token punctuation">)</span> or <span class="token punctuation">{</span>+-<span class="token punctuation">}</span>size<span class="token punctuation">{</span>KMGTP<span class="token punctuation">}</span>:
+Last sector <span class="token punctuation">(</span>2048-20969438, default <span class="token operator">=</span> 20969438<span class="token punctuation">)</span> or <span class="token punctuation">{</span>+-<span class="token punctuation">}</span>size<span class="token punctuation">{</span>KMGTP<span class="token punctuation">}</span>: +512M
+Current <span class="token function">type</span> is <span class="token string">'Linux filesystem'</span>
+Hex code or GUID <span class="token punctuation">(</span>L to show codes, Enter <span class="token operator">=</span> 8300<span class="token punctuation">)</span>: 8200
+Changed <span class="token function">type</span> of partition to <span class="token string">'Linux swap'</span>
+
+Command <span class="token punctuation">(</span>? <span class="token keyword">for</span> help<span class="token punctuation">)</span>: p
+Disk /dev/nvme0n1p4: 20969472 sectors, 10.0 GiB
+Sector size <span class="token punctuation">(</span>logical/physical<span class="token punctuation">)</span>: 512/512 bytes
+Disk identifier <span class="token punctuation">(</span>GUID<span class="token punctuation">)</span>: 2A01F71D-7DD6-446D-B3E6-65A6FDF8C79B
+Partition table holds up to 128 entries
+Main partition table begins at sector 2 and ends at sector 33
+First usable sector is 34, last usable sector is 20969438
+Partitions will be aligned on 2048-sector boundaries
+Total <span class="token function">free</span> space is 19920829 sectors <span class="token punctuation">(</span>9.5 GiB<span class="token punctuation">)</span>
+
+Number  Start <span class="token punctuation">(</span>sector<span class="token punctuation">)</span>    End <span class="token punctuation">(</span>sector<span class="token punctuation">)</span>  Size       Code  Name
+   1            2048         1050623   512.0 MiB   8200  Linux swap
+
+Command <span class="token punctuation">(</span>? <span class="token keyword">for</span> help<span class="token punctuation">)</span>: w
+
+Final checks complete. About to <span class="token function">write</span> GPT data. THIS WILL OVERWRITE EXISTING
+PARTITIONS<span class="token operator">!</span><span class="token operator">!</span>
+
+Do you want to proceed? <span class="token punctuation">(</span>Y/N<span class="token punctuation">)</span>: y
+OK<span class="token punctuation">;</span> writing new GUID partition table <span class="token punctuation">(</span>GPT<span class="token punctuation">)</span> to /dev/nvme0n1p4.
+Warning: The kernel is still using the old partition table.
+The new table will be used at the next <span class="token function">reboot</span> or after you
+run partprobe<span class="token punctuation">(</span>8<span class="token punctuation">)</span> or kpartx<span class="token punctuation">(</span>8<span class="token punctuation">)</span>
+The operation has completed successfully.
+$ mkswap /dev/nvme0n1p6
+$ blkid /dev/nvme0n1p6
+$ <span class="token function">free</span>
+              total        used        <span class="token function">free</span>      shared  buff/cache   available
+Mem:       16166752     1845564    11269080      848860     3052108    13156136 <span class="token comment" spellcheck="true">#物理内存</span>
+Swap:       2097148           0     2097148                                     <span class="token comment" spellcheck="true">#swap相关</span>
+$ swapon /dev/nvme0n1p6
+$ <span class="token function">free</span>
+total        used        <span class="token function">free</span>      shared  buff/cache   available
+Mem:       16166752     1845564    11269080      848860     3052108    13156136 <span class="token comment" spellcheck="true">#物理内存</span>
+Swap:       2597148           0     2597148                                     <span class="token comment" spellcheck="true">#swap相关</span>
+$ swapon -s
+$ <span class="token function">nano</span> /etc/fstab
+UUID<span class="token operator">=</span><span class="token string">"38cdd582-dff7-4be3-8e55-0cb51fea7c4a"</span> swap swap defaults 0 1</code></pre>
+<h4 id="使用文件创建文件交换分区"><a href="#使用文件创建文件交换分区" class="headerlink" title="使用文件创建文件交换分区"></a>使用文件创建文件交换分区</h4><pre class=" language-bash"><code class="language-bash">$ <span class="token function">dd</span> if<span class="token operator">=</span>/dev/zero of<span class="token operator">=</span>/tmp/swap bs<span class="token operator">=</span>1M count<span class="token operator">=</span>128
+128+0 records <span class="token keyword">in</span>
+128+0 records out
+134217728 bytes <span class="token punctuation">(</span>134 MB, 128 MiB<span class="token punctuation">)</span> copied, 0.183657 s, 731 MB/s
+$ ll -h /tmp/swap
+-rw-r--r-- 1 root root 128M 4月  18 11:21 /tmp/swap
+$ mkswap /tmp/swap
+mkswap: /tmp/swap: insecure permissions 0644, 0600 suggested.
+Setting up swapspace version 1, size <span class="token operator">=</span> 128 MiB <span class="token punctuation">(</span>134213632 bytes<span class="token punctuation">)</span>
+no label, UUID<span class="token operator">=</span>8237d888-982a-46d2-b753-bc38b2d6d588
+$ swapon /tmp/swap
+swapon: /tmp/swap: insecure permissions 0644, 0600 suggested.
+$ swapon -s
+Filename                Type        Size    Used    Priority
+/swapfile                                  <span class="token function">file</span>        2097148    0    -2
+/tmp/swap                                  <span class="token function">file</span>        131068    0    -3
+$ <span class="token function">nano</span> /etc/fstab
+/tmp/swap                                   swap                 swap   defaults            0       1
+<span class="token comment" spellcheck="true"># 这里不使用UIUD，因为系统仅会查询区块设备文件，不会查询文件</span>
+$ swapoff /tmp/swap
+$ swapon -s
+Filename                Type        Size    Used    Priority
+/swapfile                                  <span class="token function">file</span>        2097148    0    -2
+$ swapon -a
+$ swapon -s</code></pre>
+<h3 id="文件系统的特殊观察与操作"><a href="#文件系统的特殊观察与操作" class="headerlink" title="文件系统的特殊观察与操作"></a>文件系统的特殊观察与操作</h3><h4 id="磁盘空间之浪费问题"><a href="#磁盘空间之浪费问题" class="headerlink" title="磁盘空间之浪费问题"></a>磁盘空间之浪费问题</h4><p>其实整个文件系统中的超级区块，inode对照表等其他中介数据都会浪费容量，</p>
+<pre class=" language-bash"><code class="language-bash">$ ll -sh
+total 204K
+4.0K drwx------ 26 root  root  4.0K 4月  15 16:52 ./
+4.0K drwxr-xr-x 27 root  root  4.0K 4月  15 09:53 <span class="token punctuation">..</span>/
+4.0K drwxr-xr-x  3 root  root  4.0K 8月  26  2018 .android/
+4.0K drwxr-xr-x  3 root  root  4.0K 8月  26  2018 Android/
+4.0K drwxr-xr-x  4 root  root  4.0K 8月  26  2018 .AndroidStudio3.1/
+4.0K drwxr-xr-x  3 root  root  4.0K 8月  26  2018 AndroidStudioProjects/
+4.0K -rw-r--r--  1 root  root   113 9月   6  2018 .apport-ignore.xml <span class="token operator">&lt;</span>--这个文件只有113b，去占用了一个4k的区块
+ 40K -rw-------  1 root  root   34K 4月  18 10:23 .bash_history
+4.0K -rwxrwxrwx  1 root  root  3.3K 3月  29 14:17 .bashrc*
+4.0K drwx------  8 root  root  4.0K 4月  15 16:52 .cache/
+4.0K drwx------ 10 root  root  4.0K 4月  15 16:52 .config/
+4.0K drwx------  3 root  root  4.0K 8月  26  2018 .dbus/
+4.0K drwx------  2 root  root  4.0K 4月   8 08:29 .gconf/
+4.0K -rw-r--r--  1 root  root    55 11月 29 20:56 .gitconfig
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></code></pre>
+<h4 id="利用GNU的parted进行分区操作"><a href="#利用GNU的parted进行分区操作" class="headerlink" title="利用GNU的parted进行分区操作"></a>利用GNU的parted进行分区操作</h4><pre class=" language-bash"><code class="language-bash">$ parted <span class="token punctuation">[</span>设备<span class="token punctuation">]</span> <span class="token punctuation">[</span>命令<span class="token punctuation">[</span>参数<span class="token punctuation">]</span><span class="token punctuation">]</span>
+选项与参数：
+命令功能：
+      新增分区： mkpart <span class="token punctuation">[</span>primary<span class="token operator">|</span>logical<span class="token operator">|</span>Extended<span class="token punctuation">]</span> <span class="token punctuation">[</span>ext4<span class="token operator">|</span>vfat<span class="token operator">|</span>xfs<span class="token punctuation">]</span> 开始 结束
+      显示分区： print
+      删除分区： <span class="token function">rm</span> <span class="token punctuation">[</span>partition<span class="token punctuation">]</span>
+$ parted /dev/nvme0n1 print <span class="token comment" spellcheck="true">#列出本机分区表</span>
+Model: INTEL SSDPEKKF256G8L <span class="token punctuation">(</span>nvme<span class="token punctuation">)</span>
+Disk /dev/nvme0n1: 256GB
+Sector size <span class="token punctuation">(</span>logical/physical<span class="token punctuation">)</span>: 512B/512B
+Partition Table: gpt
+Disk Flags:
+
+Number  Start   End    Size    File system  Name                          Flags
+ 1      1049kB  274MB  273MB   fat32        EFI system partition          boot, hidden, esp
+ 2      274MB   290MB  16.8MB               Microsoft reserved partition  msftres
+ 3      290MB   142GB  142GB   ntfs         Basic data partition          msftdata
+ 4      142GB   153GB  10.7GB  ext4         Basic data partition          msftdata
+ 5      153GB   255GB  102GB   ext4
+ 6      255GB   256GB  1049MB  ntfs         Basic data partition          hidden, diag
+$ parted /dev/nvme0n1p5 mklabel mbr <span class="token comment" spellcheck="true">#改变分区表格式，这样会损坏整个文件系统</span>
+$ parted /dev/nvme0n1p5 mkpart primary fat32 36.0G 36.5G <span class="token comment" spellcheck="true">#建立新的分区</span></code></pre>
+<h3 id="重点回顾"><a href="#重点回顾" class="headerlink" title="重点回顾"></a>重点回顾</h3><ul>
+<li>压缩指令为透过一些运算方法去将原本的文件进行压缩,以减少文件所占用的磁盘容量。 压缩前与压缩后<br>的文件所占用的磁盘容量比值, 就可以被称为是『压缩比』</li>
+<li>压缩的好处是可以减少磁盘容量的浪费,在 WWW 网站也可以利用文件压缩的技术来进行数据的传送,好<br>让网站带宽的可利用率上升喔</li>
+<li>压缩文件案的扩展名大多是:『*.gz, *.bz2, *.xz, *.tar, *.tar.gz, *.tar.bz2, *.tar.xz』</li>
+<li>常见的压缩指令有 gzip, bzip2, xz。压缩率最佳的是 xz,若可以不计时间成本,建议使用 xz 进行压缩。</li>
+<li>tar 可以用来进行文件打包,并可支持 gzip, bzip2, xz 的压缩。</li>
+<li>压缩:tar -Jcv -f filename.tar.xz 要被压缩的文件或目录名称</li>
+<li>查询:tar -Jtv -f filename.tar.xz</li>
+<li>解压缩:tar -Jxv -f filename.tar.xz -C 欲解压缩的目录</li>
+<li>xfsdump 指令可备份文件系统或单一目录</li>
+<li>xfsdump 的备份若针对文件系统时,可进行 0-9 的 level 差异备份!其中 level 0 为完整备份;</li>
+<li>xfsrestore 指令可还原被 xfsdump 建置的备份档;</li>
+<li>要建立光盘刻录数据时,可透过 mkisofs 指令来建置;<br>= 可透过 wodim 来写入 CD 或 DVD 刻录机</li>
+<li>dd 可备份完整的 partition 或 disk ,因为 dd 可读取磁盘的 sector 表面数据</li>
+<li>cpio 为相当优秀的备份指令,不过必须要搭配类似 find 指令来读入欲备份的文件名数据,方可进行备份动作。 </li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2019/04/04/niao-ge-de-linux-si-fang-cai-4-linux-ci-pan-yu-wen-jian-xi-tong-guan-li/">http://jinzhengxu.github.io/2019/04/04/niao-ge-de-linux-si-fang-cai-4-linux-ci-pan-yu-wen-jian-xi-tong-guan-li/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/文件系统/">
+                                    <span class="chip bg-color">文件系统</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '7C9WIr1xTDwYs88TkPA1W0ua-gzGzoHsz',
+        appKey: 'AzaMuy0kYyiPgMrnYKQALlNS',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/09/xian-dai-bian-yi-yuan-li-c-yu-yan-miao-shu-4/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="《现代编译原理-C语言描述》（4）- 抽象语法">
+                        
+                        <span class="card-title">《现代编译原理-C语言描述》（4）- 抽象语法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            第四章 抽象语法
+抽象的(ab-stract):从所有具体实例中提取出来的。—-韦氏词典
+
+语义动作语法分析器中的语义动作（semantic action），可以作用于正在分析的短语。
+
+对于递归下降分析器来说，语义动作是分散在实现语法分析
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-04-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jinzhengxu
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/虎书/">
+                        <span class="chip bg-color">虎书</span>
+                    </a>
+                    
+                    <a href="/tags/编译原理/">
+                        <span class="chip bg-color">编译原理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/01/xian-dai-bian-yi-yuan-li-c-yu-yan-miao-shu-3/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="《现代编译原理-C语言描述》（3）- 语法分析">
+                        
+                        <span class="card-title">《现代编译原理-C语言描述》（3）- 语法分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            第三章 语法分析
+语法(syn-tax):组合单词以形成词组,从句或句子的方法。—-韦氏词典
+
+* 一个状态数为N的自动机无法记忆嵌套深度大于N的括号 *,因为状态数为N的自动机一定会到达终态，并无法继续读入。词法分析器Lex实现上一章中的
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/底层/" class="post-category">
+                                    底层
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/虎书/">
+                        <span class="chip bg-color">虎书</span>
+                    </a>
+                    
+                    <a href="/tags/编译原理/">
+                        <span class="chip bg-color">编译原理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Jinzhengxu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:jzxttzdq@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" class="tooltipped" target="_blank" data-tooltip="我的ICPCID: https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" data-position="top" data-delay="50">
+        <i class="fas fa-lightbulb"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,2334 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux(7)-认识与学习BASH, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Linux(7)-认识与学习BASH | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Jinzhengxu" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Jinzhengxu" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Linux(7)-认识与学习BASH</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/BASH/">
+                                <span class="chip bg-color">BASH</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/软件工具/" class="post-category">
+                                软件工具
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-05-06
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="认识-BASH-这个-Shell"><a href="#认识-BASH-这个-Shell" class="headerlink" title="认识 BASH 这个 Shell"></a>认识 BASH 这个 Shell</h4><h5 id="硬件、核心与shell"><a href="#硬件、核心与shell" class="headerlink" title="硬件、核心与shell"></a>硬件、核心与shell</h5><p><img src="https://s2.ax1x.com/2019/05/09/EgZRIg.png" alt="EgZRIg.png"></p>
+<pre class=" language-bash"><code class="language-bash">用户：通过命令或图形界面操作系统
+使用者界面：shell，application，KDE，接受来自使用者的指令，与核心进行沟通
+核心kernel:内存管理，CPU进程管理等
+硬件：CPU，内存，显卡等物理硬件bash</code></pre>
+<p>壳程序的功能只是提供用户操作系统的一个接口。也就是说,只要能够操作应用程序的接口都能够称为壳程序。所以图形接口也是属于shell的。</p>
+<h5 id="为何要学文字接口的shell"><a href="#为何要学文字接口的shell" class="headerlink" title="为何要学文字接口的shell"></a>为何要学文字接口的shell</h5><ul>
+<li>文字接口的shell在不同的distribution里操作基本一致。</li>
+<li>联机时文字接口的传输速度一定比较快, 而且,较不容易出现断线或者是信息外流的问题</li>
+</ul>
+<h5 id="系统的合法shell与-etc-shells的区别"><a href="#系统的合法shell与-etc-shells的区别" class="headerlink" title="系统的合法shell与/etc/shells的区别"></a>系统的合法shell与/etc/shells的区别</h5><p>早期shell有各种版本，Bourne SHell (sh) 、在 Sun 里头预设的 CSHell、 商业上常用的 K SHell、, 还有 TCSH 等等。现在超女个用的是基于GNU架构下发展的Bourne Again SHell（bash）。</p>
+<p>通过检查<code>/etc/shells</code>文件可以检查由多少个shell可用</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">cat</span> /etc/shells
+<span class="token comment" spellcheck="true"># /etc/shells: valid login shells</span>
+/bin/sh<span class="token punctuation">(</span>已经被 /bin/bash 所取代<span class="token punctuation">)</span>
+/bin/bash<span class="token punctuation">(</span>就是 Linux 预设的 shell<span class="token punctuation">)</span>
+/bin/rbash
+/bin/dash
+/usr/bin/tmux<span class="token punctuation">(</span>我自己安装的课分栏的shell<span class="token punctuation">)</span></code></pre>
+<p>各家 shell 的功能都差不多,但是在某些语法的下达方面则有所不同， <strong><em>系统上合法的 shell 要写入 /etc/shells 这个文件</em></strong> ,系统某些服务在运作过程中,会去检查使用者能够使用的 shells ,而这些 shell 的查询就是藉由<code>/etc/shells</code> 这个文件。</p>
+<p>使用者什么时候可以取得 shell 来工作？使用者预设会取得哪一个 shell ？登入的时候,系统就会分配一个 shell 让使用者来工作了。 而这个登入取得的 shell 就记录在<code>/etc/passwd</code> 这个文件内。</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">cat</span> /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span></code></pre>
+<p>每一行的最后一个数据,就是使用者登入后可以取得的预设的 shell,root是 <code>/bin/bash</code> ,不过,系统账号 bin 与 daemon 等等,就使用 <code>/sbin/nologin</code>,某些 FTP 网站会去检查使用者的可用 shell ,而如果你不想要让这些用户使用 FTP 以外的主机资源时,可能会给予该使用者 <code>/sbin/nologin</code>,让使用者无法以其他服务登入主机。</p>
+<h5 id="Bash-shell的功能"><a href="#Bash-shell的功能" class="headerlink" title="Bash shell的功能"></a>Bash shell的功能</h5><p>bash 主要的优点有底下几个:</p>
+<pre><code>命令编修能力 history
+命令与文件补全功能　[Tab]
+命令别名设定功能 alias
+工作控制，前景背景控制　job control, foreground, background
+程序化脚本　shell script
+通配符　wildcard</code></pre><h6 id="命令编修能力-history"><a href="#命令编修能力-history" class="headerlink" title="命令编修能力 history"></a>命令编修能力 history</h6><p> bash能记忆使用过的指令,记录在家目录内的 ｀.bash_history｀文件内， 不过,需要留意的是,｀~/.bash_history｀ 记录的是前一次登入以前所执行过的指令, 而至于这一次登入所执行的指令都被暂存在内存中,注销系统后,该指令记忆才会记录到 ｀.bash_history｀ 当中。</p>
+<ul>
+<li>命令与文件补全功能　[Tab]<br>1)少打很多字; 2)确定输入的数据是正确的</li>
+<li>命令别名设定功能 alias<br>在指令列输入 alias 就可以知道目前的命令别名，也可以直接下达命令来设定别名:</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">alias</span> lm<span class="token operator">=</span><span class="token string">'ls -al'</span></code></pre>
+<ul>
+<li>工作控制，前台后台控制　job control, foreground, background<br>工作控制(jobs)的用途更广, 可以随时将工作丢到后台中执行，而不怕不小心使用了<br>[Ctrl] + c 来停掉该程序。此外,也可以在单一登录的环境中,达到多任务的目的。</li>
+<li>程序化脚本　shell script<br>以后在供雷讲唔</li>
+<li>通配符　wildcard</li>
+</ul>
+<h5 id="查询指令是否为Bash-Shell的内建命令：type"><a href="#查询指令是否为Bash-Shell的内建命令：type" class="headerlink" title="查询指令是否为Bash Shell的内建命令：type"></a>查询指令是否为Bash Shell的内建命令：type</h5><p>利用 type 这个指令来观察指令是来自于外部指令(指的是其他非 bash 所提供的指令) 或是内建在 bash 当中的</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">type</span> <span class="token punctuation">[</span>-tpa<span class="token punctuation">]</span> name
+选项与参数:
+:不加任何选项与参数时,type 会显示出 name 是外部指令还是 <span class="token function">bash</span> 内建指令
+-t
+:当加入 -t 参数时,type 会将 name 以底下这些字眼显示出他的意义:
+<span class="token function">file</span> :表示为外部指令<span class="token punctuation">;</span>
+<span class="token function">alias</span> :表示该指令为命令别名所设定的名称<span class="token punctuation">;</span>
+<span class="token function">builtin</span> :表示该指令为 <span class="token function">bash</span> 内建的指令功能<span class="token punctuation">;</span>
+-p :如果后面接的 name 为外部指令时,才会显示完整文件名<span class="token punctuation">;</span>
+-a :会由 PATH 变量定义的路径中,将所有含 name 的指令都列出来,包含 <span class="token function">alias</span></code></pre>
+<p> type 也可以用来作为类似 which 指令的用途</p>
+<h5 id="指令的下达与快速编辑按钮"><a href="#指令的下达与快速编辑按钮" class="headerlink" title="指令的下达与快速编辑按钮"></a>指令的下达与快速编辑按钮</h5><p>利用『 [Enter] 』来将 [Enter] 这个按键『跳脱!』开来,让 [Enter] 按键不再具有『开始执行』的功能!好让指令可以继续在下一行输入。需要特别留意, [Enter] 按键是紧接着反斜杠 () 的,两者中间没有其他字符。 因为 \ 仅跳过『紧接着的下一个字符』而已。</p>
+<p>当所需要下达的命令特别长,或者是输入了一串错误的指令时,你快速的将这串指令<br>整个删除掉,可以使用其他的快速组合键。<br>常见的有底下这些:</p>
+<table>
+<thead>
+<tr>
+<th>组合键</th>
+<th>功能与示范</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[ctrl]+u/[ctrl]+k</td>
+<td>分别是从光标处向前删除指令串 ([ctrl]+u) 及向后删除指令串 ([ctrl]+k)。</td>
+</tr>
+<tr>
+<td>[ctrl]+a/[ctrl]+e</td>
+<td>分别是让光标移动到整个指令串的最前面 ([ctrl]+a) 或最后面 ([ctrl]+e)。</td>
+</tr>
+</tbody></table>
+<p>在终端机 (tty) 上面登入后, Linux 就会依据 ``/etc/passwd` 文件的设定给我们一个 shell (预设是 bash),然后我们就可以依据上面的指令下达方式来操作 shell。</p>
+<h4 id="shell的变量功能"><a href="#shell的变量功能" class="headerlink" title="shell的变量功能"></a>shell的变量功能</h4><ul>
+<li><p>变量的可变性与方便性</p>
+<p><a href="https://imgchr.com/i/EglPc4" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/09/EglPc4.md.png" alt="EglPc4.md.png"></a><br>系统已经帮我们规划好 MAIL 这个变量,所以用户只要知道 mail 这个指令如何<br>使用即可, mail 会主动的取用 MAIL 这个变量,就能够如上图所示的取得自己的邮件信箱(注<br>意大小写,小写的 mail 是指令, 大写的 MAIL 则是变量名称。</p>
+</li>
+<li><p>影响 bash 环境操作的变量</p>
+</li>
+</ul>
+<p><strong><em>在 Linux System 下面,所有的线程都是需要一个执行码</em></strong>, 而就如同上<br>面提到的,你『真正以 shell 来跟 Linux 沟通,是在正确的登入 Linux 之后!』这个时候你就有一<br>个 bash 的执行程序,也才可以真正的经由 bash 来跟系统沟通。而在进入 shell 之前,也正如同上面提到的,由于系统需要一些变量来提供他数据的存取 (或者是一些环境的设定参数值, 例如是<br>否要显示彩色等等的) ,所以就有一些所谓的『环境变量』 需要来读入系统中，这些环境变量例<br>如 PATH、HOME、MAIL、SHELL 等等,都是很重要的, 为了区别与自定义变量的不同,环境变<br>量通常以大写字符来表示。</p>
+<ul>
+<li><p>脚本程序设计 (shell script) 的好帮手</p>
+<h5 id="什么是变量？"><a href="#什么是变量？" class="headerlink" title="什么是变量？"></a>什么是变量？</h5><p>变量就是以一组文字或符号等,来取代一些设定或者是一串保留的数据</p>
+<h5 id="变量的取用与设定：echo，变量设置规则，unset"><a href="#变量的取用与设定：echo，变量设置规则，unset" class="headerlink" title="变量的取用与设定：echo，变量设置规则，unset"></a>变量的取用与设定：echo，变量设置规则，unset</h5><p>变量在被取用时,前面必须要加上『 $ 』才行</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token keyword">echo</span> <span class="token variable">$variable</span>
+$ <span class="token keyword">echo</span> <span class="token variable">$PATH</span>
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin:/home/dmtsai/bin
+$ <span class="token keyword">echo</span> <span class="token variable">${PATH}</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${HOME}</span> <span class="token comment" spellcheck="true">#显示出您的环境变量 HOME</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${MAIL}</span> <span class="token comment" spellcheck="true">#显示出您的环境变量 MAIL</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${myname}</span>
+     <span class="token comment" spellcheck="true">#没有任何数据～因为这个变量尚未被设定</span>
+     <span class="token comment" spellcheck="true">#每一种 shell 的语法都不相同~在变量的使用上,bash 在你没有设定的变量中强迫去</span>
+     <span class="token comment" spellcheck="true">#echo 时,它会显示出空的值。 在其他某些 shell 中,随便去 echo 一个不存在的变</span>
+     <span class="token comment" spellcheck="true">#量,它是会出现错误讯息</span>
+$ myname<span class="token operator">=</span>Jason
+$ <span class="token keyword">echo</span> <span class="token variable">${myname}</span>
+Jason　<span class="token comment" spellcheck="true">#变量设置完成</span></code></pre>
+<p>变量的设定规则：</p>
+</li>
+<li><p>变量与变量内容以一个等号『=』来连结</p>
+</li>
+<li><p>等号两边不能直接接空格符</p>
+</li>
+<li><p>变量名称只能是英文字母与数字,但是开头字符不能是数字</p>
+</li>
+<li><p>变量内容若有空格符可使用双引号『”』或单引号『’』将变量内容结合起来</p>
+<ul>
+<li>双引号内的特殊字符如 $ 等,可以保有原本的特性</li>
+<li>单引号内的特殊字符则仅为一般字符 (纯文本)</li>
+</ul>
+</li>
+<li><p>可用『 \ 』将特殊符号(如 [Enter], $, , 空格符, ‘等)变成一般字符</p>
+</li>
+<li><p>在一串指令的执行中,还需要藉由其他额外的指令所提供的信息时,可以使用反单引号『<code>命令</code>』或 『$(命令)』</p>
+</li>
+<li><p>若该变量为扩增变量内容时,则可用 “$变量名称” 或 ${变量} 累加内容</p>
+</li>
+<li><p>若该变量需要在其他子程序执行,则需要以 export 来使变量变成环境变量:『export PATH』</p>
+</li>
+<li><p>通常大写字符为系统默认变量,自行设定变量可以使用小写字符,方便判断</p>
+</li>
+<li><p>取消变量的方法为使用 unset :『unset 变量名称』</p>
+<pre class=" language-bash"><code class="language-bash">$ name<span class="token operator">=</span>Jason
+$ <span class="token keyword">echo</span> <span class="token variable">${name}</span>
+Jason
+$ <span class="token function">bash</span>  <span class="token comment" spellcheck="true">#进入到子程序</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${name}</span>
+        <span class="token comment" spellcheck="true">#并没有刚刚设定的内容</span>
+$ <span class="token keyword">exit</span>  <span class="token comment" spellcheck="true">#子程序:离开这个子程序</span>
+$ <span class="token function">export</span> name
+$ <span class="token function">bash</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${name}</span>
+Jason
+<span class="token comment" spellcheck="true">#在一般的状态下,父程序的自定义变量是无法在子程序内使用的。但是透过export将变量变成环境变量后,就能够在子程序底下应用了</span>
+
+$ <span class="token function">cd</span> /lib/modules/<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> -r<span class="token variable">`</span></span>/kernel
+<span class="token comment" spellcheck="true"># 进入到目前核心的模块目录</span>
+$ <span class="token function">ls</span> -ld <span class="token variable"><span class="token variable">$(</span><span class="token function">locate</span> <span class="token function">crontab</span><span class="token variable">)</span></span>
+<span class="token comment" spellcheck="true"># 先以 locate 将文件名数据都列出来,再以 ls 指令来处理的意思</span>
+$ work<span class="token operator">=</span><span class="token string">"/cluster/server/work/taiwan_2015/003/"</span>
+$ <span class="token function">cd</span> <span class="token variable">$work</span>
+<span class="token comment" spellcheck="true"># 使用其他目录作为我的模式工作目录时,只要变更 work 这个变数</span></code></pre>
+</li>
+</ul>
+<h5 id="环境变量的功能"><a href="#环境变量的功能" class="headerlink" title="环境变量的功能"></a>环境变量的功能</h5><h6 id="用-env-观察环境变量与常见环境变量说明"><a href="#用-env-观察环境变量与常见环境变量说明" class="headerlink" title="用 env 观察环境变量与常见环境变量说明"></a>用 env 观察环境变量与常见环境变量说明</h6><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 列出目前的 shell 环境下的所有环境变量与其内容</span>
+$ <span class="token function">env</span>
+HOSTNAME<span class="token operator">=</span>study.centos.vbird <span class="token comment" spellcheck="true"># 这部主机的主机名</span>
+TERM<span class="token operator">=</span>xterm <span class="token comment" spellcheck="true"># 这个终端机使用的环境是什么类型</span>
+SHELL<span class="token operator">=</span>/bin/bash <span class="token comment" spellcheck="true"># 目前这个环境下,使用的 Shell 是哪一个程序?</span>
+HISTSIZE<span class="token operator">=</span>1000 <span class="token comment" spellcheck="true"># 『记录指令的笔数』在 CentOS 默认可记录 1000 笔</span>
+OLDPWD<span class="token operator">=</span>/home/dmtsai <span class="token comment" spellcheck="true"># 上一个工作目录的所在</span>
+LC_ALL<span class="token operator">=</span>en_US.utf8 <span class="token comment" spellcheck="true"># 由于语系的关系,鸟哥偷偷丢上来的一个设定</span>
+USER<span class="token operator">=</span>dmtsai <span class="token comment" spellcheck="true"># 使用者的名称啊!</span>
+LS_COLORS<span class="token operator">=</span>rs<span class="token operator">=</span>0:di<span class="token operator">=</span>01<span class="token punctuation">;</span>34:ln<span class="token operator">=</span>01<span class="token punctuation">;</span>36:mh<span class="token operator">=</span>00:pi<span class="token operator">=</span>40<span class="token punctuation">;</span>33:so<span class="token operator">=</span>01<span class="token punctuation">;</span>35:do<span class="token operator">=</span>01<span class="token punctuation">;</span>35:bd<span class="token operator">=</span>40<span class="token punctuation">;</span>33<span class="token punctuation">;</span>01:cd<span class="token operator">=</span>40<span class="token punctuation">;</span>33<span class="token punctuation">;</span>01:
+or<span class="token operator">=</span>40<span class="token punctuation">;</span>31<span class="token punctuation">;</span>01:mi<span class="token operator">=</span>01<span class="token punctuation">;</span>05<span class="token punctuation">;</span>37<span class="token punctuation">;</span>41:su<span class="token operator">=</span>37<span class="token punctuation">;</span>41:sg<span class="token operator">=</span>30<span class="token punctuation">;</span>43:ca<span class="token operator">=</span>30<span class="token punctuation">;</span>41:tw<span class="token operator">=</span>30<span class="token punctuation">;</span>42:ow<span class="token operator">=</span>34<span class="token punctuation">;</span>42:st<span class="token operator">=</span>37<span class="token punctuation">;</span>44:ex<span class="token operator">=</span>01<span class="token punctuation">;</span>32:
+*.tar<span class="token operator">=</span>01<span class="token punctuation">..</span>. <span class="token comment" spellcheck="true"># 一些颜色显示</span>
+MAIL<span class="token operator">=</span>/var/spool/mail/dmtsai <span class="token comment" spellcheck="true"># 这个用户所取用的 mailbox 位置</span>
+PATH<span class="token operator">=</span>/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin:/home/dmtsai/bin
+PWD<span class="token operator">=</span>/home/dmtsai <span class="token comment" spellcheck="true"># 目前用户所在的工作目录 (利用 pwd 取出!)</span>
+LANG<span class="token operator">=</span>zh_TW.UTF-8 <span class="token comment" spellcheck="true"># 这个与语系有关,底下会再介绍!</span>
+HOME<span class="token operator">=</span>/home/dmtsai <span class="token comment" spellcheck="true"># 这个用户的家目录啊!</span>
+LOGNAME<span class="token operator">=</span>dmtsai <span class="token comment" spellcheck="true"># 登入者用来登入的账号名称</span>
+_<span class="token operator">=</span>/usr/bin/env <span class="token comment" spellcheck="true"># 上一次使用的指令的最后一个参数(或指令本身)</span></code></pre>
+<ul>
+<li>HOME：代表用户的家目录。</li>
+<li>SHELL：目前这个环境使用的 SHELL 是哪个程序</li>
+<li>HISTSIZE： 历史记录的『笔数』</li>
+<li>MAIL：使用 mail 这个指令在收信时,系统会去读取的邮件信箱文件 (mailbox)</li>
+<li>PATH:执行文件搜寻的路径</li>
+<li>LANG:语系数据</li>
+<li>RANDOM:可以透过这个随机数文件相关的变量 ($RANDOM) 来随机取得随机数值喔。<br>在 BASH 的环境下,这个 RANDOM 变量的内容,介于 0~32767 之间.<pre class=" language-bash"><code class="language-bash">$ <span class="token keyword">declare</span> -i number<span class="token operator">=</span><span class="token variable">$RANDOM*10</span>/32678<span class="token punctuation">;</span>\
+<span class="token operator">></span> <span class="token keyword">echo</span> <span class="token variable">${number}</span>
+2</code></pre>
+<h6 id="用-set-观察所有变量-含环境变量与自定义变量"><a href="#用-set-观察所有变量-含环境变量与自定义变量" class="headerlink" title="用 set 观察所有变量 (含环境变量与自定义变量)"></a>用 set 观察所有变量 (含环境变量与自定义变量)</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token keyword">set</span>
+BASH<span class="token operator">=</span>/bin/bash <span class="token comment" spellcheck="true"># bash 的主程序放置路径</span>
+BASH_VERSINFO<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">[</span>0<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"4"</span> <span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"2"</span> <span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"46"</span> <span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"1"</span> <span class="token punctuation">[</span>4<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"release"</span> <span class="token punctuation">[</span>5<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"x86_64-redhat-linux-gnu"</span><span class="token punctuation">)</span>
+BASH_VERSION<span class="token operator">=</span><span class="token string">'4.2.46(1)-release'</span> <span class="token comment" spellcheck="true"># 这两行是 bash 的版本啊!</span>
+COLUMNS<span class="token operator">=</span>90 <span class="token comment" spellcheck="true"># 在目前的终端机环境下,使用的字段有几个字符长度</span>
+HISTFILE<span class="token operator">=</span>/home/dmtsai/.bash_history <span class="token comment" spellcheck="true"># 历史命令记录的放置文件,隐藏档</span>
+HISTFILESIZE<span class="token operator">=</span>1000 <span class="token comment" spellcheck="true"># 存起来(与上个变量有关)的文件之指令的最大纪录笔数。</span>
+HISTSIZE<span class="token operator">=</span>1000 <span class="token comment" spellcheck="true"># 目前环境下,内存中记录的历史命令最大笔数。</span>
+IFS<span class="token operator">=</span>$<span class="token string">' \t\n'</span> <span class="token comment" spellcheck="true"># 预设的分隔符</span>
+LINES<span class="token operator">=</span>20 <span class="token comment" spellcheck="true"># 目前的终端机下的最大行数</span>
+MACHTYPE<span class="token operator">=</span>x86_64-redhat-linux-gnu <span class="token comment" spellcheck="true"># 安装的机器类型</span>
+OSTYPE<span class="token operator">=</span>linux-gnu <span class="token comment" spellcheck="true"># 操作系统的类型!</span>
+PS1<span class="token operator">=</span><span class="token string">'[\u@\h \W]\$ '</span> <span class="token comment" spellcheck="true"># PS1 就厉害了。这个是命令提示字符,也就是我们常见的[root@www ~] 或 [dmtsai ~]$ 的设定值啦!可以更动的!</span>
+PS2<span class="token operator">=</span><span class="token string">'> '</span> <span class="token comment" spellcheck="true"># 如果你使用跳脱符号 (\) 第二行以后的提示字符也</span>
+$ <span class="token comment" spellcheck="true"># 目前这个 shell 所使用的 PID</span>
+? <span class="token comment" spellcheck="true"># 刚刚执行完指令的回传值。</span></code></pre>
+</li>
+</ul>
+<p><strong><em>基本上,在 Linux 预设的情况中,使用{大写的字母}来设定的变量<br>一般为系统内定需要的变量</em></strong></p>
+<p>比较重要的几个变量：</p>
+<h6 id="PS1-提示字符的设定"><a href="#PS1-提示字符的设定" class="headerlink" title="PS1:(提示字符的设定)"></a>PS1:(提示字符的设定)</h6><p>PS1 就是命令提示字符,每次按下 [Enter] 按键去执行某个指令后,最后要再次出现提示字符时, 就会主动去读取这个变数值了。每个 distributions 的bash 默认的 PS1 变量内容可能有些许的差异.</p>
+<pre class=" language-bash"><code class="language-bash"> \d :可显示出『星期 月 日』的日期格式,如:<span class="token string">"Mon Feb 2"</span>
+ \H :完整的主机名。举例来说,鸟哥的练习机为『study.centos.vbird』
+ \h :仅取主机名在第一个小数点之前的名字,如鸟哥主机则为『study』后面省略
+ \t :显示时间,为 24 小时格式的『HH:MM:SS』
+ \T :显示时间,为 12 小时格式的『HH:MM:SS』
+ \A :显示时间,为 24 小时格式的『HH:MM』
+ \@ :显示时间,为 12 小时格式的『am/pm』样式
+ \u :目前使用者的账号名称,如『dmtsai』
+ \v :BASH 的版本信息,如鸟哥的测试主机版本为 4.2.46<span class="token punctuation">(</span>1<span class="token punctuation">)</span>-release,仅取『4.2』显示
+ \w :完整的工作目录名称,由根目录写起的目录名称。但家目录会以 ~ 取代<span class="token punctuation">;</span>
+ \W :利用 <span class="token function">basename</span> 函数取得工作目录名称,所以仅会列出最后一个目录名。
+ \# :下达的第几个指令。
+ \$ :提示字符,如果是 root 时,提示字符为 <span class="token comment" spellcheck="true"># ,否则就是 $ 啰~</span></code></pre>
+<h6 id="关于本-shell-的-PID"><a href="#关于本-shell-的-PID" class="headerlink" title="$:(关于本 shell 的 PID)"></a>$:(关于本 shell 的 PID)</h6><p>代表的是『目前这个 Shell 的线程代号』,亦即是所谓的 PID(Process ID)。</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token keyword">echo</span> $$ <span class="token comment" spellcheck="true">#shell 的 PID</span></code></pre>
+<h6 id="关于上个执行指令的回传值"><a href="#关于上个执行指令的回传值" class="headerlink" title="?:(关于上个执行指令的回传值)"></a>?:(关于上个执行指令的回传值)</h6><p>? 代表『上一个执行的指令所回传的值』,当我们执行某些指令时, 这些指令都会回传一个执行后的代码。一般来说,如果成功的执行该指令,则会回传一个 0 值，如果执行过程发生错误,就会回传『错误代码』</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token keyword">echo</span> <span class="token variable">$SHELL</span>
+/bin/bash  <span class="token comment" spellcheck="true">#Linux 预设使用 /bin/bash</span>
+$ <span class="token keyword">echo</span> <span class="token variable">$?</span>
+0          <span class="token comment" spellcheck="true">#因为没问题,所以回传值为 0</span>
+$ 12name<span class="token operator">=</span>Jaosn
+12name<span class="token operator">=</span>Jaosn: <span class="token function">command</span> not found <span class="token comment" spellcheck="true">#发生错误，bash 回报有问题</span>
+$ <span class="token keyword">echo</span> <span class="token variable">$?</span>
+127 <span class="token comment" spellcheck="true">#错误代码回传值依据软件而有不同,可以利用这个代码来搜寻错误的原因</span>
+$ <span class="token keyword">echo</span> <span class="token variable">$?</span>
+0</code></pre>
+<ul>
+<li>OSTYPE, HOSTTYPE, MACHTYPE:(主机硬件与核心的等级)</li>
+</ul>
+<h6 id="export-自定义变量转成环境变量"><a href="#export-自定义变量转成环境变量" class="headerlink" title="export: 自定义变量转成环境变量"></a>export: 自定义变量转成环境变量</h6><p><strong><em>子程序仅会继承父程序的环境变量, 子程序不会继承父程序的自定义变量</em></strong>。<br>想要让该变量内容继续的在子程序中使用,那么就请执行:</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">export</span> 变量名称
+<span class="token comment" spellcheck="true"># 分享自己的变量设定给后来呼叫的文件或其他程序</span></code></pre>
+<h5 id="影响显示结果的语系变量（locale）"><a href="#影响显示结果的语系变量（locale）" class="headerlink" title="影响显示结果的语系变量（locale）"></a>影响显示结果的语系变量（locale）</h5><pre class=" language-bash"><code class="language-bash">$ locale -a <span class="token comment" spellcheck="true">#当前系统支持了多少的语系</span>
+$ locale
+LANG<span class="token operator">=</span>en_US.UTF-8   <span class="token comment" spellcheck="true">#主语言的环境</span>
+LANGUAGE<span class="token operator">=</span>
+LC_CTYPE<span class="token operator">=</span><span class="token string">"en_US.UTF-8"</span> <span class="token comment" spellcheck="true">#字符(文字)辨识的编码</span>
+LC_NUMERIC<span class="token operator">=</span>zh_CN.UTF-8 <span class="token comment" spellcheck="true">#数字系统的显示讯息</span>
+LC_TIME<span class="token operator">=</span>zh_CN.UTF-8 <span class="token comment" spellcheck="true">#时间系统的显示数据</span>
+LC_COLLATE<span class="token operator">=</span><span class="token string">"en_US.UTF-8"</span> <span class="token comment" spellcheck="true">#字符串的比较与排序等</span>
+LC_MONETARY<span class="token operator">=</span>zh_CN.UTF-8 <span class="token comment" spellcheck="true">#币值格式的显示等</span>
+LC_MESSAGES<span class="token operator">=</span><span class="token string">"en_US.UTF-8"</span> <span class="token comment" spellcheck="true">#讯息显示的内容,如菜单、错误讯息等</span>
+LC_PAPER<span class="token operator">=</span>zh_CN.UTF-8
+LC_NAME<span class="token operator">=</span>zh_CN.UTF-8
+LC_ADDRESS<span class="token operator">=</span>zh_CN.UTF-8
+LC_TELEPHONE<span class="token operator">=</span>zh_CN.UTF-8
+LC_MEASUREMENT<span class="token operator">=</span>zh_CN.UTF-8
+LC_IDENTIFICATION<span class="token operator">=</span>zh_CN.UTF-8
+LC_ALL<span class="token operator">=</span> <span class="token comment" spellcheck="true">#整体语系的环境</span></code></pre>
+<p><strong><em>如果其他的语系变量都未设定, 且你有设定 LANG 或者是 LC_ALL 时,则其他的语系变量就会被这两个变量所取代</em></strong></p>
+<h5 id="变量的有效范围"><a href="#变量的有效范围" class="headerlink" title="变量的有效范围"></a>变量的有效范围</h5><ul>
+<li>环境变量=全局变量</li>
+<li>自定义变数=局部变量<br>```bash</li>
+</ul>
+<p>1.当启动一个 shell,操作系统会分配一记忆区块给 shell 使用,此内存内之变量可让子程序取用<br>2.若在父程序利用 export 功能,可以让自定义变量的内容写到上述的记忆区块当中(环境变量);<br>3.当加载另一个 shell 时 (亦即启动子程序,而离开原本的父程序了),子 shell 可以将父<br>  shell 的环境变量所在的记忆区块导入自己的环境变量区块当中。</p>
+<pre><code>这里需要注意的是 ***『环境变量』与『bash 的操作环境』*** 意思不太一样,举例来说, PS1 并不是环境变量。
+##### 变量键盘读取、数组与宣告read，array，declare
++ read
+
+  ```bash
+  $ read [-pt] variable
+  选项与参数:
+  -p :后面接提示字符
+  -t :后面接等待的『秒数』
+  $ read atest
+  This is a test  # 此时光标会等待输入
+  $ echo ${atest}
+  This is a test # 刚刚输入的数据已经变成一个变量内容
+
+  $ read -p &quot;Please keyin your name: &quot; -t 30 named
+  Please keyin your name: Jason # 提示字符
+  $ echo ${named}
+  Jason #输入的数据又变成一个变量的内容了!</code></pre><ul>
+<li><p>array</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token keyword">declare</span> -a var
+$ var<span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"sdf"</span>
+$ var<span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"sdfsd"</span>
+$ <span class="token keyword">echo</span> <span class="token string">"<span class="token variable">${var[1]}</span>,<span class="token variable">${var[2]}</span>"</span>
+sdf,sdfsd
++ declare/typeset
+<span class="token keyword">declare</span> 或 typeset 是一样的功能,就是在『宣告变量的类型』。
+​```bash
+$ <span class="token keyword">declare</span> <span class="token punctuation">[</span>-aixr<span class="token punctuation">]</span> variable
+选项与参数:
+-a :将后面名为 variable 的变量定义成为数组 <span class="token punctuation">(</span>array<span class="token punctuation">)</span> 类型
+-i :将后面名为 variable 的变量定义成为整数数字 <span class="token punctuation">(</span>integer<span class="token punctuation">)</span> 类型
+-x :用法与 <span class="token function">export</span> 一样,就是将后面的 variable 变成环境变量<span class="token punctuation">;</span>
+-r :将变量设定成为 <span class="token function">readonly</span> 类型,该变量不可被更改内容,也不能 unset
+$ sum<span class="token operator">=</span>100+300+50
+$ <span class="token keyword">echo</span> <span class="token variable">${sum}</span>
+100+300+50 <span class="token comment" spellcheck="true">#没有计算加总，因为这是文字型态的变量属性</span>
+$ <span class="token keyword">declare</span> -i sum<span class="token operator">=</span>100+300+50
+$ <span class="token keyword">echo</span> <span class="token variable">${sum}</span>
+450
+$ <span class="token keyword">declare</span> -x <span class="token function">sum</span>
+$ <span class="token function">export</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token function">sum</span>
+<span class="token keyword">declare</span> -ix sum<span class="token operator">=</span><span class="token string">"450"</span> <span class="token comment" spellcheck="true">#将 sum 变成环境变量</span>
+$ <span class="token keyword">declare</span> -r <span class="token function">sum</span>
+$ sum<span class="token operator">=</span>tesgting
+-bash: sum: <span class="token function">readonly</span> variable <span class="token comment" spellcheck="true">#sum 变成只读属性,不可更动</span>
+$ <span class="token keyword">declare</span> +x <span class="token function">sum</span> <span class="token comment" spellcheck="true"># 将 - 变成 + 可以进行『取消』动作</span>
+$ <span class="token keyword">declare</span> -p <span class="token function">sum</span> <span class="token comment" spellcheck="true">#-p 可以单独列出变量的类型</span>
+<span class="token keyword">declare</span> -ir sum<span class="token operator">=</span><span class="token string">"450"</span> <span class="token comment" spellcheck="true">#只剩下 i, r 的类型,不具有 x</span></code></pre>
+</li>
+</ul>
+<h5 id="与文件系统及程序的限制关系：ulimit"><a href="#与文件系统及程序的限制关系：ulimit" class="headerlink" title="与文件系统及程序的限制关系：ulimit"></a>与文件系统及程序的限制关系：ulimit</h5><p>bash 是可以『限制用户的某些系统资源』的,包括可以开启的文件数量, 可以使用的 CPU 时间,可以使用的内存总量等等。</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">ulimit</span> <span class="token punctuation">[</span>-SHacdfltu<span class="token punctuation">]</span> <span class="token punctuation">[</span>配额<span class="token punctuation">]</span>
+选项与参数:
+-H :hard limit ,严格的设定,必定不能超过这个设定的数值<span class="token punctuation">;</span>
+-S :soft limit ,警告的设定,可以超过这个设定值,但是若超过则有警告讯息。
+在设定上,通常 soft 会比 hard 小,举例来说,soft 可设定为 80 而 hard
+设定为 100,那么你可以使用到 90 <span class="token punctuation">(</span>因为没有超过 100<span class="token punctuation">)</span>,但介于 80~100 之间时,
+系统会有警告讯息通知你<span class="token operator">!</span>
+-a :后面不接任何选项与参数,可列出所有的限制额度<span class="token punctuation">;</span>
+-c :当某些程序发生错误时,系统可能会将该程序在内存中的信息写成文件<span class="token punctuation">(</span>除错用<span class="token punctuation">)</span>,
+这种文件就被称为核心文件<span class="token punctuation">(</span>core file<span class="token punctuation">)</span>。此为限制每个核心文件的最大容量。
+-f :此 shell 可以建立的最大文件容量<span class="token punctuation">(</span>一般可能设定为 2GB<span class="token punctuation">)</span>单位为 Kbytes
+-d :程序可使用的最大断裂内存<span class="token punctuation">(</span>segment<span class="token punctuation">)</span>容量<span class="token punctuation">;</span>
+-l :可用于锁定 <span class="token punctuation">(</span>lock<span class="token punctuation">)</span> 的内存量
+-t :可使用的最大 CPU 时间 <span class="token punctuation">(</span>单位为秒<span class="token punctuation">)</span>
+-u :单一用户可以使用的最大进程<span class="token punctuation">(</span>process<span class="token punctuation">)</span>数量。
+$ <span class="token function">ulimit</span> -a
+core <span class="token function">file</span> size          <span class="token punctuation">(</span>blocks, -c<span class="token punctuation">)</span> 0
+data seg size           <span class="token punctuation">(</span>kbytes, -d<span class="token punctuation">)</span> unlimited
+scheduling priority             <span class="token punctuation">(</span>-e<span class="token punctuation">)</span> 0
+<span class="token function">file</span> size               <span class="token punctuation">(</span>blocks, -f<span class="token punctuation">)</span> unlimited
+pending signals                 <span class="token punctuation">(</span>-i<span class="token punctuation">)</span> 62599
+max locked memory       <span class="token punctuation">(</span>kbytes, -l<span class="token punctuation">)</span> 16384
+max memory size         <span class="token punctuation">(</span>kbytes, -m<span class="token punctuation">)</span> unlimited
+<span class="token function">open</span> files                      <span class="token punctuation">(</span>-n<span class="token punctuation">)</span> 1024
+pipe size            <span class="token punctuation">(</span>512 bytes, -p<span class="token punctuation">)</span> 8
+POSIX message queues     <span class="token punctuation">(</span>bytes, -q<span class="token punctuation">)</span> 819200
+real-time priority              <span class="token punctuation">(</span>-r<span class="token punctuation">)</span> 0
+stack size              <span class="token punctuation">(</span>kbytes, -s<span class="token punctuation">)</span> 8192
+cpu <span class="token function">time</span>               <span class="token punctuation">(</span>seconds, -t<span class="token punctuation">)</span> unlimited
+max user processes              <span class="token punctuation">(</span>-u<span class="token punctuation">)</span> 62599
+virtual memory          <span class="token punctuation">(</span>kbytes, -v<span class="token punctuation">)</span> unlimited
+<span class="token function">file</span> locks                      <span class="token punctuation">(</span>-x<span class="token punctuation">)</span> unlimited
+$ <span class="token function">ulimit</span> -f 10240 <span class="token comment" spellcheck="true">#限制用户仅能建立 10MBytes 以下的容量的文件</span></code></pre>
+<h5 id="变量内容的删除，取代与替换Optional"><a href="#变量内容的删除，取代与替换Optional" class="headerlink" title="变量内容的删除，取代与替换Optional"></a>变量内容的删除，取代与替换Optional</h5><ul>
+<li><p>变量内容的删除与取代</p>
+<pre class=" language-bash"><code class="language-bash">$ path<span class="token operator">=</span><span class="token variable">${PATH}</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${path}</span>
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin:/home/dmtsai/bin
+$ <span class="token keyword">echo</span> $<span class="token punctuation">{</span>path<span class="token comment" spellcheck="true">#/*local/bin:} #删除目录</span>
+
+$<span class="token punctuation">{</span>variable<span class="token comment" spellcheck="true">#/*local/bin:}</span>
+上面的特殊字体部分是关键词<span class="token operator">!</span>用在这种删除模式所必须存在的
+$<span class="token punctuation">{</span>variable<span class="token comment" spellcheck="true">#/*local/bin:}</span>
+这就是原本的变量名称,以上面范例二来说,这里就填写 path 这个『变量名称』啦<span class="token operator">!</span>
+$<span class="token punctuation">{</span>variable<span class="token comment" spellcheck="true">#/*local/bin:}</span>
+这是重点<span class="token operator">!</span>代表『从变量内容的最前面开始向右删除』,且仅删除最短的那个
+$<span class="token punctuation">{</span>variable<span class="token comment" spellcheck="true">#/*local/bin:}</span>
+代表要被删除的部分,由于 <span class="token comment" spellcheck="true"># 代表由前面开始删除,所以这里便由开始的 / 写起。</span>
+需要注意的是,我们还可以透过通配符 * 来取代 0 到无穷多个任意字符
+$ <span class="token keyword">echo</span> $<span class="token punctuation">{</span>path<span class="token comment" spellcheck="true">##/*:}</span>
+/home/dmtsai/bin
+<span class="token comment" spellcheck="true"># 变成 ## 之后『删除掉最长的那个数据』</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${path%:*bin}</span>
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/dmtsai/.local/bin
+<span class="token comment" spellcheck="true"># 这个 % 符号代表由最后面开始向前删除!</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${path%%:*bin}</span>
+/usr/local/bin
+<span class="token comment" spellcheck="true"># 同样的, %% 代表的则是最长的符合字符串</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${path/sbin/SBIN}</span> <span class="token comment" spellcheck="true">#将 path 的变量内容内的 sbin 取代成大写 SBIN</span>
+$ <span class="token keyword">echo</span> <span class="token variable">${path//sbin/SBIN}</span> <span class="token comment" spellcheck="true">#如果是两条斜线,那么就变成所有符合的内容都会被取代喔</span></code></pre>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>变量设定方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>${变量#关键词}</td>
+<td>若变量内容从头开始的数据符合『关键词』,则将符合的最短数据删除</td>
+</tr>
+<tr>
+<td>${变量##关键词}</td>
+<td>若变量内容从头开始的数据符合『关键词』,则将符合的最长数据删除</td>
+</tr>
+<tr>
+<td>${变量%关键词}</td>
+<td>若变量内容从尾向前的数据符合『关键词』,则将符合的最短数据删除</td>
+</tr>
+<tr>
+<td>${变量%%关键词}</td>
+<td>若变量内容从尾向前的数据符合『关键词』,则将符合的最长数据删除</td>
+</tr>
+<tr>
+<td>${变量/旧字符串/新字符串}</td>
+<td>若变量内容符合『旧字符串』则『第一个旧字符串会被新字符串</td>
+</tr>
+<tr>
+<td>${变量//旧字符串/新字符串}</td>
+<td>若变量内容符合『旧字取代』若变量内容符合『旧字符串』则『全部的旧字符串会被新字符串取代』</td>
+</tr>
+</tbody></table>
+<ul>
+<li>变量的测试与内容替换<pre class=" language-bash"><code class="language-bash">new_var<span class="token operator">=</span><span class="token variable">${old_var-content}</span>
+新的变量,主要用来取代旧变量。新旧变量名称其实常常是一样的
+new_var<span class="token operator">=</span><span class="token variable">${old_var-content}</span>这是本范例中的关键词部分<span class="token operator">!</span>必须要存在的哩<span class="token operator">!</span>
+new_var<span class="token operator">=</span><span class="token variable">${old_var-content}</span>
+旧的变量,被测试的项目<span class="token operator">!</span>
+new_var<span class="token operator">=</span><span class="token variable">${old_var-content}</span>
+变量的『内容』,在本范例中,这个部分是在『给予未设定变量的内容』</code></pre>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>变量设定方式</th>
+<th>str 没有设定</th>
+<th>str 为空字符串</th>
+<th>str 已设定非为空字符串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>var=${str-expr}</td>
+<td>var=expr</td>
+<td>var=</td>
+<td>var=str</td>
+</tr>
+<tr>
+<td>var=${str:-expr}</td>
+<td>var=expr</td>
+<td>var=expr</td>
+<td>var=str</td>
+</tr>
+<tr>
+<td>var=${str+expr}</td>
+<td>var=</td>
+<td>var=expr</td>
+<td>var=expr</td>
+</tr>
+<tr>
+<td>var=${str:+expr}</td>
+<td>var=</td>
+<td>var=</td>
+<td>var=expr</td>
+</tr>
+<tr>
+<td>var=${str=expr}</td>
+<td>str=expr var=expr</td>
+<td>str 不变 var=</td>
+<td>str 不变 var=str</td>
+</tr>
+<tr>
+<td>var=${str:=expr}</td>
+<td>str=expr var=expr</td>
+<td>str=expr var=expr</td>
+<td>str 不变 var=str</td>
+</tr>
+<tr>
+<td>var=${str?expr}</td>
+<td>expr 输出至 stderr</td>
+<td>var=</td>
+<td>var=str</td>
+</tr>
+<tr>
+<td>var=${str:?expr}</td>
+<td>expr 输出至 stderr</td>
+<td>expr 输出至 stderr</td>
+<td>var=str</td>
+</tr>
+</tbody></table>
+<h4 id="变量别名与历史命令"><a href="#变量别名与历史命令" class="headerlink" title="变量别名与历史命令"></a>变量别名与历史命令</h4><h5 id="命令别名设定-alias-unalias"><a href="#命令别名设定-alias-unalias" class="headerlink" title="命令别名设定: alias, unalias"></a>命令别名设定: alias, unalias</h5><pre class=" language-bash"><code class="language-bash">$ <span class="token function">alias</span> lm<span class="token operator">=</span><span class="token string">'ls -al | more'</span></code></pre>
+<p>alias 的定义规则与变量定义规则几乎相同』, 所以只要在 alias 后面加上{『别名』=’指令 选项…’ }</p>
+<h5 id="历史命令-history"><a href="#历史命令-history" class="headerlink" title="历史命令:history"></a>历史命令:history</h5><pre class=" language-bash"><code class="language-bash">$ <span class="token function">history</span> <span class="token punctuation">[</span>n<span class="token punctuation">]</span>
+$ <span class="token function">history</span> <span class="token punctuation">[</span>-c<span class="token punctuation">]</span>
+$ <span class="token function">history</span> <span class="token punctuation">[</span>-raw<span class="token punctuation">]</span> histfiles
+选项与参数:
+ n :数字,意思是『要列出最近的 n 笔命令行表』的意思<span class="token operator">!</span>
+-c :将目前的 shell 中的所有 <span class="token function">history</span> 内容全部消除
+-a :将目前新增的 <span class="token function">history</span> 指令新增入 histfiles 中,若没有加 histfiles ,
+则预设写入 ~/.bash_history
+-r :将 histfiles 的内容读到目前这个 shell 的 <span class="token function">history</span> 记忆中<span class="token punctuation">;</span>
+-w :将目前的 <span class="token function">history</span> 记忆内容写入 histfiles 中<span class="token operator">!</span>
+
+$ <span class="token operator">!</span>number
+$ <span class="token operator">!</span>command
+$ <span class="token operator">!</span><span class="token operator">!</span>
+选项与参数:
+number:执行第几笔指令的意思<span class="token punctuation">;</span>
+<span class="token function">command</span> :由最近的指令向前搜寻『指令串开头为 command』的那个指令,并执行<span class="token punctuation">;</span>
+<span class="token operator">!</span><span class="token operator">!</span> :就是执行上一个指令<span class="token punctuation">(</span>相当于按↑按键后,按 Enter<span class="token punctuation">)</span></code></pre>
+<ul>
+<li>同一账号同时多次登入的 history 写入问题</li>
+</ul>
+<p>bash 在同时以 root 的身份登入, 因此所有的 bash 都有自己的 1000 笔记录在内存中。因为等到注销时才会更新记录文件,所以啰, 最后注销的那个 bash 才会是最后写入的数据。</p>
+<h4 id="Bash-Shell-的操作环境"><a href="#Bash-Shell-的操作环境" class="headerlink" title="Bash Shell 的操作环境"></a>Bash Shell 的操作环境</h4><h5 id="路径与指令搜寻顺序"><a href="#路径与指令搜寻顺序" class="headerlink" title="路径与指令搜寻顺序"></a>路径与指令搜寻顺序</h5><p>指令运作的顺序可以这样看:</p>
+<pre class=" language-bash"><code class="language-bash">1. 以相对/绝对路径执行指令,例如『 /bin/ls 』或『 ./ls 』<span class="token punctuation">;</span>
+2. 由 <span class="token function">alias</span> 找到该指令来执行<span class="token punctuation">;</span>
+3. 由 <span class="token function">bash</span> 内建的 <span class="token punctuation">(</span>builtin<span class="token punctuation">)</span> 指令来执行<span class="token punctuation">;</span>
+4. 透过 <span class="token variable">$PATH</span> 这个变量的顺序搜寻到的第一个指令来执行。</code></pre>
+<p>/bin/ls 及单纯的 ls 看看,会发现使用 ls 有颜色但是 /bin/ls 则没有颜色。 因为 /bin/ls 是直接取用该指令来下达,而 ls 会因为『 alias ls=’ls –color=auto’ 』这个命令别名而先使用 。</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">alias</span> echo<span class="token operator">=</span><span class="token string">'echo -n'</span>
+$ <span class="token function">type</span> -a <span class="token keyword">echo</span>
+<span class="token keyword">echo</span> is aliased to <span class="token string">'echo -n'</span>
+<span class="token keyword">echo</span> is a shell <span class="token function">builtin</span>
+<span class="token keyword">echo</span> is /usr/bin/echo</code></pre>
+<h5 id="bash-的进站与欢迎讯息-etc-issue-etc-motd"><a href="#bash-的进站与欢迎讯息-etc-issue-etc-motd" class="headerlink" title="bash 的进站与欢迎讯息: /etc/issue, /etc/motd"></a>bash 的进站与欢迎讯息: /etc/issue, /etc/motd</h5><pre class=" language-bash"><code class="language-bash">$ <span class="token function">cat</span> /etc/issue
+Ubuntu 18.04.1 LTS \n \l</code></pre>
+<table>
+<thead>
+<tr>
+<th>issue 内的各代码意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\d 本地端时间的日期;</td>
+</tr>
+<tr>
+<td>\l  显示第几个终端机接口;</td>
+</tr>
+<tr>
+<td>\m  显示硬件的等级 (i386/i486/i586/i686…);</td>
+</tr>
+<tr>
+<td>\n  显示主机的网络名称;</td>
+</tr>
+<tr>
+<td>\O  显示 domain name;</td>
+</tr>
+<tr>
+<td>\r  操作系统的版本 (相当于 uname -r)</td>
+</tr>
+<tr>
+<td>\t  显示本地端时间的时间;</td>
+</tr>
+<tr>
+<td>\S  操作系统的名称;</td>
+</tr>
+<tr>
+<td>\v  操作系统的版本。</td>
+</tr>
+</tbody></table>
+<p>当我们使用 telnet 连接到主机时,主机的登入画面就会显示 /etc/issue.net 而不是/etc/issue</p>
+<p>要让使用者登入后取得一些讯息,例如您想要让大家都知道的讯息, 那么可以将讯息加入 /etc/motd 里面</p>
+<h5 id="bash-的环境配置文件"><a href="#bash-的环境配置文件" class="headerlink" title="bash 的环境配置文件"></a>bash 的环境配置文件</h5><ul>
+<li>login 与 non-login shell<ul>
+<li>login shell:取得 bash 时需要完整的登入流程的,就称为 login shell。举例来说,你要由 tty1 ~ tty6 登入,需要输入用户的账号与密码,此时取得的 bash 就称为『 login shell 』;</li>
+<li>non-login shell:取得 bash 接口的方法不需要重复登入的举动,举例来说,<ul>
+<li>(1)你以 X window 登入 Linux 后,再以 X 的图形化接口启动终端机,此时那个终端接口并没有需要再次的输入账号与密码,那个 bash 的环境就称为 non-login shell 了。</li>
+<li>(2)你在原本的 bash 环境下再次下达 bash 这个指令,同样的也没有输入账号密码, 那第二个 bash (子程序) 也是 non-login shell 。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>login shell 其实只会读取这两个配置文件:</p>
+<pre class=" language-bash"><code class="language-bash">1. /etc/profile:这是系统整体的设定,你最好不要修改这个文件<span class="token punctuation">;</span>
+2. ~/.bash_profile 或 ~/.bash_login 或 ~/.profile:属于使用者个人设定,你要改自的数据,就写入这里<span class="token operator">!</span></code></pre>
+<h6 id="etc-profile-login-shell-才会读"><a href="#etc-profile-login-shell-才会读" class="headerlink" title="/etc/profile (login shell 才会读)"></a>/etc/profile (login shell 才会读)</h6><p><strong><em>每个使用者登入取得 bash 时一定会读取的配置文件</em></strong></p>
+<pre class=" language-bash"><code class="language-bash">PATH:会依据 UID 决定 PATH 变量要不要含有 sbin 的系统指令目录<span class="token punctuation">;</span>
+MAIL:依据账号设定好使用者的 mailbox 到 /var/spool/mail/账号名<span class="token punctuation">;</span>
+USER:根据用户的账号设定此一变量内容<span class="token punctuation">;</span>
+HOSTNAME:依据主机的 <span class="token function">hostname</span> 指令决定此一变量内容<span class="token punctuation">;</span>
+HISTSIZE:历史命令记录笔数。CentOS 7.x 设定为 1000 <span class="token punctuation">;</span>
+umask:包括 root 默认为 022 而一般用户为 002 等<span class="token operator">!</span></code></pre>
+<p>/etc/profile 可不止会做这些事而已,他还会去呼叫外部的设定数据：</p>
+<pre class=" language-bash"><code class="language-bash">/etc/profile.d/*sh:只要在 /etc/profile.d/ 这个目录内且扩展名为 .sh ,另外,使用者
+                   能够具有 r 的权限, 那么该文件就会被 /etc/profile 呼叫进来。在 CentOS 7.x 中,这个目录底
+                   下的文件规范了 <span class="token function">bash</span> 操作接口的颜色、 语系、ll 与 <span class="token function">ls</span> 指令的命令别名、vi 的命令别名、which
+                   的命令别名等等
+/etc/locale.conf:由 /etc/profile.d/lang.sh 呼叫进来的<span class="token operator">!</span>这也是我们决定 <span class="token function">bash</span> 预设使用何种语系的重要配置文件<span class="token operator">!</span>
+/usr/share/bash-completion/completions/*:命令补齐、档名补齐之外,还可以进行指令的选项/参数
+                                         补齐功能<span class="token operator">!</span>那就是从这个目录里面找到相对应的指令来处理的
+
+<span class="token comment" spellcheck="true"># bash 的 login shell 情况下所读取的整体环境配置文件其实只有 /etc/profile</span></code></pre>
+<h6 id="bash-profile-login-shell-才会读"><a href="#bash-profile-login-shell-才会读" class="headerlink" title="~/.bash_profile (login shell 才会读)"></a>~/.bash_profile (login shell 才会读)</h6><p>login shell 的 bash 环境中,所读取的个人偏好配置文件其实主要有三个,依序分别是:</p>
+<pre class=" language-bash"><code class="language-bash">1. ~/.bash_profile
+2. ~/.bash_login
+3. ~/.profile</code></pre>
+<p><strong><em>bash 的 login shell 设定只会读取上面三个文件的其中一个, 而读取的顺序则是依照上面的顺序。</em></strong></p>
+<h6 id="source-读入环境配置文件的指令"><a href="#source-读入环境配置文件的指令" class="headerlink" title="source :读入环境配置文件的指令"></a>source :读入环境配置文件的指令</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">source</span> 配置文件档名
+范例:将家目录的 ~/.bashrc 的设定读入目前的 <span class="token function">bash</span> 环境中
+$ <span class="token function">source</span> ~/.bashrc
+$. ~/.bashrc</code></pre>
+<ul>
+<li>~/.bashrc (non-login shell 会读)</li>
+</ul>
+<p>取得 non-login shell 时,该 bash 配置文件仅会读取 ~/.bashrc</p>
+<h6 id="其他相关配置文件"><a href="#其他相关配置文件" class="headerlink" title="其他相关配置文件"></a>其他相关配置文件</h6><pre class=" language-bash"><code class="language-bash">/etc/man_db.conf：规范了使用 <span class="token function">man</span> 的时候, <span class="token function">man</span> page 的路径到哪里去寻找<span class="token operator">!</span>
+~/.bash_history
+~/.bash_logout：当我注销 <span class="token function">bash</span> 后,系统再帮我做完什么动作后才离开</code></pre>
+<p><a href="https://imgchr.com/i/EoltnP" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/14/EoltnP.md.png" alt="EoltnP.md.png"></a></p>
+<h5 id="终端机的环境设定-stty-set"><a href="#终端机的环境设定-stty-set" class="headerlink" title="终端机的环境设定: stty, set"></a>终端机的环境设定: stty, set</h5><p>查阅目前的一些按键内容</p>
+<pre class=" language-bash"><code class="language-bash">$ stty <span class="token punctuation">[</span>-a<span class="token punctuation">]</span>
+选项与参数:
+-a :将目前所有的 stty 参数列出来<span class="token punctuation">;</span>
+
+stty -a
+speed 38400 baud<span class="token punctuation">;</span> rows 24<span class="token punctuation">;</span> columns 80<span class="token punctuation">;</span> line <span class="token operator">=</span> 0<span class="token punctuation">;</span>
+intr <span class="token operator">=</span> ^C<span class="token punctuation">;</span> quit <span class="token operator">=</span> ^\<span class="token punctuation">;</span> erase <span class="token operator">=</span> ^?<span class="token punctuation">;</span> <span class="token function">kill</span> <span class="token operator">=</span> ^U<span class="token punctuation">;</span> eof <span class="token operator">=</span> ^D<span class="token punctuation">;</span> eol <span class="token operator">=</span> <span class="token operator">&lt;</span>undef<span class="token operator">></span><span class="token punctuation">;</span>
+eol2 <span class="token operator">=</span> <span class="token operator">&lt;</span>undef<span class="token operator">></span><span class="token punctuation">;</span> swtch <span class="token operator">=</span> <span class="token operator">&lt;</span>undef<span class="token operator">></span><span class="token punctuation">;</span> start <span class="token operator">=</span> ^Q<span class="token punctuation">;</span> stop <span class="token operator">=</span> ^S<span class="token punctuation">;</span> susp <span class="token operator">=</span> ^Z<span class="token punctuation">;</span> rprnt <span class="token operator">=</span> ^R<span class="token punctuation">;</span>
+werase <span class="token operator">=</span> ^W<span class="token punctuation">;</span> lnext <span class="token operator">=</span> ^V<span class="token punctuation">;</span> discard <span class="token operator">=</span> ^O<span class="token punctuation">;</span> min <span class="token operator">=</span> 1<span class="token punctuation">;</span> <span class="token function">time</span> <span class="token operator">=</span> 0<span class="token punctuation">;</span>
+-parenb -parodd -cmspar cs8 -hupcl -cstopb cread -clocal -crtscts
+-ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr icrnl ixon -ixoff
+-iuclc -ixany -imaxbel iutf8
+opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0
+isig icanon iexten <span class="token keyword">echo</span> echoe echok -echonl -noflsh -xcase -tostop -echoprt
+echoctl echoke -flusho -extproc
+
+$ stty erase ^h <span class="token comment" spellcheck="true">#用 [ctrl]+h 来进行字符的删除</span>
+intr <span class="token keyword">:</span> 送出一个 interrupt <span class="token punctuation">(</span>中断<span class="token punctuation">)</span> 的讯号给目前正在 run 的程序 <span class="token punctuation">(</span>就是终止啰<span class="token operator">!</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+quit <span class="token keyword">:</span> 送出一个 quit 的讯号给目前正在 run 的程序<span class="token punctuation">;</span>
+erase <span class="token keyword">:</span> 向后删除字符,
+<span class="token function">kill</span> <span class="token keyword">:</span> 删除在目前指令列上的所有文字<span class="token punctuation">;</span>
+eof: End of <span class="token function">file</span> 的意思,代表『结束输入』
+start <span class="token keyword">:</span> 在某个程序停止后,重新启动他的 output
+stop <span class="token keyword">:</span> 停止目前屏幕的输出<span class="token punctuation">;</span>
+susp <span class="token keyword">:</span> 送出一个 terminal stop 的讯号给正在 run 的程序。</code></pre>
+<p>set以设定整个指令输出/输入的环境。 例如记录历史命令、显示错误内容等等。</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token keyword">set</span> <span class="token punctuation">[</span>-uvCHhmBx<span class="token punctuation">]</span>
+选项与参数:
+-u :预设不启用。若启用后,当使用未设定变量时,会显示错误讯息<span class="token punctuation">;</span>
+-v :预设不启用。若启用后,在讯息被输出前,会先显示讯息的原始内容<span class="token punctuation">;</span>
+-x :预设不启用。若启用后,在指令被执行前,会显示指令内容<span class="token punctuation">(</span>前面有 ++ 符号<span class="token punctuation">)</span>
+-h :预设启用。与历史命令有关<span class="token punctuation">;</span>
+-H :预设启用。与历史命令有关<span class="token punctuation">;</span>-m :预设启用。与工作管理有关<span class="token punctuation">;</span>
+-B :预设启用。与刮号 <span class="token punctuation">[</span><span class="token punctuation">]</span> 的作用有关<span class="token punctuation">;</span>
+-C :预设不启用。若使用 <span class="token operator">></span> 等,则若文件存在时,该文件不会被覆盖。
+
+$ <span class="token keyword">echo</span> $- <span class="token comment" spellcheck="true">#显示目前所有的 set 设定值</span>
+himBHs</code></pre>
+<table>
+<thead>
+<tr>
+<th>组合按键</th>
+<th>执行结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + C</td>
+<td>终止目前的命令</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>输入结束 (EOF),例如邮件结束的时候;</td>
+</tr>
+<tr>
+<td>Ctrl + M</td>
+<td>就是 Enter 啦!</td>
+</tr>
+<tr>
+<td>Ctrl + S</td>
+<td>暂停屏幕的输出</td>
+</tr>
+<tr>
+<td>Ctrl + Q</td>
+<td>恢复屏幕的输出Ctrl + U 在提示字符下,将整列命令删除</td>
+</tr>
+<tr>
+<td>Ctrl + Z</td>
+<td>『暂停』目前的命令</td>
+</tr>
+</tbody></table>
+<h5 id="通配符与特殊符号"><a href="#通配符与特殊符号" class="headerlink" title="通配符与特殊符号"></a>通配符与特殊符号</h5><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>代表『 0 个到无穷多个』任意字符</td>
+</tr>
+<tr>
+<td>?</td>
+<td>代表『一定有一个』任意字符</td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>同样代表『一定有一个在括号内』的字符(非任意字符)。例如 [abcd] 代表『一定有一个字符, 可能是 a, b,c, d 这四个任何一个』</td>
+</tr>
+<tr>
+<td>[ - ]</td>
+<td>若有减号在中括号内时,代表『在编码顺序内的所有字符』。例如 [0-9] 代表 0 到 9 之间的所有数字,因为数字的语系编码是连续的!</td>
+</tr>
+<tr>
+<td>[^ ]</td>
+<td>若中括号内的第一个字符为指数符号 (^) ,那表示『反向选择』,例如 [^abc] 代表 一定有一个字符,只要是非 a, b, c 的其他字符就接受的意思。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>#</td>
+<td>批注符号:这个最常被使用在 script 当中,视为说明!在后的数据均不执行</td>
+</tr>
+<tr>
+<td>\</td>
+<td>跳脱符号:将『特殊字符或通配符』还原成一般字符</td>
+</tr>
+<tr>
+<td>|</td>
+<td>管线 (pipe):分隔两个管线命令的界定(后两节介绍);</td>
+</tr>
+<tr>
+<td>;</td>
+<td>连续指令下达分隔符:连续性命令的界定 (注意!与管线命令并不相同)</td>
+</tr>
+<tr>
+<td>~</td>
+<td>用户的家目录</td>
+</tr>
+<tr>
+<td>$</td>
+<td>取用变数前导符:亦即是变量之前需要加的变量取代值</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>工作控制 (job control):将指令变成背景下工作</td>
+</tr>
+<tr>
+<td>!</td>
+<td>逻辑运算意义上的『非』 not 的意思!</td>
+</tr>
+<tr>
+<td>/</td>
+<td>目录符号:路径分隔的符号</td>
+</tr>
+<tr>
+<td>&gt;, &gt;&gt;</td>
+<td>数据流重定向:输出定向,分别是『取代』与『累加』</td>
+</tr>
+<tr>
+<td>&lt;, &lt;&lt;</td>
+<td>数据流重定向:输入定向 (这两个留待下节介绍)</td>
+</tr>
+<tr>
+<td>‘ ‘</td>
+<td>单引号,不具有变量置换的功能 ($ 变为纯文本)</td>
+</tr>
+<tr>
+<td>“ “</td>
+<td>具有变量置换的功能! ($ 可保留相关功能)</td>
+</tr>
+<tr>
+<td><code></code></td>
+<td>两个『 ` 』中间为可以先执行的指令,亦可使用 $( )</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>在中间为子 shell 的起始与结束</td>
+</tr>
+<tr>
+<td>{ }</td>
+<td>在中间为命令区块的组合!</td>
+</tr>
+<tr>
+<td>#### 数据流重定向</td>
+<td></td>
+</tr>
+<tr>
+<td>redirec,据流重导向就是将某个指令执行后应该要出现在屏幕上的数据, 给他传输到其他的地方,</td>
+<td></td>
+</tr>
+<tr>
+<td>例如文件或者是装置 (例如打印机)。</td>
+<td></td>
+</tr>
+<tr>
+<td>##### 什么是数据流重定向</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://imgchr.com/i/Eol81A" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/14/Eol81A.md.png" alt="Eol81A.md.png"></a></td>
+<td></td>
+</tr>
+<tr>
+<td>###### standard output 与 standard error output</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong><em>标准输出指的是『指令执行所回传的正确的讯息』,而标准错误输出可理解为『 指令执行失败后,所回传的错误讯息』</em></strong></p>
+<pre class=" language-bash"><code class="language-bash">$ ll / <span class="token comment" spellcheck="true">#此时屏幕会显示出文件名信息</span>
+$ ll / <span class="token operator">></span> ~/rootfile <span class="token comment" spellcheck="true">#屏幕并无任何信息</span>
+$ ll ~/rootfile
+-rw-r--r-- 1 jason jason 2058 5月  14 16:10 /home/jason/rootfile
+<span class="token comment" spellcheck="true"># 1. 该文件 (本例中是 ~/rootfile) 若不存在,系统会自动的将他建立起来,但是</span>
+<span class="token comment" spellcheck="true"># 2. 当这个文件存在的时候,那么系统就会先将这个文件内容清空,然后再将数据写入!</span>
+<span class="token comment" spellcheck="true"># 3. 也就是若以 > 输出到一个已存在的文件中,那个文件就会被覆盖掉啰!</span>
+
+<span class="token comment" spellcheck="true">#那如果我想要将数据累加而不想要将旧的数据删除,那该如何是好?利用两个大于的符号 (>>) 就好</span>
+<span class="token comment" spellcheck="true">#啦!以上面的范例来说,你应该要改成『 ll / >> ~/rootfile 』即可。 如此一来,当 (1) ~/#rootfile 不存在时系统会主动建立这个文件;(2)若该文件已存在, 则数据会在该文件的最下方累加进去!</span>
+
+<span class="token comment" spellcheck="true"># 1> :以覆盖的方法将『正确的数据』输出到指定的文件或装置上;</span>
+<span class="token comment" spellcheck="true"># 1>>:以累加的方法将『正确的数据』输出到指定的文件或装置上;</span>
+<span class="token comment" spellcheck="true"># 2> :以覆盖的方法将『错误的数据』输出到指定的文件或装置上;</span>
+<span class="token comment" spellcheck="true"># 2>>:以累加的方法将『错误的数据』输出到指定的文件或装置上;</span></code></pre>
+<h6 id="dev-null-垃圾桶黑洞装置与特殊写法"><a href="#dev-null-垃圾桶黑洞装置与特殊写法" class="headerlink" title="/dev/null 垃圾桶黑洞装置与特殊写法"></a>/dev/null 垃圾桶黑洞装置与特殊写法</h6><p>dev/null 可以吃掉任何导向这个装置的信息</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">find</span> /home -name .bashrc 2<span class="token operator">></span> /dev/null
+/home/dmtsai/.bashrc <span class="token comment" spellcheck="true">#只有 stdout 会显示到屏幕上, stderr 被丢弃了</span>
+
+$ <span class="token function">find</span> /home -name .bashrc <span class="token operator">></span> list 2<span class="token operator">></span> list <span class="token operator">&lt;=</span><span class="token operator">=</span>错误
+<span class="token comment" spellcheck="true">#由于两股数据同时写入一个文件,又没有使用特殊的语法, 此时两</span>
+<span class="token comment" spellcheck="true">#股数据可能会交叉写入该文件内,造成次序的错乱。</span>
+$ <span class="token function">find</span> /home -name .bashrc <span class="token operator">></span> list 2<span class="token operator">></span><span class="token operator">&amp;</span>1 <span class="token operator">&lt;=</span><span class="token operator">=</span>正确
+$ <span class="token function">find</span> /home -name .bashrc <span class="token operator">&amp;</span><span class="token operator">></span> list <span class="token operator">&lt;=</span><span class="token operator">=</span>正确
+<span class="token comment" spellcheck="true"># 将指令的数据全部写入名为 list 的文件中</span></code></pre>
+<h6 id="standard-input-lt-与-lt-lt"><a href="#standard-input-lt-与-lt-lt" class="headerlink" title="standard input : &lt; 与 &lt;&lt;"></a>standard input : &lt; 与 &lt;&lt;</h6><p>将原本需要由键盘输入的数据,改由文件内容来取代</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#利用 cat 指令来建立一个文件的简单流程</span>
+$ <span class="token function">cat</span> <span class="token operator">></span> catfile
+testing
+<span class="token function">cat</span> <span class="token function">file</span> <span class="token function">test</span>
+<span class="token operator">&lt;=</span><span class="token operator">=</span>这里按下 <span class="token punctuation">[</span>ctrl<span class="token punctuation">]</span>+d 来离开
+<span class="token comment" spellcheck="true"># 由于加入 > 在 cat 后,所以那个 catfile 会被主动的建立,</span>
+<span class="token comment" spellcheck="true"># 而内容就是刚刚键盘上面输入的那两行数据了</span>
+
+<span class="token comment" spellcheck="true">#用 stdin 取代键盘的输入以建立新文件的简单流程</span>
+$ <span class="token function">cat</span> <span class="token operator">></span> catfile <span class="token operator">&lt;</span> ~/.bashrc
+$ ll catfile ~/.bashrc
+-rw-r--r-- 1 jason jason 4958 5月  14 16:34 catfile
+-rw-r--r-- 1 jason jason 4958 5月  14 15:25 /home/jason/.bashrc
+
+<span class="token comment" spellcheck="true">#&lt;&lt;代表的是『结束的输入字符』的意思</span>
+$ <span class="token function">cat</span> <span class="token operator">></span> catfile <span class="token operator">&lt;&lt;</span> <span class="token string">"eof"</span>
+<span class="token operator">></span> This is a test.
+<span class="token operator">></span> OK now stop
+<span class="token operator">></span> eof
+<span class="token operator">&lt;=</span><span class="token operator">=</span>输入这关键词,立刻就结束而不需要输入 <span class="token punctuation">[</span>ctrl<span class="token punctuation">]</span>+d
+<span class="token punctuation">[</span>dmtsai@study ~<span class="token punctuation">]</span>$ <span class="token function">cat</span> catfile
+This is a test.
+OK now stop
+<span class="token operator">&lt;=</span><span class="token operator">=</span>只有这两行,不会存在关键词那一行<span class="token operator">!</span></code></pre>
+<h5 id="命令执行的判断依据-amp-amp"><a href="#命令执行的判断依据-amp-amp" class="headerlink" title="命令执行的判断依据: ;  &amp;&amp;  ||"></a>命令执行的判断依据: ;  &amp;&amp;  ||</h5><ul>
+<li>cmd ; cmd (不考虑指令相关性的连续指令下达)<br>在指令与指令中间利用分号 (;) 来隔开,这样一来,分号前的指令执行完后就会立刻接着执行后面的指令了。</li>
+<li>$? (指令回传值) 与 &amp;&amp; 或 ||</li>
+</ul>
+<p>两个指令之间有相依性,而这个相依性主要判断的地方就在于前一个指令执行的结果是否正确。<strong><em>若前一个指令执行的结果为正确,在 Linux 底下会回传一个 $? = 0 的值</em></strong></p>
+<table>
+<thead>
+<tr>
+<th>指令下达情况</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmd1 &amp;&amp; cmd2</td>
+<td>1. 若 cmd1 执行完毕且正确执行($?=0),则开始执行 cmd2。2. 若 cmd1 执行完毕且为错误 ($?≠0),则 cmd2 不执行。</td>
+</tr>
+<tr>
+<td>cmd1 || cmd2</td>
+<td>1. 若 cmd1 执行完毕且正确执行($?=0),则 cmd2 不执行。2. 若 cmd1 执行完毕且为错误 ($?≠0),则开始执行 cmd2。</td>
+</tr>
+</tbody></table>
+<p><strong><em>Linux 底下的指令都是由左往右执行的</em></strong> 由于指令是一个接着一个去执行的,因此,如果真要使用判断,那么这个 &amp;&amp; 与 || 的顺序就不能搞错。</p>
+<h4 id="管线命令pipe"><a href="#管线命令pipe" class="headerlink" title="管线命令pipe"></a>管线命令pipe</h4><p>管线命令『 | 』仅能处理经由前面一个指令传来的正确信息,也就是 standard output 的信息,对于stdandard error 并没有直接处理的能力。<br><a href="https://imgchr.com/i/EollfH" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/14/EollfH.md.png" alt="EollfH.md.png"></a></p>
+<pre class=" language-bash"><code class="language-bash">1.管线命令仅会处理 standard output,对于 standard error output 会予以忽略
+2.管线命令必须要能够接受来自前一个指令的数据成为 standard input 继续处理才行</code></pre>
+<h5 id="选取命令cut，grep"><a href="#选取命令cut，grep" class="headerlink" title="选取命令cut，grep"></a>选取命令cut，grep</h5><pre class=" language-bash"><code class="language-bash">$ <span class="token function">cut</span> -d<span class="token string">'分隔字符'</span> -f fields <span class="token operator">&lt;=</span><span class="token operator">=</span>用于有特定分隔字符
+$ <span class="token function">cut</span> -c 字符区间 <span class="token operator">&lt;=</span><span class="token operator">=</span>用于排列整齐的讯息
+选项与参数:
+-d :后面接分隔字符。与 -f 一起使用<span class="token punctuation">;</span>
+-f :依据 -d 的分隔字符将一段讯息分区成为数段,用 -f 取出第几段的意思<span class="token punctuation">;</span>
+-c :以字符 <span class="token punctuation">(</span>characters<span class="token punctuation">)</span> 的单位取出固定字符区间<span class="token punctuation">;</span></code></pre>
+<p>cut 主要的用途在于将『同一行里面的数据进行分解!』</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">grep</span> <span class="token punctuation">[</span>-acinv<span class="token punctuation">]</span> <span class="token punctuation">[</span>--color<span class="token operator">=</span>auto<span class="token punctuation">]</span> <span class="token string">'搜寻字符串'</span> filename
+选项与参数:
+-a :将 binary 文件以 text 文件的方式搜寻数据
+-c :计算找到 <span class="token string">'搜寻字符串'</span> 的次数
+-i :忽略大小写的不同,所以大小写视为相同
+-n :顺便输出行号
+-v :反向选择,亦即显示出没有 <span class="token string">'搜寻字符串'</span> 内容的那一行<span class="token operator">!</span>
+--color<span class="token operator">=</span>auto :可以将找到的关键词部分加上颜色的显示喔<span class="token operator">!</span></code></pre>
+<h5 id="排序命令sort，wc，uniq"><a href="#排序命令sort，wc，uniq" class="headerlink" title="排序命令sort，wc，uniq"></a>排序命令sort，wc，uniq</h5><h6 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">sort</span> <span class="token punctuation">[</span>-fbMnrtuk<span class="token punctuation">]</span> <span class="token punctuation">[</span>file or stdin<span class="token punctuation">]</span>
+选项与参数:
+-f :忽略大小写的差异,例如 A 与 a 视为编码相同<span class="token punctuation">;</span>
+-b :忽略最前面的空格符部分<span class="token punctuation">;</span>
+-M :以月份的名字来排序,例如 JAN, DEC 等等的排序方法<span class="token punctuation">;</span>
+-n :使用『纯数字』进行排序<span class="token punctuation">(</span>默认是以文字型态来排序的<span class="token punctuation">)</span><span class="token punctuation">;</span>
+-r :反向排序<span class="token punctuation">;</span>
+-u :就是 <span class="token function">uniq</span> ,相同的数据中,仅出现一行代表<span class="token punctuation">;</span>
+-t :分隔符,预设是用 <span class="token punctuation">[</span>tab<span class="token punctuation">]</span> 键来分隔<span class="token punctuation">;</span>
+-k :以那个区间 <span class="token punctuation">(</span>field<span class="token punctuation">)</span> 来进行排序的意思
+
+$ <span class="token function">cat</span> /etc/passwd <span class="token operator">|</span> <span class="token function">sort</span> -t <span class="token string">':'</span> -k 3
+root:x:0:0:root:/root:/bin/bash
+dmtsai:x:1000:1000:dmtsai:/home/dmtsai:/bin/bash
+alex:x:1001:1002::/home/alex:/bin/bash
+arod:x:1002:1003::/home/arod:/bin/bash
+
+$ last <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token string">' '</span> -f1 <span class="token operator">|</span> <span class="token function">sort</span> <span class="token comment" spellcheck="true">#利用 last ,将输出的数据仅取账号,并加以排序</span></code></pre>
+<h6 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">uniq</span> <span class="token punctuation">[</span>-ic<span class="token punctuation">]</span>
+选项与参数:
+-i :忽略大小写字符的不同<span class="token punctuation">;</span>
+-c :进行计数</code></pre>
+<h6 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">wc</span> <span class="token punctuation">[</span>-lwm<span class="token punctuation">]</span>
+选项与参数:
+-l :仅列出行<span class="token punctuation">;</span>
+-w :仅列出多少字<span class="token punctuation">(</span>英文单字<span class="token punctuation">)</span><span class="token punctuation">;</span>
+-m :多少字符<span class="token punctuation">;</span></code></pre>
+<h5 id="双向重定向tee"><a href="#双向重定向tee" class="headerlink" title="双向重定向tee"></a>双向重定向tee</h5><p>tee 会同时将数据流分送到文件去与屏幕 (screen);而输出到屏幕的,其实就是 stdout ,那就可以让下个指令继续处理<br><a href="https://imgchr.com/i/EotDat" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/14/EotDat.md.png" alt="EotDat.md.png"></a></p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">tee</span> <span class="token punctuation">[</span>-a<span class="token punctuation">]</span> <span class="token function">file</span>
+选项与参数:
+-a
+:以累加 <span class="token punctuation">(</span>append<span class="token punctuation">)</span> 的方式,将数据加入 <span class="token function">file</span> 当中<span class="token operator">!</span>
+<span class="token comment" spellcheck="true">##### 字符转换命令tr，col，join，paste，expand</span>
+<span class="token comment" spellcheck="true">###### tr</span>
+
+<span class="token function">tr</span> 可以用来删除一段讯息当中的文字,或者是进行文字讯息的替换
+​```bash
+$ <span class="token function">tr</span> <span class="token punctuation">[</span>-ds<span class="token punctuation">]</span> SET1 <span class="token punctuation">..</span>.
+选项与参数:
+-d :删除讯息当中的 SET1 这个字符串<span class="token punctuation">;</span>
+-s :取代掉重复的字符<span class="token operator">!</span></code></pre>
+<h6 id="col"><a href="#col" class="headerlink" title="col"></a>col</h6><pre class=" language-bash"><code class="language-bash">$ col <span class="token punctuation">[</span>-xb<span class="token punctuation">]</span>
+选项与参数:
+-x:将 tab 键转换成对等的空格键</code></pre>
+<h6 id="join"><a href="#join" class="headerlink" title="join"></a>join</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">join</span> <span class="token punctuation">[</span>-ti12<span class="token punctuation">]</span> file1 file2
+选项与参数:
+-t
+:join 默认以空格符分隔数据,并且比对『第一个字段』的数据,
+如果两个文件相同,则将两笔数据联成一行,且第一个字段放在第一个<span class="token operator">!</span>
+-i :忽略大小写的差异<span class="token punctuation">;</span>
+-1 :这个是数字的 1 ,代表『第一个文件要用那个字段来分析』的意思<span class="token punctuation">;</span>
+-2 :代表『第二个文件要用那个字段来分析』的意思。
+<span class="token comment" spellcheck="true"># 在使用 join 之前,你所需要处理的文件应该要事先经过排序 (sort) 处理</span></code></pre>
+<h6 id="paste"><a href="#paste" class="headerlink" title="paste"></a>paste</h6><p>将两行贴在一起,且中间以 [tab] 键隔开</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">paste</span> <span class="token punctuation">[</span>-d<span class="token punctuation">]</span> file1 file2
+选项与参数:
+-d :后面可以接分隔字符。预设是以 <span class="token punctuation">[</span>tab<span class="token punctuation">]</span> 来分隔的<span class="token operator">!</span>
+- :如果 <span class="token function">file</span> 部分写成 - ,表示来自 standard input 的资料的意思。</code></pre>
+<h6 id="expand"><a href="#expand" class="headerlink" title="expand"></a>expand</h6><pre class=" language-bash"><code class="language-bash">$ <span class="token function">expand</span> <span class="token punctuation">[</span>-t<span class="token punctuation">]</span> <span class="token function">file</span>
+选项与参数:
+-t
+:后面可以接数字。一般来说,一个 tab 按键可以用 8 个空格键取代。
+我们也可以自行定义一个 <span class="token punctuation">[</span>tab<span class="token punctuation">]</span> 按键代表多少个字符呢<span class="token operator">!</span>
+<span class="token comment" spellcheck="true">##### 分区命令split</span>
+``bash
+$ <span class="token function">split</span> <span class="token punctuation">[</span>-bl<span class="token punctuation">]</span> <span class="token function">file</span> PREFIX
+选项与参数:
+-b :后面可接欲分区成的文件大小,可加单位,例如 b, k, m 等<span class="token punctuation">;</span>
+-l :以行数来进行分区。
+PREFIX :代表前导符的意思,可作为分区文件的前导文字。
+
+$ <span class="token function">cd</span> /tmp<span class="token punctuation">;</span> <span class="token function">split</span> -b 300k /etc/services services
+$ <span class="token function">cat</span> services* <span class="token operator">>></span> servicesback <span class="token comment" spellcheck="true">#将上面的三个小文件合成一个文件</span></code></pre>
+<h5 id="参数代换xargs"><a href="#参数代换xargs" class="headerlink" title="参数代换xargs"></a>参数代换xargs</h5><p>在产生某个指令的参数</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">xargs</span> <span class="token punctuation">[</span>-0epn<span class="token punctuation">]</span> <span class="token function">command</span>
+选项与参数:
+-0
+:如果输入的 stdin 含有特殊字符,例如 `, \, 空格键等等字符时,这个 -0 参数
+可以将他还原成一般字符。这个参数可以用于特殊状态喔<span class="token operator">!</span>
+-e
+:这个是 EOF <span class="token punctuation">(</span>end of file<span class="token punctuation">)</span> 的意思。后面可以接一个字符串,当 <span class="token function">xargs</span> 分析到这个字符串时,
+就会停止继续工作<span class="token operator">!</span>
+-p :在执行每个指令的 argument 时,都会询问使用者的意思<span class="token punctuation">;</span>
+-n :后面接次数,每次 <span class="token function">command</span> 指令执行时,要使用几个参数的意思。
+当 <span class="token function">xargs</span> 后面没有接任何的指令时,默认是以 <span class="token keyword">echo</span> 来进行输出喔<span class="token operator">!</span>
+
+$ $ <span class="token function">cut</span> -d <span class="token string">':'</span> -f 1 /etc/passwd <span class="token operator">|</span> <span class="token function">head</span> -n 3 <span class="token operator">|</span> <span class="token function">xargs</span> -n 1 <span class="token function">id</span>
+uid<span class="token operator">=</span>0<span class="token punctuation">(</span>root<span class="token punctuation">)</span> gid<span class="token operator">=</span>0<span class="token punctuation">(</span>root<span class="token punctuation">)</span> groups<span class="token operator">=</span>0<span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+uid<span class="token operator">=</span>1<span class="token punctuation">(</span>bin<span class="token punctuation">)</span> gid<span class="token operator">=</span>1<span class="token punctuation">(</span>bin<span class="token punctuation">)</span> groups<span class="token operator">=</span>1<span class="token punctuation">(</span>bin<span class="token punctuation">)</span>
+uid<span class="token operator">=</span>2<span class="token punctuation">(</span>daemon<span class="token punctuation">)</span> gid<span class="token operator">=</span>2<span class="token punctuation">(</span>daemon<span class="token punctuation">)</span> groups<span class="token operator">=</span>2<span class="token punctuation">(</span>daemon<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># 透过 -n 来处理,一次给予一个参数</span>
+<span class="token comment" spellcheck="true"># 很多指令其实并不支持管线命令,因此我们可以透过 xargs 来提供该指令引用 standard input 之用</span></code></pre>
+<h5 id="关于减号-的用途"><a href="#关于减号-的用途" class="headerlink" title="关于减号-的用途"></a>关于减号-的用途</h5><p>在管线命令当中,常常会使用到前一个指令的 stdout 作为这次的stdin , 某些指令需要用到文件名 (例如 tar) 来进行处理时,该 stdin 与 stdout 可以利用减号 “-“来替代:</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">mkdir</span> /tmp/homeback
+$ <span class="token function">tar</span> -cvf - /home <span class="token operator">|</span> <span class="token function">tar</span> -xvf - -C /tmp/homeback
+<span class="token comment" spellcheck="true">#将 /home 里面的文件给他打包,但打包的数据不是纪录到文件,而是传送</span>
+<span class="token comment" spellcheck="true">#到 stdout; 经过管线后,将 tar -cvf - /home 传送给后面的 tar -xvf - 』。</span>
+<span class="token comment" spellcheck="true">#后面的这个 - 则是取用前一个指令的 stdout, 因此,我们就不需要使用 filename 了!</span></code></pre>
+<h3 id="重点回顾"><a href="#重点回顾" class="headerlink" title="重点回顾"></a>重点回顾</h3><ul>
+<li>由于核心在内存中是受保护的区块,因此我们必须要透过『 Shell 』将我们输入的指令与 Kernel 沟通,好<br>让 Kernel 可以控制硬件来正确无误的工作</li>
+<li>学习 shell 的原因主要有:文字接口的 shell 在各大 distribution 都一样;远程管理时文字接口速度较快;<br>shell 是管理 Linux 系统非常重要的一环,因为 Linux 内很多控制都是以 shell 撰写的。</li>
+<li>系统合法的 shell 均写在 /etc/shells 文件中;</li>
+<li>用户默认登入取得的 shell 记录于 /etc/passwd 的最后一个字段;</li>
+<li>bash 的功能主要有:命令编修能力;命令与文件补全功能;命令别名设定功能;工作控制、前景背景控制;程序化脚本;通配符</li>
+<li>type 可以用来找到执行指令为何种类型,亦可用于与 which 相同的功能;</li>
+<li>变量就是以一组文字或符号等,来取代一些设定或者是一串保留的数据</li>
+<li>变量主要有环境变量与自定义变量,或称为全局变量与局部变量</li>
+<li>使用 env 与 export 可观察环境变量,其中 export 可以将自定义变量转成环境变量;</li>
+<li>set 可以观察目前 bash 环境下的所有变量;</li>
+<li>$? 亦为变量,是前一个指令执行完毕后的回传值。在 Linux 回传值为 0 代表执行成功;</li>
+<li>locale 可用于观察语系资料;</li>
+<li>可用 read 让用户由键盘输入变量的值</li>
+<li>ulimit 可用以限制用户使用系统的资源情况</li>
+<li>bash 的配置文件主要分为 login shell 与 non-login shell。 login shell 主要读取 /etc/profile 与 ~/.bash_profile,non-login shell 则仅读取 ~/.bashrc</li>
+<li>在使用 vim 时,若不小心按了 [crtl]+s 则画面会被冻结。你可以使用 [ctrl]+q 来解除冻结</li>
+<li>通配符主要有: *, ?, [] 等等</li>
+<li>数据流重导向透过 &gt;, 2&gt;, &lt; 之类的符号将输出的信息转到其他文件或装置去;</li>
+<li>连续命令的下达可透过 ; &amp;&amp; || 等符号来处理</li>
+<li>管线命令的重点是:『管线命令仅会处理 standard output,对于 standard error output 会予以忽略』 『管线命令必须要能够接受来自前一个指令的数据成为 standard input 继续处理才行。』</li>
+<li>本章介绍的管线命令主要有:cut, grep, sort, wc, uniq, tee, tr, col, join, paste, expand, split, xargs 等。</li>
+</ul>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2019/05/06/niao-ge-de-linux-si-fang-cai-7-ren-shi-yu-xue-xi-bash/">http://jinzhengxu.github.io/2019/05/06/niao-ge-de-linux-si-fang-cai-7-ren-shi-yu-xue-xi-bash/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/BASH/">
+                                    <span class="chip bg-color">BASH</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '7C9WIr1xTDwYs88TkPA1W0ua-gzGzoHsz',
+        appKey: 'AzaMuy0kYyiPgMrnYKQALlNS',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/05/09/ji-qi-xue-xi-shi-yan-iris-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        <img src="https://s2.ax1x.com/2019/05/20/EzPu0x.png" class="responsive-img" alt="机器学习实验--Iris">
+                        
+                        <span class="card-title">机器学习实验--Iris</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            背景介绍数据下载这可能是模式识别文献中最著名的数据库。费舍尔的论文是该领域的经典之作，至今仍被频繁引用。（例如，参见Duda＆Hart。）数据集包含3个类别，每个类别50个实例，其中每个类别指的是一种鸢尾花。一类可以与另一类线性判别; 后者
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-05-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/机器学习/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/线性判别/">
+                        <span class="chip bg-color">线性判别</span>
+                    </a>
+                    
+                    <a href="/tags/支持向量机/">
+                        <span class="chip bg-color">支持向量机</span>
+                    </a>
+                    
+                    <a href="/tags/主成分分析/">
+                        <span class="chip bg-color">主成分分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/23/niao-ge-de-linux-si-fang-cai-6-vim-cheng-xu-bian-ji-qi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Linux(6)-vim程序编辑器">
+                        
+                        <span class="card-title">Linux(6)-vim程序编辑器</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            #     # ### #     #    ###  #####     ######  #######  #####  #######
+#     #  #  ##   ##     #  #     #    #     # #   
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/软件工具/" class="post-category">
+                                    软件工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/vim/">
+                        <span class="chip bg-color">vim</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Jinzhengxu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:jzxttzdq@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" class="tooltipped" target="_blank" data-tooltip="我的ICPCID: https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" data-position="top" data-delay="50">
+        <i class="fas fa-lightbulb"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

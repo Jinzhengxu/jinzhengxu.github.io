@@ -1,0 +1,1914 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="《现代编译原理-C语言描述》（2）- 词法分析, Algorithm">
+    <meta name="description" content>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>《现代编译原理-C语言描述》（2）- 词法分析 | Jason Jin</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Jason Jin</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Jason Jin</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Jinzhengxu" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Jinzhengxu" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">《现代编译原理-C语言描述》（2）- 词法分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/虎书/">
+                                <span class="chip bg-color">虎书</span>
+                            </a>
+                        
+                            <a href="/tags/编译原理/">
+                                <span class="chip bg-color">编译原理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/底层/" class="post-category">
+                                底层
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-14
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>词法的(lex-i-cal): 与语言的单词或词汇有关。但有别于语言的文法和结构。            —-韦氏词典</p>
+</blockquote>
+<h3 id="第二章-词法分析"><a href="#第二章-词法分析" class="headerlink" title="第二章 词法分析"></a>第二章 词法分析</h3><p>编译器前段执行分析，后端执行合成。<br>分析一般分为三种：</p>
+<pre><code>词法分析：将输入分解成一个个独立的词法符号，即单词符号‘tocken’，简称单词
+语法分析：分析程序的短语结构
+语义分析：推算程序的含义</code></pre><h4 id="2-1词法单词"><a href="#2-1词法单词" class="headerlink" title="2.1词法单词"></a>2.1词法单词</h4><p>典型的程序设计语言的一些单词有：<code>ID</code>，<code>NUM</code>，<code>REAL</code>，<code>IF</code>，<code>COMMA</code>，<code>NOTEQ</code>，<code>LPAREN</code>，<code>RPAREN</code>等。<br>非单词的例子是：</p>
+<pre><code>注释                    /* try again */
+预处理命令              #include&lt;stdio.h&gt;
+预处理命令              #define NUMS 5,6
+宏                      NUMS
+空格符，换行符和制表符</code></pre><p>一些能力较弱而需要宏处理器的语言中，由预处理器处理源程序的字符流，生成新字符流，然后词法分析器读入新字符流。<br>如对于下面这段程序：</p>
+<pre class=" language-c"><code class="language-c">dobule <span class="token function">match0</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>s<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">/*find 0*/</span>
+<span class="token punctuation">{</span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">strcmp</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span><span class="token string">"0.0"</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>词法分析器会返回：</p>
+<pre><code>FLOAT  ID(match0)  LPAREN  CHAR  STAR  ID(s)  RPAREN
+LARACE  IF  LPAREN  BANG  ID(strcmp)  LPAREN  ID(s)
+COMMA  STRING(0,0)  COMMA  NUM(3)  RPAREN  RPAREN
+RETURN  REAL(0.0)  SEML RBRACE  EOF</code></pre><p>任何合理的程序设计语言都可以实现特定的词法分析器，我们将用<strong><em>正则表达式</em></strong>的形式语言来指明词法单词，用<strong><em>确定的有限自动机</em></strong>来实现词法分析器，并用数学的方法将两者联系起来。</p>
+<h4 id="2-2正则表达式"><a href="#2-2正则表达式" class="headerlink" title="2.2正则表达式"></a>2.2正则表达式</h4><p>语言是<code>字符串组成的集合</code>，字符串是<code>符号</code>的有限序列，符号本身来自<code>有限字母表</code>。</p>
+<p>每个正则表达式代表一个字符串集合。</p>
+<ul>
+<li>符号(symbol)：对于语言字母表中的每个符号 $a$ ，正则表达式 $a$ 表示仅包含字符串 $a$ 的语言。</li>
+<li>可选（alternation）：对于给定的两个正则表达式 $M$ 和 $N$ ，可选操作符（|）形成一个新的正则表达式 $1$ 。如果一个字符串属于语言 $M$ 或 $N$ ，则它属于语言 $M|N$ 。因此$a，b$组成的语言包含 $a$ 和 $b$ 这两个字符串。</li>
+<li>联结（concatenation）：对于给定的两个正则表达式 $M$ 和 $N$ ，联结操作符（·）形成一个新的正则表达式 $M·N$。如果一个字符串是任意两个字符串  $\alpha$  和 $\beta$ 的联结，且 $\alpha$ 属于语言 $M$ ， $\beta$ 属于语言 $N$ ，则该字符串属于$M·N$组成的语言，因此正则表达式$（a|b）·a$定义了包含两个字符串 $aa$ 和 $ab$ 的语言。</li>
+<li>$\epsilon$ （epsilon）：正则表达式 $\epsilon$ 表示仅含一个空字符串的语言。因此正则表达式$(a·b)|\epsilon$表示语言$|” “,”ab”|$。</li>
+<li>重复（repetition）：对于给定的正则表达式 $M$ ，它的克林闭包（Kleene closure）是$M^<em>$，如果一个字符串是有 $M$ 中的字符串经过（0～无数）次联结运算的结果，则该字符串属于$M^</em>$。</li>
+</ul>
+<p>运算优先级：克林闭包&gt;联结运算&gt;可选运算，缩写形式[abcd]表示(a|b|c|d)，[b-g]表示[bcdefg]， $M？$ 表示 $（M|\epsilon）$, $M^+$ 则表示 $（M·M^*）$ ,但是这些缩写并没有扩充正则表达式的描述能力。</p>
+<p>我们通过正则表达式来描述<strong><em>词法单词</em></strong>，这样对于一段单词我们就可以判断它是何种类型的词法单词。</p>
+<table>
+<thead>
+<tr>
+<th align="center">正则表达式</th>
+<th align="center">C语言</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">if</td>
+<td align="center">{return IF;}</td>
+</tr>
+<tr>
+<td align="center">[a-z][a-z0-9]*</td>
+<td align="center">{return ID;}</td>
+</tr>
+<tr>
+<td align="center">[0-9]+</td>
+<td align="center">{return NUM;}</td>
+</tr>
+<tr>
+<td align="center">([0-9]+”.”[0-9]*)｜([0-9]*[0-9]+)</td>
+<td align="center">{return REAL;}</td>
+</tr>
+<tr>
+<td align="center">(“–”[a-z]*“\n”)｜(“ “｜”\n”｜”\t”)+</td>
+<td align="center">{/*注释*/}</td>
+</tr>
+<tr>
+<td align="center">.</td>
+<td align="center">{error( );}</td>
+</tr>
+</tbody></table>
+<p>其中注释的识别后,并不会提交给语法分析器,而是忽略他们重新开始词法分析。这个语言的注释是以爽横线开始，只包含字母字符，并以换行符结束。</p>
+<p>词法规范应该是完整的，它应当总是可以与输入中的某些子串相匹配，但是我们的规则存在二义性，比如if8，应该是标识符还是两个单词if和8，Lex和其他词法分析器对于二义性应用两条规则：</p>
+<ul>
+<li>最长匹配：取可以与正则表达式匹配的最长的那个字符串；</li>
+<li>规则优先：正则表达式的书写顺序有意义，第一个与之匹配的正则表达式决定了子串的单词类型。</li>
+</ul>
+<h4 id="2-3有限自动机"><a href="#2-3有限自动机" class="headerlink" title="2.3有限自动机"></a>2.3有限自动机</h4><p>通过正则表达式我们可以指明词法单词，但是我们还需要一种使用<strong><em>计算机程序来实现的形式化方法</em></strong>，这里我们可以使用有限自动机。有限自动机有一个有限<strong><em>状态</em></strong>的集合和一些从一个状态通向另一个状态的<strong><em>边</em></strong>，每条边上标记有一个<strong><em>符号</em></strong>；其中一个状态是<strong><em>初态</em></strong>，某些状态是<strong><em>终态</em></strong>。<br><a href="https://imgchr.com/i/A3i4mQ" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/03/21/A3i4mQ.png" alt="A3i4mQ.png"></a><br>圆圈表示状态，双圆圈表示终态，初态是入边无来源的圆圈，标有多个字符的边是多条平行边的缩写。</p>
+<p>在确定的有限自动机（DFA）中，不会有从同一状态出发的两条边标有相同的符号。DFA从初始状态出发，对于输出字符串的每个字符，自动机都将沿着一条确定的边到达另一个状态，这条边必须是标有输入字符的边。对n个字符的字符串进行了n次状态转换后，如果自动机达到了终态，自动机将接受该字符串其他情况如没有到达终态或找不到和输入字符匹配的边，自动机将拒绝（露伴自动机：达卡口度挖鲁）。由一个自动机识别的语言是该自动机接受的字符集合。</p>
+<p>将上面所示的6个独立的自动机合并为一个可以作为词法分析器的自动机，注意要避免二义性原则，所以我们将IF和ID自动机合并，并优先将接受单词的类型标记为IF。<br><img src="https://s2.ax1x.com/2019/03/21/A3kE80.png" alt="A3kE80.png"><br>这个自动机可以用一个转换矩阵来表示。转换矩阵是一个二维数组，一个元素是向量的向量，数组的下标是<em>状态编号</em>和<em>输入字符</em>。其中有一个停滞状态（status 0），这个状态对于任何输入都返回到自身，用status0来表示不存在的边。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> edges<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">/*...0 1 2 ... - ... e f g h i j ...*/</span>
+<span class="token comment" spellcheck="true">/*status 0*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 1*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">9</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 2*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 3*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 4*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 5*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">6</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 6*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">6</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 7*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">/*status 8*/</span>     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">8</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+et cetera
+<span class="token punctuation">}</span>
+另外还需要有一个终结（finality）数组，将状态编号映射到动作</code></pre>
+<h5 id="如何识别最长匹配"><a href="#如何识别最长匹配" class="headerlink" title="如何识别最长匹配"></a>如何识别最长匹配</h5><p>使用两个变量<code>Last-final(最近遇到的终态的编号)</code>和<code>Input-Position-at-Last-Final(最近遇到终态时的字符)</code>来记住自动机最后一次处于终态时的时机，每次进入一个终态时，词法分析器都能更新这两个变量。当到达停滞Status 0 （无出口转换的非终结状态时）时，通过这两个变量来求最长匹配。<br><img src="https://s2.ax1x.com/2019/03/21/A3AO6f.png" alt="A3AO6f.png"><br>上图展示了自动机求最大匹配的过程。</p>
+<h4 id="2-4非确定有限自动机"><a href="#2-4非确定有限自动机" class="headerlink" title="2.4非确定有限自动机"></a>2.4非确定有限自动机</h4><p>非确定有限自动机（NFA）是一种需要对从一个状态出发的多条标有相同符号的边进行选择的自动机，它也可能存在 $\epsilon$ 的边，这种边可以在不接受输入字符的情况下进行状态转化。</p>
+<p>NFA必须进行猜测来决定走那一条边，同时必须进行正确的猜测。</p>
+<p>下图是同样的两个NFA，他们能接受长度是2的倍数或长度是3<br>的倍数由a构成的字符串。<br><img src="https://s2.ax1x.com/2019/03/21/A3E1c6.png" alt="A3E1c6.png"><br><img src="https://s2.ax1x.com/2019/03/21/A3EGnO.png" alt="A3EGnO.png"></p>
+<h5 id="2-4-1将正则表达式转化为NFA"><a href="#2-4-1将正则表达式转化为NFA" class="headerlink" title="2.4.1将正则表达式转化为NFA"></a>2.4.1将正则表达式转化为NFA</h5><p>NFA可以很容易的将一个静态的，说明性的正则表达式，转化为一个可模拟的，准可执行的NFA。</p>
+<p>一般而言，任何一个正则表达式都有一个具有头和尾的NFA。其中头为末端状态，尾是开始边。</p>
+<p>NFA的几种形式：<br><img src="https://s2.ax1x.com/2019/03/21/A3VuqS.png" alt="A3VuqS.png"></p>
+<p>根据前面正则表达式ID，IF，NUM，error构造的NFA：<br><img src="https://s2.ax1x.com/2019/03/21/A3VJx0.png" alt="A3VJx0.png"></p>
+<h5 id="2-4-2将NFA转化为DFA"><a href="#2-4-2将NFA转化为DFA" class="headerlink" title="2.4.2将NFA转化为DFA"></a>2.4.2将NFA转化为DFA</h5><p>显而易见的是大多数计算机并没有足够的硬件实现NFA，但是DFA的实现较容易。</p>
+<p>我们形式化的定义  $\epsilon$  闭包如下。令 $edge(s,c)$ 是从状态 $s$ 沿着标有  $c$  的一条边可到达的所有NFA状态的集合.对于状态集合 $S$ , $closure(S)$ 是从 $S$ 的状态中出发,无需接受任何字符,即只通过 $\epsilon$ 边便可以达到的集合.这种经过 $\epsilon$ 边的概念可用数学方法表述,即 $closure(S)$ 是满足如下条件的最下集合 $T$ :</p>
+<p> $T=S \cup (\bigcup\limits_{s \in T}edge(s,\epsilon))$<br>我们可以用迭代法来算出 $T$ :</p>
+<p>$T \leftarrow S$</p>
+<p>repeate $T’ \leftarrow T$</p>
+<p>$$T \leftarrow T’ \cup (\bigcup\limits_{s \in T’}edge(s,\epsilon))$$</p>
+<p>util $T=T’$</p>
+<p>这个算法是正确的,因为 $T$ 只会不断扩大,所以最终的 $T$ 一定包含 $S$ ,如果第一次迭代之后有了 $T=T’$ ,则 $T$ 也一定包含 $\bigcup \limits_{s \in T’}edge(s,\epsilon)$ 。因为NFA中只有有限个不同的状态所以算法一定会中止。</p>
+<p>现在当用前面的方法来模拟NFA时位于状态集合 $d={s_i,s_k,s_l}$ 中,从d中的状态出发,并输入一个符号c,将到达NFA的一个新的状态集合;我们称这个集合为 $DFAedge(d,c)$ :</p>
+<p>$$DFAedge(d,c)=closure(\bigcup \limits_{s \in d}edge(s,<br>c))$$<br>利用DFAedge能够更形式化的写出NFA模拟算法，如果NFA的初态是$s_1$,输入字符为$c_1,\cdots,c_n$,则算法为:</p>
+<p>$d \leftarrow closure({s_1})$</p>
+<p>$for\ i \leftarrow\ 1 \ to \ k$</p>
+<p>$$ \quad d \leftarrow DFAedge(d,c_i) $$</p>
+<p>状态集合运算是代价很高的运算,对于每个源程序都进行这样的词法分析是不现实的.但是我们可以预先计算出所有的状态集合。可以由NFA构造一个DFA，使得NFA每一个状态集合都对应于DFA的一个状态。因为NFA个数有限，所以DFA也有限$(2^n)$</p>
+<p>DFA的状态 $d_1$ 就是 $closure（s_1）$ ,这和NFA模拟算法一样，抽象而言，如果 $d_j=DFAedge(d_i,c)$ ,则存在一条从 $d_i$ 到 $d_j$ 的标记为c的边。令 $\sum$ 是字母表。</p>
+<pre><code>states[0] &lt;-- {};  states[1] &lt;-- closure([s1])
+p &lt;-- 1; j &lt;-- 0
+while j&lt;=p
+   foreach c ∈ ∑
+               e &lt;-- DFAedge(states[j],c)
+            if e = states[i] for some i&lt;=p
+                then trans[j,c] &lt;-- i
+                else p &lt;-- p+1
+                    states[p] &lt;-- e
+                    trans[j,c] &lt;-- p
+ j &lt;-- j+1</code></pre><p>这个算法不访问DFA的不可到达状态，原则上DFA有$2^n$个状态，但实际上一般只能找到n个状态是从初态可到达的，这一点可以避免DFA解释器的转换表出现指数级膨胀。</p>
+<p>只要states[d]中有任何一个状态是NFA的终态，状态d就是DFA的终态，我们还要标记终态所映射的单词，并且states[d]中还可能有多个状态是这个NFA的终态，我们使用正则表达式中最先出现的那个单词来标记，这样就完成了<strong><em>规则优先</em></strong>的实现方法。</p>
+<p>构造DFA后只需保留转换数组即可用于词法分析。</p>
+<p>但是通过这种方法构造出来的自动机并不是最理想的，我们可以删除自动机中重复的多个状态中，只保留一个有效的状态。</p>
+<p>若$s_1$和$s_2$同为终态或同为非终态，且对于任意符号c，trans[s1,c]=trans[s2,c]，则显然它们两者等价。</p>
+<h4 id="2-5Lex：词法分析器的生成器"><a href="#2-5Lex：词法分析器的生成器" class="headerlink" title="2.5Lex：词法分析器的生成器"></a>2.5Lex：词法分析器的生成器</h4><p>在输入语言需要大量运算的时候，通过手工的方式完成DFA的构造显然不显示，而且构造DFA是一种机械性的工作，我们可以使用词法分析器的生成器Lex来构造DFA。</p>
+<p>Lex是第一个基于正则表达式的词法分析器的生成器。将还未经过 $\epsilon$ 转换检查的状态保存在一个队列或栈中，可以更加高效的计算 $\epsilon$ 闭包。正则表达式可以直接转换称DFA而不需经过NFA。DFA转换表可能是个非常大的稀疏表，实际会对表进行压缩。不通过转换表，直接jiangDFA转换为可执行代码（case），其速度可以和手工编写的词法分析器一样快，例如Flex（fast Lexical analyzer generator）。</p>
+<p>Lex由词法规范生成一个C程序。对于要进行分析的程序设计语言中的每一种单词类型，该规范包含一个正则表达式和一个动作（将单词类型和其他信息传递给编译器的下一阶段）。</p>
+<p>我们使用Lex对前面给出的6个正则表达式进行生成：</p>
+<pre class=" language-c"><code class="language-c"><span class="token operator">%</span><span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">/*C Declarations: */</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"tockens.h"</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"errormsg.h"</span> </span><span class="token comment" spellcheck="true">/*definitions of ID,IF,NUM*/</span>
+<span class="token keyword">union</span> <span class="token punctuation">{</span> <span class="token keyword">int</span> ival<span class="token punctuation">;</span> string sval<span class="token punctuation">;</span> <span class="token keyword">double</span> fval<span class="token punctuation">;</span><span class="token punctuation">}</span> yylval<span class="token punctuation">;</span>
+<span class="token keyword">int</span> charPos<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ADJ (EM_tokPos=charPos, charPos+=yyleng)</span>
+<span class="token operator">%</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/*Lex Definitions:*/</span>
+digits <span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">-</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token operator">+</span>
+<span class="token operator">%</span><span class="token operator">%</span>
+<span class="token comment" spellcheck="true">/*Regular Expressions and Actions:*/</span>
+<span class="token keyword">if</span>                   <span class="token punctuation">{</span>ADJ<span class="token punctuation">;</span> <span class="token keyword">return</span> IF<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">[</span>a<span class="token operator">-</span>z<span class="token punctuation">]</span><span class="token punctuation">[</span>a<span class="token operator">-</span>z0<span class="token number">-9</span><span class="token punctuation">]</span><span class="token operator">*</span>       <span class="token punctuation">{</span>ADJ<span class="token punctuation">;</span> yylval<span class="token punctuation">.</span>sval<span class="token operator">=</span><span class="token function">String</span><span class="token punctuation">(</span>yytext<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>digits<span class="token punctuation">}</span>             <span class="token punctuation">{</span>ADJ<span class="token punctuation">;</span> yylval<span class="token punctuation">.</span>sval<span class="token operator">=</span><span class="token function">atoi</span><span class="token punctuation">(</span>yytext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                           retrun ID<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">(</span><span class="token punctuation">{</span>digits<span class="token punctuation">}</span><span class="token string">"."</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">-</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">-</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token string">"."</span><span class="token punctuation">{</span>digits<span class="token punctuation">}</span><span class="token punctuation">)</span>     <span class="token punctuation">{</span>ADJ<span class="token punctuation">;</span>
+                         yylval<span class="token punctuation">.</span>fval<span class="token operator">=</span><span class="token function">stof</span><span class="token punctuation">(</span>yytext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                         <span class="token keyword">return</span> REAL<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">(</span><span class="token string">"--"</span><span class="token punctuation">[</span>a<span class="token operator">-</span>z<span class="token punctuation">]</span><span class="token operator">*</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token operator">|</span><span class="token string">"\n"</span><span class="token operator">|</span><span class="token string">"\t"</span><span class="token punctuation">)</span><span class="token operator">+</span>      <span class="token punctuation">{</span>ADJ<span class="token punctuation">;</span><span class="token punctuation">}</span>
+                      <span class="token punctuation">{</span>ADJ<span class="token punctuation">;</span> <span class="token function">EM_error</span><span class="token punctuation">(</span><span class="token string">"illegal character!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre>
+<h5 id="开始状态"><a href="#开始状态" class="headerlink" title="开始状态"></a>开始状态</h5><p>正则表达式是静态的和说明性的，自动机是动态的和命令式的。Lex有一种将状态和正则表达式混合到一起 的机制。你可以声明一组初态，每个正则表达式前面可以有一组对它而言是合法的初态作为其前缀，动作代码可以明显的改变初态。就相当于我们的有限自动机的边标记的是正则表达式而不是符号。</p>
+<p>但是尽管与整个注释变大时相匹配的单个正则表达式，但是随着注释的越来越复杂，特别是在允许注释嵌套的情况下，正则表达式会变的更复杂，甚至不可能。</p>
+<h4 id="程序设计：词法分析"><a href="#程序设计：词法分析" class="headerlink" title="程序设计：词法分析"></a>程序设计：词法分析</h4><p>惊了，<code>本章未对词法分析器应当如何初始化以及如何与编译器通信做出说明，你可以从Lex使用手册中学得</code>你看看这说的是人话吗，您老也知道自己没讲啊。fine，开干。</p>
+<p>总的来说就是用Lex为Tiger语言生成一个词法分析器<code>tiger.lex</code>，并且写文档说明自己是如何处理注释，字符串，错误处理，文件结束处理的，还有你自己构想实现的一些feature。</p>
+<p>打开<code>chap2</code>目录，ls一下有这样几个文件：</p>
+<pre><code>driver.c
+errormsg.c //报错信息模块，产生含文件名和行号的报错信息
+errormsg.h //报错信息模块，产生含文件名和行号的报错信息
+makefile  //编译所有文件
+tiger.lex  //lex初始代码
+tokens.h //词法单词常数以及yylval的定义
+util.c
+util.h</code></pre><p>先来熟悉熟悉一下，如何检测，首先打开<code>$Tiger/testcase</code>然后复制程序<code>test1.tig</code>到目录<code>chap2</code>，然后输入：</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">make</span>
+$ ./lextest test1.tig</code></pre>
+<p>会输出：</p>
+<pre><code>test1.tig:1.1: illegal token
+...
+test1.tig:4.8: illegal token
+       INT   88 1
+test1.tig:4.10: illegal token
+...
+test1.tig:7.4: illegal token</code></pre><p>我们还没有完成，所以全是报错信息。</p>
+<p>然后我们再来看一下附录中对Tiger语言的描述。</p>
+<p>在这里我使用Flex来生成<code>tiger.lex</code>，你可以通过</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">apt-get</span> update
+$ <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> flex</code></pre>
+<p>来获得Flex。或者通过源码编译安装<a href="https://github.com/westes/flex" target="_blank" rel="noopener">westes/flex</a><br><img src="https://cdncontribute.geeksforgeeks.org/wp-content/uploads/how_flex_is_used.jpeg" alt="work-step"><br>这是Flex 的工作流程图，所以接下来我们要做的就是修改<code>tiger.lex</code>中的内容，使之能对tiger语言进行词法分析。make可以帮助我们省去繁琐的通过lex先处理<code>.lex</code>文件的方式。</p>
+<p>这次的程序分析题比第一次友好很多啊,只需要修改一个文件<code>tiger.lex</code>就行了,内容也不难就是写几个正则表达式（两天前我是这样想的）。实际实施并不是这么简单啊。这是我第一次编辑的内容</p>
+<pre><code>%{
+#include &lt;string.h&gt;
+#include &quot;util.h&quot;
+#include &quot;tokens.h&quot;
+#include &quot;errormsg.h&quot;
+
+int charPos=1;
+
+int yywrap(void)
+{
+ charPos=1;
+ return 1;
+}
+
+
+void adjust(void)
+{
+ EM_tokPos=charPos;
+ charPos+=yyleng;
+}
+
+%}
+
+digits  [0-9]+
+d (0|1|2|3|4|5|6|7|8|9)
+
+%%
+
+  /* The Comment */
+/*[a-z]**/     {adjust();}
+
+  /* The Identidier */
+if             {adjust(); return IF;}
+for             {adjust(); return FOR;}
+while          {adjust(); return WHILE;}
+to             {adjust(); return TO;}
+break          {adjust(); return BREAK;}
+let            {adjust(); return LET;}
+in             {adjust(); return IN;}
+end            {adjust(); return END;}
+function       {adjust(); return FUNCTION;}
+var            {adjust(); return VAR;}
+type           {adjust(); return TYPE;}
+array          {adjust(); return ARRAY;}
+then           {adjust(); return THEN;}
+else           {adjust(); return ELSE;}
+do             {adjust(); return DO;}
+of             {adjust(); return OF;}
+nil            {adjust(); return NIL;}
+
+  /* The Signal*/
+&quot; &quot;           {adjust(); continue;}
+\n           {adjust(); EM_newline(); continue;}
+&quot;,&quot;            {adjust(); return COMMA;}
+&quot;:&quot;           {adjust(); return COLON;}
+&quot;;&quot;           {adjust(); return SEMICOLON;}
+&quot;(&quot;           {adjust(); return LPAREN;}
+&quot;)&quot;           {adjust(); return RPAREN;}
+&quot;[&quot;           {adjust(); return LBRACK;}
+&quot;]&quot;           {adjust(); return RBRACK;}
+&quot;{&quot;           {adjust(); return LBRACE;}
+&quot;}&quot;           {adjust(); return RBRACE;}
+&quot;+&quot;           {adjust(); return PLUS;}
+&quot;-&quot;           {adjust(); return MINUS;}
+&quot;*&quot;           {adjust(); return TIMES;}
+&quot;·&quot;             {adjust(); return DOT;}
+&quot;/&quot;           {adjust(); return DIVIDE;}
+&quot;=&quot;               {adjust(); return EQ;}
+&quot;&lt;&quot;               {adjust(); return LT;}
+&quot;&gt;&quot;               {adjust(); return GT;}
+&quot;&lt;=&quot;           {adjust(); return LE;}
+&quot;&gt;=&quot;           {adjust(); return GE;}
+&quot;&amp;&quot;            {adjust(); return AND;}
+&quot;|&quot;            {adjust(); return OR;}
+&quot;:=&quot;           {adjust(); return ASSIGN;}
+&quot;&lt;&gt;&quot;           {adjust(); return NEQ;}
+[a-z][a-z0-9]* {adjust(); yylval.sval=String(yytext); return ID;}
+
+  /*The String Literal*/
+&quot;[a-z0-9\n\t\^c\{d}{d}{d}\&quot;\\\ff\]*&quot;      {adjust(); yylval.sval=String(yytext); return STRING;}
+
+  /*The Integer Literal*/
+{digits}       {adjust(); yylval.ival=atoi(yytext); return INT;}
+
+  /*The Illrgal Token*/
+.           {adjust(); EM_error(EM_tokPos,&quot;illegal token&quot;);}</code></pre><p>测试：</p>
+<pre class=" language-bash"><code class="language-bash">$ <span class="token function">make</span>
+$ ./lextest test1.tig</code></pre>
+<p>对<code>test1.tig</code>文件测试，输出:</p>
+<pre><code>    DIVIDE    1
+     TIMES    2
+        ID    4 an
+     ARRAY    7
+      TYPE   13
+        ID   18 and
+        ID   22 an
+     ARRAY   25
+        ID   31 variable
+     TIMES   40
+    DIVIDE   41
+test1.tig:1.42: illegal token
+       LET   44
+test1.tig:2.4: illegal token
+test1.tig:3.1: illegal token
+      TYPE   50
+        ID   56 arrtype
+        EQ   64
+     ARRAY   66
+        OF   72
+        ID   75 int
+test1.tig:3.30: illegal token
+test1.tig:4.1: illegal token
+       VAR   81
+        ID   85 arr1
+     COLON   89
+        ID   90 arrtype
+    ASSIGN   98
+        ID  101 arrtype
+    LBRACK  109
+       INT  110 10
+    RBRACK  112
+        OF  114
+       INT  117 0
+test1.tig:4.39: illegal token
+        IN  120
+test1.tig:5.3: illegal token
+test1.tig:6.1: illegal token
+        ID  125 arr1
+test1.tig:6.6: illegal token
+       END  131
+test1.tig:7.4: illegal token</code></pre><p>从输出中我们可以看到词法分析器并没有跳过注释，而且对于换行符无法识别，但是对于ID，和Tiger语言保留符，运算符识别正确。而且还有一个显而易见的问题是对String类型的处理不够完美，会将String两边的引号也收入字符串中。</p>
+<p>首先增加跳过换行符的正则表达式</p>
+<pre><code>[\r\t]         {adjust(); continue;}</code></pre><p>然后增加对大写字母的支持</p>
+<pre><code>[a-zA-Z][a-zA-Z0-9]* {adjust(); yylval.sval=String(yytext); return ID;}</code></pre><p>针对字符串我们特别设定一种规则，当读入<code>&quot;</code>号时自动开始字符串的处理过程，而注释也采用自己的独特规则，这里特别要注意的一点是，前面我们有提到过，为了保证语法不会有二义性，书写正则表达式时的顺序也有含义所以我们优先书写String类型的正则表达式。</p>
+<p>对于String，当我们读入<code>&quot;</code>首先初始化一个32个元素字符数组<code>strbuf</code>，然后开始<code>STRING_STATE</code>，如果在字符串中再次遇到<code>&quot;</code>符，表示字符串结束，我们就返回字符串。通过<code>append_char2str_buf</code>函数创造新的两倍长度的数组。而对于注释我们是使词法分析器直接跳过，唯一比棘手的情况就是嵌套注释，所以我们定义一个<code>commentNesting</code>来记录注释嵌套的情况。</p>
+<pre><code>%{
+#include &lt;string.h&gt;
+#include &quot;util.h&quot;
+#include &quot;tokens.h&quot;
+#include &quot;errormsg.h&quot;
+
+int charPos = 1;
+
+int yywrap(void)
+{
+ charPos=1;
+ return 1;
+}
+
+void adjust(void)
+{
+ EM_tokPos=charPos;
+ charPos+=yyleng;
+}
+
+int commentNesting = 0;
+
+/* String buffer. */
+const int INITIAL_BUFFER_LENGTH = 32;
+char *string_buffer;
+unsigned int string_buffer_capacity;
+unsigned int STRING_START = 0;
+
+void init_string_buffer(void)
+{
+  string_buffer = checked_malloc(INITIAL_BUFFER_LENGTH);
+  string_buffer[0] = 0;
+  string_buffer_capacity = INITIAL_BUFFER_LENGTH;
+}
+
+void append_char_to_stringbuffer(char ch)
+{
+    size_t new_length = strlen(string_buffer) + 1;
+    if (new_length == string_buffer_capacity)
+    {
+        char *temp;
+
+        string_buffer_capacity *= 2;
+        temp = checked_malloc(string_buffer_capacity);
+        memcpy(temp, string_buffer, new_length);
+        free(string_buffer);
+        string_buffer = temp;
+    }
+    string_buffer[new_length - 1] = ch;
+    string_buffer[new_length] = 0;
+}
+
+%}
+
+%x COMMENT_STATE STRING_STATE
+
+%%
+  /* Skip white spaces. */
+[ \r\t]     {adjust(); continue;}
+\n     {adjust(); EM_newline(); continue;}
+
+
+  /* Reserved words. */
+while     {adjust(); return WHILE;}
+for       {adjust(); return FOR;}
+to        {adjust(); return TO;}
+break     {adjust(); return BREAK;}
+let       {adjust(); return LET;}
+in        {adjust(); return IN;}
+end       {adjust(); return END;}
+function  {adjust(); return FUNCTION;}
+var       {adjust(); return VAR;}
+type      {adjust(); return TYPE;}
+array     {adjust(); return ARRAY;}
+if        {adjust(); return IF;}
+then      {adjust(); return THEN;}
+else      {adjust(); return ELSE;}
+do        {adjust(); return DO;}
+of        {adjust(); return OF;}
+nil       {adjust(); return NIL;}
+
+  /* Punctuation symbols. */
+&quot;,&quot;   {adjust(); return COMMA;}
+&quot;:&quot;   {adjust(); return COLON;}
+&quot;;&quot;   {adjust(); return SEMICOLON;}
+&quot;(&quot;   {adjust(); return LPAREN;}
+&quot;)&quot;   {adjust(); return RPAREN;}
+&quot;[&quot;   {adjust(); return LBRACK;}
+&quot;]&quot;   {adjust(); return RBRACK;}
+&quot;{&quot;   {adjust(); return LBRACE;}
+&quot;}&quot;   {adjust(); return RBRACE;}
+&quot;.&quot;   {adjust(); return DOT;}
+&quot;+&quot;   {adjust(); return PLUS;}
+&quot;-&quot;   {adjust(); return MINUS;}
+&quot;*&quot;   {adjust(); return TIMES;}
+&quot;/&quot;   {adjust(); return DIVIDE;}
+&quot;=&quot;   {adjust(); return EQ;}
+&quot;&lt;&gt;&quot;  {adjust(); return NEQ;}
+&quot;&lt;&quot;   {adjust(); return LT;}
+&quot;&lt;=&quot;  {adjust(); return LE;}
+&quot;&gt;&quot;   {adjust(); return GT;}
+&quot;&gt;=&quot;  {adjust(); return GE;}
+&quot;&amp;&quot;   {adjust(); return AND;}
+&quot;|&quot;   {adjust(); return OR;}
+&quot;:=&quot;  {adjust(); return ASSIGN;}
+
+  /* Identifiers. */
+[a-z|A-Z]+[a-z|A-Z|0-9|_]*  {
+  adjust();
+  yylval.sval = yytext;
+  return ID;
+}
+
+  /* Integer literals. */
+[0-9]+     {
+  adjust();
+  yylval.ival=atoi(yytext);
+  return INT;
+}
+
+  /* String literals. */
+\&quot;  {
+    adjust();
+    init_string_buffer();
+    STRING_START = charPos - 1;
+    BEGIN(STRING_STATE);
+}
+
+  /* Comments. */
+&quot;/*&quot; {
+     adjust();
+     commentNesting += 1;
+     BEGIN(COMMENT_STATE);
+   }
+
+&quot;*/&quot; {
+     adjust();
+     EM_error(EM_tokPos, &quot;Comment not open!&quot;);
+     yyterminate();
+   }
+
+.     {adjust(); EM_error(EM_tokPos,&quot;illegal token&quot;);}
+
+&lt;STRING_STATE&gt;{
+    \&quot; {
+          adjust();
+          // printf(&quot;%s\n&quot;,string_buffer);
+          if(string_buffer[0]==&#39;\0&#39;){
+            yylval.sval = &quot;(null)&quot;;
+          }else{
+            yylval.sval = string_buffer;
+          }
+
+          EM_tokPos = STRING_START;
+
+          BEGIN(INITIAL);
+
+          return STRING;
+       }
+
+    \n {
+         adjust();
+         EM_error(EM_tokPos, &quot;Unterminated string constant!&quot;);
+         yyterminate();
+       }
+
+    \\n {adjust();append_char_to_stringbuffer(&#39;\n&#39;);}
+    \\t {adjust();append_char_to_stringbuffer(&#39;\t&#39;);}
+    \\r {adjust();append_char_to_stringbuffer(&#39;\r&#39;);}
+    \\b {adjust();append_char_to_stringbuffer(&#39;\b&#39;);}
+    \\f {adjust();append_char_to_stringbuffer(&#39;\f&#39;);}
+
+    &quot;\\\&quot;&quot; {adjust();append_char_to_stringbuffer(&#39;&quot;&#39;);}
+    &quot;\\&#39;&quot; {adjust();append_char_to_stringbuffer(&#39;\&#39;&#39;);}
+    &quot;\\/&quot; {adjust();append_char_to_stringbuffer(&#39;/&#39;);}
+
+    &quot;\\\\&quot; {adjust();append_char_to_stringbuffer(&#39;\\&#39;);}
+
+    &lt;&lt;EOF&gt;&gt; {
+              EM_error(EM_tokPos, &quot;Encounter EOF.&quot;);
+              yyterminate();
+            }
+
+    . {
+      adjust();
+      char *yptr = yytext;
+      while (*yptr) {
+        append_char_to_stringbuffer(*yptr++);
+      }
+    }
+}
+
+
+&lt;COMMENT_STATE&gt;{
+    &quot;/*&quot; {
+           adjust();
+           commentNesting += 1;
+           continue;
+         }
+
+    &quot;*/&quot; {
+           adjust();
+           commentNesting -= 1;
+           if (commentNesting == 0) {
+             BEGIN(INITIAL);
+           }
+         }
+
+    &lt;&lt;EOF&gt;&gt; {
+              EM_error(EM_tokPos, &quot;Encounter EOF.&quot;);
+              yyterminate();
+            }
+
+    \n  {
+      adjust();
+      EM_newline();
+      continue;
+    }
+
+    . {
+      adjust();
+      }
+
+}
+</code></pre><p>对<code>test1.tig</code>测试得到输出：</p>
+<pre><code>       LET   44
+      TYPE   50
+        ID   56 arrtype
+        EQ   64
+     ARRAY   66
+        OF   72
+        ID   75 int
+       VAR   81
+        ID   85 arr1
+     COLON   89
+        ID   90 arrtype
+    ASSIGN   98
+        ID  101 arrtype
+    LBRACK  109
+       INT  110 10
+    RBRACK  112
+        OF  114
+       INT  117 0
+        IN  120
+        ID  125 arr1
+       END  131
+</code></pre><h4 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h4><h5 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h5><h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><p>1.<a href="https://www.geeksforgeeks.org/flex-fast-lexical-analyzer-generator/" target="_blank" rel="noopener">Flex (Fast Lexical Analyzer Generator )</a></p>
+<p>2.<a href="https://github.com/yihui-he/Modern-Compiler-Implementation-in-C/blob/master/chap2/tiger.lex" target="_blank" rel="noopener">yihui-he/Modern-Compiler-Implementation-in-C</a></p>
+<p>3.<a href="http://en.wikipedia.org/wiki/ASCII#ASCII_control_characters" target="_blank" rel="noopener">控制字符列表</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Jinzhengxu</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://jinzhengxu.github.io/2019/03/14/xian-dai-bian-yi-yuan-li-c-yu-yan-miao-shu-2/">http://jinzhengxu.github.io/2019/03/14/xian-dai-bian-yi-yuan-li-c-yu-yan-miao-shu-2/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Jinzhengxu</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/虎书/">
+                                    <span class="chip bg-color">虎书</span>
+                                </a>
+                            
+                                <a href="/tags/编译原理/">
+                                    <span class="chip bg-color">编译原理</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '7C9WIr1xTDwYs88TkPA1W0ua-gzGzoHsz',
+        appKey: 'AzaMuy0kYyiPgMrnYKQALlNS',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/03/14/ubuntu18-04-xia-tong-guo-vultr-fu-wu-da-jian-vps-ke-xue-shang-wang/">
+                    <div class="card-image">
+                        
+                        <img src="https://s2.ax1x.com/2019/03/14/AATaxx.png" class="responsive-img" alt="Ubuntu18.04下通过Vultr服务搭建vps科学上网">
+                        
+                        <span class="card-title">Ubuntu18.04下通过Vultr服务搭建vps科学上网</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+购买vps服务器
+通过ssh连接服务器
+安装科学上网软件
+连接vps科学上网
+
+1.购买vps服务器Vultr（www.vultr.com )是一家云基础架构提供商，面向软件开发人员提供虚拟专用服务器（VPS），具有许多性价比很高的服务器
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-03-14
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/软件工具/" class="post-category">
+                                    软件工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/CentOS/">
+                        <span class="chip bg-color">CentOS</span>
+                    </a>
+                    
+                    <a href="/tags/服务器/">
+                        <span class="chip bg-color">服务器</span>
+                    </a>
+                    
+                    <a href="/tags/科学上网/">
+                        <span class="chip bg-color">科学上网</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/03/titanic-machine-learning-from-disaster/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Titanic: Machine Learning from Disaster">
+                        
+                        <span class="card-title">Titanic: Machine Learning from Disaster</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            初识KaggleKaggle 是一个流行的数据科学竞赛平台。由 Goldbloom 和 Ben Hamner 创建于 2010 年。在这里可以打比赛。
+Get startTitanic: Machine Learning from Disa
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/机器学习/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/Kaggle/">
+                        <span class="chip bg-color">Kaggle</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">Jinzhengxu</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Jinzhengxu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:jzxttzdq@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" class="tooltipped" target="_blank" data-tooltip="我的ICPCID: https://icpc.baylor.edu/ICPCID/0OD0ZXI7SQQL" data-position="top" data-delay="50">
+        <i class="fas fa-lightbulb"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
